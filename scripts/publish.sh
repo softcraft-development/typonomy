@@ -1,16 +1,20 @@
 #!/bin/bash
 
+echo "** Building"
 pnpm run build && pnpm run lint && pnpm run test
 if [ $? -ne 0 ]; then
   echo "Error during the build. Exiting..."
   exit 1
 fi
 
+echo "** Generating Docs"
 pnpm run docs
 if [ $? -ne 0 ]; then
   echo "Error during the documentation build. Exiting..."
   exit 1
 fi
+
+echo "** Pushing Docs to Git"
 git add docs && git commit -m "Rebuild documentation" --allow-empty && git push
 if [ $? -ne 0 ]; then
   echo "Error pushing docs to Git. Exiting..."
@@ -24,10 +28,12 @@ if [ -z "$version" ]; then
   echo "Failed to retrieve version from package.json"
   exit 1
 fi
+echo "** Version is $version"
 
 rm RELEASE_NOTES.md
 # Create a markdown file with the version variable as the title
 cp RELEASE_NOTES.template.md RELEASE_NOTES.md
+echo "** Launching VSCode to edit the release notes"
 # Open VSCode to modify the release notes
 code -w RELEASE_NOTES.md
 
@@ -38,6 +44,7 @@ if [ ! -s "RELEASE_NOTES.md" ]; then
 fi
 
 # Create a GitHub release and tag with the version number
+echo "** Creating GitHub Release"
 if [[ $version == 0* ]]; then
   gh release create v$version --title "Prerelease $version" --notes-file RELEASE_NOTES.md --prerelease
 else
@@ -51,6 +58,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Publish the package to npm
+echo "** Publishing to NPM"
 npm publish --access public
 
 if [ $? -ne 0 ]; then
@@ -58,4 +66,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+echo "** Incrementing version number for next round of development"
 pnpm version patch
+
+echo "** Publish complete"
