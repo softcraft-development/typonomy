@@ -1,4 +1,4 @@
-import { insist } from "./insist"
+import { insist } from "nullish/insist"
 
 describe("insist", () => {
   let value: object | null | undefined
