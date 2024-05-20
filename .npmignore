@@ -34,4 +34,4 @@ tsconfig.json
 RELEASE_NOTES*.md
 typedoc.json
 jest.config.js
-.eslint.rc.js
+.eslintrc.js

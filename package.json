@@ -13,6 +13,11 @@
     "typedoc-plugin-markdown": "^4.0.2",
     "typescript": "^5.4.5"
   },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "keywords": [
     "typescript",
     "types"
@@ -28,5 +33,5 @@
     "test": "jest"
   },
   "types": "dist/index.d.ts",
-  "version": "0.1.2"
+  "version": "0.1.4"
 }
