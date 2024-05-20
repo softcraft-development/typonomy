@@ -5,8 +5,9 @@
   "main": "index.ts",
   "scripts": {
     "build": "tsc --build",
+    "docs": "typedoc",
+    "lint": "eslint 'src/**/*.ts'",
     "test": "jest",
-    "lint": "eslint 'src/**/*.ts'"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
