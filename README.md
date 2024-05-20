@@ -13,5 +13,8 @@ npm install typonomy
 yarn add typonomy
 ```
 
+## Documentation
+See the [**API Documentation**](docs/README.md)
+
 ## License
 Typonomy is licensed under the [MIT License](https://opensource.org/licenses/MIT).
