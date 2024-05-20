@@ -1,14 +1,6 @@
 {
-  "name": "typonomy",
-  "version": "0.1.0",
+  "author": "Craig Walker",
   "description": "Type Management Utilities for TypeScript",
-  "main": "index.ts",
-  "scripts": {
-    "build": "tsc --build",
-    "docs": "typedoc",
-    "lint": "eslint 'src/**/*.ts'",
-    "test": "jest",
-  },
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^7.9.0",
@@ -24,6 +16,14 @@
     "typescript",
     "types"
   ],
-  "author": "Craig Walker",
-  "license": "MIT"
+  "license": "MIT",
+  "main": "index.ts",
+  "name": "typonomy",
+  "scripts": {
+    "build": "tsc --build",
+    "docs": "typedoc",
+    "lint": "eslint 'src/**/*.ts'",
+    "test": "jest"
+  },
+  "version": "0.1.0"
 }
