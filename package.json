@@ -27,5 +27,5 @@
     "publish": "publish.sh",
     "test": "jest"
   },
-  "version": "0.1.0"
+  "version": "0.1.1"
 }
