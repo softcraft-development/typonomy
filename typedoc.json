@@ -1,0 +1,18 @@
+{
+  "exclude": [
+    "**/*.test.ts"
+  ],
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "includeDeclarations": false,
+  "module": "CommonJS",
+  "moduleResolution": "node",
+  "name": "Your Project Name",
+  "out": "./docs",
+  "plugin": [
+    "typedoc-plugin-markdown"
+  ],
+  "target": "ES5",
+  "theme": "default"
+}
