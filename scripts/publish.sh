@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pnpm build
+
 # Get the version number from package.json
 version=$(jq -r '.version' package.json)
 # Exit if the version was not retrieved correctly
