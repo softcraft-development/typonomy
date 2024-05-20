@@ -2,7 +2,7 @@
 
 ***
 
-[Typonomy](../README.md) / typonomy
+[Typonomy](../globals.md) / typonomy
 
 # Variable: typonomy
 
@@ -41,4 +41,4 @@ If the value is null or undefined.
 
 ## Source
 
-[index.ts:6](https://github.com/softcraft-development/typonomy/blob/3f00dfe1e01fbb77eca6d84ec4763031141e4aa5/src/index.ts#L6)
+[index.ts:6](https://github.com/softcraft-development/typonomy/blob/bbf30a335a7ba7aabd3e6d021604fe1300eba908/src/index.ts#L6)
