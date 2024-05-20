@@ -1,6 +1,21 @@
 #!/bin/bash
 
-pnpm build
+pnpm run build && pnpm run lint && pnpm run test
+if [ $? -ne 0 ]; then
+  echo "Error during the build. Exiting..."
+  exit 1
+fi
+
+pnpm run docs
+if [ $? -ne 0 ]; then
+  echo "Error during the documentation build. Exiting..."
+  exit 1
+fi
+git add docs && git commit -m "Rebuild documentation" && git push
+if [ $? -ne 0 ]; then
+  echo "Error pushing docs to Git. Exiting..."
+  exit 1
+fi
 
 # Get the version number from package.json
 version=$(jq -r '.version' package.json)
