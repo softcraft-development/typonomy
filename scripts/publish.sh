@@ -38,7 +38,8 @@ if [ -z "$version" ]; then
 fi
 echo "** Version is $version"
 
-rm RELEASE_NOTES.md
+rm RELEASE_NOTES.old.md
+mv RELEASE_NOTES.md RELEASE_NOTES.old.md
 # Create a markdown file with the version variable as the title
 cp RELEASE_NOTES.template.md RELEASE_NOTES.md
 echo "** Launching VSCode to edit the release notes"
