@@ -18,14 +18,15 @@
     "types"
   ],
   "license": "MIT",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "name": "typonomy",
   "scripts": {
     "build": "tsc --build",
     "docs": "typedoc",
     "lint": "eslint 'src/**/*.ts'",
-    "publish": "publish.sh",
+    "publish": "scripts/publish.sh",
     "test": "jest"
   },
+  "types": "index.d.ts",
   "version": "0.1.1"
 }
