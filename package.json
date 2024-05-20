@@ -4,9 +4,9 @@
   "description": "Type Management Utilities for TypeScript",
   "main": "index.ts",
   "scripts": {
-    "build": "pnpm -r run build",
-    "test": "pnpm -r run test",
-    "lint": "pnpm -r run lint"
+    "build": "tsc --build",
+    "test": "jest",
+    "lint": "eslint 'src/**/*.ts'"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.9.0",
