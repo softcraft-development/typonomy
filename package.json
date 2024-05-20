@@ -22,7 +22,7 @@
   "name": "typonomy",
   "scripts": {
     "build": "tsc --build",
-    "docs": "typedoc",
+    "docs": "typedoc && rm docs/README.md",
     "lint": "eslint 'src/**/*.ts'",
     "publish": "scripts/publish.sh",
     "test": "jest"
