@@ -51,11 +51,11 @@ if [ $? -ne 0 ]; then
 fi
 
 # Publish the package to npm
-npm publish --access public
+echo npm publish --access public
 
 if [ $? -ne 0 ]; then
   echo "An error occurred publishing to NPM. Exiting..."
   exit 1
 fi
 
-pnpm version patch
+echo pnpm version patch
