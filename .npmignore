@@ -1,9 +1,6 @@
 # Ignore TypeScript source files
 **/*.ts
 
-# Ignore TypeScript definition files
-**/*.d.ts
-
 # Ignore TypeScript configuration files
 tsconfig.json
 
