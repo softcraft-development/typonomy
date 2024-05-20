@@ -1,15 +1,24 @@
-**Typonomy** • **Docs**
+**Typonomy** • [**Docs**](globals.md)
 
 ***
 
 # Typonomy
+Type Management Utilities for TypeScript
 
-## Variables
+## Installation
 
-- [typonomy](variables/typonomy.md)
+You can install Typonomy using npm, yarn, or pnpm:
 
-## References
+```bash
+npm install typonomy
+```
 
-### default
+```bash
+yarn add typonomy
+```
 
-Renames and re-exports [typonomy](variables/typonomy.md)
+## Documentation
+See the [**API Documentation**](docs/README.md)
+
+## License
+Typonomy is licensed under the [MIT License](https://opensource.org/licenses/MIT).
