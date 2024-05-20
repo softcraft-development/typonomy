@@ -1,4 +1,5 @@
 node_modules
 .DS_Store
 RELEASE_NOTES.md
+RELEASE_NOTES.old.md
 /dist
