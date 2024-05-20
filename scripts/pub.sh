@@ -76,6 +76,6 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "** Incrementing version number for next round of development"
-pnpm version patch
+pnpm version patch --no-git-tag-version
 
 echo "** Publish complete"
