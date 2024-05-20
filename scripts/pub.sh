@@ -76,6 +76,9 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "** Incrementing version number for next round of development"
-pnpm version patch --no-git-tag-version && git add package.json && git commit -m "v$version"
+pnpm version patch --no-git-tag-version
+version=$(jq -r '.version' package.json)
+echo "Adding new version $version to git"
+git add package.json && git commit -m "v$version"
 
 echo "** Publish complete"
