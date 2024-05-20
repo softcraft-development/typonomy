@@ -23,7 +23,7 @@
     "types"
   ],
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "index.js",
   "name": "typonomy",
   "scripts": {
     "build": "tsc --build",
@@ -32,6 +32,6 @@
     "pub": "scripts/pub.sh",
     "test": "jest"
   },
-  "types": "dist/index.d.ts",
+  "types": "index.d.ts",
   "version": "0.1.5"
 }
