@@ -41,4 +41,4 @@ If the value is null or undefined.
 
 ## Source
 
-[index.ts:6](https://github.com/softcraft-development/typonomy/blob/c94ed604dfbec9e804fa7e53c98a9702a116da55/src/index.ts#L6)
+[index.ts:6](https://github.com/softcraft-development/typonomy/blob/8085a8586b1b954903aa8604e4546725e05c35af/src/index.ts#L6)
