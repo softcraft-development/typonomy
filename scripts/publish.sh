@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Check if fast-forward is not possible
+git fetch
+git merge-base --is-ancestor origin/main HEAD
+if [ $? -ne 0 ]; then
+  echo "Fast-forward is not possible. Exiting..."
+  exit 1
+fi
+
 echo "** Building"
 pnpm run build && pnpm run lint && pnpm run test
 if [ $? -ne 0 ]; then
