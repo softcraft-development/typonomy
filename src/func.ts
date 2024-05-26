@@ -68,6 +68,22 @@ export type Transform<T, R> = (value: T) => R
 export type Trigger = () => void
 
 /**
+ * Composes a new transform from two existing transforms via an intermediate type.
+ *
+ * @template T The input type.
+ * @template I The intermediate type.
+ * @template R The result type.
+ * @param {Transform<T, I>} toIntermediate A transform to from the input to the intermediate type.
+ * @param {Transform<I, R>} toResult A transform from the intermediate type to the result type.
+ * @returns {Transform<T, R>} The composed transform function.
+ */
+export function compose<T, I, R>(toIntermediate: Transform<T, I>, toResult: Transform<I, R>): Transform<T, R> {
+  return (value: T): R => {
+    return toResult(toIntermediate(value))
+  }
+}
+
+/**
  * Repeats a reducer function a specified number of times and returns the final state.
  * Passes the current iteration number as the value (starting from 1)
  * and a zero-based index as the key to the reducer.
