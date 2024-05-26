@@ -1,8 +1,8 @@
-[**Typonomy**](../../../README.md) • **Docs**
+[**Typonomy**](../README.md) • **Docs**
 
 ***
 
-[Typonomy](../../../globals.md) / [func](../README.md) / Reducer
+[Typonomy](../globals.md) / Reducer
 
 # Type alias: Reducer()\<S, V, K\>
 
@@ -23,7 +23,8 @@ The type of the value.
 
 • **K**
 
-The type of the key. Typically a string, though frequently a number, in which case it's often called an index.
+The type of the key.
+ Typically a string, though frequently a number, in which case it's often called an index.
 
 ## Parameters
 
@@ -45,4 +46,4 @@ The key or index associated with the value.
 
 ## Source
 
-[func.ts:45](https://github.com/softcraft-development/typonomy/blob/c30f5566e83e88e3863d7deac9a23d3cd7721621/src/func.ts#L45)
+[func.ts:35](https://github.com/softcraft-development/typonomy/blob/bb2812893a49ef28102ea7de2f1eb402bb8f7209/src/func.ts#L35)

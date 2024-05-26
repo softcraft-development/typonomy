@@ -1,8 +1,8 @@
-[**Typonomy**](../../../README.md) • **Docs**
+[**Typonomy**](../README.md) • **Docs**
 
 ***
 
-[Typonomy](../../../globals.md) / [func](../README.md) / Transform
+[Typonomy](../globals.md) / Transform
 
 # Type alias: Transform()\<T, R\>
 
@@ -32,4 +32,4 @@ The value to be transformed.
 
 ## Source
 
-[func.ts:60](https://github.com/softcraft-development/typonomy/blob/c30f5566e83e88e3863d7deac9a23d3cd7721621/src/func.ts#L60)
+[func.ts:62](https://github.com/softcraft-development/typonomy/blob/bb2812893a49ef28102ea7de2f1eb402bb8f7209/src/func.ts#L62)

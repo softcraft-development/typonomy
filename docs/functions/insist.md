@@ -1,8 +1,8 @@
-[**Typonomy**](../../../README.md) • **Docs**
+[**Typonomy**](../README.md) • **Docs**
 
 ***
 
-[Typonomy](../../../globals.md) / [nullish](../README.md) / insist
+[Typonomy](../globals.md) / insist
 
 # Function: insist()
 
@@ -33,4 +33,4 @@ If the value is null or undefined.
 
 ## Source
 
-[nullish.ts:8](https://github.com/softcraft-development/typonomy/blob/c30f5566e83e88e3863d7deac9a23d3cd7721621/src/nullish.ts#L8)
+[nullish.ts:8](https://github.com/softcraft-development/typonomy/blob/bb2812893a49ef28102ea7de2f1eb402bb8f7209/src/nullish.ts#L8)

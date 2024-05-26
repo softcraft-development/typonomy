@@ -1,8 +1,8 @@
-[**Typonomy**](../../../README.md) • **Docs**
+[**Typonomy**](../README.md) • **Docs**
 
 ***
 
-[Typonomy](../../../globals.md) / [func](../README.md) / Thunk
+[Typonomy](../globals.md) / Thunk
 
 # Type alias: Thunk()\<R\>
 
@@ -23,4 +23,4 @@ The return type of the thunk.
 
 ## Source
 
-[func.ts:51](https://github.com/softcraft-development/typonomy/blob/c30f5566e83e88e3863d7deac9a23d3cd7721621/src/func.ts#L51)
+[func.ts:53](https://github.com/softcraft-development/typonomy/blob/bb2812893a49ef28102ea7de2f1eb402bb8f7209/src/func.ts#L53)
