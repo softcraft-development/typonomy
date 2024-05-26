@@ -2,6 +2,7 @@
   "author": "Craig Walker",
   "description": "Type Management Utilities for TypeScript",
   "devDependencies": {
+    "@stylistic/eslint-plugin": "^2.1.0",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^7.9.0",
     "@typescript-eslint/parser": "^7.9.0",
