@@ -65,3 +65,22 @@ export type Transform<T, R> = (value: T) => R
  * @typedef {() => void} Trigger
  */
 export type Trigger = () => void
+
+/**
+ * Repeats a reducer function a specified number of times and returns the final state.
+ * Passes the current iteration number as the value (starting from 1)
+ * and a zero-based index as the key to the reducer.
+ *
+ * @template S - The type of the state.
+ * @param {number} count - The number of times to repeat the reducer function.
+ * @param {Reducer<S, number, number>} reducer - The Reducer to execute.
+ * @param {S} initialState - The initial state.
+ * @returns {S} - The final state.
+ */
+export function reiterate<S>(count: number, reducer: Reducer<S, number, number>, initialState: S): S {
+  let state = initialState
+  for (let index = 0; index < count; index += 1) {
+    state = reducer(state, index + 1, index)
+  }
+  return state
+}
