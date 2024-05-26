@@ -67,8 +67,10 @@ if [ $? -ne 0 ]; then
 fi
 
 # Publish the package to npm
-cp package.json dist/package.json
 pushd dist
+cp ../package.json .
+cp ../README.md .
+cp ../LICENSE .
 echo "** Publishing to NPM"
 npm publish --access public
 popd
