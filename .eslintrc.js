@@ -13,6 +13,7 @@ module.exports = {
   rules: {
     "func-names": ["error", "always"],
     "func-style": ["error", "declaration", { allowArrowFunctions: true }],
+    "max-len": ["warn", { code: 120 }],
     "no-console": "warn",
     "no-multiple-empty-lines": ["error", { max: 1 }],
     "quote-props": ["error", "as-needed"],
