@@ -1,10 +1,6 @@
-import { insist } from "./nullish/insist"
+import { default as nullish } from "./nullish"
 
 /**
  * The main module for typonomy.
  */
-export const typonomy = {
-  insist
-}
-
-export default typonomy
+export default { nullish }

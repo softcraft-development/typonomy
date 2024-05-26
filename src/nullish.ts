@@ -10,3 +10,7 @@ export function insist<T>(value: T | null | undefined): T {
   if (value === undefined) throw new Error("Value must not be undefined")
   return value
 }
+
+const defaultExport = { insist }
+export type Members = typeof defaultExport
+export default defaultExport
