@@ -11,6 +11,4 @@ export function insist<T>(value: T | null | undefined): T {
   return value
 }
 
-const defaultExport = { insist }
-export type Members = typeof defaultExport
-export default defaultExport
+export default { insist }

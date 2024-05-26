@@ -65,7 +65,3 @@ export type Transform<T, R> = (value: T) => R
  * @typedef {() => void} Trigger
  */
 export type Trigger = () => void
-
-const defaultExport = {}
-export type Members = typeof defaultExport
-export default defaultExport

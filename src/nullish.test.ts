@@ -1,4 +1,4 @@
-import * as nullish from "nullish"
+import * as nullish from "./nullish"
 
 describe("nullish", () => {
   describe("insist", () => {
