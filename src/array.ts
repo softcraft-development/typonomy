@@ -11,6 +11,13 @@ export function append<T>(array: T[], value: T): T[] {
   return array
 }
 
+/**
+ * Creates an array of a specified size and type.
+ *
+ * @template T - The type of elements in the array.
+ * @param size - The size of the array to create. Defaults to 0.
+ * @returns An array of the specified size and type.
+ */
 export function arr<T>(size = 0): T[] {
   return new Array<T>(size)
 }

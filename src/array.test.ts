@@ -14,4 +14,16 @@ describe("array", () => {
       expect(result).toBe(array)
     })
   })
+
+  describe("arr", () => {
+    it("should return an array of the specified size", () => {
+      const result = lib.arr(5)
+      expect(result.length).toBe(5)
+    })
+
+    it("should return an empty array if no size is specified", () => {
+      const result = lib.arr()
+      expect(result.length).toBe(0)
+    })
+  })
 })
