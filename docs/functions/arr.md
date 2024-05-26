@@ -30,4 +30,4 @@ An array of the specified size and type.
 
 ## Source
 
-[array.ts:23](https://github.com/softcraft-development/typonomy/blob/bb2812893a49ef28102ea7de2f1eb402bb8f7209/src/array.ts#L23)
+[array.ts:23](https://github.com/softcraft-development/typonomy/blob/98e4fa0887f0ca1053297997df20bd5aab7be107/src/array.ts#L23)

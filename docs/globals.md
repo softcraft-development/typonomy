@@ -23,3 +23,4 @@
 - [fill](functions/fill.md)
 - [insist](functions/insist.md)
 - [reiterate](functions/reiterate.md)
+- [valueToString](functions/valueToString.md)
