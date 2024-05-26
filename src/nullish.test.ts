@@ -20,7 +20,7 @@ describe("nullish", () => {
       })
 
       it("throws an error", () => {
-        expect(() => { nullish.insist(value) }).toThrow()
+        expect(() => nullish.insist(value)).toThrow()
       })
     })
 
@@ -30,7 +30,7 @@ describe("nullish", () => {
       })
 
       it("throws an error", () => {
-        expect(() => { nullish.insist(value) }).toThrow()
+        expect(() => nullish.insist(value)).toThrow()
       })
     })
   })

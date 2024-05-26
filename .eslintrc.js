@@ -1,23 +1,20 @@
-// eslint-disable-next-line no-undef
 module.exports = {
   extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:@stylistic/recommended-extends",
   ],
   parser: "@typescript-eslint/parser",
   plugins: [
-    "@typescript-eslint",
+    "@stylistic",
   ],
   root: true,
   rules: {
+    "@stylistic/max-len": ["warn", { code: 120 }],
+    "@stylistic/no-multiple-empty-lines": ["error", { max: 1 }],
+    "@stylistic/quote-props": ["error", "as-needed"],
+    "@stylistic/quotes": ["error", "double"],
     "func-names": ["error", "always"],
     "func-style": ["error", "declaration", { allowArrowFunctions: true }],
-    "max-len": ["warn", { code: 120 }],
     "no-console": "warn",
-    "no-multiple-empty-lines": ["error", { max: 1 }],
-    "quote-props": ["error", "as-needed"],
-    quotes: ["error", "double"],
-    "sort-keys": ["error", "asc", { caseSensitive: true, natural: false }]
-  }
+    "sort-keys": ["error", "asc", { caseSensitive: true, natural: false }],
+  },
 }

@@ -3,7 +3,9 @@ describe("func", () => {
   describe("reiterate", () => {
     it("should return the initial state when count is 0", () => {
       const initialState = { key: "Initial state" }
-      const result = reiterate(0, () => { return { key: "Not the initial state" } }, initialState)
+      const result = reiterate(0, () => {
+        return { key: "Not the initial state" }
+      }, initialState)
       expect(result).toBe(initialState)
     })
 

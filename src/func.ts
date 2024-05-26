@@ -36,7 +36,8 @@ export type MetaTransform<A, B, R> = (fn: Transform<A, R>) => Transform<B, R>
  * Since the old and new state are of the same type, this "reduces" the value and key into the new state.
  * @template S The type of the state.
  * @template V The type of the value.
- * @template K The type of the key. Typically a string, though frequently a number, in which case it's often called an index.
+ * @template K The type of the key.
+ *  Typically a string, though frequently a number, in which case it's often called an index.
  * @param state The current state. Note that this value may be mutated, depending on the reducer.
  * @param value The value to be applied to the state.
  * @param key The key or index associated with the value.
