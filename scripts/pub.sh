@@ -67,8 +67,11 @@ if [ $? -ne 0 ]; then
 fi
 
 # Publish the package to npm
+cp package.json dist/package.json
+pushd dist
 echo "** Publishing to NPM"
 npm publish --access public
+popd
 
 if [ $? -ne 0 ]; then
   echo "An error occurred publishing to NPM. Exiting..."
