@@ -6,17 +6,6 @@
 export type Action<T> = (value: T) => void
 
 /**
- * A function that combines values two types into a third type.
- * @template A The type of the first input.
- * @template B The type of the second input.
- * @template R The type of the result.
- * @param a The first value.
- * @param b The second value.
- * @returns The result of combining the two values.
- */
-export type Combine<A, B, R> = (a: A, b: B) => R
-
-/**
  * A function that transforms one Transform function into another.
  * If you want a function that transforms one type <B> to another type <R>,
  * but only know/have a function that converts another type <A> to that same type <R>,
@@ -44,6 +33,18 @@ export type MetaTransform<A, B, R> = (fn: Transform<A, R>) => Transform<B, R>
  * @returns The new state after applying the value.
  */
 export type Reducer<S, V, K> = (state: S, value: V, key: K) => S
+
+/**
+ * A function that combines two values to produce a new value.
+ * @template A The type of the first input.
+ * @template B The type of the second input.
+ * @template R The type of the result.
+ * @param a The first value.
+ * @param b The second value.
+ * @returns The result of combining the two values.
+ */
+export type Synthesis<A, B, R> = (a: A, b: B) => R
+
 /**
  * A function that returns a value based on no direct input.
  * Often used as a closure, taking its input from external scope.
@@ -81,6 +82,23 @@ export function compose<T, I, R>(toIntermediate: Transform<T, I>, toResult: Tran
   return (value: T): R => {
     return toResult(toIntermediate(value))
   }
+}
+
+/**
+ * Composes a new Reducer from an existing Reducer for an intermediate type
+ * and a Synthesis that transforms values to that intermediate type.
+ *
+ * @template S The type of the state.
+ * @template V The type of the value to reduce.
+ * @template I The type of the intermediate value.
+ * @template K The type of the reducer key.
+ * @param reducer The Reducer function for the intermediate type.
+ * @param synthesis The Synthesis function that transforms reducer values to intermediate values.
+ *  Note that these can be Transform<V, I> functions if the key <K> is irrelevant.
+ * @returns A Reducer function for the value type.
+ */
+export function composeReducer<S, V, I, K>(reducer: Reducer<S, I, K>, synthesis: Synthesis<V, K, I>): Reducer<S, V, K> {
+  return (state, value, key) => reducer(state, synthesis(value, key), key)
 }
 
 /**
