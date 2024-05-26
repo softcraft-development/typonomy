@@ -22,9 +22,9 @@ export type Combine<A, B, R> = (a: A, b: B) => R
  * but only know/have a function that converts another type <A> to that same type <R>,
  * a MetaTransform will help get you from <A> to <B>.
  *
- * @typeparam A The input type that you have.
- * @typeparam B The input type that you want.
- * @typeparam R The output type.
+ * @template A The input type that you have.
+ * @template B The input type that you want.
+ * @template R The output type.
  *
  * @param fn The Transform function that you have.
  * @returns The Transform function that you want.
