@@ -4,12 +4,7 @@
 
 # Typonomy
 
-## Variables
+## Namespaces
 
-- [typonomy](variables/typonomy.md)
-
-## References
-
-### default
-
-Renames and re-exports [typonomy](variables/typonomy.md)
+- [func](namespaces/func/README.md)
+- [nullish](namespaces/nullish/README.md)
