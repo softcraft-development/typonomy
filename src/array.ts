@@ -1,4 +1,5 @@
 import * as func from "./func"
+import { Definite, Possible, isDefinite } from "./nullish"
 
 /**
  * A Reducer that appends its value to an array. Mutates the original array.
@@ -10,6 +11,21 @@ import * as func from "./func"
  */
 export function append<T>(array: T[], value: T): T[] {
   array.push(value)
+  return array
+}
+
+/**
+ * Appends a value to an array only if the value is neither null nor undefined.
+ *
+ * @template T - The type of elements in the array.
+ * @param {Definite<T>[]} array - The array to append the value to.
+ * @param {Possible<T>} value - The value to append to the array if it is not null or undefined.
+ * @returns {Definite<T>[]} - The updated array.
+ */
+export function appendDefinite<T>(array: Definite<T>[], value: Possible<T>): Definite<T>[] {
+  if (isDefinite(value)) {
+    array.push(value)
+  }
   return array
 }
 

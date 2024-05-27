@@ -15,6 +15,23 @@ describe("array", () => {
     })
   })
 
+  describe("appendDefinite", () => {
+    it("appends a definite value", () => {
+      const result = lib.appendDefinite<string>([], "Definite")
+      expect(result).toEqual(["Definite"])
+    })
+
+    it("does not append a null", () => {
+      const result = lib.appendDefinite<string>([], null)
+      expect(result).toEqual([])
+    })
+
+    it("does not append undefined", () => {
+      const result = lib.appendDefinite<string>([], undefined)
+      expect(result).toEqual([])
+    })
+  })
+
   describe("arr", () => {
     it("should return an array of the specified size", () => {
       const result = lib.arr(5)
