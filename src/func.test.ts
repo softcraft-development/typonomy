@@ -15,7 +15,7 @@ describe("func", () => {
       const concat = (state: string, value: number) => `${state}->${value}`
       const double = (value: number) => value * 2
       const reducer = lib.composeReducer(concat, double)
-      expect(reducer("Start", 3, undefined)).toEqual("Start->6")
+      expect(reducer("Start", 3, "")).toEqual("Start->6")
     })
   })
 

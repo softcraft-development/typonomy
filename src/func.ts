@@ -5,6 +5,8 @@
  */
 export type Action<T> = (value: T) => void
 
+export type Key = string | number
+
 /**
  * A function that transforms one Transform function into another.
  * If you want a function that transforms one type <B> to another type <R>,
@@ -32,7 +34,7 @@ export type MetaTransform<A, B, R> = (fn: Transform<A, R>) => Transform<B, R>
  * @param key The key or index associated with the value.
  * @returns The new state after applying the value.
  */
-export type Reducer<S, V, K> = (state: S, value: V, key: K) => S
+export type Reducer<S, V, K extends Key> = (state: S, value: V, key: K) => S
 
 /**
  * A function that combines two values to produce a new value.
@@ -97,7 +99,10 @@ export function compose<T, I, R>(toIntermediate: Transform<T, I>, toResult: Tran
  *  Note that these can be Transform<V, I> functions if the key <K> is irrelevant.
  * @returns A Reducer function for the value type.
  */
-export function composeReducer<S, V, I, K>(reducer: Reducer<S, I, K>, synthesis: Synthesis<V, K, I>): Reducer<S, V, K> {
+export function composeReducer<S, V, I, K extends Key>(
+  reducer: Reducer<S, I, K>,
+  synthesis: Synthesis<V, K, I>
+): Reducer<S, V, K> {
   return (state, value, key) => reducer(state, synthesis(value, key), key)
 }
 
