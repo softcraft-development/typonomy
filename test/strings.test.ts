@@ -1,4 +1,4 @@
-import { valueToString } from "../src/strings"
+import { valueToString } from "@/strings"
 
 describe("valueToString", () => {
   it("should convert a number to a string", () => {

@@ -1,5 +1,5 @@
-import * as func from "./func"
-import { Definite, Possible, isDefinite } from "./nullish"
+import * as func from "@/func"
+import { Definite, Possible, isDefinite } from "@/nullish"
 
 /**
  * A Reducer that appends its value to an array. Mutates the original array.
