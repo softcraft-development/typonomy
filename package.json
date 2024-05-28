@@ -27,6 +27,7 @@
     "pub": "scripts/pub.sh",
     "test": "jest"
   },
+  "type": "module",
   "types": "index.d.ts",
   "version": "0.1.7"
 }
