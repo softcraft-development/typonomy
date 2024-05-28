@@ -22,11 +22,13 @@
   "license": "MIT",
   "name": "typonomy",
   "scripts": {
-    "build": "esbuild ./src/**/*.ts --bundle --sourcemap --outdir=dist",
+    "check": "tsc --noEmit",
+    "build": "node esbuild.mjs",
     "docs": "typedoc && rm docs/README.md",
     "lint": "eslint 'src/**/*.ts'",
     "pub": "scripts/pub.sh",
-    "test": "jest"
+    "test": "jest",
+    "validate": "pnpm run check && pnpm run lint && pnpm run test"
   },
   "type": "module",
   "types": "index.d.ts",
