@@ -2,6 +2,10 @@ module.exports = {
   extends: [
     "plugin:@stylistic/recommended-extends",
   ],
+  ignorePatterns: [
+    "dist",
+    "node_modules",
+  ],
   parser: "@typescript-eslint/parser",
   plugins: [
     "@stylistic",
