@@ -1,4 +1,4 @@
-import { reduce } from "@/object"
+import { reduce } from "src/object"
 
 describe("object", () => {
   describe("reduce", () => {

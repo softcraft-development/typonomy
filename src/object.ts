@@ -1,4 +1,4 @@
-import { Reducer } from "@/func"
+import { Reducer } from "./func"
 
 /**
  * Reduces the keys and values of a record object.

@@ -1,4 +1,4 @@
-import * as lib from "@/array"
+import * as lib from "src/array"
 
 describe("array", () => {
   describe("append", () => {

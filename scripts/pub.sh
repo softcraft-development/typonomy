@@ -8,6 +8,13 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+echo "** Validating"
+pnpm run validate
+if [ $? -ne 0 ]; then
+  echo "Validation failed. Exiting..."
+  exit 1
+fi
+
 echo "** Building"
 pnpm run build && pnp declare
 if [ $? -ne 0 ]; then

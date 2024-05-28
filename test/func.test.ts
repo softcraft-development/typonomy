@@ -1,5 +1,5 @@
-import * as lib from "@/func"
-import { valueToString } from "@/strings"
+import * as lib from "src/func"
+import { valueToString } from "src/strings"
 
 describe("func", () => {
   describe("compose", () => {
