@@ -16,7 +16,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "** Building"
-pnpm run build && pnp declare
+pnpm run build && pnpm declare
 if [ $? -ne 0 ]; then
   echo "Error during the build. Exiting..."
   exit 1
