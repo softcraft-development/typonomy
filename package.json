@@ -23,6 +23,7 @@
   "name": "typonomy",
   "scripts": {
     "check": "tsc --noEmit",
+    "declare": "tsc -p tsconfig.declare.json",
     "build": "node esbuild.mjs",
     "docs": "typedoc && rm docs/README.md",
     "lint": "eslint 'src/**/*.ts'",
