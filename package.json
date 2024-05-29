@@ -27,7 +27,6 @@
     "build": "node esbuild.mjs",
     "docs": "typedoc && rm docs/README.md",
     "lint": "eslint 'src/**/*.ts'",
-    "pub": "scripts/pub.sh",
     "test": "jest",
     "validate": "pnpm run check && pnpm run lint && pnpm run test"
   },
