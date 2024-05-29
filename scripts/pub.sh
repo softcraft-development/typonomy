@@ -8,6 +8,27 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+# Get the version number from package.json
+version=$(jq -r '.version' package.json)
+# Exit if the version was not retrieved correctly
+if [ -z "$version" ]; then
+  echo "Failed to retrieve version from package.json"
+  exit 1
+fi
+echo "** Version is $version"
+
+# Exit if the version is a dev prerelease
+if [[ $version == *"-dev"* ]]; then
+  echo "Drop the -dev prerelease before publishing. Exiting..."
+  exit 0
+fi
+
+# Check if the version is already tagged
+if git rev-parse "v$version" >/dev/null 2>&1; then
+  echo "Version $version is already tagged. Exiting..."
+  exit 0
+fi
+
 echo "** Validating"
 pnpm run validate
 if [ $? -ne 0 ]; then
@@ -35,15 +56,6 @@ if [ $? -ne 0 ]; then
   echo "Error pushing docs to Git. Exiting..."
   exit 1
 fi
-
-# Get the version number from package.json
-version=$(jq -r '.version' package.json)
-# Exit if the version was not retrieved correctly
-if [ -z "$version" ]; then
-  echo "Failed to retrieve version from package.json"
-  exit 1
-fi
-echo "** Version is $version"
 
 previousRelease=$(gh release list --json tagName --jq ".[].tagName" --limit 1)
 # Exit if the previous release was not retrieved correctly
