@@ -14,6 +14,8 @@ if [[ $version == *"-dev"* ]]; then
   git add package.json && git commit -m "v$version"
 fi
 
+git push
+
 previousRelease=$(gh release list --json tagName --jq ".[].tagName" --limit 1)
 echo "** Previous release is $previousRelease"
 comparePrevious="https://github.com/softcraft-development/typonomy/compare/$previousRelease...main"
