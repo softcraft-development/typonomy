@@ -13,6 +13,10 @@ npm install typonomy
 yarn add typonomy
 ```
 
+```bash
+pnpm add typonomy
+```
+
 ## Documentation
 See the [**API Documentation**](docs/README.md)
 
