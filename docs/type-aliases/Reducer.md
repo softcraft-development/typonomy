@@ -21,7 +21,7 @@ The type of the state.
 
 The type of the value.
 
-• **K**
+• **K** *extends* [`Key`](Key.md)
 
 The type of the key.
  Typically a string, though frequently a number, in which case it's often called an index.
@@ -46,4 +46,4 @@ The key or index associated with the value.
 
 ## Source
 
-[func.ts:35](https://github.com/softcraft-development/typonomy/blob/98e4fa0887f0ca1053297997df20bd5aab7be107/src/func.ts#L35)
+[func.ts:37](https://github.com/softcraft-development/typonomy/blob/09474e7d86c7eb31d4c29237c93a572fbae7f0d9/src/func.ts#L37)
