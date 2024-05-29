@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Exit if RELEASE_NOTES.md is missing or has zero length
+if [ ! -s "RELEASE_NOTES.md" ]; then
+  echo "RELEASE_NOTES.md is missing or empty"
+  exit 1
+fi
+
 # Check if fast-forward is not possible
 git fetch
 git merge-base --is-ancestor origin/main HEAD
@@ -43,32 +49,6 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-previousRelease=$(gh release list --json tagName --jq ".[].tagName" --limit 1)
-# Exit if the previous release was not retrieved correctly
-if [ -z "$previousRelease" ]; then
-  echo "Failed to retrieve previous release version from GitHub"
-  exit 1
-fi
-echo "** Previous release is $previousRelease"
-comparePrevious="https://github.com/softcraft-development/typonomy/compare/$previousRelease...main"
-echo "** Comparison: $comparePrevious"
-open $comparePrevious
-
-rm RELEASE_NOTES.old.md
-mv RELEASE_NOTES.md RELEASE_NOTES.old.md
-# Create a markdown file with the version variable as the title
-cp RELEASE_NOTES.template.md RELEASE_NOTES.md
-echo "[$previousRelease...v$version](https://github.com/softcraft-development/typonomy/compare/$previousRelease...v$version)" >> RELEASE_NOTES.md
-echo "** Launching VSCode to edit the release notes"
-# Open VSCode to modify the release notes
-code -w RELEASE_NOTES.md
-
-# Exit if RELEASE_NOTES.md is missing or has zero length
-if [ ! -s "RELEASE_NOTES.md" ]; then
-  echo "RELEASE_NOTES.md is missing or empty"
-  exit 1
-fi
-
 echo "** Generating Docs"
 pnpm run docs
 if [ $? -ne 0 ]; then
@@ -96,6 +76,9 @@ if [ $? -ne 0 ]; then
   echo "An error publishing to GitHub. Exiting..."
   exit 1
 fi
+
+echo "** Archiving Release Notes"
+mv RELEASE_NOTES.md RELEASE_NOTES.v$version.md
 
 # Publish the package to npm
 pushd dist
