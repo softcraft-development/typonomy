@@ -43,20 +43,6 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo "** Generating Docs"
-pnpm run docs
-if [ $? -ne 0 ]; then
-  echo "Error during the documentation build. Exiting..."
-  exit 1
-fi
-
-echo "** Pushing Docs to Git"
-git add docs && git commit -m "Rebuild documentation" --allow-empty && git push
-if [ $? -ne 0 ]; then
-  echo "Error pushing docs to Git. Exiting..."
-  exit 1
-fi
-
 previousRelease=$(gh release list --json tagName --jq ".[].tagName" --limit 1)
 # Exit if the previous release was not retrieved correctly
 if [ -z "$previousRelease" ]; then
@@ -80,6 +66,20 @@ code -w RELEASE_NOTES.md
 # Exit if RELEASE_NOTES.md is missing or has zero length
 if [ ! -s "RELEASE_NOTES.md" ]; then
   echo "RELEASE_NOTES.md is missing or empty"
+  exit 1
+fi
+
+echo "** Generating Docs"
+pnpm run docs
+if [ $? -ne 0 ]; then
+  echo "Error during the documentation build. Exiting..."
+  exit 1
+fi
+
+echo "** Pushing Docs to Git"
+git add docs && git commit -m "Rebuild documentation" --allow-empty && git push
+if [ $? -ne 0 ]; then
+  echo "Error pushing docs to Git. Exiting..."
   exit 1
 fi
 
