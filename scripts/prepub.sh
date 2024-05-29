@@ -25,6 +25,6 @@ cp RELEASE_NOTES.template.md RELEASE_NOTES.md
 echo "[$previousRelease...v$version](https://github.com/softcraft-development/typonomy/compare/$previousRelease...v$version)" >> RELEASE_NOTES.md
 echo "** Launching VSCode to edit the release notes"
 # Open VSCode to modify the release notes
-code -w RELEASE_NOTES.md
+code RELEASE_NOTES.md
 
 
