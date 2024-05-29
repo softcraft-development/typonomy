@@ -112,8 +112,8 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "** Incrementing version number for next round of development"
-version=$(npm version prerelease --preid dev --no-git-tag-version)
-echo "Adding new version $version to git"
-git add package.json && git commit -m "v$version" && git push
+newVersion=$(npm version prerelease --preid dev --no-git-tag-version)
+echo "Adding new version $newVersion to git"
+git add package.json && git commit -m "$newVersion" && git push
 
 echo "** Publish complete"
