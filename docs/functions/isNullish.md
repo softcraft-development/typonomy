@@ -28,4 +28,4 @@ A boolean indicating whether the value is null or undefined.
 
 ## Source
 
-[nullish.ts:101](https://github.com/softcraft-development/typonomy/blob/ff6f66cc031bdf685fca6003f9d6a5ce5d03edf0/src/nullish.ts#L101)
+[nullish.ts:101](https://github.com/softcraft-development/typonomy/blob/ed5b4a5fbf166e1697c202a3763530b08ec3fe05/src/nullish.ts#L101)
