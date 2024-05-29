@@ -8,9 +8,9 @@ fi
 version=$(jq -r '.version' package.json)
 if [[ $version == *"-dev"* ]]; then
   echo "** Dropping the -dev prerelease ID"
-  npm version --preid "" --no-git-tag-version
+  npm version patch --preid "" --no-git-tag-version
   version=$(jq -r '.version' package.json)
-  echo "** New version is $version"
+  echo "** New version is v$version"
   git add package.json && git commit -m "v$version"
 fi
 
