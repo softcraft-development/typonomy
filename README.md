@@ -1,6 +1,8 @@
 # Typonomy
 Type Management Utilities for TypeScript
 
+[![npm version](https://badge.fury.io/js/typonomy.svg)](https://badge.fury.io/js/typonomy)
+
 ## Installation
 
 You can install Typonomy using npm, yarn, or pnpm:
