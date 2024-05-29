@@ -8,16 +8,13 @@ fi
 version=$(jq -r '.version' package.json)
 if [[ $version == *"-dev"* ]]; then
   echo "** Dropping the -dev prerelease ID"
-  newVersion=$(npm version --preid "" --no-git-tag-version)
-  git add package.json && git commit -m "$newVersion"
+  npm version --preid "" --no-git-tag-version
+  version=$(jq -r '.version' package.json)
+  echo "** New version is $version"
+  git add package.json && git commit -m "v$version"
 fi
 
 previousRelease=$(gh release list --json tagName --jq ".[].tagName" --limit 1)
-# Exit if the previous release was not retrieved correctly
-if [ -z "$previousRelease" ]; then
-  echo "Failed to retrieve previous release version from GitHub"
-  exit 1
-fi
 echo "** Previous release is $previousRelease"
 comparePrevious="https://github.com/softcraft-development/typonomy/compare/$previousRelease...main"
 echo "** Comparison: $comparePrevious"
