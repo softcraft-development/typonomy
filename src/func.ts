@@ -80,30 +80,102 @@ export type Trigger = () => void
  * @param {Transform<I, R>} toResult A transform from the intermediate type to the result type.
  * @returns {Transform<T, R>} The composed transform function.
  */
-export function compose<T, I, R>(toIntermediate: Transform<T, I>, toResult: Transform<I, R>): Transform<T, R> {
+export function compose<T, I, R>(
+  toIntermediate: Transform<T, I>,
+  toResult: Transform<I, R>,
+): Transform<T, R> {
   return (value: T): R => {
     return toResult(toIntermediate(value))
   }
 }
 
 /**
+ * Composes a new Synthesis from an existing Synthesis that returns an intermediate type
+ * and a Transform that transforms the intermediate type to the result type.
+ *
+ * @template A - The type of the left argument of the new Synthesis.
+ * @template B - The type of the right argument of the new Synthesis.
+ * @template I - The type of the intermediate value.
+ * @template R - The type of the result.
+ *
+ * @param {Synthesis<A, B, I>} synthesizeIntermediate - The synthesis function that returns the intermediate type.
+ * @param {Transform<B, I>} toResult - The function that transforms the intermediate type to the result type.
+ *
+ * @returns {Synthesis<A, B, R>} - The composed synthesis function.
+ */
+export function composeDown<A, B, I, R>(
+  synthesizeIntermediate: Synthesis<A, B, I>,
+  toResult: Transform<I, R>
+): Synthesis<A, B, R> {
+  return (a: A, b: B): R => {
+    return toResult(synthesizeIntermediate(a, b))
+  }
+}
+
+/**
+ * Composes a new Synthesis from an existing Synthesis for an intermediate type
+ * and a Transform that transforms the first (left) type to that intermediate type.
+ *
+ * @template A - The type of the left argument of the new Synthesis.
+ * @template B - The type of the right argument of the new Synthesis.
+ * @template I - The type of the intermediate value.
+ * @template R - The type of the result.
+ *
+ * @param {Transform<A, I>} toIntermediate - The function that transforms the left type to the intermediate type.
+ * @param {Synthesis<I, B, R>} synthesizeIntermediate - The synthesis function for the intermediate type.
+ *
+ * @returns {Synthesis<A, B, R>} - The composed synthesis function.
+ */
+export function composeLeft<A, B, I, R>(
+  toIntermediate: Transform<A, I>,
+  synthesizeIntermediate: Synthesis<I, B, R>,
+): Synthesis<A, B, R> {
+  return (a: A, b: B): R => {
+    return synthesizeIntermediate(toIntermediate(a), b)
+  }
+}
+
+/**
  * Composes a new Reducer from an existing Reducer for an intermediate type
- * and a Synthesis that transforms values to that intermediate type.
+ * and a Synthesis that transforms values and/or keys to that intermediate type.
  *
  * @template S The type of the state.
  * @template V The type of the value to reduce.
  * @template I The type of the intermediate value.
  * @template K The type of the reducer key.
- * @param reducer The Reducer function for the intermediate type.
- * @param synthesis The Synthesis function that transforms reducer values to intermediate values.
- *  Note that these can be Transform<V, I> functions if the key <K> is irrelevant.
+ * @param toIntermediate The Synthesis function that transforms reducer values to intermediate values.
+ * @param reduceIntermediate The Reducer function for the intermediate type.
+ *  Note that this can be a Transform<V, I> function if the key <K> is irrelevant.
  * @returns A Reducer function for the value type.
  */
 export function composeReducer<S, V, I, K extends Key>(
-  reducer: Reducer<S, I, K>,
-  synthesis: Synthesis<V, K, I>
+  toIntermediate: Synthesis<V, K, I>,
+  reduceIntermediate: Reducer<S, I, K>,
 ): Reducer<S, V, K> {
-  return (state, value, key) => reducer(state, synthesis(value, key), key)
+  return (state, value, key) => reduceIntermediate(state, toIntermediate(value, key), key)
+}
+
+/**
+ * Composes a new Synthesis from an existing Synthesis for an intermediate type
+ * and a Transform that transforms the second (right) type to that intermediate type.
+ *
+ * @template A - The type of the left argument of the new Synthesis.
+ * @template B - The type of the right argument of the new Synthesis.
+ * @template I - The type of the intermediate value.
+ * @template R - The type of the result.
+ *
+ * @param {Synthesis<A, I, R>} synthesizeIntermediate - The synthesis function for the intermediate type.
+ * @param {Transform<B, I>} toIntermediate - The function that transforms the right type to the intermediate type.
+ *
+ * @returns {Synthesis<A, B, R>} - The composed synthesis function.
+ */
+export function composeRight<A, B, I, R>(
+  toIntermediate: Transform<B, I>,
+  synthesizeIntermediate: Synthesis<A, I, R>,
+): Synthesis<A, B, R> {
+  return (a: A, b: B): R => {
+    return synthesizeIntermediate(a, toIntermediate(b))
+  }
 }
 
 /**

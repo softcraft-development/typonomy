@@ -4,18 +4,46 @@ import { valueToString } from "src/strings"
 describe("func", () => {
   describe("compose", () => {
     it("creates a transform from the input to result type", () => {
-      const countCharacters = (value: string) => value.length
-      const composed = lib.compose(countCharacters, valueToString)
+      const toIntermediate = (value: string) => value.length
+      const toResult = valueToString
+      const composed = lib.compose(toIntermediate, toResult)
       expect(composed("Hello")).toBe("5")
+    })
+  })
+
+  describe("composeDown", () => {
+    it("creates a new synthesis from a synthesis and a transform for the result", () => {
+      const intermediate = (a: number, b: number): number => a + b
+      const transform = valueToString
+      const synthesis = lib.composeDown(intermediate, transform)
+      expect(synthesis(3, 5)).toEqual("8")
+    })
+  })
+
+  describe("composeLeft", () => {
+    it("creates a new synthesis from a synthesis and a transform for the left type", () => {
+      const intermediate = (a: number, b: number): number => a + b
+      const transform = (value: string) => parseInt(value, 10)
+      const synthesis = lib.composeLeft(transform, intermediate)
+      expect(synthesis("7", 11)).toEqual(18)
     })
   })
 
   describe("composeReducer", () => {
     it("creates a new reducer via the synthesis function", () => {
-      const concat = (state: string, value: number) => `${state}->${value}`
-      const double = (value: number) => value * 2
-      const reducer = lib.composeReducer(concat, double)
-      expect(reducer("Start", 3, "")).toEqual("Start->6")
+      const synthesis = (value: number, key: string): number => value + key.length
+      const intermediate = (state: string, value: number, key: string): string => `${state} ${key}=${value}`
+      const reducer = lib.composeReducer(synthesis, intermediate)
+      expect(reducer("Start", 3, "test")).toEqual("Start test=7")
+    })
+  })
+
+  describe("composeRight", () => {
+    it("creates a new synthesis from a synthesis and a transform for the right type", () => {
+      const transform = (value: string) => parseInt(value, 10)
+      const intermediate = (a: number, b: number): number => a + b
+      const synthesis = lib.composeRight(transform, intermediate)
+      expect(synthesis(13, "17")).toEqual(30)
     })
   })
 
