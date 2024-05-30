@@ -31,9 +31,9 @@ describe("func", () => {
 
   describe("composeReducer", () => {
     it("creates a new reducer via the synthesis function", () => {
-      const synthesis = (value: number, key: string): number => value + key.length
-      const intermediate = (state: string, value: number, key: string): string => `${state} ${key}=${value}`
-      const reducer = lib.composeReducer(synthesis, intermediate)
+      const synthesis = (value: number, key: string): string => valueToString(value + key.length)
+      const reduceIntermediate = (state: string, value: string, key: string): string => `${state} ${key}=${value}`
+      const reducer = lib.composeReducer(synthesis, reduceIntermediate)
       expect(reducer("Start", 3, "test")).toEqual("Start test=7")
     })
   })
