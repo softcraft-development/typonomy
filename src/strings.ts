@@ -1,3 +1,14 @@
+
+/**
+ * Checks if the given object is a string.
+ *
+ * @param obj - The object to be checked.
+ * @returns `true` if the object is a string, `false` otherwise.
+ */
+export function isString(obj: unknown): obj is string {
+  return typeof obj === "string"
+}
+
 /**
  * Converts a value to a string.
  *
