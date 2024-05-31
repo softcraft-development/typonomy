@@ -32,4 +32,4 @@ The value to be transformed.
 
 ## Source
 
-[func.ts:64](https://github.com/softcraft-development/typonomy/blob/998a3a61fcab698d064d63ac7adfa4f782485616/src/func.ts#L64)
+[func.ts:64](https://github.com/softcraft-development/typonomy/blob/289df70d83b2b1e3049cb23856e86e275cb8aa8a/src/func.ts#L64)
