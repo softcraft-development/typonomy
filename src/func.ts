@@ -105,7 +105,7 @@ export function compose<T, I, R>(
  */
 export function composeDown<A, B, I, R>(
   synthesizeIntermediate: Synthesis<A, B, I>,
-  toResult: Transform<I, R>
+  toResult: Transform<I, R>,
 ): Synthesis<A, B, R> {
   return (a: A, b: B): R => {
     return toResult(synthesizeIntermediate(a, b))
