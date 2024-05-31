@@ -17,4 +17,4 @@ The love child between an Action and a Thunk.
 
 ## Source
 
-[func.ts:71](https://github.com/softcraft-development/typonomy/blob/ed5b4a5fbf166e1697c202a3763530b08ec3fe05/src/func.ts#L71)
+[func.ts:71](https://github.com/softcraft-development/typonomy/blob/998a3a61fcab698d064d63ac7adfa4f782485616/src/func.ts#L71)

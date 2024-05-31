@@ -6,10 +6,10 @@
 
 # Function: composeReducer()
 
-> **composeReducer**\<`S`, `V`, `I`, `K`\>(`reducer`, `synthesis`): [`Reducer`](../type-aliases/Reducer.md)\<`S`, `V`, `K`\>
+> **composeReducer**\<`S`, `V`, `I`, `K`\>(`toIntermediate`, `reduceIntermediate`): [`Reducer`](../type-aliases/Reducer.md)\<`S`, `V`, `K`\>
 
 Composes a new Reducer from an existing Reducer for an intermediate type
-and a Synthesis that transforms values to that intermediate type.
+and a Synthesis that transforms values and/or keys to that intermediate type.
 
 ## Type parameters
 
@@ -31,14 +31,14 @@ The type of the reducer key.
 
 ## Parameters
 
-• **reducer**: [`Reducer`](../type-aliases/Reducer.md)\<`S`, `I`, `K`\>
-
-The Reducer function for the intermediate type.
-
-• **synthesis**: [`Synthesis`](../type-aliases/Synthesis.md)\<`V`, `K`, `I`\>
+• **toIntermediate**: [`Synthesis`](../type-aliases/Synthesis.md)\<`V`, `K`, `I`\>
 
 The Synthesis function that transforms reducer values to intermediate values.
- Note that these can be Transform<V, I> functions if the key <K> is irrelevant.
+
+• **reduceIntermediate**: [`Reducer`](../type-aliases/Reducer.md)\<`S`, `I`, `K`\>
+
+The Reducer function for the intermediate type.
+ Note that this can be a Transform<V, I> function if the key <K> is irrelevant.
 
 ## Returns
 
@@ -48,4 +48,4 @@ A Reducer function for the value type.
 
 ## Source
 
-[func.ts:102](https://github.com/softcraft-development/typonomy/blob/ed5b4a5fbf166e1697c202a3763530b08ec3fe05/src/func.ts#L102)
+[func.ts:151](https://github.com/softcraft-development/typonomy/blob/998a3a61fcab698d064d63ac7adfa4f782485616/src/func.ts#L151)
