@@ -1,6 +1,15 @@
 import { Reducer } from "./func"
 
 /**
+ * Checks if an object has no keys or properties.
+ * @param obj - The object to check.
+ * @returns Returns `true` if the object has no keys; false otherwise.
+ */
+export function isEmpty(obj: Record<string, unknown>): boolean {
+  return Object.keys(obj).length === 0
+}
+
+/**
  * Reduces the keys and values of a record object.
  *
  * @template S - The type of the state.
