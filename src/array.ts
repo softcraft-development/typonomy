@@ -52,3 +52,15 @@ export function fill<T>(count: number, filler: func.Transform<number, T>): T[] {
   const reducer = func.composeReducer<T[], number, T, number>(filler, append)
   return func.reiterate(count, reducer, arr<T>())
 }
+
+/**
+ * Wraps a value or an array of values into an array.
+ * If the input is already an array, it is returned as is.
+ * If the input is a single value, it is wrapped in an array.
+ *
+ * @param value - The value or array of values to wrap.
+ * @returns The wrapped array.
+ */
+export function wrap<T>(value: T | T[]): T[] {
+  return Array.isArray(value) ? value : [value]
+}

@@ -51,4 +51,22 @@ describe("array", () => {
       expect(result).toEqual([2, 4, 6, 8])
     })
   })
+
+  describe("wrap", () => {
+    describe("when the input is an array", () => {
+      it("should return the input array as is", () => {
+        const array = [1, 2, 3]
+        const result = lib.wrap(array)
+        expect(result).toBe(array)
+      })
+    })
+
+    describe("when the input is a single value", () => {
+      it("wrap the value in an array", () => {
+        const value = 42
+        const result = lib.wrap(value)
+        expect(result).toEqual([value])
+      })
+    })
+  })
 })
