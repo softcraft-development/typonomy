@@ -16,6 +16,9 @@ fi
 
 git push
 
+echo "** Files to be published:"
+npm publish --dry-run
+
 previousRelease=$(gh release list --json tagName --jq ".[].tagName" --limit 1)
 echo "** Previous release is $previousRelease"
 comparePrevious="https://github.com/softcraft-development/typonomy/compare/$previousRelease...main"
