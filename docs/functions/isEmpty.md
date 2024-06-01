@@ -24,4 +24,4 @@ Returns `true` if the object has no keys; false otherwise.
 
 ## Source
 
-[object.ts:8](https://github.com/softcraft-development/typonomy/blob/289df70d83b2b1e3049cb23856e86e275cb8aa8a/src/object.ts#L8)
+[object.ts:8](https://github.com/softcraft-development/typonomy/blob/765a39464ce76242064341d502188569b9fd202c/src/object.ts#L8)

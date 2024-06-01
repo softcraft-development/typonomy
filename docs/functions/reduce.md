@@ -42,4 +42,4 @@ The final state.
 
 ## Source
 
-[object.ts:22](https://github.com/softcraft-development/typonomy/blob/289df70d83b2b1e3049cb23856e86e275cb8aa8a/src/object.ts#L22)
+[object.ts:22](https://github.com/softcraft-development/typonomy/blob/765a39464ce76242064341d502188569b9fd202c/src/object.ts#L22)
