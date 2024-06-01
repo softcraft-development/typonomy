@@ -1,4 +1,5 @@
-import * as lib from "src/strings"
+import { describe, expect, it } from "vitest"
+import * as lib from "../src/strings"
 
 describe("strings", () => {
   describe("isString", () => {

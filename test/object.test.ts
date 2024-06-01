@@ -1,4 +1,5 @@
-import * as lib from "src/object"
+import { describe, expect, it } from "vitest"
+import * as lib from "../src/object"
 
 describe("object", () => {
   describe("isEmpty", () => {

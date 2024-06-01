@@ -1,4 +1,5 @@
-import * as lib from "src/array"
+import { describe, expect, it } from "vitest"
+import * as lib from "../src/array"
 
 describe("array", () => {
   describe("append", () => {

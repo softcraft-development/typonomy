@@ -1,5 +1,6 @@
-import * as lib from "src/func"
-import { valueToString } from "src/strings"
+import { describe, expect, it } from "vitest"
+import * as lib from "../src/func"
+import { valueToString } from "../src/strings"
 
 describe("func", () => {
   describe("compose", () => {

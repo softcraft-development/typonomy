@@ -1,4 +1,5 @@
-import * as nullish from "src/nullish"
+import { beforeEach, describe, expect, it } from "vitest"
+import * as nullish from "../src/nullish"
 
 describe("nullish", () => {
   describe("insist", () => {
