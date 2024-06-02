@@ -26,7 +26,7 @@ See the [**API Documentation**](docs/README.md)
 
 Typonomy includes three kinds of [JavaScript module format](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
 The process for achieving this is inspired by [this blog post from SenseDeep](https://www.sensedeep.com/blog/posts/2021/how-to-create-single-source-npm-module.html).
-This library uses [ESBuild](https://esbuild.github.io/api/#format) for constructing each module format.
+This library uses [ESBuild](https://esbuild.github.io/api/#platform) for constructing each module platform.
 
 ### ES Module
 Exports all code as an ECMAScript Module, suitable for `import`:
