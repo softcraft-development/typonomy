@@ -48,4 +48,4 @@ A Reducer function for the value type.
 
 ## Source
 
-[func.ts:151](https://github.com/softcraft-development/typonomy/blob/4a3cffc57b1541a7efed27e0d213d96ff0241591/src/func.ts#L151)
+[func.ts:151](https://github.com/softcraft-development/typonomy/blob/acdcf727a03174c2b08bbaa0b667e4ee4a469eea/src/func.ts#L151)

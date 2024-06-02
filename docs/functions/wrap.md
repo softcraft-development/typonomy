@@ -30,4 +30,4 @@ The wrapped array.
 
 ## Source
 
-[array.ts:64](https://github.com/softcraft-development/typonomy/blob/4a3cffc57b1541a7efed27e0d213d96ff0241591/src/array.ts#L64)
+[array.ts:64](https://github.com/softcraft-development/typonomy/blob/acdcf727a03174c2b08bbaa0b667e4ee4a469eea/src/array.ts#L64)
