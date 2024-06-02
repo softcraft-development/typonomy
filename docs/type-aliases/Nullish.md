@@ -12,4 +12,4 @@ Either null or undefined.
 
 ## Source
 
-[nullish.ts:22](https://github.com/softcraft-development/typonomy/blob/765a39464ce76242064341d502188569b9fd202c/src/nullish.ts#L22)
+[nullish.ts:22](https://github.com/softcraft-development/typonomy/blob/4a3cffc57b1541a7efed27e0d213d96ff0241591/src/nullish.ts#L22)

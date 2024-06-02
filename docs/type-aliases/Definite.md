@@ -18,4 +18,4 @@ The type which may never be null nor undefined.
 
 ## Source
 
-[nullish.ts:40](https://github.com/softcraft-development/typonomy/blob/765a39464ce76242064341d502188569b9fd202c/src/nullish.ts#L40)
+[nullish.ts:40](https://github.com/softcraft-development/typonomy/blob/4a3cffc57b1541a7efed27e0d213d96ff0241591/src/nullish.ts#L40)

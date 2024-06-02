@@ -47,4 +47,4 @@ The function that transforms the intermediate type to the result type.
 
 ## Source
 
-[func.ts:106](https://github.com/softcraft-development/typonomy/blob/765a39464ce76242064341d502188569b9fd202c/src/func.ts#L106)
+[func.ts:106](https://github.com/softcraft-development/typonomy/blob/4a3cffc57b1541a7efed27e0d213d96ff0241591/src/func.ts#L106)
