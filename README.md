@@ -29,7 +29,7 @@ The process for achieving this is inspired by [this blog post from SenseDeep](ht
 This library uses [ESBuild](https://esbuild.github.io/api/#format) for constructing each module format.
 
 ### ES Module
-Exports all code as an ECMAScript Module, suitable for import:
+Exports all code as an ECMAScript Module, suitable for `import`:
 
 `import * as typonomy from 'typonomy'`
 
@@ -39,12 +39,12 @@ You can also import submodules:
 
 ES Modules are typically used:
   * In browser-based applications.
-  * In applications that use a JS packaging system (ex: Bundler, Webpack, ESBuild, etc)
+  * In applications that use a JS bundler system (ex: Bundler, Bun, Webpack, ESBuild, Vite, etc).
   * In [modern Node.js applications](https://nodejs.org/api/packages.html#determining-module-system).
 
-### CommonJS module.
+### CommonJS / Node module
 
-Exports all code as an ECMAScript Module, suitable for require.
+Exports all code as a CommonJS, suitable for `require`.
 
 `const typonomy = require('typonomy')`
 
@@ -53,6 +53,18 @@ You can also require submodules:
 `const array = require('typonomy/array')`
 
 CommonJS modules are typically used by older Node.JS applications.
+
+### Browser script.
+
+Exports all code as a ES6 script suitable for inclusion in browsers.
+
+`<script src='typonomy/dist/browser/index.js'>`
+
+You can also include submodules:
+
+`<script src='typonomy/dist/browser/array.js'>`
+
+Browser scripts are typically used by older web browser-based applications.
 
 ## License
 Typonomy is licensed under the [MIT License](https://opensource.org/licenses/MIT).

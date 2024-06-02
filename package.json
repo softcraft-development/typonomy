@@ -3,6 +3,7 @@
   "description": "Type Management Utilities for TypeScript",
   "devDependencies": {
     "@stylistic/eslint-plugin": "^2.1.0",
+    "@tsconfig/recommended": "^1.0.6",
     "@types/node": "^20.13.0",
     "@typescript-eslint/eslint-plugin": "^7.9.0",
     "@typescript-eslint/parser": "^7.9.0",
@@ -18,34 +19,34 @@
   },
   "exports": {
     ".": {
-      "default": "./dist/esm/index.js",
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js",
-      "types": "./dist/esm/index.d.ts"
+      "types": "./dist/esm/index.d.ts",
+      "default": "./dist/browser/index.js"
     },
     "./array": {
-      "default": "./dist/esm/array.js",
       "import": "./dist/esm/array.js",
       "require": "./dist/cjs/array.js",
-      "types": "./dist/esm/array.d.ts"
+      "types": "./dist/esm/array.d.ts",
+      "default": "./dist/browser/array.js"
     },
     "./func": {
-      "default": "./dist/esm/func.js",
       "import": "./dist/esm/func.js",
       "require": "./dist/cjs/func.js",
-      "types": "./dist/esm/func.d.ts"
+      "types": "./dist/esm/func.d.ts",
+      "default": "./dist/browser/func.js"
     },
     "./nullish": {
-      "default": "./dist/esm/nullish.js",
       "import": "./dist/esm/nullish.js",
       "require": "./dist/cjs/nullish.js",
-      "types": "./dist/esm/nullish.d.ts"
+      "types": "./dist/esm/nullish.d.ts",
+      "default": "./dist/browser/nullish.js"
     },
     "./object": {
-      "default": "./dist/esm/object.js",
       "import": "./dist/esm/object.js",
       "require": "./dist/cjs/object.js",
-      "types": "./dist/esm/object.d.ts"
+      "types": "./dist/esm/object.d.ts",
+      "default": "./dist/browser/object.js"
     }
   },
   "keywords": [
@@ -57,7 +58,7 @@
   "module": "dist/esm/index.js",
   "name": "typonomy",
   "scripts": {
-    "build": "node esbuild.mjs && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json",
+    "build": "node esbuild.mjs",
     "check": "tsc --noEmit",
     "docs": "typedoc && rm docs/README.md",
     "lint": "eslint src/**/*.ts test/**/*.test.ts",
