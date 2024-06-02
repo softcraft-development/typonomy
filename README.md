@@ -57,6 +57,7 @@ CommonJS modules are typically used by older Node.JS applications.
 ### Browser script.
 
 Exports all code as a ES6 script suitable for inclusion in browsers.
+The code is wrapped in an [Immediately invoked function expression](https://en.wikipedia.org/wiki/Immediately_invoked_function_expression) (or "IIFE").
 
 `<script src='typonomy/dist/browser/index.js'>`
 
