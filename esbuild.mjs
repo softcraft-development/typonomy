@@ -8,7 +8,7 @@ import { sync } from "rimraf"
 const base = {
   bundle: true,
   entryPoints: ["./src/**/*.ts"],
-  // minify: true,
+  minify: true,
   sourcemap: true,
 }
 
