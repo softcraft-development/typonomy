@@ -18,4 +18,4 @@ The type when it is not undefined.
 
 ## Source
 
-[nullish.ts:5](https://github.com/softcraft-development/typonomy/blob/e9724ba9d0c158a8beed5b634614d25b27c7288a/src/nullish.ts#L5)
+[nullish.ts:5](https://github.com/softcraft-development/typonomy/blob/b2f9399cc7ee48148cc20b59e77776d46b4d859d/src/nullish.ts#L5)

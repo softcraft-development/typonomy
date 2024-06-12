@@ -42,4 +42,4 @@ The composed transform function.
 
 ## Source
 
-[func.ts:83](https://github.com/softcraft-development/typonomy/blob/e9724ba9d0c158a8beed5b634614d25b27c7288a/src/func.ts#L83)
+[func.ts:83](https://github.com/softcraft-development/typonomy/blob/b2f9399cc7ee48148cc20b59e77776d46b4d859d/src/func.ts#L83)
