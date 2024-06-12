@@ -34,4 +34,4 @@ The value to append to the array.
 
 ## Source
 
-[array.ts:12](https://github.com/softcraft-development/typonomy/blob/acdcf727a03174c2b08bbaa0b667e4ee4a469eea/src/array.ts#L12)
+[array.ts:13](https://github.com/softcraft-development/typonomy/blob/e9724ba9d0c158a8beed5b634614d25b27c7288a/src/array.ts#L13)
