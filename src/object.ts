@@ -1,4 +1,4 @@
-import { Reducer } from "./func"
+import type { Reducer } from "./func"
 
 /**
  * Checks if an object has no keys or properties.

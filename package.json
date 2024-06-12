@@ -3,6 +3,7 @@
   "description": "Type Management Utilities for TypeScript",
   "devDependencies": {
     "@stylistic/eslint-plugin": "^2.1.0",
+    "@tsconfig/node-lts": "^20.1.3",
     "@tsconfig/recommended": "^1.0.6",
     "@types/node": "^20.13.0",
     "@typescript-eslint/eslint-plugin": "^7.9.0",
@@ -19,34 +20,34 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index",
+      "require": "./dist/cjs/index",
       "types": "./dist/esm/index.d.ts",
-      "default": "./dist/browser/index.js"
+      "default": "./dist/browser/index"
     },
     "./array": {
-      "import": "./dist/esm/array.js",
-      "require": "./dist/cjs/array.js",
+      "import": "./dist/esm/array",
+      "require": "./dist/cjs/array",
       "types": "./dist/esm/array.d.ts",
-      "default": "./dist/browser/array.js"
+      "default": "./dist/browser/array"
     },
     "./func": {
-      "import": "./dist/esm/func.js",
-      "require": "./dist/cjs/func.js",
+      "import": "./dist/esm/func",
+      "require": "./dist/cjs/func",
       "types": "./dist/esm/func.d.ts",
-      "default": "./dist/browser/func.js"
+      "default": "./dist/browser/func"
     },
     "./nullish": {
-      "import": "./dist/esm/nullish.js",
-      "require": "./dist/cjs/nullish.js",
+      "import": "./dist/esm/nullish",
+      "require": "./dist/cjs/nullish",
       "types": "./dist/esm/nullish.d.ts",
-      "default": "./dist/browser/nullish.js"
+      "default": "./dist/browser/nullish"
     },
     "./object": {
-      "import": "./dist/esm/object.js",
-      "require": "./dist/cjs/object.js",
+      "import": "./dist/esm/object",
+      "require": "./dist/cjs/object",
       "types": "./dist/esm/object.d.ts",
-      "default": "./dist/browser/object.js"
+      "default": "./dist/browser/object"
     }
   },
   "keywords": [
@@ -54,12 +55,12 @@
     "types"
   ],
   "license": "MIT",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/cjs/index",
+  "module": "dist/esm/index",
   "name": "typonomy",
   "scripts": {
     "build": "node esbuild.mjs",
-    "check": "tsc --noEmit",
+    "check": "tsc --noEmit && tsc --noEmit -p test/tsconfig.json",
     "docs": "typedoc && rm docs/README.md",
     "lint": "eslint src/**/*.ts test/**/*.test.ts",
     "lint:fix": "eslint --fix src/**/*.ts test/**/*.test.ts",
