@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import * as lib from "../src/array"
+import * as lib from "../src/arrays"
 import { isNumber } from "../src/types"
 
 describe("array", () => {

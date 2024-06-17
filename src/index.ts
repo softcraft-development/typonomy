@@ -1,4 +1,4 @@
-export * from "./array"
+export * from "./arrays"
 export * from "./func"
 export * from "./nullish"
 export * from "./objects"
