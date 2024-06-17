@@ -34,14 +34,14 @@ describe("array", () => {
     })
   })
 
-  describe("arr", () => {
+  describe("create", () => {
     it("returns an array of the specified size", () => {
-      const result = lib.arr(5)
+      const result = lib.create(5)
       expect(result.length).toBe(5)
     })
 
     it("returns an empty array if no size is specified", () => {
-      const result = lib.arr()
+      const result = lib.create()
       expect(result.length).toBe(0)
     })
   })

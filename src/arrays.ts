@@ -38,7 +38,7 @@ export function appendDefinite<T>(array: Definite<T>[], value: Possible<T>): Def
  * @param size - The size of the array to create. Defaults to 0.
  * @returns An array of the specified size and type.
  */
-export function arr<T>(size = 0): T[] {
+export function create<T>(size = 0): T[] {
   return new Array<T>(size)
 }
 
@@ -52,7 +52,7 @@ export function arr<T>(size = 0): T[] {
  */
 export function fill<T>(count: number, filler: func.Transform<number, T>): T[] {
   const reducer = func.composeReducer<T[], number, T, number>(filler, append)
-  return func.reiterate(count, reducer, arr<T>())
+  return func.reiterate(count, reducer, create<T>())
 }
 
 /**
