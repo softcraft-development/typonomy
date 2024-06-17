@@ -36,30 +36,6 @@ describe("nullish", () => {
     })
   })
 
-  describe("isDefined", () => {
-    it("returns true for a defined value", () => {
-      expect(lib.isDefined<string>("Defined")).toBe(true)
-    })
-
-    it("returns false for an undefined value", () => {
-      expect(lib.isDefined<string>(undefined)).toBe(false)
-    })
-  })
-
-  describe("isDefinite", () => {
-    it("returns true for a present value", () => {
-      expect(lib.isDefinite("Definite")).toBe(true)
-    })
-
-    it("returns false for a null value", () => {
-      expect(lib.isDefinite<string>(null)).toBe(false)
-    })
-
-    it("returns false for an undefined value", () => {
-      expect(lib.isDefinite<string>(undefined)).toBe(false)
-    })
-  })
-
   describe("isNull", () => {
     it("returns true for null", () => {
       expect(lib.isNull(null)).toBe(true)
@@ -90,55 +66,17 @@ describe("nullish", () => {
     })
   })
 
-  describe("isNullable", () => {
-    it("returns true for null", () => {
-      expect(lib.isNullable<string>(null)).toBe(true)
-    })
-
-    it("returns true for a defined value", () => {
-      expect(lib.isNullable<string>("Not Null")).toBe(true)
-    })
-
-    it("returns false for an undefined value", () => {
-      expect(lib.isNullable<string>(undefined)).toBe(false)
-    })
-  })
-
   describe("isNullish", () => {
     it("returns true for a null value", () => {
-      expect(lib.isNullish<string>(null)).toBe(true)
+      expect(lib.isNullish(null)).toBe(true)
     })
 
     it("returns true for an undefined value", () => {
-      expect(lib.isNullish<string>(undefined)).toBe(true)
+      expect(lib.isNullish(undefined)).toBe(true)
     })
 
     it("returns false for an definite value", () => {
-      expect(lib.isNullish<string>("Definite")).toBe(false)
-    })
-  })
-
-  describe("isOptional", () => {
-    it("returns true for an defined value", () => {
-      expect(lib.isOptional<string>("Defined")).toBe(true)
-    })
-
-    it("returns true for an undefined value", () => {
-      expect(lib.isOptional<string>(undefined)).toBe(true)
-    })
-
-    it("returns false for a null value", () => {
-      expect(lib.isOptional<string>(null)).toBe(false)
-    })
-  })
-
-  describe("isSubstantial", () => {
-    it("returns true for a non-null value", () => {
-      expect(lib.isSubstantial<string>("Substantial")).toBe(true)
-    })
-
-    it("returns false for a null value", () => {
-      expect(lib.isSubstantial<string>(null)).toBe(false)
+      expect(lib.isNullish("Explicit")).toBe(false)
     })
   })
 

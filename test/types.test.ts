@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest"
-import type { Predicate } from "../src/func"
+import { or, type Predicate } from "../src/func"
+import { isNull } from "../src/nullish"
 import { isObject } from "../src/objects"
+import { isString } from "../src/strings"
 import * as lib from "../src/types"
 
 describe("types", () => {
@@ -145,6 +147,62 @@ describe("types", () => {
 
     it("returns false if the value is undefined", () => {
       expect(lib.isPropertyKey(false)).toBe(false)
+    })
+  })
+
+  describe("narrow", () => {
+    describe("for union types", () => {
+      type Wide = string | null
+      const wide = lib.typeGuard<Wide>(or(isString, isNull))
+      const guard = lib.narrow<Wide, null>(wide, isNull)
+
+      it("returns false if the value is of the excluded type", () => {
+        expect(guard(null)).toBe(false)
+      })
+
+      it("would have returned true without the narrowing", () => {
+        expect(wide(null)).toBe(true)
+      })
+
+      it("returns true if the value is of the unexcluded type", () => {
+        expect(guard("Explicit")).toBe(true)
+      })
+    })
+
+    describe("for subtypes", () => {
+      type Wide = object
+      const wide = (value: unknown): value is object => typeof value === "object"
+      // Note that TypeScript does not consider this to be TypeGuard<Exclude<object, Array<unknown>>>
+      const guard = lib.narrow<Wide, Array<unknown>>(wide, Array.isArray)
+
+      it("returns false if the value is of the excluded type", () => {
+        expect(guard([])).toBe(false)
+      })
+
+      it("would have returned true without the narrowing", () => {
+        expect(wide([])).toBe(true)
+      })
+
+      it("returns true if the value is of the unexcluded type", () => {
+        expect(guard({})).toBe(true)
+      })
+    })
+  })
+
+  describe("widen", () => {
+    const narrow = isString
+    const guard = lib.widen(narrow, isNull)
+
+    it("returns true if the value is of the included type", () => {
+      expect(guard(null)).toBe(true)
+    })
+
+    it("would have returned false without the widening", () => {
+      expect(narrow(null)).toBe(false)
+    })
+
+    it("returns true if the value is the base type", () => {
+      expect(guard("Explicit")).toBe(true)
     })
   })
 

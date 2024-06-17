@@ -1,8 +1,17 @@
 import { describe, expect, it } from "vitest"
 import * as lib from "../src/arrays"
+import type { Explicit } from "../src/nullish"
 import { isNumber } from "../src/types"
 
-describe("array", () => {
+describe("arrays", () => {
+  describe("Explicit<T>", () => {
+    it("is assignable to T", () => {
+      const explicitType: Explicit<number> = 42
+      const generalType: number = explicitType
+      expect(generalType).toBe(explicitType)
+    })
+  })
+
   describe("append", () => {
     it("should append the value to the array", () => {
       const array = [1, 1, 2, 3]
@@ -17,20 +26,38 @@ describe("array", () => {
     })
   })
 
-  describe("appendDefinite", () => {
+  describe("appendExplicit", () => {
     it("appends a definite value", () => {
-      const result = lib.appendDefinite<string>([], "Definite")
-      expect(result).toEqual(["Definite"])
+      const result = lib.appendExplicit<string>([], "Explicit")
+      expect(result).toEqual(["Explicit"])
     })
 
     it("does not append a null", () => {
-      const result = lib.appendDefinite<string>([], null)
+      const result = lib.appendExplicit<string>([], null)
       expect(result).toEqual([])
     })
 
     it("does not append undefined", () => {
-      const result = lib.appendDefinite<string>([], undefined)
+      const result = lib.appendExplicit<string>([], undefined)
       expect(result).toEqual([])
+    })
+  })
+
+  describe("arrayGuard", () => {
+    describe("when emptyMatches is true", () => {
+      it("returns a type guard that returns true for an empty array", () => {
+        expect(lib.arrayGuard(isNumber, true)([])).toBe(true)
+      })
+    })
+
+    describe("when emptyMatches is false", () => {
+      it("returns a type guard that returns false for an empty array", () => {
+        expect(lib.arrayGuard(isNumber, false)([])).toBe(false)
+      })
+    })
+
+    it("returns a type guard that validates against the predicate", () => {
+      expect(lib.arrayGuard(isNumber)([1, 2, 3])).toBe(true)
     })
   })
 

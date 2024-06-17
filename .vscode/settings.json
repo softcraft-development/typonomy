@@ -3,6 +3,7 @@
     "IIFE",
     "outdir",
     "outfile",
-    "typonomy"
+    "typonomy",
+    "unexcluded"
   ]
 }
