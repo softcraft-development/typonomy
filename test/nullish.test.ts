@@ -2,6 +2,14 @@ import { beforeEach, describe, expect, it } from "vitest"
 import * as lib from "../src/nullish"
 
 describe("nullish", () => {
+  describe("Explicit<T>", () => {
+    it("is assignable to T[]", () => {
+      const explicitT: lib.Explicit<number | null> = 29
+      const t: number = explicitT
+      expect(t).toBe(explicitT)
+    })
+  })
+
   describe("insist", () => {
     let value: object | null | undefined
 
@@ -33,6 +41,32 @@ describe("nullish", () => {
       it("throws an error", () => {
         expect(() => lib.insist(value)).toThrow()
       })
+    })
+  })
+
+  describe("isExplicit", () => {
+    it("returns false for a null value", () => {
+      expect(lib.isExplicit(null)).toBe(false)
+    })
+
+    it("returns false for an undefined value", () => {
+      expect(lib.isExplicit(undefined)).toBe(false)
+    })
+
+    it("returns true for a string", () => {
+      expect(lib.isExplicit("Explicit")).toBe(true)
+    })
+
+    it("returns true for an object", () => {
+      expect(lib.isExplicit({})).toBe(true)
+    })
+
+    it("returns true for a number", () => {
+      expect(lib.isExplicit(23)).toBe(true)
+    })
+
+    it("returns true for a boolean", () => {
+      expect(lib.isExplicit(false)).toBe(true)
     })
   })
 

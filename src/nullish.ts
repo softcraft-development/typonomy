@@ -45,6 +45,7 @@ export type Possible<T> = T | Nullish
 /**
  * Ensures that the given value is neither `null` nor `undefined`.
  * Throws an error if the value is `null` or `undefined`.
+ * @template T - The type when it is not `null` or `undefined`.
  * @param value - The value to be checked.
  * @returns The non-null non-undefined value.
  * @throws {Error} If the value is null or undefined.
@@ -53,6 +54,16 @@ export function insist<T>(value: Possible<T>): T {
   if (isNull(value)) throw new Error("Value must not be null")
   if (isUndefined(value)) throw new Error("Value must not be undefined")
   return value
+}
+
+/**
+ * Checks if a value is not `Nullish`.
+ * @template T - The type when it is not `null` or `undefined`.
+ * @param value - The value to check.
+ * @returns `false` if the value is `null` or `undefined`; `true` otherwise.
+ */
+export function isExplicit<T>(value: Possible<T>): value is Explicit<T> {
+  return !isNullish(value)
 }
 
 /**

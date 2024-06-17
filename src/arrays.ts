@@ -1,5 +1,5 @@
 import { composeReducer, reiterate, type Predicate, type Transform } from "./func"
-import { isNullish, type Explicit, type Possible } from "./nullish"
+import { isExplicit, type Explicit, type Possible } from "./nullish"
 import type { TypeGuard } from "./types"
 
 /**
@@ -16,15 +16,15 @@ export function append<T>(array: T[], value: T): T[] {
 }
 
 /**
- * Appends a value to an array only if the value is neither null nor undefined.
+ * Appends a value to an array only if the value is neither `null` nor `undefined`.
  *
  * @template T - The type of elements in the array.
- * @param {Defined<T>[]} array - The array to append the value to.
- * @param {Possible<T>} value - The value to append to the array if it is not null or undefined.
- * @returns {Defined<T>[]} - The updated array.
+ * @param {Explicit<T>[]} array - The array to append the value to.
+ * @param {Possible<T>} value - The value to append to the array if it is not `null` or `undefined`.
+ * @returns {Explicit<T>[]} - The updated array.
  */
 export function appendExplicit<T>(array: Explicit<T>[], value: Possible<T>): Explicit<T>[] {
-  if (!isNullish(value)) {
+  if (isExplicit(value)) {
     array.push(value)
   }
   return array
