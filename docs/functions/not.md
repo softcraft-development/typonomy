@@ -28,4 +28,4 @@ A new Predicate that returns the opposite value of the input Predicate.
 
 ## Source
 
-[func.ts:224](https://github.com/softcraft-development/typonomy/blob/ac449b6265e0e88e666105085e6c109ec445538b/src/func.ts#L224)
+[func.ts:224](https://github.com/softcraft-development/typonomy/blob/a265c54b67d3009e0095d9a5a897bf61d10478cf/src/func.ts#L224)

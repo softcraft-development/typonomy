@@ -36,4 +36,4 @@ A narrower `TypeGuard` that only allows the base type.
 
 ## Source
 
-[types.ts:69](https://github.com/softcraft-development/typonomy/blob/ac449b6265e0e88e666105085e6c109ec445538b/src/types.ts#L69)
+[types.ts:69](https://github.com/softcraft-development/typonomy/blob/a265c54b67d3009e0095d9a5a897bf61d10478cf/src/types.ts#L69)

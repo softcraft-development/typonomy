@@ -27,4 +27,4 @@ Any type.
 
 ## Source
 
-[func.ts:6](https://github.com/softcraft-development/typonomy/blob/ac449b6265e0e88e666105085e6c109ec445538b/src/func.ts#L6)
+[func.ts:6](https://github.com/softcraft-development/typonomy/blob/a265c54b67d3009e0095d9a5a897bf61d10478cf/src/func.ts#L6)
