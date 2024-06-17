@@ -8,16 +8,18 @@
 
 > **insist**\<`T`\>(`value`): `T`
 
-Ensures that the given value is not null or undefined.
-If the value is null or undefined, an error is thrown.
+Ensures that the given value is neither `null` nor `undefined`.
+Throws an error if the value is `null` or `undefined`.
 
 ## Type parameters
 
 • **T**
 
+The type when it is not `null` or `undefined`.
+
 ## Parameters
 
-• **value**: `undefined` \| `null` \| `T`
+• **value**: [`Possible`](../type-aliases/Possible.md)\<`T`\>
 
 The value to be checked.
 
@@ -33,4 +35,4 @@ If the value is null or undefined.
 
 ## Source
 
-[nullish.ts:51](https://github.com/softcraft-development/typonomy/blob/16e8ada4ce77ce01fea3d62ce7f81f8090c6d1b6/src/nullish.ts#L51)
+[nullish.ts:53](https://github.com/softcraft-development/typonomy/blob/ac449b6265e0e88e666105085e6c109ec445538b/src/nullish.ts#L53)

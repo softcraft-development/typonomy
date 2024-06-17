@@ -20,8 +20,8 @@ The value to check.
 
 `value is undefined`
 
-A boolean indicating whether the value is undefined.
+`true` if the value is `undefined`; `false` otherwise.
 
 ## Source
 
-[nullish.ts:133](https://github.com/softcraft-development/typonomy/blob/16e8ada4ce77ce01fea3d62ce7f81f8090c6d1b6/src/nullish.ts#L133)
+[nullish.ts:93](https://github.com/softcraft-development/typonomy/blob/ac449b6265e0e88e666105085e6c109ec445538b/src/nullish.ts#L93)

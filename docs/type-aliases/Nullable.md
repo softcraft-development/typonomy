@@ -8,14 +8,14 @@
 
 > **Nullable**\<`T`\>: `T` \| `null`
 
-A utility type for values that may be null.
+A utility type for values that may be `null`.
 
 ## Type parameters
 
 • **T**
 
-The type when it is not null.
+The type when it is not `null`.
 
 ## Source
 
-[nullish.ts:19](https://github.com/softcraft-development/typonomy/blob/16e8ada4ce77ce01fea3d62ce7f81f8090c6d1b6/src/nullish.ts#L19)
+[nullish.ts:14](https://github.com/softcraft-development/typonomy/blob/ac449b6265e0e88e666105085e6c109ec445538b/src/nullish.ts#L14)

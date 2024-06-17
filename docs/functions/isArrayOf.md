@@ -6,7 +6,7 @@
 
 # Function: isArrayOf()
 
-> **isArrayOf**\<`T`\>(`value`, `typeGuard`, `emptyMatches`): `value is T[]`
+> **isArrayOf**\<`T`\>(`value`, `predicate`, `emptyMatches`): `value is T[]`
 
 Checks if a value is an array of a specific type.
 
@@ -20,9 +20,9 @@ Checks if a value is an array of a specific type.
 
 The value to check.
 
-• **typeGuard**: [`TypeGuard`](../type-aliases/TypeGuard.md)\<`T`\>
+• **predicate**: [`Predicate`](../type-aliases/Predicate.md)\<`T`\>
 
-The TypeGuard to check each item in the array.
+The Predicate to check each item in the array.
 
 • **emptyMatches**: `boolean`= `true`
 
@@ -37,4 +37,4 @@ The value to return when the array is empty, and the type cannot be defined by t
 
 ## Source
 
-[arrays.ts:67](https://github.com/softcraft-development/typonomy/blob/16e8ada4ce77ce01fea3d62ce7f81f8090c6d1b6/src/arrays.ts#L67)
+[arrays.ts:78](https://github.com/softcraft-development/typonomy/blob/ac449b6265e0e88e666105085e6c109ec445538b/src/arrays.ts#L78)
