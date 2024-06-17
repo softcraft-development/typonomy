@@ -33,4 +33,4 @@ If the value is null or undefined.
 
 ## Source
 
-[nullish.ts:49](https://github.com/softcraft-development/typonomy/blob/b2f9399cc7ee48148cc20b59e77776d46b4d859d/src/nullish.ts#L49)
+[nullish.ts:51](https://github.com/softcraft-development/typonomy/blob/16e8ada4ce77ce01fea3d62ce7f81f8090c6d1b6/src/nullish.ts#L51)

@@ -47,4 +47,4 @@ The synthesis function for the intermediate type.
 
 ## Source
 
-[func.ts:172](https://github.com/softcraft-development/typonomy/blob/b2f9399cc7ee48148cc20b59e77776d46b4d859d/src/func.ts#L172)
+[func.ts:209](https://github.com/softcraft-development/typonomy/blob/16e8ada4ce77ce01fea3d62ce7f81f8090c6d1b6/src/func.ts#L209)

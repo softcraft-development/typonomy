@@ -2,11 +2,11 @@
 
 ***
 
-[Typonomy](../globals.md) / arr
+[Typonomy](../globals.md) / create
 
-# Function: arr()
+# Function: create()
 
-> **arr**\<`T`\>(`size`): `T`[]
+> **create**\<`T`\>(`size`): `T`[]
 
 Creates an array of a specified size and type.
 
@@ -30,4 +30,4 @@ An array of the specified size and type.
 
 ## Source
 
-[array.ts:40](https://github.com/softcraft-development/typonomy/blob/b2f9399cc7ee48148cc20b59e77776d46b4d859d/src/array.ts#L40)
+[arrays.ts:41](https://github.com/softcraft-development/typonomy/blob/16e8ada4ce77ce01fea3d62ce7f81f8090c6d1b6/src/arrays.ts#L41)
