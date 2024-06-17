@@ -20,6 +20,5 @@
   "extends": "@tsconfig/node-lts/tsconfig.json",
   "include": [
     "src",
-    "test/types.test.ts",
   ]
 }
