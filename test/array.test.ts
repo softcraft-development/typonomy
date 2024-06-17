@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
 import * as lib from "../src/array"
+import { isNumber } from "../src/types"
 
 describe("array", () => {
   describe("append", () => {
@@ -34,14 +35,64 @@ describe("array", () => {
   })
 
   describe("arr", () => {
-    it("should return an array of the specified size", () => {
+    it("returns an array of the specified size", () => {
       const result = lib.arr(5)
       expect(result.length).toBe(5)
     })
 
-    it("should return an empty array if no size is specified", () => {
+    it("returns an empty array if no size is specified", () => {
       const result = lib.arr()
       expect(result.length).toBe(0)
+    })
+  })
+
+  describe("isArrayOf", () => {
+    describe("when the value is an empty array", () => {
+      describe("and emptyMatches is true", () => {
+        it("returns true", () => {
+          expect(lib.isArrayOf([], isNumber, true)).toBe(true)
+        })
+      })
+
+      describe("and emptyMatches is false", () => {
+        it("returns false", () => {
+          expect(lib.isArrayOf([], isNumber, false)).toBe(false)
+        })
+      })
+    })
+
+    describe("when the value is an filled array", () => {
+      describe("and the array contains only values of that type", () => {
+        it("returns true", () => {
+          expect(lib.isArrayOf([1, 2, 3], isNumber)).toBe(true)
+        })
+      })
+
+      describe("and the array contains any values not of that type", () => {
+        it("returns false", () => {
+          expect(lib.isArrayOf([1, 2, "3"], isNumber)).toBe(false)
+        })
+      })
+    })
+
+    it("returns false if the value is of the array type", () => {
+      expect(lib.isArrayOf(1, isNumber)).toBe(false)
+    })
+
+    it("returns false for null", () => {
+      expect(lib.isArrayOf(null, isNumber)).toBe(false)
+    })
+
+    it("returns false for null", () => {
+      expect(lib.isArrayOf(undefined, isNumber)).toBe(false)
+    })
+
+    it("returns false for a string", () => {
+      expect(lib.isArrayOf("test", isNumber)).toBe(false)
+    })
+
+    it("returns false for an object", () => {
+      expect(lib.isArrayOf({}, isNumber)).toBe(false)
     })
   })
 
@@ -53,9 +104,27 @@ describe("array", () => {
     })
   })
 
+  describe("isEmptyArray", () => {
+    it("returns true for an empty array", () => {
+      expect(lib.isEmptyArray([])).toBe(true)
+    })
+
+    it("returns false a filled Array", () => {
+      expect(lib.isEmptyArray([1, 2])).toBe(false)
+    })
+
+    it("returns false for null", () => {
+      expect(lib.isEmptyArray(null)).toBe(false)
+    })
+
+    it("returns false for undefined", () => {
+      expect(lib.isEmptyArray(undefined)).toBe(false)
+    })
+  })
+
   describe("wrap", () => {
     describe("when the input is an array", () => {
-      it("should return the input array as is", () => {
+      it("returns the input array as is", () => {
         const array = [1, 2, 3]
         const result = lib.wrap(array)
         expect(result).toBe(array)

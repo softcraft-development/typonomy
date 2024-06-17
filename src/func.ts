@@ -5,8 +5,6 @@
  */
 export type Action<T> = (value: T) => void
 
-export type Key = string | number
-
 /**
  * A function that transforms one Transform function into another.
  * If you want a function that transforms one type <B> to another type <R>,
@@ -23,18 +21,26 @@ export type Key = string | number
 export type MetaTransform<A, B, R> = (fn: Transform<A, R>) => Transform<B, R>
 
 /**
+ * Represents a function returns true or false for a given value..
+ * @template T The type of the value being evaluated by the predicate.
+ * @param value The value to be evaluated by the predicate.
+ * @returns A boolean indicating whether the value satisfies the predicate condition.
+ */
+export type Predicate<T> = (value: T) => boolean
+
+/**
  * A function combines a previous state, a value, and a key into a new state.
  * Since the old and new state are of the same type, this "reduces" the value and key into the new state.
  * @template S The type of the state.
  * @template V The type of the value.
  * @template K The type of the key.
- *  Typically a string, though frequently a number, in which case it's often called an index.
+ *  Typically a string, though frequently a number, in which case it's often called an "index".
  * @param state The current state. Note that this value may be mutated, depending on the reducer.
  * @param value The value to be applied to the state.
  * @param key The key or index associated with the value.
  * @returns The new state after applying the value.
  */
-export type Reducer<S, V, K extends Key> = (state: S, value: V, key: K) => S
+export type Reducer<S, V, K> = (state: S, value: V, key: K) => S
 
 /**
  * A function that combines two values to produce a new value.
@@ -69,6 +75,37 @@ export type Transform<T, R> = (value: T) => R
  * @typedef {() => void} Trigger
  */
 export type Trigger = () => void
+
+/**
+ * Create a Predicate that returns true if all input `Predicate` are true.
+ * @type T - The type of value to test.
+ * @param predicates - The `Predicate` to test against.
+ * @returns A `Predicate` that returns true if all input `Predicate` are true.
+ */
+export function all<T>(...predicates: Predicate<T>[]): Predicate<T> {
+  return value => predicates.every(predicate => predicate(value))
+}
+
+/**
+ * Create a `Predicate` based on both input `Predicate` returning `true`.
+ * @type T - The type of value to test.
+ * @param a - The first `Predicate` to test against.
+ * @param b - The second `Predicate` to test against.
+ * @returns A Predicate that returns true if both inputs are true.
+ */
+export function and<T>(a: Predicate<T>, b: Predicate<T>): Predicate<T> {
+  return (value): boolean => a(value) && b(value)
+}
+
+/**
+ * Create a Predicate that returns true if any input `Predicate` is true.
+ * @type T - The type of value to test.
+ * @param predicates - The `Predicate` to test against.
+ * @returns A `Predicate` that returns true if any input `Predicate` are true.
+ */
+export function any<T>(...predicates: Predicate<T>[]): Predicate<T> {
+  return value => predicates.some(predicate => predicate(value))
+}
 
 /**
  * Composes a new transform from two existing transforms via an intermediate type.
@@ -148,7 +185,7 @@ export function composeLeft<A, B, I, R>(
  *  Note that this can be a Transform<V, I> function if the key <K> is irrelevant.
  * @returns A Reducer function for the value type.
  */
-export function composeReducer<S, V, I, K extends Key>(
+export function composeReducer<S, V, I, K>(
   toIntermediate: Synthesis<V, K, I>,
   reduceIntermediate: Reducer<S, I, K>,
 ): Reducer<S, V, K> {
@@ -176,6 +213,27 @@ export function composeRight<A, B, I, R>(
   return (a: A, b: B): R => {
     return synthesizeIntermediate(a, toIntermediate(b))
   }
+}
+
+/**
+ * Negates a `Predicate`.
+ *
+ * @param predicate - The Predicate to negate.
+ * @returns A new Predicate that returns the opposite value of the input Predicate.
+ */
+export function not<T>(predicate: Predicate<T>): Predicate<T> {
+  return value => !predicate(value)
+}
+
+/**
+ * Create a `Predicate` based on either input `Predicate` returning `true`.
+ * @type T - The type of value to test.
+ * @param a - The first `Predicate` to test against.
+ * @param b - The second `Predicate` to test against.
+ * @returns A Predicate that returns `true` if either inputs are `true`.
+ */
+export function or<T>(a: Predicate<T>, b: Predicate<T>): Predicate<T> {
+  return (value): boolean => a(value) || b(value)
 }
 
 /**

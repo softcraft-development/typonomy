@@ -1,12 +1,43 @@
-import type { Reducer } from "./func"
+import type { Predicate, Reducer } from "./func"
+import type { TypeGuard } from "./types"
 
 /**
- * Checks if an object has no keys or properties.
- * @param obj - The object to check.
- * @returns Returns `true` if the object has no keys; false otherwise.
+ * Checks if an object has no properties or elements.
+ * @param value - The object or array to check.
+ * @returns Returns `true` if value is an object with no properties, `false` otherwise.
  */
-export function isEmpty(obj: Record<string, unknown>): boolean {
-  return Object.keys(obj).length === 0
+export function isEmptyObject(value: unknown): value is {} {
+  if (!isObject(value)) return false
+  return Object.keys(value).length === 0
+}
+
+/**
+ * Checks if a value is a non-`Array` non-`null` `object`.
+ *
+ * @param value - The value to check.
+ * @returns `false` if the value is an `Array` or `null`; `true` if the value is an object; `false` otherwise.
+ */
+export function isObject(value: unknown): value is object {
+  return typeof value === "object" && value !== null && !Array.isArray(value)
+}
+
+/**
+ * Checks if the value is a Record of specific types
+ *
+ * @template V - The type of the values in the record.
+ * @param {unknown} obj - The value to check.
+ * @param {TypeGuard} guard - A TypeGuard that checks the type of the object's values.
+ * @returns {value is Record<K, T>} - Returns true if the value is an object whose properties are all of type T.
+ */
+export function isRecordOf<T>(
+  obj: unknown,
+  guard: TypeGuard<T>,
+  emptyMatches = true
+): obj is Record<string, T> {
+  if (!isObject(obj)) return false
+  const values = Object.values(obj)
+  if (values.length === 0) return emptyMatches
+  return values.every(guard)
 }
 
 /**
@@ -20,9 +51,28 @@ export function isEmpty(obj: Record<string, unknown>): boolean {
  * @returns The final state.
  */
 export function reduce<S, V>(obj: Record<string, V>, reducer: Reducer<S, V, string>, initialState: S): S {
-  return Object.keys(obj).reduce((state, key) => {
-    const value = obj[key]
+  return Object.entries(obj).reduce((state, [key, value]) => {
     const newState = reducer(state, value, key)
     return newState
   }, initialState)
+}
+
+/**
+ * Creates a Predicate that validates the properties of an object.
+ *
+ * @template T - The Type to check against.
+ * @param predicates - An object with a Predicate for properties in T.
+ * @returns A TypeGuard that checks if an object is of type T.
+ */
+export function typeGuardFor<T>(predicates: { [K in keyof T]: Predicate<unknown> }): TypeGuard<T> {
+  return (obj: unknown): obj is T => {
+    if (!isObject(obj)) return false
+    if (isEmptyObject(obj)) return false
+    for (const key in predicates) {
+      const predicate = predicates[key]
+      const value = obj[key]
+      if (!predicate(value)) return false
+    }
+    return true
+  }
 }

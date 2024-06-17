@@ -1,6 +1,7 @@
 import * as func from "./func"
 import type { Definite, Possible } from "./nullish"
 import { isDefinite } from "./nullish"
+import type { TypeGuard } from "./types"
 
 /**
  * A Reducer that appends its value to an array. Mutates the original array.
@@ -52,6 +53,25 @@ export function arr<T>(size = 0): T[] {
 export function fill<T>(count: number, filler: func.Transform<number, T>): T[] {
   const reducer = func.composeReducer<T[], number, T, number>(filler, append)
   return func.reiterate(count, reducer, arr<T>())
+}
+
+/**
+ * Checks if a value is an array of a specific type.
+ *
+ * @param value - The value to check.
+ * @param typeGuard - The TypeGuard to check each item in the array.
+ * @param emptyMatches - The value to return when the array is empty, and the type cannot be defined by the value.
+ *  Defaults to `true`.
+ * @returns `true` if the value is an array of the specified type, `false` otherwise.
+ */
+export function isArrayOf<T>(value: unknown, typeGuard: TypeGuard<T>, emptyMatches = true): value is T[] {
+  if (!Array.isArray(value)) return false
+  if (value.length === 0) return emptyMatches
+  return value.every(item => typeGuard(item))
+}
+
+export function isEmptyArray(value: unknown): value is [] {
+  return Array.isArray(value) && value.length === 0
 }
 
 /**

@@ -3,37 +3,37 @@ import * as lib from "../src/strings"
 
 describe("strings", () => {
   describe("isString", () => {
-    it("should return true for a string", () => {
+    it("returns true for a string", () => {
       const result = lib.isString("Hello")
       expect(result).toBe(true)
     })
 
-    it("should return false for a number", () => {
+    it("returns false for a number", () => {
       const result = lib.isString(42)
       expect(result).toBe(false)
     })
 
-    it("should return false for a boolean", () => {
+    it("returns false for a boolean", () => {
       const result = lib.isString(true)
       expect(result).toBe(false)
     })
 
-    it("should return false for an object", () => {
+    it("returns false for an object", () => {
       const result = lib.isString({ toString: () => "Value of Object" })
       expect(result).toBe(false)
     })
 
-    it("should return false for null", () => {
+    it("returns false for null", () => {
       const result = lib.isString(null)
       expect(result).toBe(false)
     })
 
-    it("should return false for undefined", () => {
+    it("returns false for undefined", () => {
       const result = lib.isString(undefined)
       expect(result).toBe(false)
     })
 
-    it("should return false for a symbol", () => {
+    it("returns false for a symbol", () => {
       const result = lib.isString(Symbol("Test Symbol"))
       expect(result).toBe(false)
     })
