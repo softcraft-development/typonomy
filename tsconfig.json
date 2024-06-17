@@ -4,7 +4,13 @@
     "declarationMap": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
     "sourceMap": true,
+    "strict": true,
+    "useUnknownInCatchVariables": true,
     "verbatimModuleSyntax": true
   },
   "exclude": [
@@ -14,5 +20,6 @@
   "extends": "@tsconfig/node-lts/tsconfig.json",
   "include": [
     "src",
+    "test/types.test.ts",
   ]
 }
