@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { or } from "../src/func"
 import { isUndefined } from "../src/nullish"
-import * as lib from "../src/object"
+import * as lib from "../src/objects"
 import { isString } from "../src/strings"
 import { isBoolean, isNumber } from "../src/types"
 

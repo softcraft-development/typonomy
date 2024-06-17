@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import * as lib from "../src/func"
-import { isObject } from "../src/object"
+import { isObject } from "../src/objects"
 import { isString, valueToString } from "../src/strings"
 import { isNumber } from "../src/types"
 

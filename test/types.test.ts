@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import type { Predicate } from "../src/func"
-import { isObject } from "../src/object"
+import { isObject } from "../src/objects"
 import * as lib from "../src/types"
 
 describe("types", () => {
