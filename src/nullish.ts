@@ -82,7 +82,7 @@ export function isNull(value: unknown): value is null {
  * @param value - The potentially null or undefined value to check.
  * @returns `true` if the value is `null` or `undefined`; `false` otherwise.
  */
-export const isNullish = typeGuard(or(isNull, isUndefined))
+export const isNullish = typeGuard<Nullish>(or(isNull, isUndefined))
 
 /**
  * Checks if a value is undefined.
