@@ -58,6 +58,18 @@ export function reduce<S, V>(obj: Record<string, V>, reducer: Reducer<S, V, stri
 }
 
 /**
+ * Creates a `Record` of a specified key and value type.
+ *
+ * @template K - The type of the keys in the object.
+ * @template V - The type of the values in the object.
+ * @returns An empty `object`.
+ */
+// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+export function rOf<K extends PropertyKey, V>(data: Record<K, V> = {} as Record<K, V>): Record<K, V> {
+  return data
+}
+
+/**
  * Creates a Predicate that validates the properties of an object.
  *
  * @template T - The Type to check against.

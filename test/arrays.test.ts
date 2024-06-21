@@ -63,12 +63,12 @@ describe("arrays", () => {
 
   describe("create", () => {
     it("returns an array of the specified size", () => {
-      const result = lib.create(5)
+      const result = lib.array(5)
       expect(result.length).toBe(5)
     })
 
     it("returns an empty array if no size is specified", () => {
-      const result = lib.create()
+      const result = lib.array()
       expect(result.length).toBe(0)
     })
   })

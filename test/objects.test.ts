@@ -50,6 +50,18 @@ describe("object", () => {
     })
   })
 
+  describe("rOf", () => {
+    it("returns an empty object", () => {
+      expect(lib.rOf()).toEqual({})
+    })
+
+    it("is explicitly typed", () => {
+      const record = lib.rOf<string, number>()
+      record["test"] = 17
+      expect(record).toEqual({ test: 17 })
+    })
+  })
+
   describe("typeGuardFor", () => {
     interface TestType {
       a: number
