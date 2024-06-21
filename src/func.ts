@@ -237,6 +237,50 @@ export function or<T>(a: Predicate<T>, b: Predicate<T>): Predicate<T> {
 }
 
 /**
+ * Partially apply a value to a `Transform`.
+ * Reduces the order of the function from 1 to 0.
+ *
+ * @template T The type of the value to transform.
+ * @template R The type of the result.
+ * @param transform The transform function.
+ * @param value The value to partially apply to the transform.
+ * @returns A Thunk function that returns the transformed input value.
+ */
+export function partial<T, R>(transform: Transform<T, R>, value: T): Thunk<R> {
+  return () => transform(value)
+}
+
+/**
+ * Partially apply a value to the left (first) parameter of a `Combine`.
+ * Reduces the order of the function from 2 to 1.
+ *
+ * @template A - The type of the left argument of the `Combine`.
+ * @template B - The type of the right argument of the `Combine`.
+ * @template R - The type of the result.
+ * @param combine The `Combine` function.
+ * @param value The value to partially apply to left parameter of the `Combine`.
+ * @returns A `Transform` function function for the right parameter of the `Combine`.
+ */
+export function partialLeft<A, B, R>(combine: Combine<A, B, R>, value: A): Transform<B, R> {
+  return (b: B) => combine(value, b)
+}
+
+/**
+ * Partially apply a value to the right (second) parameter of a `Combine`.
+ * Reduces the order of the function from 2 to 1.
+ *
+ * @template A - The type of the left argument of the `Combine`.
+ * @template B - The type of the right argument of the `Combine`.
+ * @template R - The type of the result.
+ * @param combine The `Combine` function.
+ * @param value The value to partially apply to right parameter of the `Combine`.
+ * @returns A `Transform` function function for the left parameter of the `Combine`.
+ */
+export function partialRight<A, B, R>(combine: Combine<A, B, R>, value: B): Transform<A, R> {
+  return (a: A) => combine(a, value)
+}
+
+/**
  * Repeats a reducer function a specified number of times and returns the final state.
  * Passes the current iteration number as the value (starting from 1)
  * and a zero-based index as the key to the reducer.
