@@ -1,4 +1,4 @@
-import { composeReducer, reiterate, type Predicate, type Reducer, type Synthesis, type Transform } from "./func"
+import { composeReducer, reiterate, type Combine, type Predicate, type Reducer, type Transform } from "./func"
 import { isExplicit, type Explicit, type Possible } from "./nullish"
 import type { TypeGuard } from "./types"
 
@@ -154,7 +154,7 @@ export function isSingular<T>(value: Some<T>): value is T {
  * @param mapper - The mapping function to apply. If `some` is singular, then the second parameter will be `0`.
  * @returns The transformed `Some<T>`.
  */
-export function mapSome<F, T>(value: Some<F>, mapper: Synthesis<F, number, T>): Some<T> {
+export function mapSome<F, T>(value: Some<F>, mapper: Combine<F, number, T>): Some<T> {
   if (isPlural(value)) {
     return value.map(mapper)
   }
