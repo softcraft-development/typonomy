@@ -1,7 +1,8 @@
-import { describe, expect, it, vi } from "vitest"
+import { beforeEach, describe, expect, it, vi } from "vitest"
 import * as lib from "../src/arrays"
 import type { Explicit } from "../src/nullish"
-import { isNumber } from "../src/types"
+import { isString } from "../src/strings"
+import { isNumber, type TypeGuard } from "../src/types"
 
 describe("arrays", () => {
   describe("Explicit<T>", () => {
@@ -252,6 +253,40 @@ describe("arrays", () => {
     it("should reduce a single value with an index of 0", () => {
       const result = lib.reduceSome(-1, (_state, _value, index) => index, 101)
       expect(result).toBe(0)
+    })
+  })
+
+  describe("typeGuardSome", () => {
+    describe("returns a TypeGuard", () => {
+      let guard: TypeGuard<lib.Some<string>>
+
+      beforeEach(() => {
+        guard = lib.typeGuardSome(isString)
+      })
+
+      it("that can guard a single value", () => {
+        expect(guard("test")).toBe(true)
+      })
+
+      it("that can guard an array of values", () => {
+        expect(guard(["foo", "bar"])).toBe(true)
+      })
+
+      it("that is true for an empty array", () => {
+        expect(guard([])).toBe(true)
+      })
+
+      it("that returns false for undefined", () => {
+        expect(guard(undefined)).toBe(false)
+      })
+
+      it("that returns false for null", () => {
+        expect(guard(null)).toBe(false)
+      })
+
+      it("that returns false for an array that does not match all types", () => {
+        expect(guard(["a", "b", 3])).toBe(false)
+      })
     })
   })
 
