@@ -146,7 +146,7 @@ export function transformSome<F, T>(value: Some<F>, transform: Transform<F, T>):
  * @param value - The value or array of values to wrap.
  * @returns The wrapped array.
  */
-export function wrap<T>(value: T | T[]): T[] {
-  return Array.isArray(value) ? value : [value]
+export function wrap<T>(value: Some<T>): T[] {
+  return isPlural(value) ? value : [value]
 }
 
