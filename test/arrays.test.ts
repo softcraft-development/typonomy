@@ -201,19 +201,36 @@ describe("arrays", () => {
     })
   })
 
-  describe("transformSome", () => {
+  describe("mapSome", () => {
     it("should transform a single value", () => {
       const value = 42
       const transform = (value: number) => value.toString()
-      const result = lib.transformSome(value, transform)
+      const result = lib.mapSome(value, transform)
       expect(result).toBe("42")
     })
 
-    it("should transform an array of values", () => {
+    it("should map an array of values", () => {
       const value = [1, 2, 3]
       const transform = (value: number) => value.toString()
-      const result = lib.transformSome(value, transform)
+      const result = lib.mapSome(value, transform)
       expect(result).toEqual(["1", "2", "3"])
+    })
+  })
+
+  describe("reduceSome", () => {
+    it("should reduce a single value", () => {
+      const result = lib.reduceSome(42, (state, value) => state + value, 17)
+      expect(result).toBe(42 + 17)
+    })
+
+    it("should reduce an array of values", () => {
+      const result = lib.reduceSome([1, 3, 5], (state, value) => state + value, 7)
+      expect(result).toBe(1 + 3 + 5 + 7)
+    })
+
+    it("should reduce a single value with an index of 0", () => {
+      const result = lib.reduceSome(-1, (_state, _value, index) => index, 101)
+      expect(result).toBe(0)
     })
   })
 

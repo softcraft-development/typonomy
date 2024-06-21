@@ -1,4 +1,4 @@
-import { composeReducer, reiterate, type Predicate, type Transform } from "./func"
+import { composeReducer, reiterate, type Predicate, type Reducer, type Transform } from "./func"
 import { isExplicit, type Explicit, type Possible } from "./nullish"
 import type { TypeGuard } from "./types"
 
@@ -127,15 +127,33 @@ export function isSingular<T>(value: Some<T>): value is T {
  * Transforms `Some<F>` to `Some<T>`.
  * If the value is plural, transform each element into a new `T[]`
  *
- * @param value - The `Some<F>` to transform.
- * @param transform - The transform function to apply.
+ * @type F - The type to transform from.
+ * @type T - The type to transform to.
+ * @param value - The `Some<F>` to map.
+ * @param transform - The mapping function to apply.
  * @returns The transformed `Some<T>`.
  */
-export function transformSome<F, T>(value: Some<F>, transform: Transform<F, T>): Some<T> {
+export function mapSome<F, T>(value: Some<F>, transform: Transform<F, T>): Some<T> {
   if (isPlural(value)) {
     return value.map(transform)
   }
   return transform(value)
+}
+
+/**
+ * Reduce `Some<T>` to a single state.
+ * @template S The type of the state.
+ * @template V The type of the value.
+ * @param value - The `Some<T>` to reduce.
+ * @param reducer - The reducer function. If `some` is singular, then the key/index will be `0`.
+ * @param initialState - The initial state.
+ * @returns The final state.
+ */
+export function reduceSome<S, V>(some: Some<V>, reducer: Reducer<S, V, number>, initialState: S): S {
+  if (isSingular(some)) {
+    return reducer(initialState, some, 0)
+  }
+  return some.reduce(reducer, initialState)
 }
 
 /**
