@@ -87,16 +87,16 @@ export function fill<T>(count: number, filler: Transform<number, T>): T[] {
 /**
  * Apply a callback to each element in a `Some<T>`.
  * @type T - The type of value(s).
- * @param value - The `Some<T>` to apply.
+ * @param some - The `Some<T>` to apply.
  * @param callback - The callback function to apply. If `some` is singular, then the index will be `0`.
  * @returns `void`.
  */
-export function forSome<T>(value: Some<T>, callback: (value: T, index: number) => void): void {
-  if (isPlural(value)) {
-    value.forEach((value, index) => callback(value, index))
+export function forSome<T>(some: Some<T>, callback: (value: T, index: number) => void): void {
+  if (isPlural(some)) {
+    some.forEach((value, index) => callback(value, index))
     return
   }
-  callback(value, 0)
+  callback(some, 0)
 }
 
 /**
@@ -150,22 +150,22 @@ export function isSingular<T>(value: Some<T>): value is T {
  *
  * @type F - The type to transform from.
  * @type T - The type to transform to.
- * @param value - The `Some<F>` to map.
+ * @param some - The `Some<F>` to map.
  * @param mapper - The mapping function to apply. If `some` is singular, then the second parameter will be `0`.
  * @returns The transformed `Some<T>`.
  */
-export function mapSome<F, T>(value: Some<F>, mapper: Combine<F, number, T>): Some<T> {
-  if (isPlural(value)) {
-    return value.map(mapper)
+export function mapSome<F, T>(some: Some<F>, mapper: Combine<F, number, T>): Some<T> {
+  if (isPlural(some)) {
+    return some.map(mapper)
   }
-  return mapper(value, 0)
+  return mapper(some, 0)
 }
 
 /**
  * Reduce `Some<T>` to a single state.
  * @template S The type of the state.
  * @template V The type of the value.
- * @param value - The `Some<T>` to reduce.
+ * @param some - The `Some<T>` to reduce.
  * @param reducer - The reducer function. If `some` is singular, then the key/index will be `0`.
  * @param initialState - The initial state.
  * @returns The final state.
