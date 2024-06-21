@@ -24,4 +24,4 @@ The potentially null or undefined value to check.
 
 ## Source
 
-[nullish.ts:85](https://github.com/softcraft-development/typonomy/blob/bb883dcb7a2044dc6d2e6edeb73029aeebd91383/src/nullish.ts#L85)
+[nullish.ts:85](https://github.com/softcraft-development/typonomy/blob/14556f6ce24da12ae1545e4a4295c60ae5e18fe4/src/nullish.ts#L85)

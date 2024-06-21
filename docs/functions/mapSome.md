@@ -6,33 +6,33 @@
 
 # Function: mapSome()
 
-> **mapSome**\<`F`, `T`\>(`some`, `mapper`): [`Some`](../type-aliases/Some.md)\<`T`\>
+> **mapSome**\<`T`, `R`\>(`some`, `mapper`): [`Some`](../type-aliases/Some.md)\<`R`\>
 
-Transforms `Some<F>` to `Some<T>`.
+Transforms `Some<T>` to `Some<R>`.
 If the value is plural, transform each element into a new `T[]`
 
 ## Type parameters
 
-• **F**
-
 • **T**
+
+• **R**
 
 ## Parameters
 
-• **some**: [`Some`](../type-aliases/Some.md)\<`F`\>
+• **some**: [`Some`](../type-aliases/Some.md)\<`T`\>
 
-The `Some<F>` to map.
+The `Some<T>` to map.
 
-• **mapper**: [`Combine`](../type-aliases/Combine.md)\<`F`, `number`, `T`\>
+• **mapper**: [`Combine`](../type-aliases/Combine.md)\<`T`, `number`, `R`\>
 
 The mapping function to apply. If `some` is singular, then the second parameter will be `0`.
 
 ## Returns
 
-[`Some`](../type-aliases/Some.md)\<`T`\>
+[`Some`](../type-aliases/Some.md)\<`R`\>
 
-The transformed `Some<T>`.
+The transformed `Some<R>`.
 
 ## Source
 
-[arrays.ts:157](https://github.com/softcraft-development/typonomy/blob/bb883dcb7a2044dc6d2e6edeb73029aeebd91383/src/arrays.ts#L157)
+[arrays.ts:170](https://github.com/softcraft-development/typonomy/blob/14556f6ce24da12ae1545e4a4295c60ae5e18fe4/src/arrays.ts#L170)
