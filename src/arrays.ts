@@ -2,6 +2,8 @@ import { composeReducer, reiterate, type Predicate, type Transform } from "./fun
 import { isExplicit, type Explicit, type Possible } from "./nullish"
 import type { TypeGuard } from "./types"
 
+export type Some<T> = T | T[]
+
 /**
  * A Reducer that appends its value to an array. Mutates the original array.
  *
@@ -28,6 +30,22 @@ export function appendExplicit<T>(array: Explicit<T>[], value: Possible<T>): Exp
     array.push(value)
   }
   return array
+}
+
+/**
+ * Appends a value, or all elements of an array of values, to an array.
+ *
+ * @typeParam T - The type of elements in the array.
+ * @param array - The array to append values to.
+ * @param value - The value or array of values to append.
+ * @returns The updated array with the appended value(s).
+ */
+export function appendSome<T>(array: T[], value: Some<T>): T[] {
+  if (Array.isArray(value)) {
+    value.forEach(item => append(array, item))
+    return array
+  }
+  return append(array, value)
 }
 
 /**
@@ -83,6 +101,41 @@ export function isArrayOf<T>(value: unknown, predicate: Predicate<T>, emptyMatch
 
 export function isEmptyArray(value: unknown): value is [] {
   return Array.isArray(value) && value.length === 0
+}
+
+/**
+ * Checks if the given `Some<T>` is an array of `T`
+ *
+ * @param value The `Some<T>` to check.
+ * @returns Returns true if the value is an `Array<T>`, false if it is a single `T`.
+ */
+export function isPlural<T>(value: Some<T>): value is T[] {
+  return Array.isArray(value)
+}
+
+/**
+ * Checks if the given `Some<T>` is a single `T`
+ *
+ * @param value The `Some<T>` to check.
+ * @returns Returns true if the value is a single `T`, false if it is an `Array<T>`.
+ */
+export function isSingular<T>(value: Some<T>): value is T {
+  return !isPlural(value)
+}
+
+/**
+ * Transforms `Some<F>` to `Some<T>`.
+ * If the value is plural, transform each element into a new `T[]`
+ *
+ * @param value - The `Some<F>` to transform.
+ * @param transform - The transform function to apply.
+ * @returns The transformed `Some<T>`.
+ */
+export function transformSome<F, T>(value: Some<F>, transform: Transform<F, T>): Some<T> {
+  if (isPlural(value)) {
+    return value.map(transform)
+  }
+  return transform(value)
 }
 
 /**
