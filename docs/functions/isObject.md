@@ -24,4 +24,4 @@ The value to check.
 
 ## Source
 
-[objects.ts:20](https://github.com/softcraft-development/typonomy/blob/9e2d0980378fcdcaa426a5b6cdba20880ae25840/src/objects.ts#L20)
+[objects.ts:20](https://github.com/softcraft-development/typonomy/blob/85e3fd32f5ede40463c64a3e9eb5ea415d4f2898/src/objects.ts#L20)

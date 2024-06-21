@@ -8,14 +8,20 @@
 
 > **isEmptyArray**(`value`): `value is []`
 
+Checks if the given value is an empty array.
+
 ## Parameters
 
 • **value**: `unknown`
+
+The value to check.
 
 ## Returns
 
 `value is []`
 
+`true` if the value is an empty array, `false` otherwise.
+
 ## Source
 
-[arrays.ts:102](https://github.com/softcraft-development/typonomy/blob/9e2d0980378fcdcaa426a5b6cdba20880ae25840/src/arrays.ts#L102)
+[arrays.ts:123](https://github.com/softcraft-development/typonomy/blob/85e3fd32f5ede40463c64a3e9eb5ea415d4f2898/src/arrays.ts#L123)

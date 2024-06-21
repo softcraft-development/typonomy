@@ -6,20 +6,20 @@
 
 # Function: composeDown()
 
-> **composeDown**\<`A`, `B`, `I`, `R`\>(`synthesizeIntermediate`, `toResult`): [`Synthesis`](../type-aliases/Synthesis.md)\<`A`, `B`, `R`\>
+> **composeDown**\<`A`, `B`, `I`, `R`\>(`combineIntermediate`, `toResult`): [`Combine`](../type-aliases/Combine.md)\<`A`, `B`, `R`\>
 
-Composes a new Synthesis from an existing Synthesis that returns an intermediate type
+Composes a new Combine from an existing Combine that returns an intermediate type
 and a Transform that transforms the intermediate type to the result type.
 
 ## Type parameters
 
 • **A**
 
-The type of the left argument of the new Synthesis.
+The type of the left argument of the new Combine.
 
 • **B**
 
-The type of the right argument of the new Synthesis.
+The type of the right argument of the new Combine.
 
 • **I**
 
@@ -31,9 +31,9 @@ The type of the result.
 
 ## Parameters
 
-• **synthesizeIntermediate**: [`Synthesis`](../type-aliases/Synthesis.md)\<`A`, `B`, `I`\>
+• **combineIntermediate**: [`Combine`](../type-aliases/Combine.md)\<`A`, `B`, `I`\>
 
-The synthesis function that returns the intermediate type.
+The Combine that returns the intermediate type.
 
 • **toResult**: [`Transform`](../type-aliases/Transform.md)\<`I`, `R`\>
 
@@ -41,10 +41,10 @@ The function that transforms the intermediate type to the result type.
 
 ## Returns
 
-[`Synthesis`](../type-aliases/Synthesis.md)\<`A`, `B`, `R`\>
+[`Combine`](../type-aliases/Combine.md)\<`A`, `B`, `R`\>
 
-- The composed synthesis function.
+- The composed Combine function.
 
 ## Source
 
-[func.ts:143](https://github.com/softcraft-development/typonomy/blob/9e2d0980378fcdcaa426a5b6cdba20880ae25840/src/func.ts#L143)
+[func.ts:143](https://github.com/softcraft-development/typonomy/blob/85e3fd32f5ede40463c64a3e9eb5ea415d4f2898/src/func.ts#L143)
