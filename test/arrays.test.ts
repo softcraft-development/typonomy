@@ -290,20 +290,45 @@ describe("arrays", () => {
     })
   })
 
+  describe("unwrap", () => {
+    describe("when the input is an array of multiple elements", () => {
+      it("returns the same array", () => {
+        const array = [1, 2, 3]
+        expect(lib.unwrap(array)).toBe(array)
+      })
+    })
+
+    describe("when the input is an array of a single element", () => {
+      it("returns the element", () => {
+        const element = { foo: "bar" }
+        expect(lib.unwrap([element])).toBe(element)
+      })
+    })
+
+    describe("when the input is an empty array", () => {
+      it("returns undefined", () => {
+        expect(lib.unwrap([])).toBeUndefined()
+      })
+    })
+  })
+
   describe("wrap", () => {
     describe("when the input is an array", () => {
-      it("returns the input array as is", () => {
+      it("returns the same array", () => {
         const array = [1, 2, 3]
-        const result = lib.wrap(array)
-        expect(result).toBe(array)
+        expect(lib.wrap(array)).toBe(array)
       })
     })
 
     describe("when the input is a single value", () => {
       it("wrap the value in an array", () => {
-        const value = 42
-        const result = lib.wrap(value)
-        expect(result).toEqual([value])
+        expect(lib.wrap(42)).toEqual([42])
+      })
+    })
+
+    describe("when the input is undefined", () => {
+      it("returns an empty array", () => {
+        expect(lib.wrap(undefined)).toEqual([])
       })
     })
   })

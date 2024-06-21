@@ -1,5 +1,5 @@
 import * as f from "./func"
-import { isExplicit, type Explicit, type Possible } from "./nullish"
+import { isExplicit, isUndefined, type Explicit, type Optional, type Possible } from "./nullish"
 import { typeGuard, type TypeGuard } from "./types"
 
 export type Some<T> = T | T[]
@@ -203,14 +203,31 @@ export function typeGuardSome<T>(guard: TypeGuard<T>): TypeGuard<Some<T>> {
 }
 
 /**
- * Wraps a value or an array of values into an array.
- * If the input is already an array, it is returned as is.
- * If the input is a single value, it is wrapped in an array.
- *
- * @param value - The value or array of values to wrap.
- * @returns The wrapped array.
+ * Unwraps an array, returning the array, the only element of the array, or `undefined` if there are no elements.
+ * @template T The type of the array elements.
+ * @param value - The array to unwrap
+ * @returns The the first array element if it's the only one,
+ *   the whole array if there's more than one element,
+ *   or `undefined` if the array is empty.
  */
-export function wrap<T>(value: Some<T>): T[] {
-  return isPlural(value) ? value : [value]
+export function unwrap<T>(value: T[]): Optional<Some<T>> {
+  if (value.length === 0) return undefined
+  if (value.length === 1) return value[0]
+  return value
+}
+
+/**
+ * Wraps a value or an array of values into an array.
+ * If the input is already an array, return it as is.
+ * If the input is a single defined value, wrap it in a new array.
+ * If the input is `undefined`, return an empty array.
+ * @template T The type of the array elements.
+ * @param value - The value or array of values to wrap, if present.
+ * @returns A the value if it's already an array, or a new array that contains the value if it is not `undefined`.
+ */
+export function wrap<T>(value: Optional<Some<T>>): T[] {
+  if (isUndefined(value)) return []
+  if (isPlural(value)) return value
+  return [value]
 }
 
