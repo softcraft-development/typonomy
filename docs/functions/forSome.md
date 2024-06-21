@@ -6,7 +6,7 @@
 
 # Function: forSome()
 
-> **forSome**\<`T`\>(`value`, `callback`): `void`
+> **forSome**\<`T`\>(`some`, `callback`): `void`
 
 Apply a callback to each element in a `Some<T>`.
 
@@ -16,7 +16,7 @@ Apply a callback to each element in a `Some<T>`.
 
 ## Parameters
 
-• **value**: [`Some`](../type-aliases/Some.md)\<`T`\>
+• **some**: [`Some`](../type-aliases/Some.md)\<`T`\>
 
 The `Some<T>` to apply.
 
@@ -32,4 +32,4 @@ The callback function to apply. If `some` is singular, then the index will be `0
 
 ## Source
 
-[arrays.ts:94](https://github.com/softcraft-development/typonomy/blob/85e3fd32f5ede40463c64a3e9eb5ea415d4f2898/src/arrays.ts#L94)
+[arrays.ts:94](https://github.com/softcraft-development/typonomy/blob/bb883dcb7a2044dc6d2e6edeb73029aeebd91383/src/arrays.ts#L94)

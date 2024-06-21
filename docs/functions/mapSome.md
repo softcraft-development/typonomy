@@ -6,7 +6,7 @@
 
 # Function: mapSome()
 
-> **mapSome**\<`F`, `T`\>(`value`, `mapper`): [`Some`](../type-aliases/Some.md)\<`T`\>
+> **mapSome**\<`F`, `T`\>(`some`, `mapper`): [`Some`](../type-aliases/Some.md)\<`T`\>
 
 Transforms `Some<F>` to `Some<T>`.
 If the value is plural, transform each element into a new `T[]`
@@ -19,7 +19,7 @@ If the value is plural, transform each element into a new `T[]`
 
 ## Parameters
 
-• **value**: [`Some`](../type-aliases/Some.md)\<`F`\>
+• **some**: [`Some`](../type-aliases/Some.md)\<`F`\>
 
 The `Some<F>` to map.
 
@@ -35,4 +35,4 @@ The transformed `Some<T>`.
 
 ## Source
 
-[arrays.ts:157](https://github.com/softcraft-development/typonomy/blob/85e3fd32f5ede40463c64a3e9eb5ea415d4f2898/src/arrays.ts#L157)
+[arrays.ts:157](https://github.com/softcraft-development/typonomy/blob/bb883dcb7a2044dc6d2e6edeb73029aeebd91383/src/arrays.ts#L157)

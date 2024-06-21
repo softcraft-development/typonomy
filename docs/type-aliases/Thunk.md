@@ -23,4 +23,4 @@ The return type of the thunk.
 
 ## Source
 
-[func.ts:61](https://github.com/softcraft-development/typonomy/blob/85e3fd32f5ede40463c64a3e9eb5ea415d4f2898/src/func.ts#L61)
+[func.ts:61](https://github.com/softcraft-development/typonomy/blob/bb883dcb7a2044dc6d2e6edeb73029aeebd91383/src/func.ts#L61)
