@@ -215,6 +215,11 @@ describe("arrays", () => {
       const result = lib.mapSome(value, transform)
       expect(result).toEqual(["1", "2", "3"])
     })
+
+    it("should map a single value with an index of 0", () => {
+      const result = lib.mapSome(-1, (value, index) => `${value}:${index}`)
+      expect(result).toBe("-1:0")
+    })
   })
 
   describe("reduceSome", () => {
