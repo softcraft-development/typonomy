@@ -47,4 +47,4 @@ The Combine function for the intermediate type.
 
 ## Source
 
-[func.ts:209](https://github.com/softcraft-development/typonomy/blob/14556f6ce24da12ae1545e4a4295c60ae5e18fe4/src/func.ts#L209)
+[func.ts:209](https://github.com/softcraft-development/typonomy/blob/6cd020f80278694e706a0b517cce1e3ecb0a4458/src/func.ts#L209)

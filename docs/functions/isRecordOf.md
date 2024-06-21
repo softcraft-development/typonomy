@@ -34,4 +34,4 @@ A TypeGuard that checks the type of the object's values.
 
 ## Source
 
-[objects.ts:32](https://github.com/softcraft-development/typonomy/blob/14556f6ce24da12ae1545e4a4295c60ae5e18fe4/src/objects.ts#L32)
+[objects.ts:32](https://github.com/softcraft-development/typonomy/blob/6cd020f80278694e706a0b517cce1e3ecb0a4458/src/objects.ts#L32)

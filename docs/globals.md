@@ -74,6 +74,7 @@
 - [typeGuard](functions/typeGuard.md)
 - [typeGuardFor](functions/typeGuardFor.md)
 - [typeGuardSome](functions/typeGuardSome.md)
+- [unwrap](functions/unwrap.md)
 - [valueToString](functions/valueToString.md)
 - [widen](functions/widen.md)
 - [wrap](functions/wrap.md)

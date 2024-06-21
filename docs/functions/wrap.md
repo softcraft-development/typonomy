@@ -9,25 +9,28 @@
 > **wrap**\<`T`\>(`value`): `T`[]
 
 Wraps a value or an array of values into an array.
-If the input is already an array, it is returned as is.
-If the input is a single value, it is wrapped in an array.
+If the input is already an array, return it as is.
+If the input is a single defined value, wrap it in a new array.
+If the input is `undefined`, return an empty array.
 
 ## Type parameters
 
 • **T**
 
+The type of the array elements.
+
 ## Parameters
 
-• **value**: [`Some`](../type-aliases/Some.md)\<`T`\>
+• **value**: [`Optional`](../type-aliases/Optional.md)\<[`Some`](../type-aliases/Some.md)\<`T`\>\>
 
-The value or array of values to wrap.
+The value or array of values to wrap, if present.
 
 ## Returns
 
 `T`[]
 
-The wrapped array.
+A the value if it's already an array, or a new array that contains the value if it is not `undefined`.
 
 ## Source
 
-[arrays.ts:213](https://github.com/softcraft-development/typonomy/blob/14556f6ce24da12ae1545e4a4295c60ae5e18fe4/src/arrays.ts#L213)
+[arrays.ts:228](https://github.com/softcraft-development/typonomy/blob/6cd020f80278694e706a0b517cce1e3ecb0a4458/src/arrays.ts#L228)
