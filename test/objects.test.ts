@@ -50,13 +50,22 @@ describe("object", () => {
     })
   })
 
-  describe("rOf", () => {
-    it("returns an empty object", () => {
-      expect(lib.rOf()).toEqual({})
+  describe("recordOf", () => {
+    describe("by default", () => {
+      it("returns an empty object", () => {
+        expect(lib.recordOf()).toEqual({})
+      })
+    })
+
+    describe("when passed an object", () => {
+      it("returns that object", () => {
+        const object = { a: 1, b: 2 }
+        expect(lib.recordOf(object)).toBe(object)
+      })
     })
 
     it("is explicitly typed", () => {
-      const record = lib.rOf<string, number>()
+      const record = lib.recordOf<string, number>()
       record["test"] = 17
       expect(record).toEqual({ test: 17 })
     })
