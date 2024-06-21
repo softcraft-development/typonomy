@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest"
+import { describe, expect, it, vi } from "vitest"
 import * as lib from "../src/arrays"
 import type { Explicit } from "../src/nullish"
 import { isNumber } from "../src/types"
@@ -102,6 +102,22 @@ describe("arrays", () => {
     it("returns an empty array if no size is specified", () => {
       const result = lib.arrayOf()
       expect(result.length).toBe(0)
+    })
+  })
+
+  describe("forSome", () => {
+    it("should apply the callback to a single value", () => {
+      const callback = vi.fn<[number, number], void>()
+      lib.forSome(19, callback)
+      expect(callback).toHaveBeenCalledWith(19, 0)
+    })
+
+    it("should apply the callback to all array elements", () => {
+      const callback = vi.fn<[number, number], void>()
+      lib.forSome([3, 5, 7], callback)
+      expect(callback).toHaveBeenNthCalledWith(1, 3, 0)
+      expect(callback).toHaveBeenNthCalledWith(2, 5, 1)
+      expect(callback).toHaveBeenNthCalledWith(3, 7, 2)
     })
   })
 

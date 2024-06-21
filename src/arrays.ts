@@ -85,6 +85,21 @@ export function fill<T>(count: number, filler: Transform<number, T>): T[] {
 }
 
 /**
+ * Apply a callback to each element in a `Some<T>`.
+ * @type T - The type of value(s).
+ * @param value - The `Some<T>` to apply.
+ * @param callback - The callback function to apply. If `some` is singular, then the index will be `0`.
+ * @returns `void`.
+ */
+export function forSome<T>(value: Some<T>, callback: (value: T, index: number) => void): void {
+  if (isPlural(value)) {
+    value.forEach((value, index) => callback(value, index))
+    return
+  }
+  callback(value, 0)
+}
+
+/**
  * Checks if a value is an array of a specific type.
  *
  * @param value - The value to check.
@@ -99,6 +114,12 @@ export function isArrayOf<T>(value: unknown, predicate: Predicate<T>, emptyMatch
   return value.every(predicate)
 }
 
+/**
+ * Checks if the given value is an empty array.
+ *
+ * @param value - The value to check.
+ * @returns `true` if the value is an empty array, `false` otherwise.
+ */
 export function isEmptyArray(value: unknown): value is [] {
   return Array.isArray(value) && value.length === 0
 }
