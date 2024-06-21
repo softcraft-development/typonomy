@@ -18,7 +18,7 @@ If the input is a single value, it is wrapped in an array.
 
 ## Parameters
 
-• **value**: `T` \| `T`[]
+• **value**: [`Some`](../type-aliases/Some.md)\<`T`\>
 
 The value or array of values to wrap.
 
@@ -30,4 +30,4 @@ The wrapped array.
 
 ## Source
 
-[arrays.ts:96](https://github.com/softcraft-development/typonomy/blob/bfa332593f2d4f3fa0b0a1ff2b00494cc65a0318/src/arrays.ts#L96)
+[arrays.ts:149](https://github.com/softcraft-development/typonomy/blob/9e2d0980378fcdcaa426a5b6cdba20880ae25840/src/arrays.ts#L149)

@@ -28,4 +28,4 @@ A `TypeGuard<T>` that checks if an `unknown` value is of type `T`.
 
 ## Source
 
-[types.ts:90](https://github.com/softcraft-development/typonomy/blob/bfa332593f2d4f3fa0b0a1ff2b00494cc65a0318/src/types.ts#L90)
+[types.ts:90](https://github.com/softcraft-development/typonomy/blob/9e2d0980378fcdcaa426a5b6cdba20880ae25840/src/types.ts#L90)

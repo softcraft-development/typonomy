@@ -18,4 +18,4 @@ The type, which is neither `null` nor `undefined`.
 
 ## Source
 
-[nullish.ts:8](https://github.com/softcraft-development/typonomy/blob/bfa332593f2d4f3fa0b0a1ff2b00494cc65a0318/src/nullish.ts#L8)
+[nullish.ts:8](https://github.com/softcraft-development/typonomy/blob/9e2d0980378fcdcaa426a5b6cdba20880ae25840/src/nullish.ts#L8)

@@ -34,4 +34,4 @@ The value to append to the array if it is not `null` or `undefined`.
 
 ## Source
 
-[arrays.ts:26](https://github.com/softcraft-development/typonomy/blob/bfa332593f2d4f3fa0b0a1ff2b00494cc65a0318/src/arrays.ts#L26)
+[arrays.ts:28](https://github.com/softcraft-development/typonomy/blob/9e2d0980378fcdcaa426a5b6cdba20880ae25840/src/arrays.ts#L28)
