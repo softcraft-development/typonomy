@@ -48,7 +48,7 @@ export type Possible<T> = T | Nullish
  * @template T - The type when it is not `null` or `undefined`.
  * @param value - The value to be checked.
  * @returns The non-null non-undefined value.
- * @throws {Error} If the value is null or undefined.
+ * @throws If the value is null or undefined.
  */
 export function insist<T>(value: Possible<T>): T {
   if (isNull(value)) throw new Error("Value must not be null")

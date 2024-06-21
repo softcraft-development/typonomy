@@ -25,9 +25,9 @@ export function isObject(value: unknown): value is object {
  * Checks if the value is a Record of specific types
  *
  * @template V - The type of the values in the record.
- * @param {unknown} obj - The value to check.
- * @param {TypeGuard} guard - A TypeGuard that checks the type of the object's values.
- * @returns {value is Record<K, T>} - Returns true if the value is an object whose properties are all of type T.
+ * @param obj - The value to check.
+ * @param guard - A TypeGuard that checks the type of the object's values.
+ * @returns - Returns true if the value is an object whose properties are all of type T.
  */
 export function isRecordOf<T>(
   obj: unknown,

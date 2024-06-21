@@ -72,7 +72,7 @@ export type Transform<T, R> = (value: T) => R
 /**
  * A function that only performs side effects, based on no direct input.
  * The love child between an Action and a Thunk.
- * @typedef {() => void} Trigger
+ * @typedef Trigger
  */
 export type Trigger = () => void
 
@@ -113,9 +113,9 @@ export function any<T>(...predicates: Predicate<T>[]): Predicate<T> {
  * @template T The input type.
  * @template I The intermediate type.
  * @template R The result type.
- * @param {Transform<T, I>} toIntermediate A transform to from the input to the intermediate type.
- * @param {Transform<I, R>} toResult A transform from the intermediate type to the result type.
- * @returns {Transform<T, R>} The composed transform function.
+ * @param toIntermediate A transform to from the input to the intermediate type.
+ * @param toResult A transform from the intermediate type to the result type.
+ * @returns The composed transform function.
  */
 export function compose<T, I, R>(
   toIntermediate: Transform<T, I>,
@@ -135,10 +135,10 @@ export function compose<T, I, R>(
  * @template I - The type of the intermediate value.
  * @template R - The type of the result.
  *
- * @param {Synthesis<A, B, I>} synthesizeIntermediate - The synthesis function that returns the intermediate type.
- * @param {Transform<B, I>} toResult - The function that transforms the intermediate type to the result type.
+ * @param synthesizeIntermediate - The synthesis function that returns the intermediate type.
+ * @param toResult - The function that transforms the intermediate type to the result type.
  *
- * @returns {Synthesis<A, B, R>} - The composed synthesis function.
+ * @returns - The composed synthesis function.
  */
 export function composeDown<A, B, I, R>(
   synthesizeIntermediate: Synthesis<A, B, I>,
@@ -158,10 +158,10 @@ export function composeDown<A, B, I, R>(
  * @template I - The type of the intermediate value.
  * @template R - The type of the result.
  *
- * @param {Transform<A, I>} toIntermediate - The function that transforms the left type to the intermediate type.
- * @param {Synthesis<I, B, R>} synthesizeIntermediate - The synthesis function for the intermediate type.
+ * @param toIntermediate - The function that transforms the left type to the intermediate type.
+ * @param synthesizeIntermediate - The synthesis function for the intermediate type.
  *
- * @returns {Synthesis<A, B, R>} - The composed synthesis function.
+ * @returns - The composed synthesis function.
  */
 export function composeLeft<A, B, I, R>(
   toIntermediate: Transform<A, I>,
@@ -201,10 +201,10 @@ export function composeReducer<S, V, I, K>(
  * @template I - The type of the intermediate value.
  * @template R - The type of the result.
  *
- * @param {Synthesis<A, I, R>} synthesizeIntermediate - The synthesis function for the intermediate type.
- * @param {Transform<B, I>} toIntermediate - The function that transforms the right type to the intermediate type.
+ * @param synthesizeIntermediate - The synthesis function for the intermediate type.
+ * @param toIntermediate - The function that transforms the right type to the intermediate type.
  *
- * @returns {Synthesis<A, B, R>} - The composed synthesis function.
+ * @returns - The composed synthesis function.
  */
 export function composeRight<A, B, I, R>(
   toIntermediate: Transform<B, I>,
@@ -242,10 +242,10 @@ export function or<T>(a: Predicate<T>, b: Predicate<T>): Predicate<T> {
  * and a zero-based index as the key to the reducer.
  *
  * @template S - The type of the state.
- * @param {number} count - The number of times to repeat the reducer function.
- * @param {Reducer<S, number, number>} reducer - The Reducer to execute.
- * @param {S} initialState - The initial state.
- * @returns {S} - The final state.
+ * @param count - The number of times to repeat the reducer function.
+ * @param reducer - The Reducer to execute.
+ * @param initialState - The initial state.
+ * @returns - The final state.
  */
 export function reiterate<S>(count: number, reducer: Reducer<S, number, number>, initialState: S): S {
   let state = initialState

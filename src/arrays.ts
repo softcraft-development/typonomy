@@ -6,9 +6,9 @@ import type { TypeGuard } from "./types"
  * A Reducer that appends its value to an array. Mutates the original array.
  *
  * @template T - The type of elements in the array.
- * @param {T[]} array - The array to append the value to.
- * @param {T} value - The value to append to the array.
- * @returns {T[]} - The updated array with the value appended.
+ * @param array - The array to append the value to.
+ * @param value - The value to append to the array.
+ * @returns - The updated array with the value appended.
  */
 export function append<T>(array: T[], value: T): T[] {
   array.push(value)
@@ -19,9 +19,9 @@ export function append<T>(array: T[], value: T): T[] {
  * Appends a value to an array only if the value is neither `null` nor `undefined`.
  *
  * @template T - The type of elements in the array.
- * @param {Explicit<T>[]} array - The array to append the value to.
- * @param {Possible<T>} value - The value to append to the array if it is not `null` or `undefined`.
- * @returns {Explicit<T>[]} - The updated array.
+ * @param array - The array to append the value to.
+ * @param value - The value to append to the array if it is not `null` or `undefined`.
+ * @returns - The updated array.
  */
 export function appendExplicit<T>(array: Explicit<T>[], value: Possible<T>): Explicit<T>[] {
   if (isExplicit(value)) {
@@ -34,9 +34,9 @@ export function appendExplicit<T>(array: Explicit<T>[], value: Possible<T>): Exp
  * Creates a `TypeGuard` for an array of a specific type.
  *
  * @template T - The type of elements in the array.
- * @param {Predicate<T>} predicate - The predicate to check against each element of the array.
- * @param {boolean} [emptyMatches=true] - Specifies whether an empty array qualifies as an array of the given type.
- * @returns {TypeGuard<T[]>} - The type guard function.
+ * @param predicate - The predicate to check against each element of the array.
+ * @param [emptyMatches=true] - Specifies whether an empty array qualifies as an array of the given type.
+ * @returns - The type guard function.
  */
 export function arrayGuard<T>(predicate: Predicate<T>, emptyMatches = true): TypeGuard<T[]> {
   return (value: unknown): value is T[] => isArrayOf(value, predicate, emptyMatches)
