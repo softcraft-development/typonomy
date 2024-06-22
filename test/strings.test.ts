@@ -39,6 +39,13 @@ describe("strings", () => {
     })
   })
 
+  describe("reduceCharacters", () => {
+    it("reduce the characters in the string", () => {
+      const reducer = (state: string, value: string, index: number) => `${state} ${index}:${value}`
+      expect(lib.reduceCharacters("abcd", reducer, "Initial")).toEqual("Initial 0:a 1:b 2:c 3:d")
+    })
+  })
+
   describe("valueToString", () => {
     it("should convert a number to a string", () => {
       const result = lib.valueToString(42)
