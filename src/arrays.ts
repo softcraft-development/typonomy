@@ -4,6 +4,8 @@ import { typeGuard, type TypeGuard } from "./types"
 
 export type Some<T> = T | T[]
 
+export type Mapper<T, R> = f.Combine<T, number, R>
+
 /**
  * A Reducer that appends its value to an array. Mutates the original array.
  *
@@ -85,18 +87,41 @@ export function fill<T>(count: number, filler: f.Transform<number, T>): T[] {
 }
 
 /**
- * Apply a callback to each element in a `Some<T>`.
+ * Apply a callback to each element in an array,
+ * unless the callback throws `BreakException`,
+ * in which case further execution halts.
+ *
+ * @template T - The type of elements in the array.
+ * @param array - The array to iterate over.
+ * @param callback - The callback function to apply to each element.
+ */
+export function forArray<T>(array: T[], callback: Mapper<T, void>): void {
+  reduceArray<undefined, T>(array, (_, value, index) => {
+    callback(value, index)
+    return undefined
+  }, undefined)
+}
+
+/**
+ * Apply a callback to each element in a `Some<T>`,
+ * unless the callback throws `BreakException`,
+ * in which case further execution halts.
+ *
  * @type T - The type of value(s).
  * @param some - The `Some<T>` to apply.
  * @param callback - The callback function to apply. If `some` is singular, then the index will be `0`.
- * @returns `void`.
  */
 export function forSome<T>(some: Some<T>, callback: (value: T, index: number) => void): void {
   if (isPlural(some)) {
-    some.forEach((value, index) => callback(value, index))
+    forArray(some, (value, index) => callback(value, index))
     return
   }
-  callback(some, 0)
+  try {
+    callback(some, 0)
+  }
+  catch (exception) {
+    f.onBreakExecution(exception, undefined)
+  }
 }
 
 /**
@@ -125,7 +150,8 @@ export function isEmptyArray(value: unknown): value is [] {
 }
 
 /**
- * Checks if the given `Some<T>` is an array of `T`
+ * Checks if the given `Some<T>` is an array of `T`.
+ * Note that an empty array, or an array of one element, is still considered plural.
  *
  * @param value The `Some<T>` to check.
  * @returns Returns true if the value is an `Array<T>`, false if it is a single `T`.
@@ -158,24 +184,91 @@ export function isSome<T>(value: unknown, typeGuard: TypeGuard<T>): value is Som
 }
 
 /**
+ * Transform an array of one type to another type.
+ * Note that the output array will have the same number of elements as the input array
+ * unless the mapper throws a `BreakExecution`.
+ *
+ * @template T - The type of the elements in the input array.
+ * @template R - The type of the elements in the output array.
+ * @param array - The input array.
+ * @param mapper - The `Mapper` to transform one element type to the other.
+ * @returns The mapped array.
+ */
+export function mapArray<T, R>(array: T[], mapper: Mapper<T, R>): R[] {
+  return reduceArray<R[], T>(array, mapReducer(mapper), arrayOf<R>())
+}
+
+/**
+ * Converts a `Mapper` into an array `Reducer`.
+ *
+ * @template T - The type of input elements.
+ * @template R - The type of the output elements.
+ * @param mapper - A function that maps the input element (and possibly the element's index) to the output element.
+ * @returns A `Reducer` that transforms inputs to outputs and appends them to an array.
+ */
+export function mapReducer<T, R>(mapper: Mapper<T, R>): f.Reducer<R[], T, number> {
+  return (state, value, index) => {
+    const result = mapper(value, index)
+    return append(state, result)
+  }
+}
+
+/**
  * Transforms `Some<T>` to `Some<R>`.
- * If the value is plural, transform each element into a new `T[]`
+ * If the value is plural, transform each element into a new `T[]`.
+ * If the mapper breaks execution, return an empty array.
  *
  * @type T - The type to transform from.
  * @type R - The type to transform to.
  * @param some - The `Some<T>` to map.
  * @param mapper - The mapping function to apply. If `some` is singular, then the second parameter will be `0`.
- * @returns The transformed `Some<R>`.
+ * @returns An `R` for a single `T`,
+ *  or an array of `R` for an array of `T`,
+ *  or an empty array if the mapper breaks execution on a single `T`.
  */
-export function mapSome<T, R>(some: Some<T>, mapper: f.Combine<T, number, R>): Some<R> {
+export function mapSome<T, R>(some: Some<T>, mapper: Mapper<T, R>): Some<R> {
   if (isPlural(some)) {
-    return some.map(mapper)
+    return reduceSome<R[], T>(some, mapReducer(mapper), arrayOf<R>())
   }
-  return mapper(some, 0)
+  try {
+    return mapper(some, 0)
+  }
+  catch (exception) {
+    return f.onBreakExecution<R[]>(exception, [])
+  }
 }
 
 /**
- * Reduce `Some<T>` to a single state.
+ * Reduces an array of values to a single value.
+ * Stops execution if the reducer throws a `BreakExecution`.
+ *
+ * @template S - The type of the resulting state.
+ * @template T - The type of the elements in the array.
+ * @param array - The array to reduce.
+ * @param reducer - The function that returns the next State for each array element.
+ * @param initialState - The initial state for the first call to `reducer`.
+ * @returns The final reduced state.
+ */
+export function reduceArray<S, T>(array: T[], reducer: f.Reducer<S, T, number>, initialState: S): S {
+  let state = initialState
+  for (let index = 0; index < array.length; index++) {
+    // We're only using indexes within the array bounds.
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    const value = array[index] as T
+    try {
+      state = reducer(state, value, index)
+    }
+    catch (exception) {
+      return f.onBreakExecution<S>(exception, state)
+    }
+  }
+  return state
+}
+
+/**
+ * Reduce `Some<T>` to a single state `S`.
+ * Note that a `BreakExecution` on a singular `T` will return the initial state.
+ *
  * @template S The type of the state.
  * @template V The type of the value.
  * @param some - The `Some<T>` to reduce.
@@ -184,10 +277,15 @@ export function mapSome<T, R>(some: Some<T>, mapper: f.Combine<T, number, R>): S
  * @returns The final state.
  */
 export function reduceSome<S, V>(some: Some<V>, reducer: f.Reducer<S, V, number>, initialState: S): S {
-  if (isSingular(some)) {
+  if (isPlural(some)) {
+    return reduceArray(some, reducer, initialState)
+  }
+  try {
     return reducer(initialState, some, 0)
   }
-  return some.reduce(reducer, initialState)
+  catch (exception) {
+    return f.onBreakExecution<S>(exception, initialState)
+  }
 }
 
 /**

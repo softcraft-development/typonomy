@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import * as lib from "../src/arrays"
+import { Break } from "../src/func"
 import type { Explicit } from "../src/nullish"
 import { isString } from "../src/strings"
 import { isNumber, type TypeGuard } from "../src/types"
@@ -106,19 +107,69 @@ describe("arrays", () => {
     })
   })
 
-  describe("forSome", () => {
-    it("should apply the callback to a single value", () => {
-      const callback = vi.fn<[number, number], void>()
-      lib.forSome(19, callback)
-      expect(callback).toHaveBeenCalledWith(19, 0)
-    })
-
-    it("should apply the callback to all array elements", () => {
-      const callback = vi.fn<[number, number], void>()
-      lib.forSome([3, 5, 7], callback)
+  describe("forArray", () => {
+    it("applies the callback to each element", () => {
+      const callback = vi.fn()
+      lib.forArray([3, 5, 7], callback)
       expect(callback).toHaveBeenNthCalledWith(1, 3, 0)
       expect(callback).toHaveBeenNthCalledWith(2, 5, 1)
       expect(callback).toHaveBeenNthCalledWith(3, 7, 2)
+    })
+
+    describe("when the callback breaks on the first element", () => {
+      it("applies the callback to every element on or before the break", () => {
+        const callback = vi.fn((_, index) => {
+          if (index === 1) throw Break
+        })
+        lib.forArray([3, 5, 7], callback)
+        expect(callback).toHaveBeenCalledTimes(2)
+        expect(callback).toHaveBeenNthCalledWith(1, 3, 0)
+        expect(callback).toHaveBeenNthCalledWith(2, 5, 1)
+      })
+    })
+  })
+
+  describe("forSome", () => {
+    describe("with a single value", () => {
+      it("should apply the callback with index 0", () => {
+        const callback = vi.fn<[number, number], void>()
+        lib.forSome(19, callback)
+        expect(callback).toHaveBeenCalledOnce()
+        expect(callback).toHaveBeenCalledWith(19, 0)
+      })
+
+      describe("when the callback breaks execution", () => {
+        it("call the callback without exceptions", () => {
+          const callback = vi.fn(() => {
+            throw Break
+          })
+          lib.forSome(23, callback)
+          expect(callback).toHaveBeenCalledOnce()
+        })
+      })
+    })
+
+    describe("with an array of values", () => {
+      it("should apply the callback for each element with its index", () => {
+        const callback = vi.fn<[number, number], void>()
+        lib.forSome([5, 7, 11], callback)
+        expect(callback).toHaveBeenCalledTimes(3)
+        expect(callback).toHaveBeenNthCalledWith(1, 5, 0)
+        expect(callback).toHaveBeenNthCalledWith(2, 7, 1)
+        expect(callback).toHaveBeenNthCalledWith(3, 11, 2)
+      })
+
+      describe("when the callback breaks execution", () => {
+        it("calls the callback for only the prior elements", () => {
+          const callback = vi.fn((_value, index) => {
+            if (index === 1) throw Break
+          })
+          lib.forSome([5, 7, 11], callback)
+          expect(callback).toHaveBeenCalledTimes(2)
+          expect(callback).toHaveBeenNthCalledWith(1, 5, 0)
+          expect(callback).toHaveBeenNthCalledWith(2, 7, 1)
+        })
+      })
     })
   })
 
@@ -218,41 +269,147 @@ describe("arrays", () => {
     })
   })
 
+  describe("mapArray", () => {
+    it("maps an array of values", () => {
+      expect(lib.mapArray([3, 5, 7], (value, index) => `${index}:${value}`)).toEqual(["0:3", "1:5", "2:7"])
+    })
+
+    describe("when the mapper breaks execution", () => {
+      it("maps only the prior elements", () => {
+        expect(lib.mapArray([3, 5, 7], (value, index) => {
+          if (index === 2) throw Break
+          return `${index}:${value}`
+        })).toEqual(["0:3", "1:5"])
+      })
+    })
+  })
+
+  describe("mapReducer", () => {
+    it("creates an array Reducer for a Mapper", () => {
+      const mapper = (value: number, index: number) => (value + index).toString()
+      const reducer = lib.mapReducer(mapper)
+      expect(reducer(["initial"], 42, -1)).toEqual(["initial", "41"])
+    })
+  })
+
   describe("mapSome", () => {
-    it("should transform a single value", () => {
-      const value = 42
-      const transform = (value: number) => value.toString()
-      const result = lib.mapSome(value, transform)
-      expect(result).toBe("42")
+    describe("with a single value", () => {
+      it("should return the mapped value", () => {
+        const value = 42
+        const transform = (value: number) => value.toString()
+        const result = lib.mapSome(value, transform)
+        expect(result).toBe("42")
+      })
+
+      it("should set the index to 0", () => {
+        const result = lib.mapSome(-1, (value, index) => `${value}:${index}`)
+        expect(result).toBe("-1:0")
+      })
+
+      describe("when the mapper breaks execution", () => {
+        it("should return an empty array", () => {
+          expect(lib.mapSome(42, () => {
+            throw Break
+          })).toEqual([])
+        })
+      })
     })
 
-    it("should map an array of values", () => {
-      const value = [1, 2, 3]
-      const transform = (value: number) => value.toString()
-      const result = lib.mapSome(value, transform)
-      expect(result).toEqual(["1", "2", "3"])
+    describe("with an array of values", () => {
+      it("return an array of mapped values", () => {
+        const value = ["a", "b", "c"]
+        const mapper = (value: string, index: number) => `${index}:${value}`
+        const result = lib.mapSome(value, mapper)
+        expect(result).toEqual(["0:a", "1:b", "2:c"])
+      })
+
+      describe("when the mapper breaks execution", () => {
+        it("maps only the prior elements", () => {
+          expect(lib.mapSome([3, 5, 7], (value, index) => {
+            if (index === 2) throw Break
+            return `${index}:${value}`
+          })).toEqual(["0:3", "1:5"])
+        })
+      })
+    })
+  })
+
+  describe("reduceArray", () => {
+    it("reduces an array of values", () => {
+      expect(lib.reduceArray([3, 5, 7], (state, value) => state + value, 11)).toBe(3 + 5 + 7 + 11)
     })
 
-    it("should map a single value with an index of 0", () => {
-      const result = lib.mapSome(-1, (value, index) => `${value}:${index}`)
-      expect(result).toBe("-1:0")
+    describe("when the reducer breaks on the first element", () => {
+      it("returns the initial state", () => {
+        const initial = { last: -1 }
+        type State = typeof initial
+        const reducer = (_state: State, _value: number, index: number) => {
+          if (index === 0) throw Break
+          throw new Error("Should never get past the first index")
+        }
+        const result = lib.reduceArray([1, 2, 3], reducer, initial)
+        expect(result).toBe(initial)
+      })
+    })
+
+    describe("when the reducer breaks on a subsequent element", () => {
+      it("does not continue to reduce", () => {
+        const reducer = vi.fn((state, value, index) => {
+          if (index === 2) throw Break
+          return state + value
+        })
+        const result = lib.reduceArray([5, 7, 11, 13], reducer, 17)
+        expect(result).toBe(5 + 7 + 17)
+      })
     })
   })
 
   describe("reduceSome", () => {
-    it("should reduce a single value", () => {
-      const result = lib.reduceSome(42, (state, value) => state + value, 17)
-      expect(result).toBe(42 + 17)
+    describe("with a single value", () => {
+      it("reduce the value with an index of 0", () => {
+        const result = lib.reduceSome(42, (state, value, index) => `${state}->${index}:${value}`, "initial")
+        expect(result).toBe("initial->0:42")
+      })
+
+      describe("when the reducer breaks execution", () => {
+        it("returns the initial state", () => {
+          const initial = { value: "Initial" }
+          const result = lib.reduceSome(42, () => {
+            throw Break
+          }, initial)
+          expect(result).toBe(initial)
+        })
+      })
     })
 
-    it("should reduce an array of values", () => {
-      const result = lib.reduceSome([1, 3, 5], (state, value) => state + value, 7)
-      expect(result).toBe(1 + 3 + 5 + 7)
-    })
+    describe("with an array of values", () => {
+      it("reduces each elem ent", () => {
+        expect(lib.reduceArray([3, 5, 7], (state, value) => state + value, 11)).toBe(3 + 5 + 7 + 11)
+      })
 
-    it("should reduce a single value with an index of 0", () => {
-      const result = lib.reduceSome(-1, (_state, _value, index) => index, 101)
-      expect(result).toBe(0)
+      describe("when the reducer breaks on the first element", () => {
+        it("returns the initial state", () => {
+          const initial = { last: -1 }
+          type State = typeof initial
+          const reducer = (_state: State, _value: number, index: number) => {
+            if (index === 0) throw Break
+            throw new Error("Should never get past the first index")
+          }
+          const result = lib.reduceArray([1, 2, 3], reducer, initial)
+          expect(result).toBe(initial)
+        })
+      })
+
+      describe("when the reducer breaks on a subsequent element", () => {
+        it("does not continue to reduce", () => {
+          const reducer = vi.fn((state, value, index) => {
+            if (index === 2) throw Break
+            return state + value
+          })
+          const result = lib.reduceArray([5, 7, 11, 13], reducer, 17)
+          expect(result).toBe(5 + 7 + 17)
+        })
+      })
     })
   })
 
