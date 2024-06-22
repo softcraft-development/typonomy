@@ -17,6 +17,20 @@ export type Action<T> = (value: T) => void
 export type Combine<A, B, R> = (a: A, b: B) => R
 
 /**
+ * A collection of elements that can be retrieved by a numeric index.
+ * `Array` and `string` are typical examples of `Indexed` collections.
+ * @template T The type of elements in the collection.
+ */
+export type Indexed<T> = {
+  [index: number]: T | undefined
+}
+
+/**
+ * A function that can transform from one type and its numeric index to another type.
+ */
+export type IndexedMapper<T, R> = Combine<T, number, R>
+
+/**
  * A function that transforms one Transform function into another.
  * If you want a function that transforms one type <B> to another type <R>,
  * but only know/have a function that converts another type <A> to that same type <R>,
@@ -337,9 +351,43 @@ export function partialRight<A, B, R>(combine: Combine<A, B, R>, value: B): Tran
 }
 
 /**
- * Repeats a reducer function a specified number of times and returns the final state.
+ * Reduces indexed elements to a single value by iterating over a sequential list of indices.
+ * Stops execution if the reducer throws a `BreakExecution`.
+ *
+ * @template S - The type of the resulting state.
+ * @template T - The type of the elements in the array.
+ * @param array - The array to reduce.
+ * @param startIndex - The first index to request.
+ * @param endIndex - The last index to request.
+ * @param reducer - The function that returns the next State for each element.
+ * @param initialState - The initial state for the first call to `reducer`.
+ * @returns The final state.
+ */
+export function reduceIndexed<S, T>(
+  indexed: Indexed<T>,
+  startIndex: number,
+  endIndex: number,
+  reducer: Reducer<S, T | undefined, number>,
+  initialState: S,
+): S {
+  let state = initialState
+  for (let index = startIndex; index <= endIndex; index++) {
+    const value = indexed[index]
+    try {
+      state = reducer(state, value, index)
+    }
+    catch (exception) {
+      return onBreakExecution<S>(exception, state)
+    }
+  }
+  return state
+}
+
+/**
+ * Calls a reducer function a specified number of times and returns the final state.
  * Passes the current iteration number as the value (starting from 1)
  * and a zero-based index as the key to the reducer.
+ * Stops execution if the reducer throws a `BreakExecution`.
  *
  * @template S - The type of the state.
  * @param count - The number of times to repeat the reducer function.
@@ -350,7 +398,12 @@ export function partialRight<A, B, R>(combine: Combine<A, B, R>, value: B): Tran
 export function reiterate<S>(count: number, reducer: Reducer<S, number, number>, initialState: S): S {
   let state = initialState
   for (let index = 0; index < count; index += 1) {
-    state = reducer(state, index + 1, index)
+    try {
+      state = reducer(state, index + 1, index)
+    }
+    catch (exception) {
+      return onBreakExecution<S>(exception, state)
+    }
   }
   return state
 }

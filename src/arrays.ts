@@ -4,8 +4,6 @@ import { typeGuard, type TypeGuard } from "./types"
 
 export type Some<T> = T | T[]
 
-export type Mapper<T, R> = f.Combine<T, number, R>
-
 /**
  * A Reducer that appends its value to an array. Mutates the original array.
  *
@@ -95,7 +93,7 @@ export function fill<T>(count: number, filler: f.Transform<number, T>): T[] {
  * @param array - The array to iterate over.
  * @param callback - The callback function to apply to each element.
  */
-export function forArray<T>(array: T[], callback: Mapper<T, void>): void {
+export function forArray<T>(array: T[], callback: f.IndexedMapper<T, void>): void {
   reduceArray<undefined, T>(array, (_, value, index) => {
     callback(value, index)
     return undefined
@@ -112,16 +110,10 @@ export function forArray<T>(array: T[], callback: Mapper<T, void>): void {
  * @param callback - The callback function to apply. If `some` is singular, then the index will be `0`.
  */
 export function forSome<T>(some: Some<T>, callback: (value: T, index: number) => void): void {
-  if (isPlural(some)) {
-    forArray(some, (value, index) => callback(value, index))
-    return
-  }
-  try {
-    callback(some, 0)
-  }
-  catch (exception) {
-    f.onBreakExecution(exception, undefined)
-  }
+  reduceSome<undefined, T>(some, (_, value, index) => {
+    callback(value, index)
+    return undefined
+  }, undefined)
 }
 
 /**
@@ -194,7 +186,7 @@ export function isSome<T>(value: unknown, typeGuard: TypeGuard<T>): value is Som
  * @param mapper - The `Mapper` to transform one element type to the other.
  * @returns The mapped array.
  */
-export function mapArray<T, R>(array: T[], mapper: Mapper<T, R>): R[] {
+export function mapArray<T, R>(array: T[], mapper: f.IndexedMapper<T, R>): R[] {
   return reduceArray<R[], T>(array, mapReducer(mapper), arrayOf<R>())
 }
 
@@ -206,7 +198,7 @@ export function mapArray<T, R>(array: T[], mapper: Mapper<T, R>): R[] {
  * @param mapper - A function that maps the input element (and possibly the element's index) to the output element.
  * @returns A `Reducer` that transforms inputs to outputs and appends them to an array.
  */
-export function mapReducer<T, R>(mapper: Mapper<T, R>): f.Reducer<R[], T, number> {
+export function mapReducer<T, R>(mapper: f.IndexedMapper<T, R>): f.Reducer<R[], T, number> {
   return (state, value, index) => {
     const result = mapper(value, index)
     return append(state, result)
@@ -226,15 +218,15 @@ export function mapReducer<T, R>(mapper: Mapper<T, R>): f.Reducer<R[], T, number
  *  or an array of `R` for an array of `T`,
  *  or an empty array if the mapper breaks execution on a single `T`.
  */
-export function mapSome<T, R>(some: Some<T>, mapper: Mapper<T, R>): Some<R> {
+export function mapSome<T, R>(some: Some<T>, mapper: f.IndexedMapper<T, R>): Some<R> {
   if (isPlural(some)) {
-    return reduceSome<R[], T>(some, mapReducer(mapper), arrayOf<R>())
+    return mapArray(some, mapper)
   }
   try {
     return mapper(some, 0)
   }
   catch (exception) {
-    return f.onBreakExecution<R[]>(exception, [])
+    return f.onBreakExecution(exception, [])
   }
 }
 
@@ -250,19 +242,15 @@ export function mapSome<T, R>(some: Some<T>, mapper: Mapper<T, R>): Some<R> {
  * @returns The final reduced state.
  */
 export function reduceArray<S, T>(array: T[], reducer: f.Reducer<S, T, number>, initialState: S): S {
-  let state = initialState
-  for (let index = 0; index < array.length; index++) {
-    // We're only using indexes within the array bounds.
+  return f.reduceIndexed<S, T>(array, 0, array.length - 1, (state, value, index) => {
+    // We know that the indices only exist within the bounds of the `array`,
+    // so we know that the `value` will never be `undefined` as a result of out-of-bounds de-indexing.
+    // Thus treating `value` as `T` is safe.
+    // Note that this does not prevent `undefined` from being passed to the `reducer`
+    // if `T` itself allows `undefined`.
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    const value = array[index] as T
-    try {
-      state = reducer(state, value, index)
-    }
-    catch (exception) {
-      return f.onBreakExecution<S>(exception, state)
-    }
-  }
-  return state
+    return reducer(state, value as T, index)
+  }, initialState)
 }
 
 /**
