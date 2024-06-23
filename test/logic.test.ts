@@ -37,18 +37,6 @@ describe("fp", () => {
     })
   })
 
-  describe("any", () => {
-    it("returns true if any input Predicates is true", () => {
-      const combined = lib.any(isObject, value => value === 37, value => value === "42")
-      expect(combined({})).toBe(true)
-    })
-
-    it("returns false if all input Predicates is true", () => {
-      const combined = lib.any(isObject, value => value === 37, value => value === "42")
-      expect(combined("37")).toBe(false)
-    })
-  })
-
   describe("not", () => {
     it("returns the negation of the input Predicate", () => {
       const negatedGuard = lib.not(isString)
@@ -69,6 +57,18 @@ describe("fp", () => {
       const typeGuard2 = (value: unknown) => typeof value === "number"
       const combinedGuard = lib.or(typeGuard1, typeGuard2)
       expect(combinedGuard(true)).toBe(false)
+    })
+  })
+
+  describe("some", () => {
+    it("returns true if any input Predicates is true", () => {
+      const combined = lib.some(isObject, value => value === 37, value => value === "42")
+      expect(combined({})).toBe(true)
+    })
+
+    it("returns false if all input Predicates is true", () => {
+      const combined = lib.some(isObject, value => value === 37, value => value === "42")
+      expect(combined("37")).toBe(false)
     })
   })
 })

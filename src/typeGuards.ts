@@ -1,4 +1,4 @@
-import { and, any, not, or } from "./logic"
+import { and, not, or, some } from "./logic"
 import type { Explicit, Nullish, Possible, Predicate, TypeGuard } from "./types"
 
 /**
@@ -116,7 +116,7 @@ export function isObject(value: unknown): value is object {
  * @returns `true` if the value is a `string`, `number`, or `Symbol`, `false` otherwise.
  */
 export function isPropertyKey(value: unknown): value is PropertyKey {
-  return any(isString, isNumber, isSymbol)(value)
+  return some(isString, isNumber, isSymbol)(value)
 }
 
 /**

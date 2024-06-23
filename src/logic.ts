@@ -22,16 +22,6 @@ export function and<T>(a: Predicate<T>, b: Predicate<T>): Predicate<T> {
 }
 
 /**
- * Create a Predicate that returns true if any input `Predicate` is true.
- * @type T - The type of value to test.
- * @param predicates - The `Predicate` to test against.
- * @returns A `Predicate` that returns true if any input `Predicate` are true.
- */
-export function any<T>(...predicates: Predicate<T>[]): Predicate<T> {
-  return value => predicates.some(predicate => predicate(value))
-}
-
-/**
  * Negates a `Predicate`.
  *
  * @param predicate - The `Predicate` to negate.
@@ -51,3 +41,14 @@ export function not<T>(predicate: Predicate<T>): Predicate<T> {
 export function or<T>(a: Predicate<T>, b: Predicate<T>): Predicate<T> {
   return (value): boolean => a(value) || b(value)
 }
+
+/**
+ * Create a Predicate that returns true if any input `Predicate` is true.
+ * @type T - The type of value to test.
+ * @param predicates - The `Predicate` to test against.
+ * @returns A `Predicate` that returns true if any input `Predicate` are true.
+ */
+export function some<T>(...predicates: Predicate<T>[]): Predicate<T> {
+  return value => predicates.some(predicate => predicate(value))
+}
+
