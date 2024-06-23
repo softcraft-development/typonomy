@@ -1,7 +1,7 @@
 import { addMore, type Some } from "./arrays"
 import { isEquality, onBreakExecution, type Combine, type Predicate, type Reducer } from "./func"
 import { isUndefined, type Optional } from "./nullish"
-import type { TypeGuard } from "./types"
+import { typeGuard, type TypeGuard } from "./types"
 
 /**
  * Checks if an object has no properties or elements.
@@ -137,4 +137,23 @@ export function typeGuardFor<T>(predicates: { [K in keyof T]: Predicate<unknown>
     }
     return true
   }
+}
+
+/**
+ * Creates a type guard function that checks if a value is mapped to a key in the object, record, or enum.
+ *
+ * @template T - The type to guard.
+ * @param obj - The object with keys mapped to values.
+ * @param [checkEquality=isEquality<unknown>] - A function to compare object values to the target value.
+ * @returns - The type guard for the object,
+ *  which returns `true` if the value is mapped to a key in `obj`, and `false` otherwise.
+ */
+export function typeGuardValue<T extends Record<string, unknown>>(
+  obj: Record<string, unknown>,
+  checkEquality: Combine<unknown, unknown, boolean> = isEquality<unknown>
+): TypeGuard<T> {
+  return typeGuard<T>((value) => {
+    const keys = keysForValue(obj, value, checkEquality)
+    return !isUndefined(keys)
+  })
 }

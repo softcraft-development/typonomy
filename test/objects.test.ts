@@ -237,4 +237,70 @@ describe("object", () => {
       })
     })
   })
+
+  describe("typeGuardValue", () => {
+    describe("for an enum", () => {
+      enum TestEnum {
+        A = "a",
+        B = "b",
+        C = "c",
+        BB = "b",
+      }
+      const guard = lib.typeGuardValue(TestEnum)
+
+      it("returns true for a unique value", () => {
+        expect(guard("a")).toBe(true)
+      })
+
+      it("returns true for a non-unique value", () => {
+        expect(guard("b")).toBe(true)
+      })
+
+      it("returns false for a non value", () => {
+        expect(guard("x")).toBe(false)
+      })
+    })
+
+    describe("for an record", () => {
+      const record = lib.recordOf<string, number>({ a: 1, b: 2, bb: 2, c: 3 })
+      const guard = lib.typeGuardValue(record)
+
+      it("returns true for a unique value", () => {
+        expect(guard(3)).toBe(true)
+      })
+
+      it("returns true for a non-unique value", () => {
+        expect(guard(2)).toBe(true)
+      })
+
+      it("returns false for a non value", () => {
+        expect(guard(-1)).toBe(false)
+      })
+    })
+
+    describe("for an object", () => {
+      const obj = { a: 1, b: "B", bb: "B", c: "3" }
+      const guard = lib.typeGuardValue(obj)
+
+      it("returns true for a unique value", () => {
+        expect(guard(1)).toBe(true)
+      })
+
+      it("returns true for a non-unique value", () => {
+        expect(guard("B")).toBe(true)
+      })
+
+      it("returns false if an unmapped value", () => {
+        expect(guard(3)).toBe(false)
+      })
+
+      describe("with a custom equality check", () => {
+        const check = (a: unknown, b: unknown) => String(a) === String(b)
+        const guard = lib.typeGuardValue(obj, check)
+        it("returns true for values that match the check", () => {
+          expect(guard(3)).toBe(true)
+        })
+      })
+    })
+  })
 })
