@@ -1,9 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import * as lib from "../src/arrays"
-import { Break } from "../src/func"
-import type { Explicit } from "../src/nullish"
-import { isString } from "../src/strings"
-import { isNumber, type TypeGuard } from "../src/types"
+import { Break } from "../src/break"
+import { isNumber, isString } from "../src/typeGuards"
+import type { Explicit, Optional, Some, TypeGuard } from "../src/types"
 
 describe("arrays", () => {
   describe("Explicit<T>", () => {
@@ -144,7 +143,7 @@ describe("arrays", () => {
   describe("forSome", () => {
     describe("with a single value", () => {
       it("should apply the callback with index 0", () => {
-        const callback = vi.fn<[number, number], void>()
+        const callback = vi.fn()
         lib.forSome(19, callback)
         expect(callback).toHaveBeenCalledOnce()
         expect(callback).toHaveBeenCalledWith(19, 0)
@@ -163,7 +162,7 @@ describe("arrays", () => {
 
     describe("with an array of values", () => {
       it("should apply the callback for each element with its index", () => {
-        const callback = vi.fn<[number, number], void>()
+        const callback = vi.fn()
         lib.forSome([5, 7, 11], callback)
         expect(callback).toHaveBeenCalledTimes(3)
         expect(callback).toHaveBeenNthCalledWith(1, 5, 0)
@@ -298,7 +297,7 @@ describe("arrays", () => {
 
   describe("mapReducer", () => {
     it("creates an array Reducer for a Mapper", () => {
-      const mapper = (value: number, index: number) => (value + index).toString()
+      const mapper = (value: Optional<number>, index: number) => ((value || 0) + index).toString()
       const reducer = lib.mapReducer(mapper)
       expect(reducer(["initial"], 42, -1)).toEqual(["initial", "41"])
     })
@@ -308,7 +307,7 @@ describe("arrays", () => {
     describe("with a single value", () => {
       it("should return the mapped value", () => {
         const value = 42
-        const transform = (value: number) => value.toString()
+        const transform = (value?: number) => String(value)
         const result = lib.mapSome(value, transform)
         expect(result).toBe("42")
       })
@@ -330,7 +329,7 @@ describe("arrays", () => {
     describe("with an array of values", () => {
       it("return an array of mapped values", () => {
         const value = ["a", "b", "c"]
-        const mapper = (value: string, index: number) => `${index}:${value}`
+        const mapper = (value: Optional<string>, index: number) => `${index}:${value}`
         const result = lib.mapSome(value, mapper)
         expect(result).toEqual(["0:a", "1:b", "2:c"])
       })
@@ -348,14 +347,14 @@ describe("arrays", () => {
 
   describe("reduceArray", () => {
     it("reduces an array of values", () => {
-      expect(lib.reduceArray([3, 5, 7], (state, value) => state + value, 11)).toBe(3 + 5 + 7 + 11)
+      expect(lib.reduceArray([3, 5, 7], (state, value) => state + (value || 0), 11)).toBe(3 + 5 + 7 + 11)
     })
 
     describe("when the reducer breaks on the first element", () => {
       it("returns the initial state", () => {
         const initial = { last: -1 }
         type State = typeof initial
-        const reducer = (_state: State, _value: number, index: number) => {
+        const reducer = (_state: State, _value: Optional<number>, index: number) => {
           if (index === 0) throw Break
           throw new Error("Should never get past the first index")
         }
@@ -396,14 +395,14 @@ describe("arrays", () => {
 
     describe("with an array of values", () => {
       it("reduces each elem ent", () => {
-        expect(lib.reduceArray([3, 5, 7], (state, value) => state + value, 11)).toBe(3 + 5 + 7 + 11)
+        expect(lib.reduceArray([3, 5, 7], (state, value) => state + (value || 0), 11)).toBe(3 + 5 + 7 + 11)
       })
 
       describe("when the reducer breaks on the first element", () => {
         it("returns the initial state", () => {
           const initial = { last: -1 }
           type State = typeof initial
-          const reducer = (_state: State, _value: number, index: number) => {
+          const reducer = (_state: State, _value: Optional<number>, index: number) => {
             if (index === 0) throw Break
             throw new Error("Should never get past the first index")
           }
@@ -425,9 +424,36 @@ describe("arrays", () => {
     })
   })
 
+  describe("reiterate", () => {
+    it("returns the initial state when count is 0", () => {
+      const initialState = { key: "Initial state" }
+      const result = lib.reiterate(0, () => {
+        return { key: "Not the initial state" }
+      }, initialState)
+      expect(result).toBe(initialState)
+    })
+
+    it("reduces the given number of times", () => {
+      const reducer = (state: number, value: number) => state + value
+      const result = lib.reiterate(3, reducer, 101)
+      expect(result).toEqual(101 + 1 + 2 + 3)
+    })
+
+    describe("when the reducer breaks", () => {
+      it("does not continue to reduce", () => {
+        const reducer = (state: number, value: number) => {
+          if (state >= 102) throw Break
+          return state + value
+        }
+        const result = lib.reiterate(97, reducer, 101)
+        expect(result).toEqual(101 + 1)
+      })
+    })
+  })
+
   describe("typeGuardSome", () => {
     describe("returns a TypeGuard", () => {
-      let guard: TypeGuard<lib.Some<string>>
+      let guard: TypeGuard<Some<string>>
 
       beforeEach(() => {
         guard = lib.typeGuardSome(isString)

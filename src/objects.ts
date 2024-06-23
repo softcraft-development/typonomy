@@ -1,45 +1,39 @@
-import { addMore, reduceArray, type Some } from "./arrays"
-import { isEquality, onBreakExecution, type Combine, type Predicate, type Reducer } from "./func"
-import { isUndefined, type Optional } from "./nullish"
-import { type TypeGuard } from "./types"
+import { addMore, reduceArray } from "./arrays"
+import { Break, onBreakExecution } from "./break"
+import { isEmptyObject, isEquality, isObject, isPropertyKey, isUndefined, typeGuard } from "./typeGuards"
+import type { Combine, Optional, Predicate, Reducer, Some, TypeGuard } from "./types"
 
-/**
- * Checks if an object has no properties or elements.
- * @param value - The object or array to check.
- * @returns Returns `true` if value is an object with no properties, `false` otherwise.
- */
-export function isEmptyObject(value: unknown): value is {} {
-  if (!isObject(value)) return false
-  return Object.keys(value).length === 0
+export function isKeyOf<T extends object>(value: unknown, example: T): value is keyof T {
+  if (!isPropertyKey(value)) return false
+  return value in example
 }
 
 /**
- * Checks if a value is a non-`Array` non-`null` `object`.
- *
- * @param value - The value to check.
- * @returns `false` if the value is an `Array` or `null`; `true` if the value is an object; `false` otherwise.
- */
-export function isObject(value: unknown): value is object {
-  return typeof value === "object" && value !== null && !Array.isArray(value)
-}
-
-/**
- * Checks if the value is a Record of specific types
- *
+ * Checks if the value is a Record of specific types.
+ * @template K - The type of the keys in the record.
  * @template V - The type of the values in the record.
- * @param obj - The value to check.
- * @param guard - A TypeGuard that checks the type of the object's values.
- * @returns - Returns true if the value is an object whose properties are all of type T.
+ * @param value - The value to check.
+ * @param valueGuard - A TypeGuard that checks the type of the object's keys.
+ * @param valueGuard - A TypeGuard that checks the type of the object's values.
+ * @param emptyMatches - The return value if the object is empty. Defaults to `true`.
+ * @returns - Returns `true` if the `value` is an object whose keys are all of type `K`
+ *  and values are all of type `V`, or `emptyMatches` if there are no keys.
  */
-export function isRecordOf<T>(
-  obj: unknown,
-  guard: TypeGuard<T>,
+export function isRecordOf<K extends PropertyKey, V>(
+  value: unknown,
+  keyGuard: TypeGuard<K>,
+  valueGuard: TypeGuard<V>,
   emptyMatches = true
-): obj is Record<string, T> {
-  if (!isObject(obj)) return false
-  const values = Object.values(obj)
-  if (values.length === 0) return emptyMatches
-  return values.every(guard)
+): value is Record<K, V> {
+  if (!isObject(value)) return false
+  const result = reduceObject(value, (state, value, key) => {
+    if (state === false) throw Break
+    if (!keyGuard(key)) return false
+    if (!valueGuard(value)) return false
+    return true
+  }, objectOf<Optional<boolean>>(undefined))
+  if (isUndefined(result)) return emptyMatches
+  return result
 }
 
 /**
@@ -55,43 +49,42 @@ export function keysForValue<T extends object>(
   target: unknown,
   checkEquality: Combine<unknown, unknown, boolean> = isEquality<unknown>
 ): Optional<Some<keyof T>> {
-  return reduceArray(Object.entries(obj), (state, [k, value]) => {
-    if (!checkEquality(value, target)) return state
-    // We know `k` is a key of `T` because it comes from `Object.entries(obj)`.
+  return reduceArray(Object.entries(obj), (state, entry) => {
+    // We know `entry` is a key-value pair because it comes from `Object.entries(obj)`,
+    // so we can both safely
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    const key = k as keyof T
+    const [key, value] = entry as [keyof T, unknown]
+    if (!checkEquality(value, target)) return state
     if (isUndefined(state)) return key
     return addMore(state, key)
   }, objectOf<Optional<Some<keyof T>>>(undefined))
 }
 
 /**
- * Reduces the keys and values of a record object.
+ * Reduces the keys and values of an object.
  * Stops execution if the reducer throws a `BreakExecution`.
- * Note that the order of the keys is not guaranteed.
+ * Note that the order of the keys & values is not guaranteed.
  *
  * @template S - The type of the state.
- * @template V - The type of the values in the record.
- * @param record - The object to be reduced.
+ * @template T - The type of object to reduce.
+ * @template V - The type of the values in the object. Defaults to `unknown`.
+ * @param obj - The object to be reduced.
  * @param reducer - The reducer function.
  * @param initialState - The initial state.
  * @returns The final state.
  */
-export function reduceRecord<S, V>(record: Record<string, V>, reducer: Reducer<S, V, string>, initialState: S): S {
+export function reduceObject<S, T extends Record<keyof T, V>, V = unknown>(
+  obj: T,
+  reducer: Reducer<S, V, keyof T>,
+  initialState: S): S {
   let state: S = initialState
-  for (const key in record) {
-    if (record.hasOwnProperty(key)) {
-      // We've confirmed the key exists, so we know the is not `undefined` by virtue of being unassigned,
-      // so we are safe to declare it as `V`.
-      // Note that the value may still be assigned as `undefined` if `V` includes `undefined`.
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      const value = record[key] as V
-      try {
-        state = reducer(state, value, key)
-      }
-      catch (exception) {
-        return onBreakExecution(exception, state)
-      }
+  for (const key in obj) {
+    const value = obj[key]
+    try {
+      state = reducer(state, value, key)
+    }
+    catch (exception) {
+      return onBreakExecution(exception, state)
     }
   }
   return state
@@ -123,6 +116,20 @@ export function recordOf<K extends PropertyKey, V>(data: Record<K, V> = {} as Re
 }
 
 /**
+ * Creates type guard for Records with specific types of keys and values
+ *
+ * @template K - The type of the keys in the record.
+ * @param predicates - An object with a Predicate for properties in T.
+ * @returns A TypeGuard that checks if an object is of type T.
+ */
+export function typeGuardRecord<K extends PropertyKey, V>(
+  keyGuard: TypeGuard<K>,
+  valueGuard: TypeGuard<V>
+): TypeGuard<Record<K, V>> {
+  return typeGuard(value => isRecordOf(value, keyGuard, valueGuard))
+}
+
+/**
  * Creates a Predicate that validates the properties of an object.
  *
  * @template T - The Type to check against.
@@ -140,6 +147,15 @@ export function typeGuardFor<T>(predicates: { [K in keyof T]: Predicate<unknown>
     }
     return true
   }
+}
+
+/**
+ * Returns a type guard for the keys of an object.
+ * @param example - The object to create the type guard for.
+ * @returns A type guard function that checks if a value is a key of the object.
+ */
+export function typeGuardKeys<T extends object>(example: T): TypeGuard<keyof T> {
+  return (value: unknown): value is keyof T => isKeyOf(value, example)
 }
 
 /**

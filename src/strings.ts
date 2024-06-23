@@ -1,22 +1,12 @@
-import { reduceIndexed, type Reducer } from "./func"
-
-/**
- * Checks if the given object is a string.
- *
- * @param obj - The object to be checked.
- * @returns `true` if the object is a string, `false` otherwise.
- */
-export function isString(obj: unknown): obj is string {
-  return typeof obj === "string"
-}
+import { reduceArray } from "./arrays"
+import type { Reducer } from "./types"
 
 export function reduceCharacters<S>(str: string, reducer: Reducer<S, string, number>, initialState: S): S {
-  return reduceIndexed<S, string>(str, 0, str.length - 1, (state, value, index) => {
-    // We know that the indices only exist within the length of `str`,
-    // so we know that the `value` will never be `undefined` as a result of out-of-bounds de-indexing.
-    // Thus treating `value` as `string` is safe.
+  return reduceArray<S, string>(str, (state, character, index) => {
+    // Strings can never contain undefined characters;
+    // The `undefined` here is a consequence of strings being `ArrayLike`, which in turn can de-index to `undefined`.
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    return reducer(state, value as string, index)
+    return reducer(state, character as string, index)
   }, initialState)
 }
 
