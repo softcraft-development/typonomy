@@ -13,7 +13,7 @@ export function isKeyOf<T extends object>(value: unknown, example: T): value is 
  * @template K - The type of the keys in the record.
  * @template V - The type of the values in the record.
  * @param value - The value to check.
- * @param valueGuard - A TypeGuard that checks the type of the object's keys.
+ * @param keyGuard - A TypeGuard that checks the type of the object's keys.
  * @param valueGuard - A TypeGuard that checks the type of the object's values.
  * @param emptyMatches - The return value if the object is empty. Defaults to `true`.
  * @returns - Returns `true` if the `value` is an object whose keys are all of type `K`
@@ -116,17 +116,21 @@ export function recordOf<K extends PropertyKey, V>(data: Record<K, V> = {} as Re
 }
 
 /**
- * Creates type guard for Records with specific types of keys and values
+ * Creates type guard for Records with specific types of keys and values.
  *
- * @template K - The type of the keys in the record.
- * @param predicates - An object with a Predicate for properties in T.
- * @returns A TypeGuard that checks if an object is of type T.
+ * @template K - The type of the keys in the record. Must be a `PropertyKey`.
+ * @template V - The type of the values in the record.
+ * @param keyGuard - A TypeGuard that checks the type of the object's keys.
+ * @param valueGuard - A TypeGuard that checks the type of the object's values.
+ * @param emptyMatches - The return value if the object is empty. Defaults to `true`.
+ * @returns - Returns a TypeGuard for a specific form of `Record`
  */
 export function typeGuardRecord<K extends PropertyKey, V>(
   keyGuard: TypeGuard<K>,
-  valueGuard: TypeGuard<V>
+  valueGuard: TypeGuard<V>,
+  emptyMatches = true
 ): TypeGuard<Record<K, V>> {
-  return typeGuard(value => isRecordOf(value, keyGuard, valueGuard))
+  return typeGuard(value => isRecordOf(value, keyGuard, valueGuard, emptyMatches))
 }
 
 /**
