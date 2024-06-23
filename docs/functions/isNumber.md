@@ -33,4 +33,4 @@ Whether `Infinity` or `-Infinity` are considered a valid numbers. Defaults to `f
 
 ## Source
 
-[types.ts:37](https://github.com/softcraft-development/typonomy/blob/ed30302645156be7a3415a48b3f38706435f25d3/src/types.ts#L37)
+[types.ts:37](https://github.com/softcraft-development/typonomy/blob/e1364998248d4274156807a851bf36cc6159b829/src/types.ts#L37)

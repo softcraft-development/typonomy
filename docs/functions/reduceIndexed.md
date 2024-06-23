@@ -25,6 +25,8 @@ The type of the elements in the array.
 
 • **indexed**: [`Indexed`](../type-aliases/Indexed.md)\<`T`\>
 
+The Indexed to reduce.
+
 • **startIndex**: `number`
 
 The first index to request.
@@ -49,4 +51,4 @@ The final state.
 
 ## Source
 
-[func.ts:366](https://github.com/softcraft-development/typonomy/blob/ed30302645156be7a3415a48b3f38706435f25d3/src/func.ts#L366)
+[func.ts:366](https://github.com/softcraft-development/typonomy/blob/e1364998248d4274156807a851bf36cc6159b829/src/func.ts#L366)
