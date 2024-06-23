@@ -1,4 +1,4 @@
-import type { Predicate, Reducer } from "./func"
+import { onBreakExecution, type Predicate, type Reducer } from "./func"
 import type { TypeGuard } from "./types"
 
 /**
@@ -42,19 +42,34 @@ export function isRecordOf<T>(
 
 /**
  * Reduces the keys and values of a record object.
+ * Stops execution if the reducer throws a `BreakExecution`.
+ * Note that the order of the keys is not guaranteed.
  *
  * @template S - The type of the state.
  * @template V - The type of the values in the record.
- * @param obj - The object to be reduced.
+ * @param record - The object to be reduced.
  * @param reducer - The reducer function.
  * @param initialState - The initial state.
  * @returns The final state.
  */
-export function reduce<S, V>(obj: Record<string, V>, reducer: Reducer<S, V, string>, initialState: S): S {
-  return Object.entries(obj).reduce((state, [key, value]) => {
-    const newState = reducer(state, value, key)
-    return newState
-  }, initialState)
+export function reduceRecord<S, V>(record: Record<string, V>, reducer: Reducer<S, V, string>, initialState: S): S {
+  let state: S = initialState
+  for (const key in record) {
+    if (record.hasOwnProperty(key)) {
+      // We've confirmed the key exists, so we know the is not `undefined` by virtue of being unassigned,
+      // so we are safe to declare it as `V`.
+      // Note that the value may still be assigned as `undefined` if `V` includes `undefined`.
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      const value = record[key] as V
+      try {
+        state = reducer(state, value, key)
+      }
+      catch (exception) {
+        return onBreakExecution(exception, state)
+      }
+    }
+  }
+  return state
 }
 
 /**

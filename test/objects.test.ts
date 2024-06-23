@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { or } from "../src/func"
+import { Break, or } from "../src/func"
 import { isUndefined } from "../src/nullish"
 import * as lib from "../src/objects"
 import { isString } from "../src/strings"
@@ -143,11 +143,22 @@ describe("object", () => {
     })
   })
 
-  describe("reduce", () => {
+  describe("reduceRecord", () => {
     it("should reduce the keys and values of a record object", () => {
       const obj = { a: 3, b: undefined, c: 7, d: null }
-      const result = lib.reduce(obj, (state, value, key) => `${key}:${value},${state}`, "")
-      expect(result).toBe("d:null,c:7,b:undefined,a:3,")
+      const result = lib.reduceRecord(obj, (state, value, key) => `${state} ${key}:${value}`, "Initial")
+      expect(result).toBe("Initial a:3 b:undefined c:7 d:null")
+    })
+
+    describe("when the reducer breaks execution", () => {
+      it("should reduce the keys and values of a record object", () => {
+        const obj = { a: 3, b: undefined, c: 7, d: null }
+        const result = lib.reduceRecord(obj, (state, value, key) => {
+          if (value === undefined) throw Break
+          return `${state} ${key}:${value}`
+        }, "Initial")
+        expect(result).toBe("Initial a:3")
+      })
     })
   })
 })
