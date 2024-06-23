@@ -14,6 +14,18 @@ describe("arrays", () => {
     })
   })
 
+  describe("addMore", () => {
+    it("creates an array for two single values", () => {
+      const result = lib.addMore(1, 2)
+      expect(result).toEqual([1, 2])
+    })
+
+    it("appends a value to an array", () => {
+      const result = lib.addMore([1, 2], 3)
+      expect(result).toEqual([1, 2, 3])
+    })
+  })
+
   describe("append", () => {
     it("should append the value to the array", () => {
       const array = [1, 1, 2, 3]

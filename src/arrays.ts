@@ -4,6 +4,13 @@ import { typeGuard, type TypeGuard } from "./types"
 
 export type Some<T> = T | T[]
 
+export function addMore<T>(some: Some<T>, more: T): T[] {
+  if (isPlural(some)) {
+    return appendSome(some, more)
+  }
+  return [some, more]
+}
+
 /**
  * A Reducer that appends its value to an array. Mutates the original array.
  *
