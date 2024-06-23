@@ -18,4 +18,4 @@ The type when it is not `null`.
 
 ## Source
 
-[nullish.ts:14](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/nullish.ts#L14)
+[types.ts:52](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/types.ts#L52)

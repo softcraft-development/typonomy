@@ -27,7 +27,7 @@ The type of the value.
 
 The `Some<T>` to reduce.
 
-• **reducer**: [`Reducer`](../type-aliases/Reducer.md)\<`S`, `V`, `number`\>
+• **reducer**: [`Reducer`](../type-aliases/Reducer.md)\<`S`, [`Optional`](../type-aliases/Optional.md)\<`V`\>, `number`\>
 
 The reducer function. If `some` is singular, then the key/index will be `0`.
 
@@ -43,4 +43,4 @@ The final state.
 
 ## Source
 
-[arrays.ts:284](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/arrays.ts#L284)
+[arrays.ts:292](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/arrays.ts#L292)

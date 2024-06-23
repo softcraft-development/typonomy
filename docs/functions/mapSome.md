@@ -24,7 +24,7 @@ If the mapper breaks execution, return an empty array.
 
 The `Some<T>` to map.
 
-• **mapper**: [`IndexedMapper`](../type-aliases/IndexedMapper.md)\<`T`, `R`\>
+• **mapper**: [`IndexMapper`](../type-aliases/IndexMapper.md)\<`T`, `R`\>
 
 The mapping function to apply. If `some` is singular, then the second parameter will be `0`.
 
@@ -38,4 +38,4 @@ An `R` for a single `T`,
 
 ## Source
 
-[arrays.ts:238](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/arrays.ts#L238)
+[arrays.ts:237](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/arrays.ts#L237)

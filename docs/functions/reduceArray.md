@@ -6,9 +6,9 @@
 
 # Function: reduceArray()
 
-> **reduceArray**\<`S`, `T`\>(`array`, `reducer`, `initialState`): `S`
+> **reduceArray**\<`S`, `T`\>(`arrayLike`, `reducer`, `initialState`, `startIndex`, `endIndex`): `S`
 
-Reduces an array of values to a single value.
+Reduces elements of an array-like object to a single value by iterating over a sequential list of indices.
 Stops execution if the reducer throws a `BreakExecution`.
 
 ## Type parameters
@@ -19,28 +19,36 @@ The type of the resulting state.
 
 • **T**
 
-The type of the elements in the array.
+The type of the elements in the array-like object.
 
 ## Parameters
 
-• **array**: `T`[]
+• **arrayLike**: `ArrayLike`\<`T`\>
 
-The array to reduce.
+The array-like object to reduce.
 
-• **reducer**: [`Reducer`](../type-aliases/Reducer.md)\<`S`, `T`, `number`\>
+• **reducer**: [`Reducer`](../type-aliases/Reducer.md)\<`S`, [`Optional`](../type-aliases/Optional.md)\<`T`\>, `number`\>
 
-The function that returns the next State for each array element.
+The function that returns the next State for each element.
 
 • **initialState**: `S`
 
 The initial state for the first call to `reducer`.
 
+• **startIndex**: `number`= `0`
+
+The first index to request. Defaults to `0`
+
+• **endIndex**: `number`= `undefined`
+
+The last index to request. Defaults to the last index of `arrayLike`
+
 ## Returns
 
 `S`
 
-The final reduced state.
+The final state.
 
 ## Source
 
-[arrays.ts:261](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/arrays.ts#L261)
+[arrays.ts:262](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/arrays.ts#L262)

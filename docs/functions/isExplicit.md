@@ -6,7 +6,7 @@
 
 # Function: isExplicit()
 
-> **isExplicit**\<`T`\>(`value`): `value is Exclude<T, Nullish>`
+> **isExplicit**\<`T`\>(`value`): `value is Explicit<T>`
 
 Checks if a value is not `Nullish`.
 
@@ -24,10 +24,10 @@ The value to check.
 
 ## Returns
 
-`value is Exclude<T, Nullish>`
+`value is Explicit<T>`
 
 `false` if the value is `null` or `undefined`; `true` otherwise.
 
 ## Source
 
-[nullish.ts:65](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/nullish.ts#L65)
+[typeGuards.ts:56](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/typeGuards.ts#L56)

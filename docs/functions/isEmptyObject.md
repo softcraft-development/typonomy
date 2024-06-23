@@ -24,4 +24,4 @@ Returns `true` if value is an object with no properties, `false` otherwise.
 
 ## Source
 
-[objects.ts:11](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/objects.ts#L11)
+[typeGuards.ts:45](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/typeGuards.ts#L45)

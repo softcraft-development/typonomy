@@ -12,7 +12,7 @@ Returns all keys (if any) that are mapped to the target value.
 
 ## Type parameters
 
-• **T** *extends* `Record`\<`string`, `unknown`\>
+• **T** *extends* `object`
 
 ## Parameters
 
@@ -37,4 +37,4 @@ An optional array of keys that have the specified value.
 
 ## Source
 
-[objects.ts:53](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/objects.ts#L53)
+[objects.ts:47](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/objects.ts#L47)

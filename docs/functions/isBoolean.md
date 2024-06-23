@@ -24,4 +24,4 @@ The value to check.
 
 ## Source
 
-[types.ts:15](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/types.ts#L15)
+[typeGuards.ts:24](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/typeGuards.ts#L24)

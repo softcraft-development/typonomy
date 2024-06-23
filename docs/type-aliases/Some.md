@@ -8,10 +8,14 @@
 
 > **Some**\<`T`\>: `T` \| `T`[]
 
+Represents a type that can be either a single value of type T or an array of type T.
+
 ## Type parameters
 
 • **T**
 
+The type of value.
+
 ## Source
 
-[arrays.ts:5](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/arrays.ts#L5)
+[types.ts:110](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/types.ts#L110)

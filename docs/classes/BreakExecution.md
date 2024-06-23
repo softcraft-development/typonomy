@@ -6,7 +6,7 @@
 
 # Class: BreakExecution
 
-A signal to break out of the typical execution flow.
+A signal to break out of the typical execution flow, and optionally include a final result.
 Typonomy iteration functions (which typically start with `for*`, `map*`, or `reduce*`) will `catch` this signal
 and use it to short-circuit the iteration.
 Note that this looks like an `Error`, and can be `throw`n and `catch`ed like one, but is not an `Error`.
@@ -23,23 +23,27 @@ Creates a new instance of the BreakExecution class.
 
 • **message**: `string`= `"Break Execution"`
 
+The reason why execution was aborted. Defaults to "Break Execution".
+
 #### Returns
 
 [`BreakExecution`](BreakExecution.md)
 
 #### Source
 
-[func.ts:105](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/func.ts#L105)
+[break.ts:18](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/break.ts#L18)
 
 ## Properties
 
 ### message
 
-> **message**: `string`
+> `readonly` **message**: `string`
+
+The reason why execution was aborted.
 
 #### Source
 
-[func.ts:100](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/func.ts#L100)
+[break.ts:12](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/break.ts#L12)
 
 ## Methods
 
@@ -57,4 +61,4 @@ The `message` used to construct the `BreakExecution`.
 
 #### Source
 
-[func.ts:113](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/func.ts#L113)
+[break.ts:26](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/break.ts#L26)

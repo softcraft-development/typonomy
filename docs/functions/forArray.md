@@ -24,7 +24,7 @@ The type of elements in the array.
 
 The array to iterate over.
 
-• **callback**: [`IndexedMapper`](../type-aliases/IndexedMapper.md)\<`T`, `void`\>
+• **callback**: [`IndexMapper`](../type-aliases/IndexMapper.md)\<`T`, `void`\>
 
 The callback function to apply to each element.
 
@@ -34,4 +34,4 @@ The callback function to apply to each element.
 
 ## Source
 
-[arrays.ts:113](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/arrays.ts#L113)
+[arrays.ts:112](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/arrays.ts#L112)
