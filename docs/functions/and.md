@@ -32,4 +32,4 @@ A Predicate that returns true if both inputs are true.
 
 ## Source
 
-[func.ts:96](https://github.com/softcraft-development/typonomy/blob/6cd020f80278694e706a0b517cce1e3ecb0a4458/src/func.ts#L96)
+[func.ts:140](https://github.com/softcraft-development/typonomy/blob/37d2aadc75ec0bb1bcd45938f3aae7730dc0182e/src/func.ts#L140)

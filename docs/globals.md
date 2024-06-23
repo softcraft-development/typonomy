@@ -4,11 +4,17 @@
 
 # Typonomy
 
+## Classes
+
+- [BreakExecution](classes/BreakExecution.md)
+
 ## Type Aliases
 
 - [Action](type-aliases/Action.md)
 - [Combine](type-aliases/Combine.md)
 - [Explicit](type-aliases/Explicit.md)
+- [Indexed](type-aliases/Indexed.md)
+- [IndexedMapper](type-aliases/IndexedMapper.md)
 - [MetaTransform](type-aliases/MetaTransform.md)
 - [NotNull](type-aliases/NotNull.md)
 - [NotUndefined](type-aliases/NotUndefined.md)
@@ -23,6 +29,10 @@
 - [Transform](type-aliases/Transform.md)
 - [Trigger](type-aliases/Trigger.md)
 - [TypeGuard](type-aliases/TypeGuard.md)
+
+## Variables
+
+- [Break](variables/Break.md)
 
 ## Functions
 
@@ -40,10 +50,12 @@
 - [composeReducer](functions/composeReducer.md)
 - [composeRight](functions/composeRight.md)
 - [fill](functions/fill.md)
+- [forArray](functions/forArray.md)
 - [forSome](functions/forSome.md)
 - [insist](functions/insist.md)
 - [isArrayOf](functions/isArrayOf.md)
 - [isBoolean](functions/isBoolean.md)
+- [isBreakExecution](functions/isBreakExecution.md)
 - [isEmptyArray](functions/isEmptyArray.md)
 - [isEmptyObject](functions/isEmptyObject.md)
 - [isExplicit](functions/isExplicit.md)
@@ -60,15 +72,21 @@
 - [isString](functions/isString.md)
 - [isSymbol](functions/isSymbol.md)
 - [isUndefined](functions/isUndefined.md)
+- [mapArray](functions/mapArray.md)
+- [mapReducer](functions/mapReducer.md)
 - [mapSome](functions/mapSome.md)
 - [narrow](functions/narrow.md)
 - [not](functions/not.md)
+- [onBreakExecution](functions/onBreakExecution.md)
 - [or](functions/or.md)
 - [partial](functions/partial.md)
 - [partialLeft](functions/partialLeft.md)
 - [partialRight](functions/partialRight.md)
 - [recordOf](functions/recordOf.md)
-- [reduce](functions/reduce.md)
+- [reduceArray](functions/reduceArray.md)
+- [reduceCharacters](functions/reduceCharacters.md)
+- [reduceIndexed](functions/reduceIndexed.md)
+- [reduceRecord](functions/reduceRecord.md)
 - [reduceSome](functions/reduceSome.md)
 - [reiterate](functions/reiterate.md)
 - [typeGuard](functions/typeGuard.md)

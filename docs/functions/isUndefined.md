@@ -24,4 +24,4 @@ The value to check.
 
 ## Source
 
-[nullish.ts:93](https://github.com/softcraft-development/typonomy/blob/6cd020f80278694e706a0b517cce1e3ecb0a4458/src/nullish.ts#L93)
+[nullish.ts:93](https://github.com/softcraft-development/typonomy/blob/37d2aadc75ec0bb1bcd45938f3aae7730dc0182e/src/nullish.ts#L93)

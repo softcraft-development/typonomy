@@ -8,7 +8,9 @@
 
 > **forSome**\<`T`\>(`some`, `callback`): `void`
 
-Apply a callback to each element in a `Some<T>`.
+Apply a callback to each element in a `Some<T>`,
+unless the callback throws `BreakException`,
+in which case further execution halts.
 
 ## Type parameters
 
@@ -28,8 +30,6 @@ The callback function to apply. If `some` is singular, then the index will be `0
 
 `void`
 
-`void`.
-
 ## Source
 
-[arrays.ts:94](https://github.com/softcraft-development/typonomy/blob/6cd020f80278694e706a0b517cce1e3ecb0a4458/src/arrays.ts#L94)
+[arrays.ts:112](https://github.com/softcraft-development/typonomy/blob/37d2aadc75ec0bb1bcd45938f3aae7730dc0182e/src/arrays.ts#L112)

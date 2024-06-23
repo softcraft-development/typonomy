@@ -8,7 +8,8 @@
 
 > **reduceSome**\<`S`, `V`\>(`some`, `reducer`, `initialState`): `S`
 
-Reduce `Some<T>` to a single state.
+Reduce `Some<T>` to a single state `S`.
+Note that a `BreakExecution` on a singular `T` will return the initial state.
 
 ## Type parameters
 
@@ -42,4 +43,4 @@ The final state.
 
 ## Source
 
-[arrays.ts:186](https://github.com/softcraft-development/typonomy/blob/6cd020f80278694e706a0b517cce1e3ecb0a4458/src/arrays.ts#L186)
+[arrays.ts:267](https://github.com/softcraft-development/typonomy/blob/37d2aadc75ec0bb1bcd45938f3aae7730dc0182e/src/arrays.ts#L267)

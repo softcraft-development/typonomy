@@ -8,9 +8,10 @@
 
 > **reiterate**\<`S`\>(`count`, `reducer`, `initialState`): `S`
 
-Repeats a reducer function a specified number of times and returns the final state.
+Calls a reducer function a specified number of times and returns the final state.
 Passes the current iteration number as the value (starting from 1)
 and a zero-based index as the key to the reducer.
+Stops execution if the reducer throws a `BreakExecution`.
 
 ## Type parameters
 
@@ -40,4 +41,4 @@ The initial state.
 
 ## Source
 
-[func.ts:294](https://github.com/softcraft-development/typonomy/blob/6cd020f80278694e706a0b517cce1e3ecb0a4458/src/func.ts#L294)
+[func.ts:398](https://github.com/softcraft-development/typonomy/blob/37d2aadc75ec0bb1bcd45938f3aae7730dc0182e/src/func.ts#L398)

@@ -8,7 +8,8 @@
 
 > **isPlural**\<`T`\>(`value`): `value is T[]`
 
-Checks if the given `Some<T>` is an array of `T`
+Checks if the given `Some<T>` is an array of `T`.
+Note that an empty array, or an array of one element, is still considered plural.
 
 ## Type parameters
 
@@ -28,4 +29,4 @@ Returns true if the value is an `Array<T>`, false if it is a single `T`.
 
 ## Source
 
-[arrays.ts:133](https://github.com/softcraft-development/typonomy/blob/6cd020f80278694e706a0b517cce1e3ecb0a4458/src/arrays.ts#L133)
+[arrays.ts:151](https://github.com/softcraft-development/typonomy/blob/37d2aadc75ec0bb1bcd45938f3aae7730dc0182e/src/arrays.ts#L151)

@@ -28,4 +28,4 @@ The string representation of the value.
 
 ## Source
 
-[strings.ts:18](https://github.com/softcraft-development/typonomy/blob/6cd020f80278694e706a0b517cce1e3ecb0a4458/src/strings.ts#L18)
+[strings.ts:29](https://github.com/softcraft-development/typonomy/blob/37d2aadc75ec0bb1bcd45938f3aae7730dc0182e/src/strings.ts#L29)

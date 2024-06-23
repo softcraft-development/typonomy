@@ -2,13 +2,15 @@
 
 ***
 
-[Typonomy](../globals.md) / reduce
+[Typonomy](../globals.md) / reduceRecord
 
-# Function: reduce()
+# Function: reduceRecord()
 
-> **reduce**\<`S`, `V`\>(`obj`, `reducer`, `initialState`): `S`
+> **reduceRecord**\<`S`, `V`\>(`record`, `reducer`, `initialState`): `S`
 
 Reduces the keys and values of a record object.
+Stops execution if the reducer throws a `BreakExecution`.
+Note that the order of the keys is not guaranteed.
 
 ## Type parameters
 
@@ -22,7 +24,7 @@ The type of the values in the record.
 
 ## Parameters
 
-• **obj**: `Record`\<`string`, `V`\>
+• **record**: `Record`\<`string`, `V`\>
 
 The object to be reduced.
 
@@ -42,4 +44,4 @@ The final state.
 
 ## Source
 
-[objects.ts:53](https://github.com/softcraft-development/typonomy/blob/6cd020f80278694e706a0b517cce1e3ecb0a4458/src/objects.ts#L53)
+[objects.ts:55](https://github.com/softcraft-development/typonomy/blob/37d2aadc75ec0bb1bcd45938f3aae7730dc0182e/src/objects.ts#L55)
