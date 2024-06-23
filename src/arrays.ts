@@ -4,6 +4,16 @@ import { typeGuard, type TypeGuard } from "./types"
 
 export type Some<T> = T | T[]
 
+/**
+ * Adds an element to a `Some`, resulting in an `Array` of elements.
+ * If the `Some` is already an array, the element is appended to the array.
+ * Otherwise, create a new array with the singular `Some` and the new element.
+ *
+ * @template T - The type of the elements.
+ * @param some - The array or element to add to.
+ * @param more - The element to add.
+ * @returns An array with the additional element.
+ */
 export function addMore<T>(some: Some<T>, more: T): T[] {
   if (isPlural(some)) {
     return appendSome(some, more)
