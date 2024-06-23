@@ -356,7 +356,7 @@ export function partialRight<A, B, R>(combine: Combine<A, B, R>, value: B): Tran
  *
  * @template S - The type of the resulting state.
  * @template T - The type of the elements in the array.
- * @param array - The array to reduce.
+ * @param indexed - The Indexed to reduce.
  * @param startIndex - The first index to request.
  * @param endIndex - The last index to request.
  * @param reducer - The function that returns the next State for each element.
