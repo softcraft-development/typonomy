@@ -143,6 +143,20 @@ describe("object", () => {
     })
   })
 
+  describe("objectOf", () => {
+    it("returns the object", () => {
+      interface Test {
+        a: string
+        b?: number
+      }
+      // input obeys Test but is not inferred to be Test.
+      const input = { a: "Hello", b: 42 }
+      // Output is inferred to be Test.
+      const output = lib.objectOf<Test>(input)
+      expect(output).toBe(input)
+    })
+  })
+
   describe("reduceRecord", () => {
     it("should reduce the keys and values of a record object", () => {
       const obj = { a: 3, b: undefined, c: 7, d: null }

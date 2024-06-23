@@ -73,6 +73,18 @@ export function reduceRecord<S, V>(record: Record<string, V>, reducer: Reducer<S
 }
 
 /**
+ * Declares an object to be of a specific type.
+ * Useful for type inference when the object is a literal.
+ *
+ * @template T - The type of the object.
+ * @param obj - The object to return
+ * @returns The input object
+ */
+export function objectOf<T>(obj: T): T {
+  return obj
+}
+
+/**
  * Creates a `Record` of a specified key and value type.
  *
  * @template K - The type of the keys in the object.
