@@ -20,7 +20,7 @@ pnpm add typonomy
 ```
 
 ## Documentation
-See the [**API Documentation**](docs/README.md)
+See the [**API Documentation**](docs/globals.md)
 
 ## Modules
 
