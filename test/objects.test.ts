@@ -144,7 +144,7 @@ describe("object", () => {
   })
 
   describe("keysForValue", () => {
-    describe("for an enum", () => {
+    describe("for a string enum", () => {
       enum TestEnum {
         A = "a",
         B = "b",
@@ -162,6 +162,27 @@ describe("object", () => {
 
       it("returns undefined if an unmapped value", () => {
         expect(lib.keysForValue(TestEnum, "x")).toBeUndefined()
+      })
+    })
+
+    describe("for a numeric enum", () => {
+      enum TestEnum {
+        A = 1,
+        B = 2,
+        C = 5,
+        BB = 2,
+      }
+
+      it("returns the key for a unique value", () => {
+        expect(lib.keysForValue(TestEnum, 1)).toBe("A")
+      })
+
+      it("returns an array of keys for a non-unique value", () => {
+        expect(lib.keysForValue(TestEnum, 2)).toEqual(["B", "BB"])
+      })
+
+      it("returns undefined if an unmapped value", () => {
+        expect(lib.keysForValue(TestEnum, 4)).toBeUndefined()
       })
     })
 
@@ -238,15 +259,15 @@ describe("object", () => {
     })
   })
 
-  describe("typeGuardValue", () => {
-    describe("for an enum", () => {
+  describe("typeGuardValues", () => {
+    describe("for a string enum", () => {
       enum TestEnum {
         A = "a",
         B = "b",
         C = "c",
         BB = "b",
       }
-      const guard = lib.typeGuardValue(TestEnum)
+      const guard = lib.typeGuardValues(TestEnum)
 
       it("returns true for a unique value", () => {
         expect(guard("a")).toBe(true)
@@ -261,9 +282,31 @@ describe("object", () => {
       })
     })
 
+    describe("for a numeric enum", () => {
+      enum TestEnum {
+        A = 1,
+        B = 2,
+        C = 5,
+        BB = 2,
+      }
+      const guard = lib.typeGuardValues(TestEnum)
+
+      it("returns true for a unique value", () => {
+        expect(guard(1)).toBe(true)
+      })
+
+      it("returns true for a non-unique value", () => {
+        expect(guard(2)).toBe(true)
+      })
+
+      it("returns false for a non value", () => {
+        expect(guard(4)).toBe(false)
+      })
+    })
+
     describe("for an record", () => {
       const record = lib.recordOf<string, number>({ a: 1, b: 2, bb: 2, c: 3 })
-      const guard = lib.typeGuardValue(record)
+      const guard = lib.typeGuardValues<Record<string, number>>(record)
 
       it("returns true for a unique value", () => {
         expect(guard(3)).toBe(true)
@@ -280,7 +323,8 @@ describe("object", () => {
 
     describe("for an object", () => {
       const obj = { a: 1, b: "B", bb: "B", c: "3" }
-      const guard = lib.typeGuardValue(obj)
+      type TestType = typeof obj
+      const guard = lib.typeGuardValues<TestType>(obj)
 
       it("returns true for a unique value", () => {
         expect(guard(1)).toBe(true)
@@ -296,7 +340,7 @@ describe("object", () => {
 
       describe("with a custom equality check", () => {
         const check = (a: unknown, b: unknown) => String(a) === String(b)
-        const guard = lib.typeGuardValue(obj, check)
+        const guard = lib.typeGuardValues(obj, check)
         it("returns true for values that match the check", () => {
           expect(guard(3)).toBe(true)
         })

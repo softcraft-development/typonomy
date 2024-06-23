@@ -1,7 +1,7 @@
-import { addMore, type Some } from "./arrays"
+import { addMore, reduceArray, type Some } from "./arrays"
 import { isEquality, onBreakExecution, type Combine, type Predicate, type Reducer } from "./func"
 import { isUndefined, type Optional } from "./nullish"
-import { typeGuard, type TypeGuard } from "./types"
+import { type TypeGuard } from "./types"
 
 /**
  * Checks if an object has no properties or elements.
@@ -50,16 +50,19 @@ export function isRecordOf<T>(
   * @param [checkEquality=isEquality<unknown>] - A function to compare object values to the target value.
  * @returns An optional array of keys that have the specified value.
  */
-export function keysForValue<T extends Record<string, unknown>>(
+export function keysForValue<T extends object>(
   obj: T,
   target: unknown,
   checkEquality: Combine<unknown, unknown, boolean> = isEquality<unknown>
 ): Optional<Some<keyof T>> {
-  return reduceRecord<Optional<Some<keyof T>>, unknown>(obj, (state, value, key) => {
+  return reduceArray(Object.entries(obj), (state, [k, value]) => {
     if (!checkEquality(value, target)) return state
+    // We know `k` is a key of `T` because it comes from `Object.entries(obj)`.
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    const key = k as keyof T
     if (isUndefined(state)) return key
     return addMore(state, key)
-  }, undefined)
+  }, objectOf<Optional<Some<keyof T>>>(undefined))
 }
 
 /**
@@ -140,7 +143,10 @@ export function typeGuardFor<T>(predicates: { [K in keyof T]: Predicate<unknown>
 }
 
 /**
- * Creates a type guard function that checks if a value is mapped to a key in the object, record, or enum.
+ * Creates a type guard function that checks if a value is mapped to a key in the object.
+ * Typically used for enum type guards, where the values are the primary constituents of the enum.
+ * Also works for other key-value maps like `object` and `Record`,
+ * though it makes less sense to base a type guard on mapped values for those types.
  *
  * @template T - The type to guard.
  * @param obj - The object with keys mapped to values.
@@ -148,12 +154,12 @@ export function typeGuardFor<T>(predicates: { [K in keyof T]: Predicate<unknown>
  * @returns - The type guard for the object,
  *  which returns `true` if the value is mapped to a key in `obj`, and `false` otherwise.
  */
-export function typeGuardValue<T extends Record<string, unknown>>(
-  obj: Record<string, unknown>,
+export function typeGuardValues<T extends object>(
+  obj: T,
   checkEquality: Combine<unknown, unknown, boolean> = isEquality<unknown>
-): TypeGuard<T> {
-  return typeGuard<T>((value) => {
+): TypeGuard<T[keyof T]> {
+  return (value: unknown): value is T[keyof T] => {
     const keys = keysForValue(obj, value, checkEquality)
     return !isUndefined(keys)
-  })
+  }
 }
