@@ -28,7 +28,7 @@ export type Explicit<T> = Exclude<T, Nullish>
 /**
  * A function that can transform from one type and its numeric index to another type.
  */
-export type IndexMapper<T, R> = Combine<Optional<T>, number, R>
+export type IndexedMapper<T, R> = Combine<Optional<T>, number, R>
 
 /**
  * A function that transforms one Transform function into another.
