@@ -263,5 +263,16 @@ describe("func", () => {
       const result = lib.reiterate(3, reducer, 101)
       expect(result).toEqual(101 + 1 + 2 + 3)
     })
+
+    describe("when the reducer breaks", () => {
+      it("does not continue to reduce", () => {
+        const reducer = (state: number, value: number) => {
+          if (state >= 102) throw lib.Break
+          return state + value
+        }
+        const result = lib.reiterate(97, reducer, 101)
+        expect(result).toEqual(101 + 1)
+      })
+    })
   })
 })
