@@ -121,7 +121,7 @@ export function forArray<T>(array: T[], callback: t.IndexedMapper<T, void>): voi
  * unless the callback throws `BreakException`,
  * in which case further execution halts.
  *
- * @type T - The type of value(s).
+ * @typeParam T - The type of value(s).
  * @param some - The `Some<T>` to apply.
  * @param callback - The callback function to apply. If `some` is singular, then the index will be `0`.
  */
@@ -180,7 +180,7 @@ export function isSingular<T>(value: t.Some<T>): value is T {
 
 /**
  * Checks if a value matches a type, an array of that type, or an empty array (potentially of that type).
- * @type T - The type to check.
+ * @typeParam T - The type to check.
  * @param value - The value to check.
  * @param typeGuard - A function to check individual values
  * @returns `true` the value is of the specified type, an array of that type, or an empty array; `false` otherwise.
@@ -226,8 +226,8 @@ export function mapReducer<T, R>(mapper: t.IndexedMapper<T, R>): t.Reducer<R[], 
  * If the value is plural, transform each element into a new `T[]`.
  * If the mapper breaks execution, return an empty array.
  *
- * @type T - The type to transform from.
- * @type R - The type to transform to.
+ * @typeParam T - The type to transform from.
+ * @typeParam R - The type to transform to.
  * @param some - The `Some<T>` to map.
  * @param mapper - The mapping function to apply. If `some` is singular, then the second parameter will be `0`.
  * @returns An `R` for a single `T`,

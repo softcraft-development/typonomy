@@ -172,7 +172,7 @@ export function narrow<T, X>(base: TypeGuard<T | X>, excluded: TypeGuard<X>): Ty
 
 /**
  * Convert a `Predicate<unknown>` into a type guard for a type.
- * @type T - The type of the resulting TypeGuard.
+ * @typeParam T - The type of the resulting TypeGuard.
  * @param predicate - The `Predicate<unknown>` used to check the type.
  * @returns A `TypeGuard<T>` that checks if an `unknown` value is of type `T`.
  */
