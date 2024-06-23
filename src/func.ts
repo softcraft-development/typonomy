@@ -269,6 +269,18 @@ export function isBreakExecution(value: unknown): value is BreakExecution {
 }
 
 /**
+ * Checks if two values are equal via the `===` operator.
+ *
+ * @template T - The type of the values being compared.
+ * @param a - The first value.
+ * @param b - The second value.
+ * @returns `true` if the values are equal, `false` otherwise.
+ */
+export function isEquality<T>(a: T, b: T): boolean {
+  return a === b
+}
+
+/**
  * Negates a `Predicate`.
  *
  * @param predicate - The Predicate to negate.

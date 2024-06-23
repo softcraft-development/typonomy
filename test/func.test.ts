@@ -131,6 +131,44 @@ describe("func", () => {
     })
   })
 
+  describe("isEquality", () => {
+    it("returns true if the values are equal", () => {
+      expect(lib.isEquality(42, 42)).toBe(true)
+    })
+
+    it("returns true if the values are the same string", () => {
+      expect(lib.isEquality("42", "42")).toBe(true)
+    })
+
+    it("returns true if both values are undefined", () => {
+      expect(lib.isEquality(undefined, undefined)).toBe(true)
+    })
+
+    it("returns true if both values are null", () => {
+      expect(lib.isEquality(null, null)).toBe(true)
+    })
+
+    it("returns true if both values are Infinity", () => {
+      expect(lib.isEquality(Infinity, Infinity)).toBe(true)
+    })
+
+    it("returns false if both values are NaN", () => {
+      expect(lib.isEquality(NaN, NaN)).toBe(false)
+    })
+
+    it("returns false if the values are symbols", () => {
+      expect(lib.isEquality(Symbol("test"), Symbol("test"))).toBe(false)
+    })
+
+    it("returns false if the values are different objects", () => {
+      expect(lib.isEquality({ key: "test" }, { key: "test" })).toBe(false)
+    })
+
+    it("returns false if the values are not equal", () => {
+      expect(lib.isEquality<unknown>(42, "42")).toBe(false)
+    })
+  })
+
   describe("not", () => {
     it("returns the negation of the input Predicate", () => {
       const negatedGuard = lib.not(isString)
