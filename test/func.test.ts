@@ -275,4 +275,11 @@ describe("func", () => {
       })
     })
   })
+
+  describe("thunk", () => {
+    it("returns the value", () => {
+      const value = { key: "Test" }
+      expect(lib.thunk(value)()).toBe(value)
+    })
+  })
 })

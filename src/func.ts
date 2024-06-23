@@ -407,3 +407,13 @@ export function reiterate<S>(count: number, reducer: Reducer<S, number, number>,
   }
   return state
 }
+
+/**
+ * Creates a `Thunk`= that returns the provided value.
+ * @template T - The type of the value.
+ * @param value - The value to be returned by the `Thunk`.
+ * @returns A function that returns the provided value.
+ */
+export function thunk<T>(value: T): Thunk<T> {
+  return () => value
+}
