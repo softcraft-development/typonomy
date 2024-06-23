@@ -16,7 +16,11 @@ If the mapper breaks execution, return an empty array.
 
 • **T**
 
+The type to transform from.
+
 • **R**
+
+The type to transform to.
 
 ## Parameters
 
@@ -38,4 +42,4 @@ An `R` for a single `T`,
 
 ## Source
 
-[arrays.ts:237](https://github.com/softcraft-development/typonomy/blob/a62fc03e32b184f07c3799ae239136e6b1077839/src/arrays.ts#L237)
+[arrays.ts:237](https://github.com/softcraft-development/typonomy/blob/f77f6002b19dd65199e89540af6d271db08bf123/src/arrays.ts#L237)
