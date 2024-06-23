@@ -1,4 +1,6 @@
+import { addMore, type Some } from "./arrays"
 import { onBreakExecution, type Predicate, type Reducer } from "./func"
+import { isUndefined, type Optional } from "./nullish"
 import type { TypeGuard } from "./types"
 
 /**
@@ -38,6 +40,14 @@ export function isRecordOf<T>(
   const values = Object.values(obj)
   if (values.length === 0) return emptyMatches
   return values.every(guard)
+}
+
+export function keysForValue<T extends Record<string, V>, V>(obj: T, target: V): Optional<Some<keyof T>> {
+  return reduceRecord<Optional<Some<keyof T>>, V>(obj, (state, value, key) => {
+    if (value !== target) return state
+    if (isUndefined(state)) return key
+    return addMore(state, key)
+  }, undefined)
 }
 
 /**

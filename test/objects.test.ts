@@ -143,6 +143,45 @@ describe("object", () => {
     })
   })
 
+  describe("keysForValue", () => {
+    describe("for an enum", () => {
+      enum TestEnum {
+        A = "a",
+        B = "b",
+        C = "c",
+        BB = "b",
+      }
+
+      it("returns the key for a unique value", () => {
+        expect(lib.keysForValue(TestEnum, "a")).toBe("A")
+      })
+
+      it("returns an array of keys for a non-unique value", () => {
+        expect(lib.keysForValue(TestEnum, "b")).toEqual(["B", "BB"])
+      })
+
+      it("returns undefined if an unmapped value", () => {
+        expect(lib.keysForValue(TestEnum, "x")).toBeUndefined()
+      })
+    })
+
+    describe("for a record", () => {
+      const record = lib.recordOf<string, number>({ a: 1, b: 2, bb: 2, c: 3 })
+
+      it("returns the key for a unique value", () => {
+        expect(lib.keysForValue(record, 3)).toBe("c")
+      })
+
+      it("returns an array of keys for a non-unique value", () => {
+        expect(lib.keysForValue(record, 2)).toEqual(["b", "bb"])
+      })
+
+      it("returns undefined if an unmapped value", () => {
+        expect(lib.keysForValue(record, -1)).toBeUndefined()
+      })
+    })
+  })
+
   describe("objectOf", () => {
     it("returns the object", () => {
       interface Test {
