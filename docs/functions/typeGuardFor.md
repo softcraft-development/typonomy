@@ -30,4 +30,4 @@ A TypeGuard that checks if an object is of type T.
 
 ## Source
 
-[objects.ts:95](https://github.com/softcraft-development/typonomy/blob/37d2aadc75ec0bb1bcd45938f3aae7730dc0182e/src/objects.ts#L95)
+[objects.ts:107](https://github.com/softcraft-development/typonomy/blob/ed30302645156be7a3415a48b3f38706435f25d3/src/objects.ts#L107)

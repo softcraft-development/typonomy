@@ -28,4 +28,4 @@ A `Predicate` that returns true if all input `Predicate` are true.
 
 ## Source
 
-[func.ts:129](https://github.com/softcraft-development/typonomy/blob/37d2aadc75ec0bb1bcd45938f3aae7730dc0182e/src/func.ts#L129)
+[func.ts:129](https://github.com/softcraft-development/typonomy/blob/ed30302645156be7a3415a48b3f38706435f25d3/src/func.ts#L129)
