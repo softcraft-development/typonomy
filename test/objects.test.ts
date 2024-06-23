@@ -180,6 +180,29 @@ describe("object", () => {
         expect(lib.keysForValue(record, -1)).toBeUndefined()
       })
     })
+
+    describe("for an object", () => {
+      const obj = { a: 1, b: "B", bb: "B", c: "1" }
+
+      it("returns the key for a unique value", () => {
+        expect(lib.keysForValue(obj, 1)).toBe("a")
+      })
+
+      it("returns an array of keys for a non-unique value", () => {
+        expect(lib.keysForValue(obj, "B")).toEqual(["b", "bb"])
+      })
+
+      it("returns undefined if an unmapped value", () => {
+        expect(lib.keysForValue(obj, false)).toBeUndefined()
+      })
+
+      describe("with a custom equality check", () => {
+        it("returns keys for values that match the check", () => {
+          const check = (a: unknown, b: unknown) => String(a) === String(b)
+          expect(lib.keysForValue(obj, 1, check)).toEqual(["a", "c"])
+        })
+      })
+    })
   })
 
   describe("objectOf", () => {

@@ -1,5 +1,5 @@
 import { addMore, type Some } from "./arrays"
-import { onBreakExecution, type Predicate, type Reducer } from "./func"
+import { isEquality, onBreakExecution, type Combine, type Predicate, type Reducer } from "./func"
 import { isUndefined, type Optional } from "./nullish"
 import type { TypeGuard } from "./types"
 
@@ -42,9 +42,21 @@ export function isRecordOf<T>(
   return values.every(guard)
 }
 
-export function keysForValue<T extends Record<string, V>, V>(obj: T, target: V): Optional<Some<keyof T>> {
-  return reduceRecord<Optional<Some<keyof T>>, V>(obj, (state, value, key) => {
-    if (value !== target) return state
+/**
+ * Returns all keys (if any) that are mapped to the target value.
+ * @template V - The type of the values in the record.
+ * @param obj - The record or enum to search.
+ * @param target - The value to search for.
+  * @param [checkEquality=isEquality<unknown>] - A function to compare object values to the target value.
+ * @returns An optional array of keys that have the specified value.
+ */
+export function keysForValue<T extends Record<string, unknown>>(
+  obj: T,
+  target: unknown,
+  checkEquality: Combine<unknown, unknown, boolean> = isEquality<unknown>
+): Optional<Some<keyof T>> {
+  return reduceRecord<Optional<Some<keyof T>>, unknown>(obj, (state, value, key) => {
+    if (!checkEquality(value, target)) return state
     if (isUndefined(state)) return key
     return addMore(state, key)
   }, undefined)
