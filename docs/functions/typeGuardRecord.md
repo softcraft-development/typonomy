@@ -42,4 +42,4 @@ The return value if the object is empty. Defaults to `true`.
 
 ## Source
 
-[objects.ts:128](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/objects.ts#L128)
+[objects.ts:128](https://github.com/softcraft-development/typonomy/blob/a62fc03e32b184f07c3799ae239136e6b1077839/src/objects.ts#L128)

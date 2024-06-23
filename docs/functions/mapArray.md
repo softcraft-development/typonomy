@@ -28,7 +28,7 @@ The type of the elements in the output array.
 
 The input array.
 
-• **mapper**: [`IndexMapper`](../type-aliases/IndexMapper.md)\<`T`, `R`\>
+• **mapper**: [`IndexedMapper`](../type-aliases/IndexedMapper.md)\<`T`, `R`\>
 
 The `Mapper` to transform one element type to the other.
 
@@ -40,4 +40,4 @@ The mapped array.
 
 ## Source
 
-[arrays.ts:205](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/arrays.ts#L205)
+[arrays.ts:205](https://github.com/softcraft-development/typonomy/blob/a62fc03e32b184f07c3799ae239136e6b1077839/src/arrays.ts#L205)

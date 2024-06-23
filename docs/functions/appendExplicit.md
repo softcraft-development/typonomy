@@ -18,7 +18,7 @@ The type of elements in the array.
 
 ## Parameters
 
-• **array**: [`Explicit`](../type-aliases/Explicit.md)\<`T`\>[]
+• **array**: `Exclude`\<`T`, [`Nullish`](../type-aliases/Nullish.md)\>[]
 
 The array to append the value to.
 
@@ -34,4 +34,4 @@ The value to append to the array if it is not `null` or `undefined`.
 
 ## Source
 
-[arrays.ts:44](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/arrays.ts#L44)
+[arrays.ts:44](https://github.com/softcraft-development/typonomy/blob/a62fc03e32b184f07c3799ae239136e6b1077839/src/arrays.ts#L44)

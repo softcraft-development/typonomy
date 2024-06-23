@@ -22,7 +22,7 @@ The type of the output elements.
 
 ## Parameters
 
-• **mapper**: [`IndexMapper`](../type-aliases/IndexMapper.md)\<`T`, `R`\>
+• **mapper**: [`IndexedMapper`](../type-aliases/IndexedMapper.md)\<`T`, `R`\>
 
 A function that maps the input element (and possibly the element's index) to the output element.
 
@@ -34,4 +34,4 @@ A `Reducer` that transforms inputs to outputs and appends them to an array.
 
 ## Source
 
-[arrays.ts:217](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/arrays.ts#L217)
+[arrays.ts:217](https://github.com/softcraft-development/typonomy/blob/a62fc03e32b184f07c3799ae239136e6b1077839/src/arrays.ts#L217)

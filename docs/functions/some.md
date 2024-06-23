@@ -2,11 +2,11 @@
 
 ***
 
-[Typonomy](../globals.md) / any
+[Typonomy](../globals.md) / some
 
-# Function: any()
+# Function: some()
 
-> **any**\<`T`\>(...`predicates`): [`Predicate`](../type-aliases/Predicate.md)\<`T`\>
+> **some**\<`T`\>(...`predicates`): [`Predicate`](../type-aliases/Predicate.md)\<`T`\>
 
 Create a Predicate that returns true if any input `Predicate` is true.
 
@@ -28,4 +28,4 @@ A `Predicate` that returns true if any input `Predicate` are true.
 
 ## Source
 
-[logic.ts:30](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/logic.ts#L30)
+[logic.ts:51](https://github.com/softcraft-development/typonomy/blob/a62fc03e32b184f07c3799ae239136e6b1077839/src/logic.ts#L51)

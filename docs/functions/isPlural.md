@@ -29,4 +29,4 @@ Returns true if the value is an `Array<T>`, false if it is a single `T`.
 
 ## Source
 
-[arrays.ts:167](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/arrays.ts#L167)
+[arrays.ts:167](https://github.com/softcraft-development/typonomy/blob/a62fc03e32b184f07c3799ae239136e6b1077839/src/arrays.ts#L167)

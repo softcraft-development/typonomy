@@ -43,4 +43,4 @@ A `Transform` function function for the right parameter of the `Combine`.
 
 ## Source
 
-[fp.ts:136](https://github.com/softcraft-development/typonomy/blob/862c1ddee53805e60a02ad4f6ec1cd71d6a929be/src/fp.ts#L136)
+[fp.ts:136](https://github.com/softcraft-development/typonomy/blob/a62fc03e32b184f07c3799ae239136e6b1077839/src/fp.ts#L136)
