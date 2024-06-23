@@ -32,4 +32,4 @@ The the first array element if it's the only one,
 
 ## Source
 
-[arrays.ts:299](https://github.com/softcraft-development/typonomy/blob/e1364998248d4274156807a851bf36cc6159b829/src/arrays.ts#L299)
+[arrays.ts:306](https://github.com/softcraft-development/typonomy/blob/cac11b20828d50b550eeacd6b4954a5f2aa411b3/src/arrays.ts#L306)

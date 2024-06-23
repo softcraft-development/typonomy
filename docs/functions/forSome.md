@@ -32,4 +32,4 @@ The callback function to apply. If `some` is singular, then the index will be `0
 
 ## Source
 
-[arrays.ts:112](https://github.com/softcraft-development/typonomy/blob/e1364998248d4274156807a851bf36cc6159b829/src/arrays.ts#L112)
+[arrays.ts:119](https://github.com/softcraft-development/typonomy/blob/cac11b20828d50b550eeacd6b4954a5f2aa411b3/src/arrays.ts#L119)

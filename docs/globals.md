@@ -36,6 +36,7 @@
 
 ## Functions
 
+- [addMore](functions/addMore.md)
 - [all](functions/all.md)
 - [and](functions/and.md)
 - [any](functions/any.md)
@@ -72,6 +73,7 @@
 - [isString](functions/isString.md)
 - [isSymbol](functions/isSymbol.md)
 - [isUndefined](functions/isUndefined.md)
+- [keysForValue](functions/keysForValue.md)
 - [mapArray](functions/mapArray.md)
 - [mapReducer](functions/mapReducer.md)
 - [mapSome](functions/mapSome.md)

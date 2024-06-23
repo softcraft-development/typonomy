@@ -30,4 +30,4 @@ A type guard for `Some<T>`.
 
 ## Source
 
-[arrays.ts:285](https://github.com/softcraft-development/typonomy/blob/e1364998248d4274156807a851bf36cc6159b829/src/arrays.ts#L285)
+[arrays.ts:292](https://github.com/softcraft-development/typonomy/blob/cac11b20828d50b550eeacd6b4954a5f2aa411b3/src/arrays.ts#L292)

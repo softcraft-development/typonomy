@@ -37,4 +37,4 @@ The value to return when the array is empty, and the type cannot be defined by t
 
 ## Source
 
-[arrays.ts:128](https://github.com/softcraft-development/typonomy/blob/e1364998248d4274156807a851bf36cc6159b829/src/arrays.ts#L128)
+[arrays.ts:135](https://github.com/softcraft-development/typonomy/blob/cac11b20828d50b550eeacd6b4954a5f2aa411b3/src/arrays.ts#L135)

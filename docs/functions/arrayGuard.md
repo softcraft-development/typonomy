@@ -34,4 +34,4 @@ Specifies whether an empty array qualifies as an array of the given type.
 
 ## Source
 
-[arrays.ts:59](https://github.com/softcraft-development/typonomy/blob/e1364998248d4274156807a851bf36cc6159b829/src/arrays.ts#L59)
+[arrays.ts:66](https://github.com/softcraft-development/typonomy/blob/cac11b20828d50b550eeacd6b4954a5f2aa411b3/src/arrays.ts#L66)
