@@ -29,7 +29,7 @@ Creates a new instance of the BreakExecution class.
 
 #### Source
 
-[func.ts:105](https://github.com/softcraft-development/typonomy/blob/cac11b20828d50b550eeacd6b4954a5f2aa411b3/src/func.ts#L105)
+[func.ts:105](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/func.ts#L105)
 
 ## Properties
 
@@ -39,7 +39,7 @@ Creates a new instance of the BreakExecution class.
 
 #### Source
 
-[func.ts:100](https://github.com/softcraft-development/typonomy/blob/cac11b20828d50b550eeacd6b4954a5f2aa411b3/src/func.ts#L100)
+[func.ts:100](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/func.ts#L100)
 
 ## Methods
 
@@ -57,4 +57,4 @@ The `message` used to construct the `BreakExecution`.
 
 #### Source
 
-[func.ts:113](https://github.com/softcraft-development/typonomy/blob/cac11b20828d50b550eeacd6b4954a5f2aa411b3/src/func.ts#L113)
+[func.ts:113](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/func.ts#L113)

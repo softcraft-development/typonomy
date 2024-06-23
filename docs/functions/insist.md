@@ -35,4 +35,4 @@ If the value is null or undefined.
 
 ## Source
 
-[nullish.ts:53](https://github.com/softcraft-development/typonomy/blob/cac11b20828d50b550eeacd6b4954a5f2aa411b3/src/nullish.ts#L53)
+[nullish.ts:53](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/nullish.ts#L53)

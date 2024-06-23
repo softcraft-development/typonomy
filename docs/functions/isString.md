@@ -24,4 +24,4 @@ The object to be checked.
 
 ## Source
 
-[strings.ts:9](https://github.com/softcraft-development/typonomy/blob/cac11b20828d50b550eeacd6b4954a5f2aa411b3/src/strings.ts#L9)
+[strings.ts:9](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/strings.ts#L9)

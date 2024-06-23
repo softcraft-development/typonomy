@@ -23,4 +23,4 @@ The type of elements in the collection.
 
 ## Source
 
-[func.ts:24](https://github.com/softcraft-development/typonomy/blob/cac11b20828d50b550eeacd6b4954a5f2aa411b3/src/func.ts#L24)
+[func.ts:24](https://github.com/softcraft-development/typonomy/blob/b0e16bd041f316a076ebba1edb1d4cf521b110ee/src/func.ts#L24)
