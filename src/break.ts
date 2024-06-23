@@ -46,7 +46,7 @@ export function isBreakExecution(value: unknown): value is BreakExecution {
  * Return a value if the exception is a `BreakExecution`, or (re)throw it otherwise.
  * The typical use case is to call this from a `catch(exception)` block where `BreakExecution` is expected.
  *
- * @template R - The type of the return value.
+ * @typeParam R - The type of the return value.
  * @param exception - Any object, which is expected to
  * @param returnValue - The value to return if the exception is a `BreakExecution`.
  * @returns The `returnValue` if the exception is a `BreakExecution`; otherwise `exception` is thrown.

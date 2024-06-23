@@ -4,7 +4,7 @@ import type { Explicit, Nullish, Possible, Predicate, TypeGuard } from "./types"
 /**
  * Ensures that the given value is neither `null` nor `undefined`.
  * Throws an error if the value is `null` or `undefined`.
- * @template T - The type when it is not `null` or `undefined`.
+ * @typeParam T - The type when it is not `null` or `undefined`.
  * @param value - The value to be checked.
  * @returns The non-null non-undefined value.
  * @throws If the value is null or undefined.
@@ -28,7 +28,7 @@ export function isBoolean(value: unknown): value is boolean {
 /**
  * Checks if two values are equal via the `===` operator.
  *
- * @template T - The type of the values being compared.
+ * @typeParam T - The type of the values being compared.
  * @param a - The first value.
  * @param b - The second value.
  * @returns `true` if the values are equal, `false` otherwise.
@@ -49,7 +49,7 @@ export function isEmptyObject(value: unknown): value is {} {
 
 /**
  * Checks if a value is not `Nullish`.
- * @template T - The type when it is not `null` or `undefined`.
+ * @typeParam T - The type when it is not `null` or `undefined`.
  * @param value - The value to check.
  * @returns `false` if the value is `null` or `undefined`; `true` otherwise.
  */
@@ -161,8 +161,8 @@ export function isUnknown(value: unknown): value is unknown {
 
 /**
  * Create a `TypeGuard` that excludes values of another type.
- * @template T - The base type of the resulting `TypeGuard`.
- * @template X - The type to exclude.
+ * @typeParam T - The base type of the resulting `TypeGuard`.
+ * @typeParam X - The type to exclude.
  * @param base - A `TypeGuard` that allows either the base type or excluded type.
  * @returns A narrower `TypeGuard` that only allows the base type.
  */
@@ -182,8 +182,8 @@ export function typeGuard<T>(predicate: Predicate<unknown>): TypeGuard<T> {
 
 /**
  * Create a `TypeGuard` that includes values of another type.
- * @template T - The type of the base `TypeGuard`.
- * @template I - The type to include.
+ * @typeParam T - The type of the base `TypeGuard`.
+ * @typeParam I - The type to include.
  * @param base - A `TypeGuard` that allows the base type.
  * @returns A wider `TypeGuard` that allows the base type or the included type.
  */

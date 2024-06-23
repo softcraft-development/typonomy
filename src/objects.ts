@@ -10,8 +10,8 @@ export function isKeyOf<T extends object>(value: unknown, example: T): value is 
 
 /**
  * Checks if the value is a Record of specific types.
- * @template K - The type of the keys in the record.
- * @template V - The type of the values in the record.
+ * @typeParam K - The type of the keys in the record.
+ * @typeParam V - The type of the values in the record.
  * @param value - The value to check.
  * @param keyGuard - A TypeGuard that checks the type of the object's keys.
  * @param valueGuard - A TypeGuard that checks the type of the object's values.
@@ -38,7 +38,7 @@ export function isRecordOf<K extends PropertyKey, V>(
 
 /**
  * Returns all keys (if any) that are mapped to the target value.
- * @template V - The type of the values in the record.
+ * @typeParam V - The type of the values in the record.
  * @param obj - The record or enum to search.
  * @param target - The value to search for.
   * @param [checkEquality=isEquality<unknown>] - A function to compare object values to the target value.
@@ -65,9 +65,9 @@ export function keysForValue<T extends object>(
  * Stops execution if the reducer throws a `BreakExecution`.
  * Note that the order of the keys & values is not guaranteed.
  *
- * @template S - The type of the state.
- * @template T - The type of object to reduce.
- * @template V - The type of the values in the object. Defaults to `unknown`.
+ * @typeParam S - The type of the state.
+ * @typeParam T - The type of object to reduce.
+ * @typeParam V - The type of the values in the object. Defaults to `unknown`.
  * @param obj - The object to be reduced.
  * @param reducer - The reducer function.
  * @param initialState - The initial state.
@@ -94,7 +94,7 @@ export function reduceObject<S, T extends Record<keyof T, V>, V = unknown>(
  * Declares an object to be of a specific type.
  * Useful for type inference when the object is a literal.
  *
- * @template T - The type of the object.
+ * @typeParam T - The type of the object.
  * @param obj - The object to return
  * @returns The input object
  */
@@ -105,8 +105,8 @@ export function objectOf<T>(obj: T): T {
 /**
  * Creates a `Record` of a specified key and value type.
  *
- * @template K - The type of the keys in the object.
- * @template V - The type of the values in the object.
+ * @typeParam K - The type of the keys in the object.
+ * @typeParam V - The type of the values in the object.
  * @param [data={} as Record<K, V>] - An object to use as the record. Defaults to an empty object.
  * @returns An empty `object`.
  */
@@ -118,8 +118,8 @@ export function recordOf<K extends PropertyKey, V>(data: Record<K, V> = {} as Re
 /**
  * Creates type guard for Records with specific types of keys and values.
  *
- * @template K - The type of the keys in the record. Must be a `PropertyKey`.
- * @template V - The type of the values in the record.
+ * @typeParam K - The type of the keys in the record. Must be a `PropertyKey`.
+ * @typeParam V - The type of the values in the record.
  * @param keyGuard - A TypeGuard that checks the type of the object's keys.
  * @param valueGuard - A TypeGuard that checks the type of the object's values.
  * @param emptyMatches - The return value if the object is empty. Defaults to `true`.
@@ -136,7 +136,7 @@ export function typeGuardRecord<K extends PropertyKey, V>(
 /**
  * Creates a Predicate that validates the properties of an object.
  *
- * @template T - The Type to check against.
+ * @typeParam T - The Type to check against.
  * @param predicates - An object with a Predicate for properties in T.
  * @returns A TypeGuard that checks if an object is of type T.
  */
@@ -168,7 +168,7 @@ export function typeGuardKeys<T extends object>(example: T): TypeGuard<keyof T> 
  * Also works for other key-value maps like `object` and `Record`,
  * though it makes less sense to base a type guard on mapped values for those types.
  *
- * @template T - The type to guard.
+ * @typeParam T - The type to guard.
  * @param obj - The object with keys mapped to values.
  * @param [checkEquality=isEquality<unknown>] - A function to compare object values to the target value.
  * @returns - The type guard for the object,
