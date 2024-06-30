@@ -34,4 +34,4 @@ The second value.
 
 ## Source
 
-[typeGuards.ts:36](https://github.com/softcraft-development/typonomy/blob/fe50b8023c82b88ddae1a279519fbfc3eededb46/src/typeGuards.ts#L36)
+[typeGuards.ts:36](https://github.com/softcraft-development/typonomy/blob/5469316e6ff7a55df7069c91f81292468fab4b62/src/typeGuards.ts#L36)

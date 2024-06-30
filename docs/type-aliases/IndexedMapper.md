@@ -18,4 +18,4 @@ A function that can transform from one type and its numeric index to another typ
 
 ## Source
 
-[types.ts:31](https://github.com/softcraft-development/typonomy/blob/fe50b8023c82b88ddae1a279519fbfc3eededb46/src/types.ts#L31)
+[types.ts:46](https://github.com/softcraft-development/typonomy/blob/5469316e6ff7a55df7069c91f81292468fab4b62/src/types.ts#L46)

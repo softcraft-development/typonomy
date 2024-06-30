@@ -42,4 +42,4 @@ An `R` for a single `T`,
 
 ## Source
 
-[arrays.ts:237](https://github.com/softcraft-development/typonomy/blob/fe50b8023c82b88ddae1a279519fbfc3eededb46/src/arrays.ts#L237)
+[arrays.ts:256](https://github.com/softcraft-development/typonomy/blob/5469316e6ff7a55df7069c91f81292468fab4b62/src/arrays.ts#L256)

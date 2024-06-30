@@ -31,4 +31,4 @@ The input object
 
 ## Source
 
-[objects.ts:101](https://github.com/softcraft-development/typonomy/blob/fe50b8023c82b88ddae1a279519fbfc3eededb46/src/objects.ts#L101)
+[objects.ts:101](https://github.com/softcraft-development/typonomy/blob/5469316e6ff7a55df7069c91f81292468fab4b62/src/objects.ts#L101)

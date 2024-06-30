@@ -8,7 +8,7 @@
 
 > **isSingular**\<`T`\>(`value`): `value is T`
 
-Checks if the given `Some<T>` is a single `T`
+Checks if the given `Bag<T>` is a single `T`.
 
 ## Type parameters
 
@@ -16,16 +16,16 @@ Checks if the given `Some<T>` is a single `T`
 
 ## Parameters
 
-• **value**: [`Some`](../type-aliases/Some.md)\<`T`\>
+• **value**: [`Bag`](../type-aliases/Bag.md)\<`T`\>
 
-The `Some<T>` to check.
+The `Bag<T>` to check.
 
 ## Returns
 
 `value is T`
 
-Returns true if the value is a single `T`, false if it is an `Array<T>`.
+`true` if the value is a single `T`, `false` if it is an `Array<T>` or `undefined`.
 
 ## Source
 
-[arrays.ts:177](https://github.com/softcraft-development/typonomy/blob/fe50b8023c82b88ddae1a279519fbfc3eededb46/src/arrays.ts#L177)
+[arrays.ts:196](https://github.com/softcraft-development/typonomy/blob/5469316e6ff7a55df7069c91f81292468fab4b62/src/arrays.ts#L196)

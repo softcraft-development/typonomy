@@ -11,6 +11,7 @@
 ## Type Aliases
 
 - [Action](type-aliases/Action.md)
+- [Bag](type-aliases/Bag.md)
 - [Combine](type-aliases/Combine.md)
 - [Entry](type-aliases/Entry.md)
 - [Explicit](type-aliases/Explicit.md)
@@ -44,6 +45,7 @@
 - [appendSome](functions/appendSome.md)
 - [arrayGuard](functions/arrayGuard.md)
 - [arrayOf](functions/arrayOf.md)
+- [bag](functions/bag.md)
 - [compose](functions/compose.md)
 - [composeDown](functions/composeDown.md)
 - [composeLeft](functions/composeLeft.md)

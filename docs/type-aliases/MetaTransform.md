@@ -39,4 +39,4 @@ The Transform function that you have.
 
 ## Source
 
-[types.ts:46](https://github.com/softcraft-development/typonomy/blob/fe50b8023c82b88ddae1a279519fbfc3eededb46/src/types.ts#L46)
+[types.ts:61](https://github.com/softcraft-development/typonomy/blob/5469316e6ff7a55df7069c91f81292468fab4b62/src/types.ts#L61)
