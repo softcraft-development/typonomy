@@ -47,4 +47,4 @@ The return value if the object is empty. Defaults to `true`.
 
 ## Source
 
-[objects.ts:22](https://github.com/softcraft-development/typonomy/blob/f77f6002b19dd65199e89540af6d271db08bf123/src/objects.ts#L22)
+[objects.ts:22](https://github.com/softcraft-development/typonomy/blob/fe50b8023c82b88ddae1a279519fbfc3eededb46/src/objects.ts#L22)

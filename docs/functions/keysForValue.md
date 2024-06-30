@@ -37,4 +37,4 @@ An optional array of keys that have the specified value.
 
 ## Source
 
-[objects.ts:47](https://github.com/softcraft-development/typonomy/blob/f77f6002b19dd65199e89540af6d271db08bf123/src/objects.ts#L47)
+[objects.ts:47](https://github.com/softcraft-development/typonomy/blob/fe50b8023c82b88ddae1a279519fbfc3eededb46/src/objects.ts#L47)

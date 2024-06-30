@@ -30,4 +30,4 @@ A function that returns the provided value.
 
 ## Source
 
-[fp.ts:161](https://github.com/softcraft-development/typonomy/blob/f77f6002b19dd65199e89540af6d271db08bf123/src/fp.ts#L161)
+[fp.ts:207](https://github.com/softcraft-development/typonomy/blob/fe50b8023c82b88ddae1a279519fbfc3eededb46/src/fp.ts#L207)
