@@ -65,7 +65,7 @@
     "lint:fix": "eslint --fix src/**/*.ts test/**/*.test.ts",
     "lint": "eslint src/**/*.ts test/**/*.test.ts",
     "test:coverage": "vitest run --coverage",
-    "test:dev": "vitest",
+    "test:dev": "vitest  --coverage",
     "test": "vitest run",
     "validate": "pnpm run check && pnpm run lint && pnpm run test"
   },
