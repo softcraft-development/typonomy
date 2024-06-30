@@ -17,11 +17,11 @@ describe("arrays", () => {
     })
   })
 
-  describe("addToBag", () => {
+  describe("bag", () => {
     interface TestType { key: string }
     let bag: Bag<TestType>
     let element: Optional<TestType>
-    let result = () => lib.addToBag(bag, element)
+    let result = () => lib.bag(bag, element)
 
     describe("when the bag is undefined", () => {
       beforeEach(() => {

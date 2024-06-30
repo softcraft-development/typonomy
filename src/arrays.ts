@@ -21,24 +21,6 @@ export function addMore<T>(some: t.Some<T>, more: T): T[] {
 }
 
 /**
- * Adds a defined element to a `Bag<T>`.
- * Ignore the element if it is `undefined`.
- *
- * @template T - The type of elements (if any) in the bag.
- * @param bag - The `Bag<T>` to add the element to.
- * @param element - The element to add to the bag, or `undefined` if there is no element to add.
- * @returns An `Array<T>` containing all elements from both `bag` and `element` if both are not `undefined`,
- *   or the `bag` if `element` is `undefined`,
- *   or `element` if `bag` is `undefined`,
- *   or `undefined` if both `bag` and `element` are `undefined`.
- */
-export function addToBag<T>(bag: t.Bag<T>, element: t.Optional<T>): t.Bag<T> {
-  if (isUndefined(bag)) return element
-  if (isUndefined(element)) return bag
-  return addMore(bag, element)
-}
-
-/**
  * A Reducer that appends its value to an array. Mutates the original array.
  *
  * @typeParam T - The type of elements in the array.
@@ -103,6 +85,24 @@ export function arrayGuard<T>(predicate: t.Predicate<T>, emptyMatches = true): t
  */
 export function arrayOf<T>(size = 0): T[] {
   return new Array<T>(size)
+}
+
+/**
+ * Adds a defined element to a `Bag<T>`.
+ * Ignore the element if it is `undefined`.
+ *
+ * @template T - The type of elements (if any) in the bag.
+ * @param bag - The `Bag<T>` to add the element to.
+ * @param element - The element to add to the bag, or `undefined` if there is no element to add.
+ * @returns An `Array<T>` containing all elements from both `bag` and `element` if both are not `undefined`,
+ *   or the `bag` if `element` is `undefined`,
+ *   or `element` if `bag` is `undefined`,
+ *   or `undefined` if both `bag` and `element` are `undefined`.
+ */
+export function bag<T>(bag: t.Bag<T>, element: t.Optional<T>): t.Bag<T> {
+  if (isUndefined(bag)) return element
+  if (isUndefined(element)) return bag
+  return addMore(bag, element)
 }
 
 /**
