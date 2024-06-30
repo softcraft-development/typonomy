@@ -2,17 +2,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest"
 import * as lib from "../src/arrays"
 import { Break } from "../src/break"
 import { isNumber, isString } from "../src/typeGuards"
-import type { Explicit, Optional, Some, TypeGuard } from "../src/types"
+import type { Bag, Optional, Some, TypeGuard } from "../src/types"
 
 describe("arrays", () => {
-  describe("Explicit<T>", () => {
-    it("is assignable to T", () => {
-      const explicitType: Explicit<number> = 42
-      const generalType: number = explicitType
-      expect(generalType).toBe(explicitType)
-    })
-  })
-
   describe("addMore", () => {
     it("creates an array for two single values", () => {
       const result = lib.addMore(1, 2)
@@ -22,6 +14,86 @@ describe("arrays", () => {
     it("appends a value to an array", () => {
       const result = lib.addMore([1, 2], 3)
       expect(result).toEqual([1, 2, 3])
+    })
+  })
+
+  describe("addToBag", () => {
+    interface TestType { key: string }
+    let bag: Bag<TestType>
+    let element: Optional<TestType>
+    let result = () => lib.addToBag(bag, element)
+
+    describe("when the bag is undefined", () => {
+      beforeEach(() => {
+        bag = undefined
+      })
+
+      describe("and the element is undefined", () => {
+        beforeEach(() => {
+          element = undefined
+        })
+        it("returns undefined", () => {
+          expect(result()).toBeUndefined()
+        })
+      })
+
+      describe("and the element is defined", () => {
+        beforeEach(() => {
+          element = { key: "Element" }
+        })
+        it("returns the element", () => {
+          expect(result()).toBe(element)
+        })
+      })
+    })
+
+    describe("when the bag is singular", () => {
+      beforeEach(() => {
+        bag = { key: "Bag" }
+      })
+
+      describe("and the element is undefined", () => {
+        beforeEach(() => {
+          element = undefined
+        })
+        it("returns the bag", () => {
+          expect(result()).toBe(bag)
+        })
+      })
+
+      describe("and the element is defined", () => {
+        beforeEach(() => {
+          element = { key: "Element" }
+        })
+        it("returns the a new array with both elements", () => {
+          expect(result()).toEqual([bag, element])
+        })
+      })
+    })
+
+    describe("when the bag is plural", () => {
+      beforeEach(() => {
+        bag = [{ key: "First" }, { key: "Second" }]
+      })
+
+      describe("and the element is undefined", () => {
+        beforeEach(() => {
+          element = undefined
+        })
+        it("returns the bag", () => {
+          expect(result()).toBe(bag)
+        })
+      })
+
+      describe("and the element is defined", () => {
+        beforeEach(() => {
+          element = { key: "Element" }
+        })
+        it("appends the new elements", () => {
+          expect(result()).toBe(bag)
+          expect(bag).toContain(element)
+        })
+      })
     })
   })
 
@@ -253,22 +325,46 @@ describe("arrays", () => {
   })
 
   describe("isPlural", () => {
-    it("returns true if the value is an array", () => {
+    it("returns true for an array with elements", () => {
       expect(lib.isPlural([1, 2, 3])).toBe(true)
     })
 
-    it("returns false if the value is not an array", () => {
+    it("returns true for an empty array", () => {
+      expect(lib.isPlural([])).toBe(true)
+    })
+
+    it("returns true for a single element array", () => {
+      expect(lib.isPlural([42])).toBe(true)
+    })
+
+    it("returns false if the value is a single element", () => {
       expect(lib.isPlural(42)).toBe(false)
+    })
+
+    it("returns false for undefined", () => {
+      expect(lib.isPlural(undefined)).toBe(false)
     })
   })
 
   describe("isSingular", () => {
-    it("returns false if the value is an array", () => {
+    it("returns false for an array with elements", () => {
       expect(lib.isSingular([1, 2, 3])).toBe(false)
     })
 
-    it("returns true if the value is not an array", () => {
+    it("returns false for an empty array", () => {
+      expect(lib.isSingular([])).toBe(false)
+    })
+
+    it("returns false for a single element array", () => {
+      expect(lib.isSingular([42])).toBe(false)
+    })
+
+    it("returns true if the value is a single element", () => {
       expect(lib.isSingular(42)).toBe(true)
+    })
+
+    it("returns false for undefined", () => {
+      expect(lib.isSingular(undefined)).toBe(false)
     })
   })
 

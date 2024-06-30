@@ -7,6 +7,15 @@
 export type Action<T> = (value: T) => void
 
 /**
+ * Zero, one, or more values of type `T`.
+ * Zero values are represented as `undefined`.
+ * One value is represented as `T`.
+ * More than one value is represented as `Array<T>`.
+ * @template T The type of value.
+ */
+export type Bag<T> = Optional<Some<T>>
+
+/**
  * A function that combines two values to produce a new value.
  * @typeParam A The type of the first input.
  * @typeParam B The type of the second input.
@@ -17,6 +26,12 @@ export type Action<T> = (value: T) => void
  */
 export type Combine<A, B, R> = (a: A, b: B) => R
 
+/**
+ * A key:value pair from an object `T`
+ *
+ * @template T - The type of the object with keys.
+ * @template V - The type of the value for the keys.
+ */
 export type Entry<T extends object, V = unknown> = [keyof T, V]
 
 /**

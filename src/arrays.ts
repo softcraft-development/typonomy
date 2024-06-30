@@ -21,6 +21,24 @@ export function addMore<T>(some: t.Some<T>, more: T): T[] {
 }
 
 /**
+ * Adds a defined element to a `Bag<T>`.
+ * Ignore the element if it is `undefined`.
+ *
+ * @template T - The type of elements (if any) in the bag.
+ * @param bag - The `Bag<T>` to add the element to.
+ * @param element - The element to add to the bag, or `undefined` if there is no element to add.
+ * @returns An `Array<T>` containing all elements from both `bag` and `element` if both are not `undefined`,
+ *   or the `bag` if `element` is `undefined`,
+ *   or `element` if `bag` is `undefined`,
+ *   or `undefined` if both `bag` and `element` are `undefined`.
+ */
+export function addToBag<T>(bag: t.Bag<T>, element: t.Optional<T>): t.Bag<T> {
+  if (isUndefined(bag)) return element
+  if (isUndefined(element)) return bag
+  return addMore(bag, element)
+}
+
+/**
  * A Reducer that appends its value to an array. Mutates the original array.
  *
  * @typeParam T - The type of elements in the array.
@@ -158,24 +176,25 @@ export function isEmptyArray(value: unknown): value is [] {
 }
 
 /**
- * Checks if the given `Some<T>` is an array of `T`.
+ * Checks if the given `Bag<T>` is an array of `T`.
  * Note that an empty array, or an array of one element, is still considered plural.
  *
- * @param value The `Some<T>` to check.
- * @returns Returns true if the value is an `Array<T>`, false if it is a single `T`.
+ * @param value The `Bag<T>` to check.
+ * @returns `true` if the value is an `Array<T>`, `false` if it is a single `T` or `undefined`.
  */
-export function isPlural<T>(value: t.Some<T>): value is T[] {
+export function isPlural<T>(value: t.Bag<T>): value is T[] {
+  // Undefined is not an array so we don't need to check it explicitly here.
   return Array.isArray(value)
 }
 
 /**
- * Checks if the given `Some<T>` is a single `T`
+ * Checks if the given `Bag<T>` is a single `T`.
  *
- * @param value The `Some<T>` to check.
- * @returns Returns true if the value is a single `T`, false if it is an `Array<T>`.
+ * @param value The `Bag<T>` to check.
+ * @returns `true` if the value is a single `T`, `false` if it is an `Array<T>` or `undefined`.
  */
-export function isSingular<T>(value: t.Some<T>): value is T {
-  return !isPlural(value)
+export function isSingular<T>(value: t.Bag<T>): value is T {
+  return !isPlural(value) && !isUndefined(value)
 }
 
 /**
