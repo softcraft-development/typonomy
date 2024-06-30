@@ -17,86 +17,6 @@ describe("arrays", () => {
     })
   })
 
-  describe("bag", () => {
-    interface TestType { key: string }
-    let bag: Bag<TestType>
-    let element: Optional<TestType>
-    let result = () => lib.bag(bag, element)
-
-    describe("when the bag is undefined", () => {
-      beforeEach(() => {
-        bag = undefined
-      })
-
-      describe("and the element is undefined", () => {
-        beforeEach(() => {
-          element = undefined
-        })
-        it("returns undefined", () => {
-          expect(result()).toBeUndefined()
-        })
-      })
-
-      describe("and the element is defined", () => {
-        beforeEach(() => {
-          element = { key: "Element" }
-        })
-        it("returns the element", () => {
-          expect(result()).toBe(element)
-        })
-      })
-    })
-
-    describe("when the bag is singular", () => {
-      beforeEach(() => {
-        bag = { key: "Bag" }
-      })
-
-      describe("and the element is undefined", () => {
-        beforeEach(() => {
-          element = undefined
-        })
-        it("returns the bag", () => {
-          expect(result()).toBe(bag)
-        })
-      })
-
-      describe("and the element is defined", () => {
-        beforeEach(() => {
-          element = { key: "Element" }
-        })
-        it("returns the a new array with both elements", () => {
-          expect(result()).toEqual([bag, element])
-        })
-      })
-    })
-
-    describe("when the bag is plural", () => {
-      beforeEach(() => {
-        bag = [{ key: "First" }, { key: "Second" }]
-      })
-
-      describe("and the element is undefined", () => {
-        beforeEach(() => {
-          element = undefined
-        })
-        it("returns the bag", () => {
-          expect(result()).toBe(bag)
-        })
-      })
-
-      describe("and the element is defined", () => {
-        beforeEach(() => {
-          element = { key: "Element" }
-        })
-        it("appends the new elements", () => {
-          expect(result()).toBe(bag)
-          expect(bag).toContain(element)
-        })
-      })
-    })
-  })
-
   describe("append", () => {
     it("should append the value to the array", () => {
       const array = [1, 1, 2, 3]
@@ -187,6 +107,86 @@ describe("arrays", () => {
     it("returns an empty array if no size is specified", () => {
       const result = lib.arrayOf()
       expect(result.length).toBe(0)
+    })
+  })
+
+  describe("bag", () => {
+    interface TestType { key: string }
+    let bag: Bag<TestType>
+    let element: Optional<TestType>
+    let result = () => lib.bag(bag, element)
+
+    describe("when the bag is undefined", () => {
+      beforeEach(() => {
+        bag = undefined
+      })
+
+      describe("and the element is undefined", () => {
+        beforeEach(() => {
+          element = undefined
+        })
+        it("returns undefined", () => {
+          expect(result()).toBeUndefined()
+        })
+      })
+
+      describe("and the element is defined", () => {
+        beforeEach(() => {
+          element = { key: "Element" }
+        })
+        it("returns the element", () => {
+          expect(result()).toBe(element)
+        })
+      })
+    })
+
+    describe("when the bag is singular", () => {
+      beforeEach(() => {
+        bag = { key: "Bag" }
+      })
+
+      describe("and the element is undefined", () => {
+        beforeEach(() => {
+          element = undefined
+        })
+        it("returns the bag", () => {
+          expect(result()).toBe(bag)
+        })
+      })
+
+      describe("and the element is defined", () => {
+        beforeEach(() => {
+          element = { key: "Element" }
+        })
+        it("returns the a new array with both elements", () => {
+          expect(result()).toEqual([bag, element])
+        })
+      })
+    })
+
+    describe("when the bag is plural", () => {
+      beforeEach(() => {
+        bag = [{ key: "First" }, { key: "Second" }]
+      })
+
+      describe("and the element is undefined", () => {
+        beforeEach(() => {
+          element = undefined
+        })
+        it("returns the bag", () => {
+          expect(result()).toBe(bag)
+        })
+      })
+
+      describe("and the element is defined", () => {
+        beforeEach(() => {
+          element = { key: "Element" }
+        })
+        it("appends the new elements", () => {
+          expect(result()).toBe(bag)
+          expect(bag).toContain(element)
+        })
+      })
     })
   })
 
