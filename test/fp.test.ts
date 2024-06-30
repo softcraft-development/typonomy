@@ -1,7 +1,8 @@
-import { describe, expect, it } from "vitest"
+import { beforeEach, describe, expect, it, vi } from "vitest"
 import * as lib from "../src/fp"
 import { valueToString } from "../src/strings"
-import { isEquality, isString } from "../src/typeGuards"
+import { isEquality, isNumber, isString } from "../src/typeGuards"
+import type { Transform, TypeGuard } from "../src/types"
 
 describe("fp", () => {
   describe("compose", () => {
@@ -124,6 +125,12 @@ describe("fp", () => {
     })
   })
 
+  describe("noOp", () => {
+    it("does nothing", () => {
+      expect(lib.noOp("anything")).toBeUndefined()
+    })
+  })
+
   describe("partial", () => {
     it("partially applies a value to the parameter of a Transform", () => {
       const thunk = lib.partial(valueToString, 23)
@@ -144,6 +151,45 @@ describe("fp", () => {
       const divide = (a: number, b: number) => a / b
       const half = lib.partialRight(divide, 2)
       expect(half(6)).toBe(3)
+    })
+  })
+
+  describe("passThrough", () => {
+    it("returns the value", () => {
+      const value = { key: "Test" }
+      expect(lib.passThrough(value)).toBe(value)
+    })
+  })
+
+  describe("transformIf", () => {
+    describe("for two transforms", () => {
+      let guard: TypeGuard<number>
+      let convert: Transform<number, string>
+      let fallback: Transform<unknown, string>
+      let transform: Transform<unknown, string>
+
+      beforeEach(() => {
+        guard = isNumber
+        convert = vi.fn((value: number) => (value * 2).toString())
+        fallback = vi.fn(lib.thunk("Fallback"))
+        transform = lib.transformIf<number, unknown, string>(guard, convert, fallback)
+      })
+
+      describe("when passed a matching value", () => {
+        it("uses the matching transform", () => {
+          expect(transform(3)).toBe("6")
+          expect(convert).toHaveBeenCalledWith(3)
+          expect(fallback).not.toHaveBeenCalled()
+        })
+      })
+
+      describe("when passed a non-matching value", () => {
+        it("uses the non-matching transform", () => {
+          expect(transform("Not-matching")).toBe("Fallback")
+          expect(convert).not.toHaveBeenCalled()
+          expect(fallback).toHaveBeenCalledWith("Not-matching")
+        })
+      })
     })
   })
 

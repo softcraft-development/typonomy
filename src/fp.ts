@@ -1,4 +1,4 @@
-import type { Combine, Reducer, Thunk, Transform } from "./types"
+import type { Action, Combine, Reducer, Thunk, Transform, TypeGuard } from "./types"
 
 /**
  * Composes a new transform from two existing transforms via an intermediate type.
@@ -109,6 +109,11 @@ export function composeRight<A, B, I, R>(
 }
 
 /**
+ * Ignore all parameters.
+ */
+export const noOp: Action<unknown> = () => { }
+
+/**
  * Partially apply a value to a `Transform`.
  * Reduces the order of the function from 1 to 0.
  *
@@ -150,6 +155,47 @@ export function partialLeft<A, B, R>(combine: Combine<A, B, R>, value: A): Trans
  */
 export function partialRight<A, B, R>(combine: Combine<A, B, R>, value: B): Transform<A, R> {
   return (a: A) => combine(a, value)
+}
+
+/**
+ * Return the input.
+ *
+ * @template T - The type of value.
+ * @param value - The input value.
+ * @returns The same input value.
+ */
+export function passThrough<T>(value: T): T {
+  return value
+}
+
+/**
+ * If a `value` of type `X` matches the type guard for `T`, then transform it using `Transform<T,R>`.
+ * Otherwise, transform it using the `fallback` `Transform<X,R>`.
+ *
+ * Note that `Transform` functions do not necessarily need to consider their input values,
+ * i.e.: they can be `Thunk<R>`.
+ * This is useful for returning default values, especially for the `fallback` transform.
+ *
+ * If `R` is `void`, then the transforms can be callbacks, ie: `Action<T>` and `Action<X>`.
+ *
+ * @template T - The type to be checked by the type guard.
+ * @template R - The type of the transformed value.
+ * @template X - The type of the input value.
+ *
+ * @param typeGuard - The `TypeGuard<T> used to check the value.
+ * @param transform - The transform to apply to the value if the type guard returns `true`.
+ * @param fallback - The transform to  apply to the value if the type guard returns `false`.
+ *
+ * @returns {Transform<X, R>} - The transformed value or the default value.
+ */
+export function transformIf<T, X, R>(
+  typeGuard: TypeGuard<T>,
+  transform: Transform<T, R>,
+  fallback: Transform<X, R>): Transform<T | X, R> {
+  return (value: T | X): R => {
+    if (typeGuard(value)) return transform(value)
+    return fallback(value)
+  }
 }
 
 /**
