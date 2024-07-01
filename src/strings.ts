@@ -3,7 +3,8 @@ import type { Possible, Reducer } from "./types"
 
 /**
  * Concatenates two strings
- * Note that this can be used as `Reducer<string, string, unknown>` since the `key` is irrelevant.
+ * Note that this is compatible with `Reducer<string, Optional<string>, unknown>` since the `key` is irrelevant.
+ * This is particularly useful for passing to `reduceSome`.
  *
  * @param a - The first string.
  * @param b - The second string.
