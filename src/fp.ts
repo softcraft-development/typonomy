@@ -160,7 +160,7 @@ export function partialRight<A, B, R>(combine: Combine<A, B, R>, value: B): Tran
 /**
  * Return the input.
  *
- * @template T - The type of value.
+ * @typeParam T - The type of value.
  * @param value - The input value.
  * @returns The same input value.
  */
@@ -178,9 +178,9 @@ export function passThrough<T>(value: T): T {
  *
  * If `R` is `void`, then the transforms can be callbacks, ie: `Action<T>` and `Action<X>`.
  *
- * @template T - The type to be checked by the type guard.
- * @template R - The type of the transformed value.
- * @template X - The type of the input value.
+ * @typeParam T - The type to be checked by the type guard.
+ * @typeParam R - The type of the transformed value.
+ * @typeParam X - The type of the input value.
  *
  * @param typeGuard - The `TypeGuard<T> used to check the value.
  * @param transform - The transform to apply to the value if the type guard returns `true`.

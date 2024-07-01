@@ -91,7 +91,7 @@ export function arrayOf<T>(size = 0): T[] {
  * Adds a defined element to a `Bag<T>`.
  * Ignore the element if it is `undefined`.
  *
- * @template T - The type of elements (if any) in the bag.
+ * @typeParam T - The type of elements (if any) in the bag.
  * @param bag - The `Bag<T>` to add the element to.
  * @param element - The element to add to the bag, or `undefined` if there is no element to add.
  * @returns An `Array<T>` containing all elements from both `bag` and `element` if both are not `undefined`,
