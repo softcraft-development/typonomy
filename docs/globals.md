@@ -51,6 +51,7 @@
 - [composeLeft](functions/composeLeft.md)
 - [composeReducer](functions/composeReducer.md)
 - [composeRight](functions/composeRight.md)
+- [concat](functions/concat.md)
 - [fill](functions/fill.md)
 - [forArray](functions/forArray.md)
 - [forSome](functions/forSome.md)

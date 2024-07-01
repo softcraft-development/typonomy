@@ -8,22 +8,34 @@
 
 > **reduceCharacters**\<`S`\>(`str`, `reducer`, `initialState`): `S`
 
+Reduce each character in a string.
+
 ## Type parameters
 
 • **S**
+
+The type of the accumulated state.
 
 ## Parameters
 
 • **str**: `string`
 
+The input string.
+
 • **reducer**: [`Reducer`](../type-aliases/Reducer.md)\<`S`, `string`, `number`\>
 
+The reducer function to apply to each character.
+
 • **initialState**: `S`
+
+The initial state value.
 
 ## Returns
 
 `S`
 
+- The reduced state.
+
 ## Source
 
-[strings.ts:4](https://github.com/softcraft-development/typonomy/blob/5469316e6ff7a55df7069c91f81292468fab4b62/src/strings.ts#L4)
+[strings.ts:27](https://github.com/softcraft-development/typonomy/blob/1b8341dc287f5d4629e29cda9ae815b4e8592c92/src/strings.ts#L27)
