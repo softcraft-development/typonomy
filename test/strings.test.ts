@@ -1,7 +1,34 @@
 import { describe, expect, it } from "vitest"
+import { reduceSome } from "../src/arrays"
 import * as lib from "../src/strings"
 
 describe("strings", () => {
+  describe("concat", () => {
+    it("should concatenate two strings", () => {
+      const result = lib.concat("Hello", "World")
+      expect(result).toBe("HelloWorld")
+    })
+
+    it("should return the first string if the second string is empty", () => {
+      const result = lib.concat("Hello", "")
+      expect(result).toBe("Hello")
+    })
+
+    it("should return the first string if the second string is null", () => {
+      const result = lib.concat("Hello", null)
+      expect(result).toBe("Hello")
+    })
+
+    it("should return the first string if the second string is undefined", () => {
+      const result = lib.concat("Hello", undefined)
+      expect(result).toBe("Hello")
+    })
+
+    it("can be used as a reducer", () => {
+      expect(reduceSome(["a", "b", null, "c", "d"], lib.concat, "Start:")).toBe("Start:abcd")
+    })
+  })
+
   describe("reduceCharacters", () => {
     it("reduce the characters in the string", () => {
       const reducer = (state: string, value: string, index: number) => `${state} ${index}:${value}`
