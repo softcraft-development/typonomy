@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import * as lib from "../src/arrays"
 import { Break } from "../src/break"
-import { isNumber, isString } from "../src/typeGuards"
-import type { Bag, Optional, Some, TypeGuard } from "../src/types"
+import { isNumber, isString, isUndefined } from "../src/typeGuards"
+import type { Action, Bag, Optional, Reducer, Some, TypeGuard } from "../src/types"
 
 describe("arrays", () => {
   describe("addMore", () => {
@@ -254,6 +254,13 @@ describe("arrays", () => {
         })
       })
     })
+
+    it("can call back an empty bag with the right mapper", () => {
+      const emptyBag: Bag<number> = undefined
+      const callback: Action<Optional<number>> = vi.fn()
+      lib.forSome(emptyBag, callback)
+      expect(callback).toBeCalledWith(undefined, 0)
+    })
   })
 
   describe("isArrayOf", () => {
@@ -391,8 +398,20 @@ describe("arrays", () => {
     })
   })
 
+  describe("mapOptional", () => {
+    const mapper = lib.mapOptional((value: string, index: number) => Number.parseInt(value) + index)
+
+    it("maps a value", () => {
+      expect(mapper("13", 5)).toEqual(18)
+    })
+
+    it("maps undefined", () => {
+      expect(mapper(undefined, 5)).toBeUndefined()
+    })
+  })
+
   describe("mapReducer", () => {
-    it("creates an array Reducer for a Mapper", () => {
+    it("creates an array Reducer for a mapper", () => {
       const mapper = (value: Optional<number>, index: number) => ((value || 0) + index).toString()
       const reducer = lib.mapReducer(mapper)
       expect(reducer(["initial"], 42, -1)).toEqual(["initial", "41"])
@@ -438,6 +457,18 @@ describe("arrays", () => {
           })).toEqual(["0:3", "1:5"])
         })
       })
+    })
+
+    it("can map an empty bag with the right mapper", () => {
+      const emptyBag: Bag<number> = undefined
+      const mapper = (value: Optional<number>) => {
+        if (isUndefined(value)) {
+          return "Empty Bag"
+        }
+        return value.toString()
+      }
+      const result = lib.mapSome(emptyBag, mapper)
+      expect(result).toEqual(["Empty Bag"])
     })
   })
 
@@ -517,6 +548,18 @@ describe("arrays", () => {
           expect(result).toBe(5 + 7 + 17)
         })
       })
+    })
+
+    it("can reduce an empty bag with the right reducer", () => {
+      const emptyBag: Bag<string> = undefined
+      const reducer: Reducer<string, Optional<string>, number> = (_, value) => {
+        if (isUndefined(value)) {
+          return "Empty Bag"
+        }
+        return value
+      }
+      const result = lib.reduceSome(emptyBag, reducer, "Initial")
+      expect(result).toBe("Empty Bag")
     })
   })
 

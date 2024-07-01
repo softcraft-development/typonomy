@@ -41,9 +41,12 @@ export type Entry<T extends object, V = unknown> = [keyof T, V]
 export type Explicit<T> = Exclude<T, Nullish>
 
 /**
- * A function that can transform from one type and its numeric index to another type.
+ * A function that transforms from one type (and its numeric index) to another.
+ * Note that `Transform<T,R>` are `Mapper<T,R>` that ignore the indexes.
+ * @typeParam T - The input type.
+ * @typeParam T - The input type.
  */
-export type IndexedMapper<T, R> = Combine<Optional<T>, number, R>
+export type Mapper<T, R> = Combine<T, number, R>
 
 /**
  * A function that transforms one Transform function into another.

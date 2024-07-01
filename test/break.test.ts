@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest"
 import * as lib from "../src/break"
 
 describe("break", () => {
-  describe("BreakException", () => {
+  describe("BreakExecution", () => {
     describe("toString", () => {
       it("returns the message", () => {
         expect(new lib.BreakExecution("Test Message").toString()).toEqual("Test Message")
