@@ -1,10 +1,39 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
+import { mapArray } from "../src/arrays"
 import * as lib from "../src/fp"
 import { valueToString } from "../src/strings"
 import { isEquality, isNumber, isString } from "../src/typeGuards"
 import type { Transform, TypeGuard } from "../src/types"
 
 describe("fp", () => {
+  describe("Tuples", () => {
+    const tuple: [number, string, boolean, null] = [1, "word", true, null]
+
+    it("can be used as a regular array", () => {
+      expect(mapArray(tuple, valueToString)).toEqual(["1", "word", "true", "null"])
+    })
+
+    it("can dereference individual elements", () => {
+      expect(tuple[1]).toBe("word")
+    })
+
+    it("cannot dereference higher order elements", () => {
+      // TypeScript does not let us use `tuple[4]`
+      expect(tuple.at(4)).toBeUndefined()
+    })
+
+    it("cannot reduce to a lower order", () => {
+      // TypeScript does not let us do this:
+      //   const couple: [number, string] = tuple
+      // ...unless we force it through `unknown:
+      const guess: unknown = tuple
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      const couple: [number, string] = guess as [number, string]
+      // But this doesn't change the object
+      expect(couple).toBe(tuple)
+    })
+  })
+
   describe("compose", () => {
     it("creates a transform from the input to result type", () => {
       const toIntermediate = (value: string) => value.length
