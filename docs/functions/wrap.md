@@ -33,4 +33,4 @@ A the value if it's already an array, or a new array that contains the value if 
 
 ## Source
 
-[arrays.ts:383](https://github.com/softcraft-development/typonomy/blob/1b8341dc287f5d4629e29cda9ae815b4e8592c92/src/arrays.ts#L383)
+[arrays.ts:383](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/arrays.ts#L383)

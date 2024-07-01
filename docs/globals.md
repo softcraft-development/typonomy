@@ -95,6 +95,7 @@
 - [recordOf](functions/recordOf.md)
 - [reduceArray](functions/reduceArray.md)
 - [reduceCharacters](functions/reduceCharacters.md)
+- [reduceIf](functions/reduceIf.md)
 - [reduceObject](functions/reduceObject.md)
 - [reduceSome](functions/reduceSome.md)
 - [reiterate](functions/reiterate.md)
