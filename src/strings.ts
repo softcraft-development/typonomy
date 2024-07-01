@@ -15,6 +15,15 @@ export function concat(a: string, b: Possible<string>): string {
   return `${a}${b}`
 }
 
+/**
+ * Reduce each character in a string.
+ *
+ * @typeParam S - The type of the accumulated state.
+ * @param str - The input string.
+ * @param reducer - The reducer function to apply to each character.
+ * @param initialState - The initial state value.
+ * @returns - The reduced state.
+ */
 export function reduceCharacters<S>(str: string, reducer: Reducer<S, string, number>, initialState: S): S {
   return reduceArray<S, string>(str, (state, character, index) => {
     // Strings can never contain undefined characters;
