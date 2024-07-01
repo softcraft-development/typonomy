@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import { mapArray } from "../src/arrays"
 import * as lib from "../src/fp"
-import { valueToString } from "../src/strings"
+import { concat, valueToString } from "../src/strings"
 import { isEquality, isNumber, isString } from "../src/typeGuards"
 import type { Transform, TypeGuard } from "../src/types"
 
@@ -187,6 +187,21 @@ describe("fp", () => {
     it("returns the value", () => {
       const value = { key: "Test" }
       expect(lib.passThrough(value)).toBe(value)
+    })
+  })
+
+  describe("reduceIf", () => {
+    const reducer = lib.reduceIf<string, string, number, unknown>(
+      isString,
+      concat,
+    )
+
+    it("reduces a matching value", () => {
+      expect(reducer("State", "Value", undefined)).toBe("StateValue")
+    })
+
+    it("ignores a non-matching value", () => {
+      expect(reducer("State", 1, undefined)).toBe("State")
     })
   })
 

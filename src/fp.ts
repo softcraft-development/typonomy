@@ -169,6 +169,29 @@ export function passThrough<T>(value: T): T {
 }
 
 /**
+ * Reduce a `value` if it matches the type guard for `V`.
+ * Otherwise, ignore it and return the current state.
+ *
+ * @typeParam S - The type of the state.
+ * @typeParam V - The type of value to reduce.
+ * @typeParam X - The type of value to ignore.
+ * @typeParam L - The type of the key.
+ * @param typeGuard - The `TypeGuard<V>` to check if the value should be reduced.
+ * @param reducer - The `Reducer<S,V,K>` to reduce matching values.
+ * @param initialState - The initial state.
+ * @returns The final state.
+ */
+export function reduceIf<S, V, X, K>(
+  typeGuard: TypeGuard<V>,
+  reducer: Reducer<S, V, K>,
+): Reducer<S, V | X, K> {
+  return (state, value, key) => {
+    if (typeGuard(value)) return reducer(state, value, key)
+    return state
+  }
+}
+
+/**
  * If a `value` of type `X` matches the type guard for `T`, then transform it using `Transform<T,R>`.
  * Otherwise, transform it using the `fallback` `Transform<X,R>`.
  *
@@ -186,7 +209,7 @@ export function passThrough<T>(value: T): T {
  * @param transform - The transform to apply to the value if the type guard returns `true`.
  * @param fallback - The transform to  apply to the value if the type guard returns `false`.
  *
- * @returns {Transform<X, R>} - The transformed value or the default value.
+ * @returns - The transformed value or the default value.
  */
 export function transformIf<T, X, R>(
   typeGuard: TypeGuard<T>,
