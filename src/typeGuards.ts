@@ -1,5 +1,5 @@
 import { and, not, or, some } from "./logic"
-import type { Explicit, Nullish, Possible, Predicate, TypeGuard } from "./types"
+import type { Bag, Defined, Explicit, Nullish, Possible, Predicate, Some, TypeGuard } from "./types"
 
 /**
  * Ensures that the given value is neither `null` nor `undefined`.
@@ -16,6 +16,36 @@ export function insist<T>(value: Possible<T>): T {
 }
 
 /**
+ * Checks if a value is an array of a specific type.
+ *
+ * @param value - The value to check.
+ * @param predicate - The Predicate to check each item in the array.
+ * @param emptyMatches - The value to return when the array is empty, and the type cannot be defined by the value.
+ *  Defaults to `true`.
+ * @returns `true` if the value is an array of the specified type, `false` otherwise.
+ */
+export function isArrayOf<T>(value: unknown, predicate: Predicate<T>, emptyMatches = true): value is T[] {
+  if (!Array.isArray(value)) return false
+  if (value.length === 0) return emptyMatches
+  return value.every(predicate)
+}
+
+/**
+ * Checks a value is a `Bag` of values that could match a specific type.
+ * @typeParam T - The type to check.
+ * @param value - The value to check.
+ * @param typeGuard - A function to check individual values
+ * @returns `true` the value is of the specified type,
+ *  `undefined`, an array of that type or `undefined`, or an empty array; `false` otherwise.
+ */
+export function isBag<T>(value: unknown, typeGuard: TypeGuard<T>): value is Bag<T> {
+  if (isUndefined(value)) return true
+  if (isArrayOf(value, or(isUndefined, typeGuard), true)) return true
+  if (typeGuard(value)) return true
+  return false
+}
+
+/**
  * Checks if a value is a `true` or `false`.
  *
  * @param value - The value to check.
@@ -23,6 +53,16 @@ export function insist<T>(value: Possible<T>): T {
  */
 export function isBoolean(value: unknown): value is boolean {
   return value === true || value === false
+}
+
+/**
+ * Checks if the given value is an empty array.
+ *
+ * @param value - The value to check.
+ * @returns `true` if the value is an empty array, `false` otherwise.
+ */
+export function isEmptyArray(value: unknown): value is [] {
+  return Array.isArray(value) && value.length === 0
 }
 
 /**
@@ -111,12 +151,50 @@ export function isObject(value: unknown): value is object {
 }
 
 /**
+ * Checks if the given `Bag<T>` is an array of `T`.
+ * Note that an empty array, or an array of one element, or an array of `undefined`
+ * are all still considered plural.
+ *
+ * @param value The `Bag<T>` to check.
+ * @returns `true` if the value is an `Array<T>`, `false` if it is a single `T` or `undefined`.
+ */
+export function isPlural<T>(value: Bag<T>): value is T[] {
+  // Undefined is not an array so we don't need to check it explicitly here.
+  return Array.isArray(value)
+}
+
+/**
  * Checks if a value is a PropertyKey (i.e.: a `string`, `number`, or `Symbol`).
  * @param value - The value to check.
  * @returns `true` if the value is a `string`, `number`, or `Symbol`, `false` otherwise.
  */
 export function isPropertyKey(value: unknown): value is PropertyKey {
   return some(isString, isNumber, isSymbol)(value)
+}
+
+/**
+ * Checks if the given `Bag<T>` is a single `T`.
+ *
+ * @param value The `Bag<T>` to check.
+ * @returns `true` if the value is a single `T`, `false` if it is an `Array<T>` or `undefined`.
+ */
+export function isSingular<T>(value: Bag<T>): value is Defined<T> {
+  if (isPlural(value)) return false
+  if (isUndefined(value)) return false
+  return true
+}
+
+/**
+ * Checks if a value matches a type or a non-empty array of that type.
+ * @typeParam T - The type to check.
+ * @param value - The value to check.
+ * @param typeGuard - A function to check individual values.
+ * @returns `true` the value is of the specified type or a non-empty array of that type; `false` otherwise.
+ */
+export function isSome<T>(value: unknown, typeGuard: TypeGuard<T>): value is Some<T> {
+  if (isArrayOf(value, typeGuard, false)) return true
+  if (typeGuard(value)) return true
+  return false
 }
 
 /**

@@ -11,9 +11,10 @@ export type Action<T> = (value: T) => void
  * Zero values are represented as `undefined`.
  * One value is represented as `T`.
  * More than one value is represented as `Array<T>`.
+ * Note that, if `T` itself includes `undefined`, then `Bag<T>` could be `Array<T | undefined>`.
  * @typeParam T The type of value.
  */
-export type Bag<T> = Optional<Some<T>>
+export type Bag<T> = undefined | T | T[]
 
 /**
  * A function that combines two values to produce a new value.
@@ -25,6 +26,12 @@ export type Bag<T> = Optional<Some<T>>
  * @returns The result of combining the two values.
  */
 export type Combine<A, B, R> = (a: A, b: B) => R
+
+/**
+ * A utility type for values that are never `undefined` (but potentially `null`).
+ * @typeParam T - The type, which is not `undefined`.
+ */
+export type Defined<T> = Exclude<T, undefined>
 
 /**
  * A key:value pair from an object `T`
@@ -76,12 +83,6 @@ export type Nullable<T> = T | null
 export type NotNull<T> = Exclude<T, null>
 
 /**
- * A utility type for values that are never `undefined` (but potentially `null`).
- * @typeParam T - The type, which is not `undefined`.
- */
-export type NotUndefined<T> = Exclude<T, undefined>
-
-/**
  * Either null or undefined.
  */
 export type Nullish = null | undefined
@@ -122,10 +123,11 @@ export type Reducer<S, V, K> = (state: S, value: V, key: K) => S
 
 /**
  * Represents a type that can be either a single value of type T or an array of type T.
+ * Note that T may never be `undefined`.
  *
  * @typeParam T - The type of value.
  */
-export type Some<T> = T | T[]
+export type Some<T> = Defined<T> | Defined<T>[]
 
 /**
  * A function that returns a value based on no direct input.

@@ -1,7 +1,7 @@
-import { addMore, reduceArray } from "./arrays"
+import { bag } from "./bags"
 import { Break, onBreakExecution } from "./break"
 import { isEmptyObject, isEquality, isObject, isPropertyKey, isUndefined, typeGuard } from "./typeGuards"
-import type { Combine, Optional, Predicate, Reducer, Some, TypeGuard } from "./types"
+import type { Bag, Combine, Optional, Predicate, Reducer, TypeGuard } from "./types"
 
 export function isKeyOf<T extends object>(value: unknown, example: T): value is keyof T {
   if (!isPropertyKey(value)) return false
@@ -41,23 +41,18 @@ export function isRecordOf<K extends PropertyKey, V>(
  * @typeParam V - The type of the values in the record.
  * @param obj - The record or enum to search.
  * @param target - The value to search for.
-  * @param [checkEquality=isEquality<unknown>] - A function to compare object values to the target value.
+* @param [checkEquality=isEquality<unknown>] - A function to compare object values to the target value.
  * @returns An optional array of keys that have the specified value.
  */
 export function keysForValue<T extends object>(
   obj: T,
   target: unknown,
   checkEquality: Combine<unknown, unknown, boolean> = isEquality<unknown>
-): Optional<Some<keyof T>> {
-  return reduceArray(Object.entries(obj), (state, entry) => {
-    // We know `entry` is a key-value pair because it comes from `Object.entries(obj)`,
-    // so we can both safely
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    const [key, value] = entry as [keyof T, unknown]
+): Bag<keyof T> {
+  return reduceObject<Bag<keyof T>, T>(obj, (state, value, key) => {
     if (!checkEquality(value, target)) return state
-    if (isUndefined(state)) return key
-    return addMore(state, key)
-  }, objectOf<Optional<Some<keyof T>>>(undefined))
+    return bag(state, key)
+  }, undefined)
 }
 
 /**

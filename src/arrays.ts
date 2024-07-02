@@ -1,24 +1,7 @@
 import { onBreakExecution } from "./break"
-import { composeReducer, ignoreUndefined, partialRight } from "./fp"
-import { isExplicit, isUndefined, typeGuard } from "./typeGuards"
+import { composeReducer } from "./fp"
+import { isExplicit, isPlural, isUndefined } from "./typeGuards"
 import * as ty from "./types"
-
-/**
- * Adds an element to a `Some`, resulting in an `Array` of elements.
- * If the `Some` is already an array, the element is appended to the array.
- * Otherwise, create a new array with the singular `Some` and the new element.
- *
- * @typeParam T - The type of the elements.
- * @param some - The array or element to add to.
- * @param more - The element to add.
- * @returns An array with the additional element.
- */
-export function addMore<T>(some: ty.Some<T>, more: T): T[] {
-  if (isPlural(some)) {
-    return appendSome(some, more)
-  }
-  return [some, more]
-}
 
 /**
  * A Reducer that appends its value to an array. Mutates the original array.
@@ -49,34 +32,6 @@ export function appendExplicit<T>(array: ty.Explicit<T>[], value: ty.Possible<T>
 }
 
 /**
- * Appends a value, or all elements of an array of values, to an array.
- *
- * @typeParam T - The type of elements in the array.
- * @param array - The array to append values to.
- * @param value - The value or array of values to append.
- * @returns The updated array with the appended value(s).
- */
-export function appendSome<T>(array: T[], value: ty.Some<T>): T[] {
-  if (Array.isArray(value)) {
-    value.forEach(item => append(array, item))
-    return array
-  }
-  return append(array, value)
-}
-
-/**
- * Creates a `TypeGuard` for an array of a specific type.
- *
- * @typeParam T - The type of elements in the array.
- * @param predicate - The predicate to check against each element of the array.
- * @param [emptyMatches=true] - Specifies whether an empty array qualifies as an array of the given type.
- * @returns - The type guard function.
- */
-export function arrayGuard<T>(predicate: ty.Predicate<T>, emptyMatches = true): ty.TypeGuard<T[]> {
-  return (value: unknown): value is T[] => isArrayOf(value, predicate, emptyMatches)
-}
-
-/**
  * Creates an array of a specified size and type.
  *
  * @typeParam T - The type of elements in the array.
@@ -85,24 +40,6 @@ export function arrayGuard<T>(predicate: ty.Predicate<T>, emptyMatches = true): 
  */
 export function arrayOf<T>(size = 0): T[] {
   return new Array<T>(size)
-}
-
-/**
- * Adds a defined element to a `Bag<T>`.
- * Ignore the element if it is `undefined`.
- *
- * @typeParam T - The type of elements (if any) in the bag.
- * @param bag - The `Bag<T>` to add the element to.
- * @param element - The element to add to the bag, or `undefined` if there is no element to add.
- * @returns An `Array<T>` containing all elements from both `bag` and `element` if both are not `undefined`,
- *   or the `bag` if `element` is `undefined`,
- *   or `element` if `bag` is `undefined`,
- *   or `undefined` if both `bag` and `element` are `undefined`.
- */
-export function bag<T>(bag: ty.Bag<T>, element: ty.Optional<T>): ty.Bag<T> {
-  if (isUndefined(bag)) return element
-  if (isUndefined(element)) return bag
-  return addMore(bag, element)
 }
 
 /**
@@ -132,82 +69,6 @@ export function forArray<T>(array: T[], callback: (value: ty.Optional<T>, index:
     callback(value, index)
     return undefined
   }, undefined)
-}
-
-/**
- * Apply a callback to each element in a `Some<T>`,
- * unless the callback throws `BreakExecution`,
- * in which case further execution halts.
- *
- * @typeParam T - The type of value(s).
- * @param some - The `Some<T>` to apply.
- * @param callback - The callback function to apply. If `some` is singular, then the index will be `0`.
- */
-export function forSome<T>(some: ty.Some<T>, callback: (value: T, index: number) => void): void {
-  reduceSome<undefined, T>(some, (_, value, index) => {
-    callback(value, index)
-    return undefined
-  }, undefined)
-}
-
-/**
- * Checks if a value is an array of a specific type.
- *
- * @param value - The value to check.
- * @param predicate - The Predicate to check each item in the array.
- * @param emptyMatches - The value to return when the array is empty, and the type cannot be defined by the value.
- *  Defaults to `true`.
- * @returns `true` if the value is an array of the specified type, `false` otherwise.
- */
-export function isArrayOf<T>(value: unknown, predicate: ty.Predicate<T>, emptyMatches = true): value is T[] {
-  if (!Array.isArray(value)) return false
-  if (value.length === 0) return emptyMatches
-  return value.every(predicate)
-}
-
-/**
- * Checks if the given value is an empty array.
- *
- * @param value - The value to check.
- * @returns `true` if the value is an empty array, `false` otherwise.
- */
-export function isEmptyArray(value: unknown): value is [] {
-  return Array.isArray(value) && value.length === 0
-}
-
-/**
- * Checks if the given `Bag<T>` is an array of `T`.
- * Note that an empty array, or an array of one element, is still considered plural.
- *
- * @param value The `Bag<T>` to check.
- * @returns `true` if the value is an `Array<T>`, `false` if it is a single `T` or `undefined`.
- */
-export function isPlural<T>(value: ty.Bag<T>): value is T[] {
-  // Undefined is not an array so we don't need to check it explicitly here.
-  return Array.isArray(value)
-}
-
-/**
- * Checks if the given `Bag<T>` is a single `T`.
- *
- * @param value The `Bag<T>` to check.
- * @returns `true` if the value is a single `T`, `false` if it is an `Array<T>` or `undefined`.
- */
-export function isSingular<T>(value: ty.Bag<T>): value is T {
-  return !isPlural(value) && !isUndefined(value)
-}
-
-/**
- * Checks if a value matches a type, an array of that type, or an empty array (potentially of that type).
- * @typeParam T - The type to check.
- * @param value - The value to check.
- * @param typeGuard - A function to check individual values
- * @returns `true` the value is of the specified type, an array of that type, or an empty array; `false` otherwise.
- */
-export function isSome<T>(value: unknown, typeGuard: ty.TypeGuard<T>): value is ty.Some<T> {
-  if (isArrayOf(value, typeGuard, true)) return true
-  if (typeGuard(value)) return true
-  return false
 }
 
 /**
@@ -255,33 +116,6 @@ export function mapReducer<T, R>(mapper: ty.Mapper<T, R>): ty.Reducer<R[], T, nu
 }
 
 /**
- * Transforms `Some<T>` to `Some<R>`.
- * If the value is plural, transform each element into a new `T[]`.
- * Note that the output array may have fewer elements than the input array if the mapper breaks execution.
- * If the mapper breaks execution on a singular element, return an empty array.
- *
- * @typeParam T - The type to transform from.
- * @typeParam R - The type to transform to.
- * @param some - The `Some<T>` to map.
- * @param mapper - The mapping function to apply. If `some` is singular, then the second parameter will be `0`.
- * @returns An `R` for a single `T`,
- *  or an array of `R` for an array of `T`,
- *  or an empty array if the mapper breaks execution on a single `T`.
- */
-export function mapSome<T, R>(some: ty.Some<T>, mapper: ty.Mapper<T, R>): ty.Some<R> {
-  if (isSingular(some)) {
-    try {
-      return mapper(some, 0)
-    }
-    catch (err) {
-      return onBreakExecution(err, arrayOf<R>())
-    }
-  }
-  const reducer = composeReducer<R[], T, R, number>(mapper, append)
-  return reduceSome(some, reducer, arrayOf<R>())
-}
-
-/**
  * Reduces elements of an array-like object to a single value by iterating over a sequential list of indices.
  * Stops execution if the reducer throws a `BreakExecution`.
  *
@@ -314,33 +148,6 @@ export function reduceArray<S, T>(
 }
 
 /**
- * Reduce `Some<T>` to a single state `S`.
- * Note that a `BreakExecution` on a singular `T` will return the initial state.
- *
- * @typeParam S The type of the state.
- * @typeParam V The type of the value.
- * @param some - The `Some<T>` to reduce.
- * @param reducer - The reducer function. If `some` is singular, then the key/index will be `0`.
- * @param initialState - The initial state.
- * @returns The final state.
- */
-export function reduceSome<S, V>(
-  some: ty.Some<V>,
-  reducer: ty.Reducer<S, V, number>,
-  initialState: S
-): S {
-  if (isPlural(some)) {
-    return reduceArray(some, ignoreUndefined(reducer), initialState)
-  }
-  try {
-    return reducer(initialState, some, 0)
-  }
-  catch (exception) {
-    return onBreakExecution<S>(exception, initialState)
-  }
-}
-
-/**
  * Calls a reducer function a specified number of times and returns the final state.
  * Passes the current iteration number as the value (starting from 1)
  * and a zero-based index as the key to the reducer.
@@ -366,32 +173,6 @@ export function reiterate<S>(count: number, reducer: ty.Reducer<S, number, numbe
 }
 
 /**
- * Converts a `TypeGuard<T>` into a `TypeGuard<Some<T>>`.
- * @typeParam T The underlying type to guard.
- * @param guard - The type guard for `T`
- * @returns A type guard for `Some<T>`.
- */
-export function typeGuardSome<T>(guard: ty.TypeGuard<T>): ty.TypeGuard<ty.Some<T>> {
-  const predicate = partialRight<unknown, ty.TypeGuard<T>, boolean>(isSome, guard)
-  const forSome = typeGuard<ty.Some<T>>(predicate)
-  return forSome
-}
-
-/**
- * Unwraps an array, returning the array, the only element of the array, or `undefined` if there are no elements.
- * @typeParam T The type of the array elements.
- * @param value - The array to unwrap
- * @returns The the first array element if it's the only one,
- *   the whole array if there's more than one element,
- *   or `undefined` if the array is empty.
- */
-export function unwrap<T>(value: T[]): ty.Optional<ty.Some<T>> {
-  if (value.length === 0) return undefined
-  if (value.length === 1) return value[0]
-  return value
-}
-
-/**
  * Wraps a value or an array of values into an array.
  * If the input is already an array, return it as is.
  * If the input is a single defined value, wrap it in a new array.
@@ -400,7 +181,7 @@ export function unwrap<T>(value: T[]): ty.Optional<ty.Some<T>> {
  * @param value - The value or array of values to wrap, if present.
  * @returns A the value if it's already an array, or a new array that contains the value if it is not `undefined`.
  */
-export function wrap<T>(value: ty.Optional<ty.Some<T>>): T[] {
+export function wrap<T>(value: ty.Bag<T>): T[] {
   if (isUndefined(value)) return []
   if (isPlural(value)) return value
   return [value]

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { reduceSome } from "../src/arrays"
+import { reduceBag } from "../src/bags"
 import * as lib from "../src/strings"
 
 describe("strings", () => {
@@ -25,7 +25,7 @@ describe("strings", () => {
     })
 
     it("can be used as a reducer", () => {
-      expect(reduceSome(["a", "b", null, "c", "d"], lib.concat, "Start:")).toBe("Start:abcd")
+      expect(reduceBag(["a", "b", null, "c", "d"], lib.concat, "Start:")).toBe("Start:abcd")
     })
   })
 

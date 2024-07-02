@@ -1,6 +1,4 @@
-import { not } from "./logic"
-import { isUndefined, typeGuard } from "./typeGuards"
-import type { Action, Combine, Optional, Reducer, Thunk, Transform, TypeGuard } from "./types"
+import type { Action, Combine, Reducer, Thunk, Transform, TypeGuard } from "./types"
 
 /**
  * Composes a new transform from two existing transforms via an intermediate type.
@@ -108,24 +106,6 @@ export function composeRight<A, B, I, R>(
   return (a: A, b: B): R => {
     return combineIntermediate(a, toIntermediate(b))
   }
-}
-
-/**
- * Return a reducer that ignores `undefined` values.
- * Returns the current state if the value is `undefined`.
- *
- * @typeParam S - The type of the state.
- * @typeParam V - The type of value to reduce.
- * @typeParam K - The type of the key.
- * @param reducer - The `Reducer<S,V,K>` to reduce defined values.
- * @param initialState - The initial state.
- * @returns The final state.
- */
-export function ignoreUndefined<S, V, K>(reducer: Reducer<S, V, K>): Reducer<S, Optional<V>, K> {
-  return reduceIf(
-    typeGuard(not(isUndefined)),
-    reducer
-  )
 }
 
 /**

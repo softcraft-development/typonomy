@@ -37,6 +37,150 @@ describe("typeGuards", () => {
       })
     })
   })
+
+  describe("isArrayOf", () => {
+    describe("when the value is an empty array", () => {
+      describe("and emptyMatches is true", () => {
+        it("returns true", () => {
+          expect(lib.isArrayOf([], lib.isNumber, true)).toBe(true)
+        })
+      })
+
+      describe("and emptyMatches is false", () => {
+        it("returns false", () => {
+          expect(lib.isArrayOf([], lib.isNumber, false)).toBe(false)
+        })
+      })
+    })
+
+    describe("when the value is an filled array", () => {
+      describe("and the array contains only values of that type", () => {
+        it("returns true", () => {
+          expect(lib.isArrayOf([1, 2, 3], lib.isNumber)).toBe(true)
+        })
+      })
+
+      describe("and the array contains any values not of that type", () => {
+        it("returns false", () => {
+          expect(lib.isArrayOf([1, 2, "3"], lib.isNumber)).toBe(false)
+        })
+      })
+    })
+
+    it("returns false if the value is of the array type", () => {
+      expect(lib.isArrayOf(1, lib.isNumber)).toBe(false)
+    })
+
+    it("returns false for null", () => {
+      expect(lib.isArrayOf(null, lib.isNumber)).toBe(false)
+    })
+
+    it("returns false for null", () => {
+      expect(lib.isArrayOf(undefined, lib.isNumber)).toBe(false)
+    })
+
+    it("returns false for a string", () => {
+      expect(lib.isArrayOf("test", lib.isNumber)).toBe(false)
+    })
+
+    it("returns false for an object", () => {
+      expect(lib.isArrayOf({}, lib.isNumber)).toBe(false)
+    })
+  })
+
+  describe("isBag", () => {
+    describe("isBag", () => {
+      it("returns true for an array of the specified type", () => {
+        expect(lib.isBag([1, 2, 3], lib.isNumber)).toBe(true)
+      })
+      it("returns true for an empty array", () => {
+        expect(lib.isBag([], lib.isNumber)).toBe(true)
+      })
+      it("returns true for a single element array of the specified type", () => {
+        expect(lib.isBag([42], lib.isNumber)).toBe(true)
+      })
+      it("returns true if the value is undefined", () => {
+        expect(lib.isBag(undefined, lib.isNumber)).toBe(true)
+      })
+      it("returns true for a single value of the specified type", () => {
+        expect(lib.isBag(42, lib.isNumber)).toBe(true)
+      })
+
+      it("returns false for an array that contains other types", () => {
+        expect(lib.isBag([1, "2", 3], lib.isNumber)).toBe(false)
+      })
+
+      it("returns false if the value is null", () => {
+        expect(lib.isBag(null, lib.isNumber)).toBe(false)
+      })
+      it("returns false for a single value of another type", () => {
+        expect(lib.isBag("42", lib.isNumber)).toBe(false)
+      })
+    })
+  })
+
+  describe("isEmptyArray", () => {
+    it("returns true for an empty array", () => {
+      expect(lib.isEmptyArray([])).toBe(true)
+    })
+
+    it("returns false a filled Array", () => {
+      expect(lib.isEmptyArray([1, 2])).toBe(false)
+    })
+
+    it("returns false for null", () => {
+      expect(lib.isEmptyArray(null)).toBe(false)
+    })
+
+    it("returns false for undefined", () => {
+      expect(lib.isEmptyArray(undefined)).toBe(false)
+    })
+  })
+
+  describe("isPlural", () => {
+    it("returns true for an array with elements", () => {
+      expect(lib.isPlural([1, 2, 3])).toBe(true)
+    })
+
+    it("returns true for an empty array", () => {
+      expect(lib.isPlural([])).toBe(true)
+    })
+
+    it("returns true for a single element array", () => {
+      expect(lib.isPlural([42])).toBe(true)
+    })
+
+    it("returns false if the value is a single element", () => {
+      expect(lib.isPlural(42)).toBe(false)
+    })
+
+    it("returns false for undefined", () => {
+      expect(lib.isPlural(undefined)).toBe(false)
+    })
+  })
+
+  describe("isSingular", () => {
+    it("returns false for an array with elements", () => {
+      expect(lib.isSingular([1, 2, 3])).toBe(false)
+    })
+
+    it("returns false for an empty array", () => {
+      expect(lib.isSingular([])).toBe(false)
+    })
+
+    it("returns false for a single element array", () => {
+      expect(lib.isSingular([42])).toBe(false)
+    })
+
+    it("returns true if the value is a single element", () => {
+      expect(lib.isSingular(42)).toBe(true)
+    })
+
+    it("returns false for undefined", () => {
+      expect(lib.isSingular(undefined)).toBe(false)
+    })
+  })
+
   describe("isBoolean", () => {
     it("returns true for true", () => {
       expect(lib.isBoolean(true)).toBe(true)
@@ -295,6 +439,37 @@ describe("typeGuards", () => {
     })
   })
 
+  describe("isSome", () => {
+    describe("isSome", () => {
+      it("returns true for an array of the specified type", () => {
+        expect(lib.isSome([1, 2, 3], lib.isNumber)).toBe(true)
+      })
+      it("returns false for an empty array", () => {
+        expect(lib.isSome([], lib.isNumber)).toBe(false)
+      })
+      it("returns true for a single element array of the specified type", () => {
+        expect(lib.isSome([42], lib.isNumber)).toBe(true)
+      })
+      it("returns false if the value is undefined", () => {
+        expect(lib.isSome(undefined, lib.isNumber)).toBe(false)
+      })
+      it("returns true for a single value of the specified type", () => {
+        expect(lib.isSome(42, lib.isNumber)).toBe(true)
+      })
+
+      it("returns false for an array that contains other types", () => {
+        expect(lib.isSome([1, "2", 3], lib.isNumber)).toBe(false)
+      })
+
+      it("returns false if the value is null", () => {
+        expect(lib.isSome(null, lib.isNumber)).toBe(false)
+      })
+      it("returns false for a single value of another type", () => {
+        expect(lib.isSome("42", lib.isNumber)).toBe(false)
+      })
+    })
+  })
+
   describe("isUnknown", () => {
     it("is true for false", () => {
       expect(lib.isUnknown(false)).toBe(true)
@@ -382,23 +557,6 @@ describe("typeGuards", () => {
     })
   })
 
-  describe("widen", () => {
-    const narrow = lib.isString
-    const guard = lib.widen(narrow, lib.isNull)
-
-    it("returns true if the value is of the included type", () => {
-      expect(guard(null)).toBe(true)
-    })
-
-    it("would have returned false without the widening", () => {
-      expect(narrow(null)).toBe(false)
-    })
-
-    it("returns true if the value is the base type", () => {
-      expect(guard("Explicit")).toBe(true)
-    })
-  })
-
   describe("typeGuard", () => {
     type TestType = { even: number }
     const predicate: Predicate<unknown> = (value: unknown): boolean => {
@@ -423,6 +581,23 @@ describe("typeGuards", () => {
     it("guards against invalid types", () => {
       const obj: unknown = { even: -1 }
       expect(guard(obj)).toBe(false)
+    })
+  })
+
+  describe("widen", () => {
+    const narrow = lib.isString
+    const guard = lib.widen(narrow, lib.isNull)
+
+    it("returns true if the value is of the included type", () => {
+      expect(guard(null)).toBe(true)
+    })
+
+    it("would have returned false without the widening", () => {
+      expect(narrow(null)).toBe(false)
+    })
+
+    it("returns true if the value is the base type", () => {
+      expect(guard("Explicit")).toBe(true)
     })
   })
 })
