@@ -77,7 +77,7 @@ describe("bags", () => {
         beforeEach(() => {
           element = { key: "Element" }
         })
-        it("appends the new elements", () => {
+        it("pushes the new elements", () => {
           expect(result()).toBe(bag)
           expect(bag).toContain(element)
         })

@@ -1,4 +1,4 @@
-import { append, mapArray, reduceArray } from "./arrays"
+import { mapArray, push, reduceArray } from "./arrays"
 import { onBreakExecution } from "./break"
 import { isPlural, isUndefined } from "./typeGuards"
 import type { Bag, Mapper, Optional, Reducer } from "./types"
@@ -18,7 +18,7 @@ import type { Bag, Mapper, Optional, Reducer } from "./types"
 export function bag<T>(bag: Bag<T>, more?: T): Bag<T> {
   if (isUndefined(bag)) return more
   if (isUndefined(more)) return bag
-  if (isPlural(bag)) return append(bag, more)
+  if (isPlural(bag)) return push(bag, more)
   return [bag, more]
 }
 

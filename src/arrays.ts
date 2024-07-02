@@ -4,29 +4,30 @@ import { isExplicit, isPlural, isUndefined } from "./typeGuards"
 import * as ty from "./types"
 
 /**
- * A Reducer that appends its value to an array. Mutates the original array.
+ * Return a new array that includes all elements from the input array plus the value.
  *
  * @typeParam T - The type of elements in the array.
- * @param array - The array to append the value to.
- * @param value - The value to append to the array.
- * @returns - The updated array with the value appended.
+ * @param array - The array of existing element.
+ * @param value - The new element.
+ * @returns - A new array including all elements.
  */
 export function append<T>(array: T[], value: T): T[] {
-  array.push(value)
-  return array
+  return [...array, value]
 }
 
 /**
- * Appends a value to an array only if the value is neither `null` nor `undefined`.
+ * If the `value` is not null or undefined, append it with the existing array.
+ * Otherwise, return the existing array.
  *
  * @typeParam T - The type of elements in the array.
- * @param array - The array to append the value to.
- * @param value - The value to append to the array if it is not `null` or `undefined`.
- * @returns - The updated array.
+ * @param array - The array of existing elements.
+ * @param value - The new element.
+ * @returns - The existing `array` if the `value` is `null` or `undefined`,
+ *  or a new array including all elements.
  */
 export function appendExplicit<T>(array: ty.Explicit<T>[], value: ty.Possible<T>): ty.Explicit<T>[] {
   if (isExplicit(value)) {
-    array.push(value)
+    return append(array, value)
   }
   return array
 }
@@ -111,8 +112,37 @@ export function mapOptional<T, R>(map: ty.Mapper<T, R>): ty.Mapper<ty.Optional<T
 export function mapReducer<T, R>(mapper: ty.Mapper<T, R>): ty.Reducer<R[], T, number> {
   return (state, value, index) => {
     const result = mapper(value, index)
-    return append(state, result)
+    return push(state, result)
   }
+}
+
+/**
+ * Add an element to the end of an existing array.
+ *
+ * @typeParam T - The type of elements in the array.
+ * @param array - The array to mutate.
+ * @param value - The new element.
+ * @returns - The array, which now includes the new element.
+ */
+export function push<T>(array: T[], value: T): T[] {
+  array.push(value)
+  return array
+}
+
+/**
+ * If the `value` is not null or undefined, push it into the existing array.
+ * Otherwise, return the array unchanged.
+ *
+ * @typeParam T - The type of elements in the array.
+ * @param array - The array to mutate.
+ * @param value - The new element.
+ * @returns - The array, which includes the value if it is not `null` or `undefined`.
+ */
+export function pushExplicit<T>(array: ty.Explicit<T>[], value: ty.Possible<T>): ty.Explicit<T>[] {
+  if (isExplicit(value)) {
+    return push(array, value)
+  }
+  return array
 }
 
 /**

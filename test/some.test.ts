@@ -9,7 +9,7 @@ describe("some", () => {
       expect(result).toEqual([1, 2])
     })
 
-    it("appends a value to an array", () => {
+    it("pushes a value to an array", () => {
       const result = lib.addMore([1, 2], 3)
       expect(result).toEqual([1, 2, 3])
     })

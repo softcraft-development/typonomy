@@ -1,4 +1,4 @@
-import { append, mapReducer } from "./arrays"
+import { mapReducer, push } from "./arrays"
 import { reduceBag } from "./bags"
 import { onBreakExecution } from "./break"
 import { isPlural } from "./typeGuards"
@@ -6,7 +6,7 @@ import type { Combine, Defined, Mapper, Reducer, Some } from "./types"
 
 /**
  * Adds an element to a `Some`, resulting in an `Array` of elements.
- * If the `Some` is already an array, the element is appended to the array.
+ * If the `Some` is already an array, the element is pushed on to the array.
  * Otherwise, create a new array with the singular `Some` and the new element.
  *
  * @typeParam T - The e of the elements.
@@ -16,7 +16,7 @@ import type { Combine, Defined, Mapper, Reducer, Some } from "./types"
  */
 export function addMore<T>(some: Some<T>, more: Defined<T>): Defined<T>[] {
   if (isPlural(some)) {
-    return append(some, more)
+    return push(some, more)
   }
   return [some, more]
 }

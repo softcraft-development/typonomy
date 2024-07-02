@@ -11,27 +11,33 @@ describe("arrays", () => {
       expect(result).toEqual([1, 1, 2, 3, 5])
     })
 
-    it("should mutate the original array", () => {
+    it("should not mutate the original array", () => {
       const array = [1, 1, 2, 3]
       const result = lib.append(array, 7)
-      expect(result).toBe(array)
+      expect(result).not.toBe(array)
     })
   })
 
   describe("appendExplicit", () => {
-    it("appends a definite value", () => {
+    it("adds a definite value", () => {
       const result = lib.appendExplicit<string>([], "Explicit")
       expect(result).toEqual(["Explicit"])
     })
 
-    it("does not append a null", () => {
+    it("does not adds a null", () => {
       const result = lib.appendExplicit<string>([], null)
       expect(result).toEqual([])
     })
 
-    it("does not append undefined", () => {
+    it("does not adds undefined", () => {
       const result = lib.appendExplicit<string>([], undefined)
       expect(result).toEqual([])
+    })
+
+    it("should not mutate the original array", () => {
+      const array = [1, 1, 2, 3]
+      const result = lib.appendExplicit(array, 7)
+      expect(result).not.toBe(array)
     })
   })
 
@@ -109,6 +115,43 @@ describe("arrays", () => {
       const mapper = (value: Optional<number>, index: number) => ((value || 0) + index).toString()
       const reducer = lib.mapReducer(mapper)
       expect(reducer(["initial"], 42, -1)).toEqual(["initial", "41"])
+    })
+  })
+
+  describe("push", () => {
+    it("should add the value to the array", () => {
+      const array = [1, 1, 2, 3]
+      const result = lib.push(array, 5)
+      expect(result).toEqual([1, 1, 2, 3, 5])
+    })
+
+    it("should mutate the original array", () => {
+      const array = [1, 1, 2, 3]
+      const result = lib.push(array, 7)
+      expect(result).toBe(array)
+    })
+  })
+
+  describe("pushExplicit", () => {
+    it("adds a definite value", () => {
+      const result = lib.pushExplicit<string>([], "Explicit")
+      expect(result).toEqual(["Explicit"])
+    })
+
+    it("does not add a null", () => {
+      const result = lib.pushExplicit<string>([], null)
+      expect(result).toEqual([])
+    })
+
+    it("does not add undefined", () => {
+      const result = lib.pushExplicit<string>([], undefined)
+      expect(result).toEqual([])
+    })
+
+    it("should mutate the original array", () => {
+      const array = [1, 1, 2, 3]
+      const result = lib.pushExplicit(array, 7)
+      expect(result).toBe(array)
     })
   })
 
