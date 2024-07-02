@@ -28,4 +28,4 @@ The value to be evaluated by the predicate.
 
 ## Source
 
-[types.ts:104](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/types.ts#L104)
+[types.ts:108](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/types.ts#L108)

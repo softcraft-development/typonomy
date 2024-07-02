@@ -9,7 +9,8 @@
 > **isPlural**\<`T`\>(`value`): `value is T[]`
 
 Checks if the given `Bag<T>` is an array of `T`.
-Note that an empty array, or an array of one element, is still considered plural.
+Note that an empty array, or an array of one element, or an array of `undefined`
+are all still considered plural.
 
 ## Type parameters
 
@@ -29,4 +30,4 @@ The `Bag<T>` to check.
 
 ## Source
 
-[arrays.ts:185](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/arrays.ts#L185)
+[typeGuards.ts:161](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/typeGuards.ts#L161)

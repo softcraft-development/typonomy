@@ -30,4 +30,4 @@ A `Predicate` that returns true if all input `Predicate` are true.
 
 ## Source
 
-[logic.ts:9](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/logic.ts#L9)
+[logic.ts:9](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/logic.ts#L9)

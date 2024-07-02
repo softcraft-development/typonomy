@@ -8,7 +8,8 @@
 
 > **appendExplicit**\<`T`\>(`array`, `value`): [`Explicit`](../type-aliases/Explicit.md)\<`T`\>[]
 
-Appends a value to an array only if the value is neither `null` nor `undefined`.
+If the `value` is not null or undefined, append it with the existing array.
+Otherwise, return the existing array.
 
 ## Type parameters
 
@@ -20,18 +21,19 @@ The type of elements in the array.
 
 • **array**: `Exclude`\<`T`, [`Nullish`](../type-aliases/Nullish.md)\>[]
 
-The array to append the value to.
+The array of existing elements.
 
 • **value**: [`Possible`](../type-aliases/Possible.md)\<`T`\>
 
-The value to append to the array if it is not `null` or `undefined`.
+The new element.
 
 ## Returns
 
 [`Explicit`](../type-aliases/Explicit.md)\<`T`\>[]
 
-- The updated array.
+- The existing `array` if the `value` is `null` or `undefined`,
+ or a new array including all elements.
 
 ## Source
 
-[arrays.ts:44](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/arrays.ts#L44)
+[arrays.ts:28](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/arrays.ts#L28)

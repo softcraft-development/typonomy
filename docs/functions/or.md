@@ -34,4 +34,4 @@ A `Predicate` that returns `true` if either inputs are `true`.
 
 ## Source
 
-[logic.ts:41](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/logic.ts#L41)
+[logic.ts:41](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/logic.ts#L41)

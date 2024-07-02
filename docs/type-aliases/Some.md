@@ -6,9 +6,10 @@
 
 # Type alias: Some\<T\>
 
-> **Some**\<`T`\>: `T` \| `T`[]
+> **Some**\<`T`\>: [`Defined`](Defined.md)\<`T`\> \| [`Defined`](Defined.md)\<`T`\>[]
 
 Represents a type that can be either a single value of type T or an array of type T.
+Note that T may never be `undefined`.
 
 ## Type parameters
 
@@ -18,4 +19,4 @@ The type of value.
 
 ## Source
 
-[types.ts:125](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/types.ts#L125)
+[types.ts:130](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/types.ts#L130)

@@ -21,7 +21,7 @@ The type of the array elements.
 
 ## Parameters
 
-• **value**: [`Optional`](../type-aliases/Optional.md)\<[`Some`](../type-aliases/Some.md)\<`T`\>\>
+• **value**: [`Bag`](../type-aliases/Bag.md)\<`T`\>
 
 The value or array of values to wrap, if present.
 
@@ -33,4 +33,4 @@ A the value if it's already an array, or a new array that contains the value if 
 
 ## Source
 
-[arrays.ts:383](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/arrays.ts#L383)
+[arrays.ts:200](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/arrays.ts#L200)

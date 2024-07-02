@@ -24,4 +24,4 @@ The potentially null or undefined value to check.
 
 ## Source
 
-[typeGuards.ts:85](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/typeGuards.ts#L85)
+[typeGuards.ts:125](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/typeGuards.ts#L125)

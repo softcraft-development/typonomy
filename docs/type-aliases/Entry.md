@@ -22,4 +22,4 @@ The type of the value for the keys.
 
 ## Source
 
-[types.ts:35](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/types.ts#L35)
+[types.ts:42](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/types.ts#L42)

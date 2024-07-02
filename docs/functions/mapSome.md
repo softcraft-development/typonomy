@@ -8,38 +8,22 @@
 
 > **mapSome**\<`T`, `R`\>(`some`, `mapper`): [`Some`](../type-aliases/Some.md)\<`R`\>
 
-Transforms `Some<T>` to `Some<R>`.
-If the value is plural, transform each element into a new `T[]`.
-If the mapper breaks execution, return an empty array.
-
 ## Type parameters
 
 • **T**
 
-The type to transform from.
-
 • **R**
-
-The type to transform to.
 
 ## Parameters
 
 • **some**: [`Some`](../type-aliases/Some.md)\<`T`\>
 
-The `Some<T>` to map.
-
-• **mapper**: [`IndexedMapper`](../type-aliases/IndexedMapper.md)\<`T`, `R`\>
-
-The mapping function to apply. If `some` is singular, then the second parameter will be `0`.
+• **mapper**: [`Mapper`](../type-aliases/Mapper.md)\<[`Defined`](../type-aliases/Defined.md)\<`T`\>, [`Defined`](../type-aliases/Defined.md)\<`R`\>\>
 
 ## Returns
 
 [`Some`](../type-aliases/Some.md)\<`R`\>
 
-An `R` for a single `T`,
- or an array of `R` for an array of `T`,
- or an empty array if the mapper breaks execution on a single `T`.
-
 ## Source
 
-[arrays.ts:256](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/arrays.ts#L256)
+[some.ts:31](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/some.ts#L31)

@@ -6,17 +6,17 @@
 
 # Function: addMore()
 
-> **addMore**\<`T`\>(`some`, `more`): `T`[]
+> **addMore**\<`T`\>(`some`, `more`): [`Defined`](../type-aliases/Defined.md)\<`T`\>[]
 
 Adds an element to a `Some`, resulting in an `Array` of elements.
-If the `Some` is already an array, the element is appended to the array.
+If the `Some` is already an array, the element is pushed on to the array.
 Otherwise, create a new array with the singular `Some` and the new element.
 
 ## Type parameters
 
 • **T**
 
-The type of the elements.
+The e of the elements.
 
 ## Parameters
 
@@ -24,16 +24,16 @@ The type of the elements.
 
 The array or element to add to.
 
-• **more**: `T`
+• **more**: [`Defined`](../type-aliases/Defined.md)\<`T`\>
 
 The element to add.
 
 ## Returns
 
-`T`[]
+[`Defined`](../type-aliases/Defined.md)\<`T`\>[]
 
 An array with the additional element.
 
 ## Source
 
-[arrays.ts:16](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/arrays.ts#L16)
+[some.ts:17](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/some.ts#L17)

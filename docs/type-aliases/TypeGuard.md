@@ -24,4 +24,4 @@ A function that checks if a value satisfies a specific type.
 
 ## Source
 
-[types.ts:153](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/types.ts#L153)
+[types.ts:158](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/types.ts#L158)

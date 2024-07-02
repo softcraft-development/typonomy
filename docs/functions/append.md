@@ -8,7 +8,7 @@
 
 > **append**\<`T`\>(`array`, `value`): `T`[]
 
-A Reducer that appends its value to an array. Mutates the original array.
+Return a new array that includes all elements from the input array plus the value.
 
 ## Type parameters
 
@@ -20,18 +20,18 @@ The type of elements in the array.
 
 • **array**: `T`[]
 
-The array to append the value to.
+The array of existing element.
 
 • **value**: `T`
 
-The value to append to the array.
+The new element.
 
 ## Returns
 
 `T`[]
 
-- The updated array with the value appended.
+- A new array including all elements.
 
 ## Source
 
-[arrays.ts:31](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/arrays.ts#L31)
+[arrays.ts:14](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/arrays.ts#L14)

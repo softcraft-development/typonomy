@@ -20,4 +20,4 @@ Ignore all parameters.
 
 ## Source
 
-[fp.ts:114](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/fp.ts#L114)
+[fp.ts:129](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/fp.ts#L129)

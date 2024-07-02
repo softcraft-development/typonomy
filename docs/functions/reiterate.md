@@ -41,4 +41,4 @@ The initial state.
 
 ## Source
 
-[arrays.ts:335](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/arrays.ts#L335)
+[arrays.ts:178](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/arrays.ts#L178)

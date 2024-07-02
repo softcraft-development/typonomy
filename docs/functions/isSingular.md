@@ -6,7 +6,7 @@
 
 # Function: isSingular()
 
-> **isSingular**\<`T`\>(`value`): `value is T`
+> **isSingular**\<`T`\>(`value`): `value is Defined<T>`
 
 Checks if the given `Bag<T>` is a single `T`.
 
@@ -22,10 +22,10 @@ The `Bag<T>` to check.
 
 ## Returns
 
-`value is T`
+`value is Defined<T>`
 
 `true` if the value is a single `T`, `false` if it is an `Array<T>` or `undefined`.
 
 ## Source
 
-[arrays.ts:196](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/arrays.ts#L196)
+[typeGuards.ts:181](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/typeGuards.ts#L181)

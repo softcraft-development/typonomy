@@ -51,4 +51,4 @@ The `TypeGuard<T> used to check the value.
 
 ## Source
 
-[fp.ts:214](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/fp.ts#L214)
+[fp.ts:229](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/fp.ts#L229)

@@ -9,7 +9,7 @@
 > **forArray**\<`T`\>(`array`, `callback`): `void`
 
 Apply a callback to each element in an array,
-unless the callback throws `BreakException`,
+unless the callback throws `BreakExecution`,
 in which case further execution halts.
 
 ## Type parameters
@@ -24,9 +24,9 @@ The type of elements in the array.
 
 The array to iterate over.
 
-• **callback**: [`IndexedMapper`](../type-aliases/IndexedMapper.md)\<`T`, `void`\>
+• **callback**
 
-The callback function to apply to each element.
+The callback function to apply to each element and index.
 
 ## Returns
 
@@ -34,4 +34,4 @@ The callback function to apply to each element.
 
 ## Source
 
-[arrays.ts:130](https://github.com/softcraft-development/typonomy/blob/30acaf0c9fc726297ecfec68c62e8d1edc67bc52/src/arrays.ts#L130)
+[arrays.ts:68](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/arrays.ts#L68)
