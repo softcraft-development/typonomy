@@ -154,6 +154,18 @@ describe("fp", () => {
     })
   })
 
+  describe("mapOptional", () => {
+    const mapper = lib.mapOptional((value: string, index: number) => Number.parseInt(value) + index)
+
+    it("maps a value", () => {
+      expect(mapper("13", 5)).toEqual(18)
+    })
+
+    it("maps undefined", () => {
+      expect(mapper(undefined, 5)).toBeUndefined()
+    })
+  })
+
   describe("noOp", () => {
     it("does nothing", () => {
       expect(lib.noOp("anything")).toBeUndefined()

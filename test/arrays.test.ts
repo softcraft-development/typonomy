@@ -98,18 +98,6 @@ describe("arrays", () => {
     })
   })
 
-  describe("mapOptional", () => {
-    const mapper = lib.mapOptional((value: string, index: number) => Number.parseInt(value) + index)
-
-    it("maps a value", () => {
-      expect(mapper("13", 5)).toEqual(18)
-    })
-
-    it("maps undefined", () => {
-      expect(mapper(undefined, 5)).toBeUndefined()
-    })
-  })
-
   describe("mapReducer", () => {
     it("creates an array Reducer for a mapper", () => {
       const mapper = (value: Optional<number>, index: number) => ((value || 0) + index).toString()

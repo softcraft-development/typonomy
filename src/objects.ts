@@ -41,7 +41,7 @@ export function isRecordOf<K extends PropertyKey, V>(
  * @typeParam V - The type of the values in the record.
  * @param obj - The record or enum to search.
  * @param target - The value to search for.
-* @param [checkEquality=isEquality<unknown>] - A function to compare object values to the target value.
+ * @param [checkEquality=isEquality<unknown>] - A function to compare object values to the target value.
  * @returns An optional array of keys that have the specified value.
  */
 export function keysForValue<T extends object>(

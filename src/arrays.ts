@@ -88,20 +88,6 @@ export function mapArray<T, R>(array: T[], mapper: ty.Mapper<ty.Optional<T>, R>)
 }
 
 /**
- * Widen a mapping function to operate on `Optional` values.
- * `undefined` inputs will be translated to `undefined` outputs.
- *
- * @param map - The mapping function to apply.
- * @returns A new mapping function that operates on optional values.
- */
-export function mapOptional<T, R>(map: ty.Mapper<T, R>): ty.Mapper<ty.Optional<T>, ty.Optional<R>> {
-  return (value, index) => {
-    if (isUndefined(value)) return value
-    return map(value, index)
-  }
-}
-
-/**
  * Converts a indexed mapping function into an array `Reducer`.
  *
  * @typeParam T - The type of input elements.

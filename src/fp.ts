@@ -1,4 +1,5 @@
-import type { Action, Combine, Reducer, Thunk, Transform, TypeGuard } from "./types"
+import { isUndefined } from "./typeGuards"
+import type { Action, Combine, Mapper, Optional, Reducer, Thunk, Transform, TypeGuard } from "./types"
 
 /**
  * Composes a new transform from two existing transforms via an intermediate type.
@@ -105,6 +106,20 @@ export function composeRight<A, B, I, R>(
 ): Combine<A, B, R> {
   return (a: A, b: B): R => {
     return combineIntermediate(a, toIntermediate(b))
+  }
+}
+
+/**
+ * Widen a mapping function to operate on `Optional` values.
+ * `undefined` inputs will be translated to `undefined` outputs.
+ *
+ * @param map - The mapping function to apply.
+ * @returns A new mapping function that operates on optional values.
+ */
+export function mapOptional<T, R>(map: Mapper<T, R>): Mapper<Optional<T>, Optional<R>> {
+  return (value, index) => {
+    if (isUndefined(value)) return value
+    return map(value, index)
   }
 }
 
