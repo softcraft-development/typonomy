@@ -2,7 +2,7 @@ import { append, mapReducer } from "./arrays"
 import { reduceBag } from "./bags"
 import { onBreakExecution } from "./break"
 import { isPlural } from "./typeGuards"
-import type { Combine, Defined, Explicit, Mapper, Reducer, Some } from "./types"
+import type { Combine, Defined, Mapper, Reducer, Some } from "./types"
 
 /**
  * Adds an element to a `Some`, resulting in an `Array` of elements.
@@ -21,16 +21,16 @@ export function addMore<T>(some: Some<T>, more: Defined<T>): Defined<T>[] {
   return [some, more]
 }
 
-export function forSome<T>(some: Some<T>, callback: Combine<T, number, void>): void {
+export function forSome<T>(some: Some<T>, callback: Combine<Defined<T>, number, void>): void {
   reduceSome(some, (state, value, index) => {
     callback(value, index)
     return state
   }, undefined)
 }
 
-export function mapSome<T, R>(some: Some<T>, mapper: Mapper<T, Defined<R>>): Some<R> {
+export function mapSome<T, R>(some: Some<T>, mapper: Mapper<Defined<T>, Defined<R>>): Some<R> {
   if (isPlural(some)) {
-    const reducer = mapReducer<T, Defined<R>>(mapper)
+    const reducer = mapReducer(mapper)
     return reduceSome<Defined<R>[], T>(some, reducer, [])
   }
   try {
@@ -41,9 +41,10 @@ export function mapSome<T, R>(some: Some<T>, mapper: Mapper<T, Defined<R>>): Som
   }
 }
 
-export function reduceSome<S, V>(some: Some<V>, reducer: Reducer<S, V, number>, initialState: S): S {
+export function reduceSome<S, V>(some: Some<V>, reducer: Reducer<S, Defined<V>, number>, initialState: S): S {
   return reduceBag(some, (state, value, index) => {
+    // Since we're reducing Some<V>, we know that all values are Defined<V>.
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    return reducer(state, value as Explicit<V>, index)
+    return reducer(state, value as Defined<V>, index)
   }, initialState)
 }
