@@ -2,14 +2,18 @@ import { beforeEach, describe, expect, it, vi } from "vitest"
 import * as lib from "../src/bags"
 import { Break } from "../src/break"
 import { isUndefined } from "../src/typeGuards"
-import type { Bag, Optional } from "../src/types"
+import type { Bag, Optional, Thunk } from "../src/types"
 
 describe("bags", () => {
   describe("bag", () => {
     interface TestType { key: string }
     let bag: Bag<TestType>
     let element: Optional<TestType>
-    let result = () => lib.bag(bag, element)
+    let result: Thunk<Bag<TestType>>
+
+    beforeEach(() => {
+      result = () => lib.bag(bag, element)
+    })
 
     describe("when the bag is undefined", () => {
       beforeEach(() => {

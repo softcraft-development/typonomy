@@ -8,18 +8,18 @@ import type { Bag, Mapper, Optional, Reducer } from "./types"
  * Note that `undefined` is ignored even if `T` itself includes `undefined.
  *
  * @typeParam T - The e of elements (if any) in the bag.
- * @param bag - The `Bag<T>` to add the element to.
+ * @param previous - The `Bag<T>` to add the element to.
  * @param more - The element to add to the bag, or `undefined` if there is no element to add.
  * @returns An `Array<T>` containing all elements from both `bag` and `element` if neither are `undefined`,
  *   or the `bag` if `element` is `undefined`,
  *   or `element` if `bag` is `undefined`,
  *   or `undefined` if both `bag` and `element` are `undefined`.
  */
-export function bag<T>(bag: Bag<T>, more?: T): Bag<T> {
-  if (isUndefined(bag)) return more
-  if (isUndefined(more)) return bag
-  if (isPlural(bag)) return push(bag, more)
-  return [bag, more]
+export function bag<T>(previous: Bag<T>, more?: T): Bag<T> {
+  if (isUndefined(previous)) return more
+  if (isUndefined(more)) return previous
+  if (isPlural(previous)) return push(previous, more)
+  return [previous, more]
 }
 
 /**
