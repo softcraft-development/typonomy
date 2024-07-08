@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest"
 import { mapArray } from "../src/arrays"
 import * as lib from "../src/fp"
 import { concat, valueToString } from "../src/strings"
-import { isEquality, isNumber, isString } from "../src/typeGuards"
+import { isNumber, isString } from "../src/typeGuards"
 import type { Transform, TypeGuard } from "../src/types"
 
 describe("fp", () => {
@@ -31,6 +31,14 @@ describe("fp", () => {
       const couple: [number, string] = guess as [number, string]
       // But this doesn't change the object
       expect(couple).toBe(tuple)
+    })
+  })
+
+  describe("commute", () => {
+    it("swaps the parameters", () => {
+      const combine = (a: number, b: string) => `${a}:${b}`
+      const commuted = lib.commute(combine)
+      expect(commuted("Hello", 42)).toEqual(combine(42, "Hello"))
     })
   })
 
@@ -79,78 +87,35 @@ describe("fp", () => {
     })
   })
 
-  describe("isEquality", () => {
-    it("returns true if the values are equal", () => {
-      expect(isEquality(42, 42)).toBe(true)
-    })
-
-    it("returns true if the values are the same string", () => {
-      expect(isEquality("42", "42")).toBe(true)
-    })
-
-    it("returns true if both values are undefined", () => {
-      expect(isEquality(undefined, undefined)).toBe(true)
-    })
-
-    it("returns true if both values are null", () => {
-      expect(isEquality(null, null)).toBe(true)
-    })
-
-    it("returns true if both values are Infinity", () => {
-      expect(isEquality(Infinity, Infinity)).toBe(true)
-    })
-
-    it("returns false if both values are NaN", () => {
-      expect(isEquality(NaN, NaN)).toBe(false)
-    })
-
-    it("returns false if the values are symbols", () => {
-      expect(isEquality(Symbol("test"), Symbol("test"))).toBe(false)
-    })
-
-    it("returns false if the values are different objects", () => {
-      expect(isEquality({ key: "test" }, { key: "test" })).toBe(false)
-    })
-
-    it("returns false if the values are not equal", () => {
-      expect(isEquality<unknown>(42, "42")).toBe(false)
+  describe("curry", () => {
+    it("curries a combine", () => {
+      const combine = (a: number, b: number) => `A: ${a}, B: ${b} `
+      const curried = lib.curry(combine)
+      expect(curried(3)(5)).toEqual(combine(3, 5))
     })
   })
 
-  describe("isString", () => {
-    it("returns true for a string", () => {
-      const result = isString("Hello")
-      expect(result).toBe(true)
+  describe("curryLeft", () => {
+    it("curries the first parameter of a 3-arity function", () => {
+      const fn = (a: number, b: number, c: number) => `A: ${a}, B: ${b} C: ${c}`
+      const curried = lib.curryLeft(fn)
+      expect(curried(3)(5, 7)).toEqual(fn(3, 5, 7))
     })
+  })
 
-    it("returns false for a number", () => {
-      const result = isString(42)
-      expect(result).toBe(false)
+  describe("curryMiddle", () => {
+    it("curries the second parameter of a 3-arity function", () => {
+      const fn = (a: number, b: number, c: number) => `A: ${a}, B: ${b} C: ${c}`
+      const curried = lib.curryMiddle(fn)
+      expect(curried(5)(3, 7)).toEqual(fn(3, 5, 7))
     })
+  })
 
-    it("returns false for a boolean", () => {
-      const result = isString(true)
-      expect(result).toBe(false)
-    })
-
-    it("returns false for an object", () => {
-      const result = isString({ toString: () => "Value of Object" })
-      expect(result).toBe(false)
-    })
-
-    it("returns false for null", () => {
-      const result = isString(null)
-      expect(result).toBe(false)
-    })
-
-    it("returns false for undefined", () => {
-      const result = isString(undefined)
-      expect(result).toBe(false)
-    })
-
-    it("returns false for a symbol", () => {
-      const result = isString(Symbol("Test Symbol"))
-      expect(result).toBe(false)
+  describe("curryRight", () => {
+    it("curries the third parameter of a 3-arity function", () => {
+      const fn = (a: number, b: number, c: number) => `A: ${a}, B: ${b} C: ${c}`
+      const curried = lib.curryRight(fn)
+      expect(curried(7)(3, 5)).toEqual(fn(3, 5, 7))
     })
   })
 
@@ -253,6 +218,14 @@ describe("fp", () => {
     it("returns the value", () => {
       const value = { key: "Test" }
       expect(lib.thunk(value)()).toBe(value)
+    })
+  })
+
+  describe("yrruc", () => {
+    it("reverse curries a combine", () => {
+      const combine = (a: number, b: number) => `A: ${a}, B: ${b} `
+      const curried = lib.yrruc(combine)
+      expect(curried(5)(3)).toEqual(combine(3, 5))
     })
   })
 })

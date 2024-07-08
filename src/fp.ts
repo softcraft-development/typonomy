@@ -2,6 +2,19 @@ import { isUndefined } from "./typeGuards"
 import type { Action, Combine, Mapper, Optional, Reducer, Thunk, Transform, TypeGuard } from "./types"
 
 /**
+ * Swap the argument order of a Combine (arity-2) function.
+ *
+ * @template A - The type of the first argument of the input Combine.
+ * @template B - The type of the second argument of the input Combine.
+ * @template R - The return type of the function.
+ * @param combine - The function to commute.
+ * @returns A new Combine that takes the arguments in reverse order.
+ */
+export function commute<A, B, R>(combine: Combine<A, B, R>): Combine<B, A, R> {
+  return (b: B, a: A): R => combine(a, b)
+}
+
+/**
  * Composes a new transform from two existing transforms via an intermediate type.
  *
  * @typeParam T The input type.
@@ -110,6 +123,81 @@ export function composeRight<A, B, I, R>(
 }
 
 /**
+ * Convert a Combine function into a Transform function.
+ * This function transforms the first argument of the Combine function into another Transform function.
+ * In turn, this second function transforms the second Combine argument into the return value.
+ * Thus, `curry` converts an arity-2 function into two arity-1 functions.
+ *
+ * See also `yrruc`, which does the same, except with the opposite argument order.
+ *
+ * @param combine - The function to curry.
+ * @returns A curried function that takes the first argument and returns a function that takes the second argument.
+ */
+export function curry<A, B, R>(combine: Combine<A, B, R>): Transform<A, Transform<B, R>> {
+  return (a: A) => (b: B) => combine(a, b)
+}
+
+/**
+ * Convert an arity-3 function into a Transform function.
+ * This function transforms the first argument of the function
+ * into a Combine function for the second and third arguments.
+ * Thus, `curryLeft` converts an arity-3 function into an arity-1 function and arity-2 function.
+ * To fully curry the original function, pass the results into `curry` or `yrruc` as appropriate.
+ *
+ * See also `curryMiddle` and `curryRight`, which do the same for the second and third arguments, respectively.
+ * @template A - The type of the first argument of the input function.
+ * @template B - The type of the second argument of the input function.
+ * @template C - The type of the third argument of the input function.
+ * @template R - The return type of the function.
+ * @param fn - The function to curry.
+ * @returns A curried function that takes the first argument
+ *  and returns a function that takes the second and third arguments.
+ */
+export function curryLeft<A, B, C, R>(fn: (first: A, second: B, third: C) => R): Transform<A, Combine<B, C, R>> {
+  return (first: A) => (second: B, third: C) => fn(first, second, third)
+}
+
+/**
+ * Convert an arity-3 function into a Transform function.
+ * This function transforms the second argument of the function
+ * into a Combine function for the first and third arguments.
+ * Thus, `curryMiddle` converts an arity-3 function into an arity-1 function and arity-2 function.
+ * To fully curry the original function, pass the results into `curry` or `yrruc` as appropriate.
+ *
+ * See also `curryLeft` and `curryRight`, which do the same for the first and third arguments, respectively.
+ * @template A - The type of the first argument of the input function.
+ * @template B - The type of the second argument of the input function.
+ * @template C - The type of the third argument of the input function.
+ * @template R - The return type of the function.
+ * @param fn - The function to curry.
+ * @returns A curried function that takes the second argument
+ *  and returns a function that takes the first and third arguments.
+ */
+export function curryMiddle<A, B, C, R>(fn: (first: A, second: B, third: C) => R): Transform<B, Combine<A, C, R>> {
+  return (second: B) => (first: A, third: C) => fn(first, second, third)
+}
+
+/**
+ * Convert an arity-3 function into a Transform function.
+ * This function transforms the third argument of the function
+ * into a Combine function for the first and second arguments.
+ * Thus, `curryMiddle` converts an arity-3 function into an arity-1 function and arity-2 function.
+ * To fully curry the original function, pass the results into `curry` or `yrruc` as appropriate.
+ *
+ * See also `curryLeft` and `curryMiddle`, which do the same for the first and second arguments, respectively.
+ * @template A - The type of the first argument of the input function.
+ * @template B - The type of the second argument of the input function.
+ * @template C - The type of the third argument of the input function.
+ * @template R - The return type of the function.
+ * @param fn - The function to curry.
+ * @returns A curried function that takes the third argument
+ *  and returns a function that takes the first and second arguments.
+ */
+export function curryRight<A, B, C, R>(fn: (first: A, second: B, third: C) => R): Transform<C, Combine<A, B, R>> {
+  return (third: C) => (first: A, second: B) => fn(first, second, third)
+}
+
+/**
  * Widen a mapping function to operate on `Optional` values.
  * `undefined` inputs will be translated to `undefined` outputs.
  *
@@ -130,7 +218,7 @@ export const noOp: Action<unknown> = () => { }
 
 /**
  * Partially apply a value to a `Transform`.
- * Reduces the order of the function from 1 to 0.
+ * Reduces the arity of the function from 1 to 0.
  *
  * @typeParam T The type of the value to transform.
  * @typeParam R The type of the result.
@@ -144,7 +232,7 @@ export function partial<T, R>(transform: Transform<T, R>, value: T): Thunk<R> {
 
 /**
  * Partially apply a value to the left (first) parameter of a `Combine`.
- * Reduces the order of the function from 2 to 1.
+ * Reduces the arity of the function from 2 to 1.
  *
  * @typeParam A - The type of the left argument of the `Combine`.
  * @typeParam B - The type of the right argument of the `Combine`.
@@ -159,7 +247,7 @@ export function partialLeft<A, B, R>(combine: Combine<A, B, R>, value: A): Trans
 
 /**
  * Partially apply a value to the right (second) parameter of a `Combine`.
- * Reduces the order of the function from 2 to 1.
+ * Reduces the arity of the function from 2 to 1.
  *
  * @typeParam A - The type of the left argument of the `Combine`.
  * @typeParam B - The type of the right argument of the `Combine`.
@@ -246,3 +334,17 @@ export function thunk<T>(value: T): Thunk<T> {
   return () => value
 }
 
+/**
+ * Convert a Combine function into a Transform function.
+ * This function transforms the second argument of the Combine function into another Transform function.
+ * In turn, this second function transforms the first Combine argument into the return value.
+ * Thus, `curry` converts an arity-2 function into two arity-1 functions.
+ *
+ * See also `curry`, which does the same, except with the opposite argument order.
+ *
+ * @param combine - The function to curry.
+ * @returns A curried function that takes the second argument and returns a function that takes the first argument.
+ */
+export function yrruc<A, B, R>(combine: Combine<A, B, R>): Transform<B, Transform<A, R>> {
+  return curry(commute(combine))
+}

@@ -137,6 +137,81 @@ describe("typeGuards", () => {
     })
   })
 
+  describe("isEquality", () => {
+    it("returns true if the values are equal", () => {
+      expect(lib.isEquality(42, 42)).toBe(true)
+    })
+
+    it("returns true if the values are the same string", () => {
+      expect(lib.isEquality("42", "42")).toBe(true)
+    })
+
+    it("returns true if both values are undefined", () => {
+      expect(lib.isEquality(undefined, undefined)).toBe(true)
+    })
+
+    it("returns true if both values are null", () => {
+      expect(lib.isEquality(null, null)).toBe(true)
+    })
+
+    it("returns true if both values are Infinity", () => {
+      expect(lib.isEquality(Infinity, Infinity)).toBe(true)
+    })
+
+    it("returns false if both values are NaN", () => {
+      expect(lib.isEquality(NaN, NaN)).toBe(false)
+    })
+
+    it("returns false if the values are symbols", () => {
+      expect(lib.isEquality(Symbol("test"), Symbol("test"))).toBe(false)
+    })
+
+    it("returns false if the values are different objects", () => {
+      expect(lib.isEquality({ key: "test" }, { key: "test" })).toBe(false)
+    })
+
+    it("returns false if the values are not equal", () => {
+      expect(lib.isEquality<unknown>(42, "42")).toBe(false)
+    })
+  })
+
+  describe("isString", () => {
+    it("returns true for a string", () => {
+      const result = lib.isString("Hello")
+      expect(result).toBe(true)
+    })
+
+    it("returns false for a number", () => {
+      const result = lib.isString(42)
+      expect(result).toBe(false)
+    })
+
+    it("returns false for a boolean", () => {
+      const result = lib.isString(true)
+      expect(result).toBe(false)
+    })
+
+    it("returns false for an object", () => {
+      const result = lib.isString({ toString: () => "Value of Object" })
+      expect(result).toBe(false)
+    })
+
+    it("returns false for null", () => {
+      const result = lib.isString(null)
+      expect(result).toBe(false)
+    })
+
+    it("returns false for undefined", () => {
+      const result = lib.isString(undefined)
+      expect(result).toBe(false)
+    })
+
+    it("returns false for a symbol", () => {
+      const result = lib.isString(Symbol("Test Symbol"))
+      expect(result).toBe(false)
+    })
+  })
+
   describe("isPlural", () => {
     it("returns true for an array with elements", () => {
       expect(lib.isPlural([1, 2, 3])).toBe(true)
