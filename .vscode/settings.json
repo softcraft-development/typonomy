@@ -1,10 +1,13 @@
 {
   "cSpell.words": [
+    "Arity",
     "camelcase",
     "IIFE",
+    "nullary",
     "outdir",
     "outfile",
     "typonomy",
+    "uncurrying",
     "unexcluded",
     "yrruc"
   ]
