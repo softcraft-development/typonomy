@@ -137,6 +137,18 @@ describe("fp", () => {
     })
   })
 
+  describe("offsetIndexReducer", () => {
+    function testReducer(state: [string, number][], value: string, index: number): [string, number][] {
+      state.push([value, index])
+      return state
+    }
+    const reducer = lib.offsetIndexReducer(testReducer, 11)
+
+    it("adds the base to the index", () => {
+      expect(reducer([], "A value", 13)).toEqual([["A value", 24]])
+    })
+  })
+
   describe("partial", () => {
     it("partially applies a value to the parameter of a Transform", () => {
       const thunk = lib.partial(valueToString, 23)

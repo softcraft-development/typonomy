@@ -217,6 +217,19 @@ export function mapOptional<T, R>(map: Mapper<T, R>): Mapper<Optional<T>, Option
 export const noOp: Action<unknown> = () => { }
 
 /**
+ * Applies an offset to the numeric index of a reducer.
+ *
+ * @template S - The type of the state.
+ * @template V - The type of the value.
+ * @param reducer - The input reducer.
+ * @param offset - The amount to add to the index.
+ * @returns A new reducer function with the offset applied to the index parameter.
+ */
+export function offsetIndexReducer<S, V>(reducer: Reducer<S, V, number>, offset: number): Reducer<S, V, number> {
+  return (state, value, index) => reducer(state, value, offset + index)
+}
+
+/**
  * Partially apply a value to a `Transform`.
  * Reduces the arity of the function from 1 to 0.
  *
