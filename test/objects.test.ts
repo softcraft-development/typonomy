@@ -162,6 +162,18 @@ describe("object", () => {
     })
   })
 
+  describe("plucker", () => {
+    interface TestType {
+      a: number
+      b: string
+    }
+    it("returns a pluck function", () => {
+      const pluckA = lib.plucker<TestType, "a">("a")
+      const obj = { a: 19, b: "Test string" }
+      expect(pluckA(obj)).toEqual(19)
+    })
+  })
+
   describe("recordOf", () => {
     describe("by default", () => {
       it("returns an empty object", () => {

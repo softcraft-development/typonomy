@@ -1,7 +1,7 @@
 import { bag } from "./bags"
 import { Break, onBreakExecution } from "./break"
 import { isEmptyObject, isEquality, isObject, isPropertyKey, isUndefined, typeGuard } from "./typeGuards"
-import type { Bag, Combine, Optional, Predicate, Reducer, TypeGuard } from "./types"
+import type { Bag, Combine, Optional, Predicate, Reducer, Transform, TypeGuard } from "./types"
 
 export function isKeyOf<T extends object>(value: unknown, example: T): value is keyof T {
   if (!isPropertyKey(value)) return false
@@ -95,6 +95,18 @@ export function reduceObject<S, T extends Record<keyof T, V>, V = unknown>(
  */
 export function objectOf<T>(obj: T): T {
   return obj
+}
+
+/**
+ * Returns a Transform that extracts the specified property from an object.
+ *
+ * @typeParam T - The type of the object that contains the property.
+ * @typeParam K - The key of T to extract. Note that this should be the same value as the `property`.
+ * @param property - The name of the property to extract. Note that this should be the same value as `K`
+ * @returns A transform function that takes an object and returns the value of the specified property.
+ */
+export function plucker<T, K extends keyof T>(property: K): Transform<T, T[K]> {
+  return (obj: T): T[K] => obj[property]
 }
 
 /**
