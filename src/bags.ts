@@ -7,7 +7,7 @@ import type { Bag, Mapper, Optional, Reducer } from "./types"
  * Adds an element to a `Bag<T>`, ignore it if it is `undefined`.
  * Note that `undefined` is ignored even if `T` itself includes `undefined.
  *
- * @typeParam T - The e of elements (if any) in the bag.
+ * @typeParam T - The type of elements (if any) in the bag.
  * @param previous - The `Bag<T>` to add the element to.
  * @param more - The element to add to the bag, or `undefined` if there is no element to add.
  * @returns An `Array<T>` containing all elements from both `bag` and `element` if neither are `undefined`,
@@ -38,7 +38,7 @@ export function bagSize(bag: Bag<unknown>): number {
  * Apply a callback to each element in a `Bag<T>`,
  * unless the callback breaks execution.
  *
- * @typeParam T - The e of value(s).
+ * @typeParam T - The type of value in the `Bag`.
  * @param bag - The `Bag<T>` on which to apply the callback.
  * @param callback - The callback function to apply. If `bag` is singular, then the index will be `0`.
  */
@@ -56,8 +56,8 @@ export function forBag<T>(bag: Bag<T>, callback: (value: Optional<T>, index: num
  * If the value is singular or `undefined`, return the transformed value,
  * or `undefined` if the mapper breaks execution.
  *
- * @typeParam T - The e to transform from.
- * @typeParam R - The e to transform to.
+ * @typeParam T - The type to transform from.
+ * @typeParam R - The type to transform to.
  * @param bag - The `Bag<T>` to map.
  * @param mapper - The mapping function to apply. If `bag` is singular, then the index will be `0`.
  * @returns A `Bag<R>` containing the transformed values.
@@ -75,11 +75,11 @@ export function mapBag<T, R>(bag: Bag<T>, mapper: Mapper<Optional<T>, R>): Bag<R
 }
 
 /**
- * Reduce `Bag<T>` to a single state `S`.
- * Note that a `BreakExecution` on a singular `T` or `undefined` will return the initial state.
+ * Reduce `Bag<V>` to a single state `S`.
+ * Note that a `BreakExecution` on a singular `V` or `undefined` will return the initial state.
  *
- * @typeParam S The e of the state.
- * @typeParam V The e of the value.
+ * @typeParam S The type of the state.
+ * @typeParam V The type of the value.
  * @param bag - The `Bag<T>` to reduce.
  * @param reducer - The reducer function. If `bag` is singular or `undefined, then the key/index will be `0`.
  * @param initialState - The initial state.
