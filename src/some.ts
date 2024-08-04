@@ -48,3 +48,15 @@ export function reduceSome<S, V>(some: Some<V>, reducer: Reducer<S, Defined<V>, 
     return reducer(state, value as Defined<V>, index)
   }, initialState)
 }
+
+/**
+ * Returns the number of items in the `Some`.
+ *
+ * @param some - The `Some`.
+ * @returns The number of items in the `Some`. Always returns number that is positive and finite.
+ */
+
+export function someSize(some: Some<unknown>): number {
+  if (isPlural(some)) return some.length
+  return 1
+}

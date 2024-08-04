@@ -23,6 +23,18 @@ export function bag<T>(previous: Bag<T>, more?: T): Bag<T> {
 }
 
 /**
+ * Returns the number of items in the `Bag`.
+ *
+ * @param bag - The `Bag`.
+ * @returns The number of items in the bag. Always returns number that is non-negative and finite.
+ */
+export function bagSize(bag: Bag<unknown>): number {
+  if (isUndefined(bag)) return 0
+  if (isPlural(bag)) return bag.length
+  return 1
+}
+
+/**
  * Apply a callback to each element in a `Bag<T>`,
  * unless the callback breaks execution.
  *

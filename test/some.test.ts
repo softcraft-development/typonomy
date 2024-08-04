@@ -1,6 +1,7 @@
-import { describe, expect, it, vi } from "vitest"
+import { beforeEach, describe, expect, it, vi } from "vitest"
 import { Break } from "../src/break"
 import * as lib from "../src/some"
+import type { Some } from "../src/types"
 
 describe("some", () => {
   describe("addMore", () => {
@@ -146,6 +147,30 @@ describe("some", () => {
           const result = lib.reduceSome([5, 7, 11, 13], reducer, 17)
           expect(result).toBe(5 + 7 + 17)
         })
+      })
+    })
+  })
+
+  describe("someSize", () => {
+    let some: Some<string>
+
+    describe("for a single item", () => {
+      beforeEach(() => {
+        some = "A single item"
+      })
+
+      it("is one", () => {
+        expect(lib.someSize(some)).toEqual(1)
+      })
+    })
+
+    describe("for multiple items", () => {
+      beforeEach(() => {
+        some = lib.addMore("First", "Second")
+      })
+
+      it("is the number of items", () => {
+        expect(lib.someSize(some)).toEqual(2)
       })
     })
   })

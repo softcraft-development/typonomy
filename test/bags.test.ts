@@ -89,6 +89,39 @@ describe("bags", () => {
     })
   })
 
+  describe("bagSize", () => {
+    let bag: Bag<string>
+    describe("for undefined", () => {
+      beforeEach(() => {
+        bag = undefined
+      })
+
+      it("is zero", () => {
+        expect(lib.bagSize(bag)).toEqual(0)
+      })
+    })
+
+    describe("for a single item", () => {
+      beforeEach(() => {
+        bag = "A single item"
+      })
+
+      it("is one", () => {
+        expect(lib.bagSize(bag)).toEqual(1)
+      })
+    })
+
+    describe("for multiple items", () => {
+      beforeEach(() => {
+        bag = lib.bag("First", "Second")
+      })
+
+      it("is the number of items", () => {
+        expect(lib.bagSize(bag)).toEqual(2)
+      })
+    })
+  })
+
   describe("forBag", () => {
     describe("with a single value", () => {
       it("should apply the callback with index 0", () => {
