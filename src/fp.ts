@@ -4,9 +4,9 @@ import type { Action, Combine, Mapper, Optional, Reducer, Thunk, Transform, Type
 /**
  * Swap the argument order of a Combine (arity-2) function.
  *
- * @template A - The type of the first argument of the input Combine.
- * @template B - The type of the second argument of the input Combine.
- * @template R - The return type of the function.
+ * @typeParam A - The type of the first argument of the input Combine.
+ * @typeParam B - The type of the second argument of the input Combine.
+ * @typeParam R - The return type of the function.
  * @param combine - The function to commute.
  * @returns A new Combine that takes the arguments in reverse order.
  */
@@ -147,10 +147,10 @@ export function curry<A, B, R>(combine: Combine<A, B, R>): Transform<A, Transfor
  * To fully curry the original function, pass the results into `curry` or `yrruc` as appropriate.
  *
  * See also `curryMiddle` and `curryRight`, which do the same for the second and third arguments, respectively.
- * @template A - The type of the first argument of the input function.
- * @template B - The type of the second argument of the input function.
- * @template C - The type of the third argument of the input function.
- * @template R - The return type of the function.
+ * @typeParam A - The type of the first argument of the input function.
+ * @typeParam B - The type of the second argument of the input function.
+ * @typeParam C - The type of the third argument of the input function.
+ * @typeParam R - The return type of the function.
  * @param fn - The function to curry.
  * @returns A curried function that takes the first argument
  *  and returns a function that takes the second and third arguments.
@@ -167,10 +167,10 @@ export function curryLeft<A, B, C, R>(fn: (first: A, second: B, third: C) => R):
  * To fully curry the original function, pass the results into `curry` or `yrruc` as appropriate.
  *
  * See also `curryLeft` and `curryRight`, which do the same for the first and third arguments, respectively.
- * @template A - The type of the first argument of the input function.
- * @template B - The type of the second argument of the input function.
- * @template C - The type of the third argument of the input function.
- * @template R - The return type of the function.
+ * @typeParam A - The type of the first argument of the input function.
+ * @typeParam B - The type of the second argument of the input function.
+ * @typeParam C - The type of the third argument of the input function.
+ * @typeParam R - The return type of the function.
  * @param fn - The function to curry.
  * @returns A curried function that takes the second argument
  *  and returns a function that takes the first and third arguments.
@@ -187,10 +187,10 @@ export function curryMiddle<A, B, C, R>(fn: (first: A, second: B, third: C) => R
  * To fully curry the original function, pass the results into `curry` or `yrruc` as appropriate.
  *
  * See also `curryLeft` and `curryMiddle`, which do the same for the first and second arguments, respectively.
- * @template A - The type of the first argument of the input function.
- * @template B - The type of the second argument of the input function.
- * @template C - The type of the third argument of the input function.
- * @template R - The return type of the function.
+ * @typeParam A - The type of the first argument of the input function.
+ * @typeParam B - The type of the second argument of the input function.
+ * @typeParam C - The type of the third argument of the input function.
+ * @typeParam R - The return type of the function.
  * @param fn - The function to curry.
  * @returns A curried function that takes the third argument
  *  and returns a function that takes the first and second arguments.
@@ -221,8 +221,8 @@ export const noOp: Action<unknown> = () => { }
 /**
  * Applies an offset to the numeric index of a reducer.
  *
- * @template S - The type of the state.
- * @template V - The type of the value.
+ * @typeParam S - The type of the state.
+ * @typeParam V - The type of the value.
  * @param reducer - The input reducer.
  * @param offset - The amount to add to the index.
  * @returns A new reducer function with the offset applied to the index parameter.
