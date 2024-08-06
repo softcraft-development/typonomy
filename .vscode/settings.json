@@ -5,7 +5,10 @@
     "outdir",
     "outfile",
     "typonomy",
+    "uncurried",
+    "uncurry",
     "unexcluded",
+    "unyrruc",
     "yrruc"
   ]
 }

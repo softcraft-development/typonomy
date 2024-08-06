@@ -128,7 +128,9 @@ export function composeRight<A, B, I, R>(
  * In turn, this second function transforms the second Combine argument into the return value.
  * Thus, `curry` converts an arity-2 function into two arity-1 functions.
  *
- * See also `yrruc`, which does the same, except with the opposite argument order.
+ * See also:
+ *   * `yrruc`, which does the same, except with the opposite argument order.
+ *   * `uncurry`, which does the opposite transformation.
  *
  * @param combine - The function to curry.
  * @returns A curried function that takes the first argument and returns a function that takes the second argument.
@@ -348,12 +350,47 @@ export function thunk<T>(value: T): Thunk<T> {
 }
 
 /**
+ * Convert a curried function into a `Combine` function.
+ * The function to uncurry is a `Transform` that returns a `Transform`.
+ * The parameter to the first `Transform` becomes the first parameter of the resulting Combine function.
+ * `uncurry` is thus the opposite transformation of `curry`.
+ *
+ * @param curried - The function to uncurry.
+ * @returns A `Combine` whose first parameter is that of the first curried Transform,
+ *  and second parameter is that of the resulting Transform.
+ */
+export function uncurry<A, B, R>(curried: Transform<A, Transform<B, R>>): Combine<A, B, R> {
+  return (a: A, b: B): R => curried(a)(b)
+}
+
+/**
+ * Convert a curried function into a `Combine` function.
+ * The function to uncurry is a `Transform` that returns a `Transform`.
+ * The parameter to the first `Transform` becomes the first parameter of the resulting Combine function.
+ * `uncurry` is thus the opposite transformation of `curry`,
+ * and so converts two arity-1 functions into an arity-2 function.
+ *
+ * See also:
+ *   * `uncurry`, which does the same, except with the opposite argument order.
+ *   * `yrruc`, which does the opposite transformation.
+
+ * @param curried - The function to uncurry.
+ * @returns A `Combine` whose first parameter is that of the first curried Transform,
+ *  and second parameter is that of the resulting Transform.
+ */
+export function unyrruc<A, B, R>(curried: Transform<B, Transform<A, R>>): Combine<A, B, R> {
+  return commute(uncurry(curried))
+}
+
+/**
  * Convert a Combine function into a Transform function.
  * This function transforms the second argument of the Combine function into another Transform function.
  * In turn, this second function transforms the first Combine argument into the return value.
  * Thus, `curry` converts an arity-2 function into two arity-1 functions.
  *
- * See also `curry`, which does the same, except with the opposite argument order.
+ * See also:
+ *   * `curry`, which does the same, except with the opposite argument order.
+ *   * `uncurry`, which does the opposite transformation.
  *
  * @param combine - The function to curry.
  * @returns A curried function that takes the second argument and returns a function that takes the first argument.

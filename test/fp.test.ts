@@ -89,9 +89,9 @@ describe("fp", () => {
 
   describe("curry", () => {
     it("curries a combine", () => {
-      const combine = (a: number, b: number) => `A: ${a}, B: ${b} `
+      const combine = (a: number, b: string) => `A: ${a}, B: ${b}`
       const curried = lib.curry(combine)
-      expect(curried(3)(5)).toEqual(combine(3, 5))
+      expect(curried(3)("A String")).toEqual("A: 3, B: A String")
     })
   })
 
@@ -233,11 +233,27 @@ describe("fp", () => {
     })
   })
 
+  describe("uncurry", () => {
+    it("creates a Combine from curried Transforms", () => {
+      const curried = (a: number) => (b: string) => `A: ${a}, B: ${b}`
+      const combine = lib.uncurry(curried)
+      expect(combine(3, "A String")).toEqual("A: 3, B: A String")
+    })
+  })
+
+  describe("unyrruc", () => {
+    it("creates a Combine from curried Transforms", () => {
+      const curried = (a: number) => (b: string) => `A: ${a}, B: ${b}`
+      const combine = lib.unyrruc(curried)
+      expect(combine("A String", 5)).toEqual("A: 5, B: A String")
+    })
+  })
+
   describe("yrruc", () => {
     it("reverse curries a combine", () => {
-      const combine = (a: number, b: number) => `A: ${a}, B: ${b} `
+      const combine = (a: number, b: string) => `A: ${a}, B: ${b}`
       const curried = lib.yrruc(combine)
-      expect(curried(5)(3)).toEqual(combine(3, 5))
+      expect(curried("A String")(3)).toEqual("A: 3, B: A String")
     })
   })
 })
