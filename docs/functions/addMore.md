@@ -16,7 +16,7 @@ Otherwise, create a new array with the singular `Some` and the new element.
 
 • **T**
 
-The e of the elements.
+The type of the elements.
 
 ## Parameters
 
@@ -36,4 +36,4 @@ An array with the additional element.
 
 ## Source
 
-[some.ts:17](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/some.ts#L17)
+[some.ts:17](https://github.com/softcraft-development/typonomy/blob/c5db2fa8cb85771ae57ef1e5ca7f405fc63a6f0d/src/some.ts#L17)

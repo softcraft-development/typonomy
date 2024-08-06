@@ -18,11 +18,11 @@ or `undefined` if the mapper breaks execution.
 
 • **T**
 
-The e to transform from.
+The type to transform from.
 
 • **R**
 
-The e to transform to.
+The type to transform to.
 
 ## Parameters
 
@@ -42,4 +42,4 @@ A `Bag<R>` containing the transformed values.
 
 ## Source
 
-[bags.ts:53](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/bags.ts#L53)
+[bags.ts:65](https://github.com/softcraft-development/typonomy/blob/c5db2fa8cb85771ae57ef1e5ca7f405fc63a6f0d/src/bags.ts#L65)

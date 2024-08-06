@@ -6,13 +6,13 @@
 
 # Function: bag()
 
-> **bag**\<`T`\>(`bag`, `more`?): [`Bag`](../type-aliases/Bag.md)\<`T`\>
+> **bag**\<`T`\>(`previous`, `more`?): [`Bag`](../type-aliases/Bag.md)\<`T`\>
 
 Adds an element to a `Bag<T>`, ignore it if it is `undefined`.
 Note that `undefined` is ignored even if `T` itself includes `undefined.
 
-@typeParam T - The e of elements (if any) in the bag.
-@param bag - The `Bag<T>` to add the element to.
+@typeParam T - The type of elements (if any) in the bag.
+@param previous - The `Bag<T>` to add the element to.
 @param more - The element to add to the bag, or `undefined` if there is no element to add.
 @returns An `Array<T>` containing all elements from both `bag` and `element` if neither are `undefined`,
   or the `bag` if `element` is `undefined`,
@@ -25,7 +25,7 @@ Note that `undefined` is ignored even if `T` itself includes `undefined.
 
 ## Parameters
 
-• **bag**: [`Bag`](../type-aliases/Bag.md)\<`T`\>
+• **previous**: [`Bag`](../type-aliases/Bag.md)\<`T`\>
 
 • **more?**: `T`
 
@@ -35,4 +35,4 @@ Note that `undefined` is ignored even if `T` itself includes `undefined.
 
 ## Source
 
-[bags.ts:18](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/bags.ts#L18)
+[bags.ts:18](https://github.com/softcraft-development/typonomy/blob/c5db2fa8cb85771ae57ef1e5ca7f405fc63a6f0d/src/bags.ts#L18)

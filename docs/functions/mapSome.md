@@ -8,22 +8,39 @@
 
 > **mapSome**\<`T`, `R`\>(`some`, `mapper`): [`Some`](../type-aliases/Some.md)\<`R`\>
 
+Transforms `Some<T>` to `Some<R>`.
+If the value is plural, return a new array of transformed elements.
+Note that the new array may be shorter than the original if the mapper breaks execution.
+If the value is singular return the transformed value,
+or an empty array if the mapper breaks execution.
+
 ## Type parameters
 
 • **T**
 
+The type to transform from.
+
 • **R**
+
+The type to transform to.
 
 ## Parameters
 
 • **some**: [`Some`](../type-aliases/Some.md)\<`T`\>
 
+The `Some<T>` to map.
+
 • **mapper**: [`Mapper`](../type-aliases/Mapper.md)\<[`Defined`](../type-aliases/Defined.md)\<`T`\>, [`Defined`](../type-aliases/Defined.md)\<`R`\>\>
+
+The mapping function to apply. If `some` is singular, then the index will be `0`.
 
 ## Returns
 
 [`Some`](../type-aliases/Some.md)\<`R`\>
 
+A `Some<R>` containing the transformed values.
+ May be an empty array if the mapper breaks execution on a singular `some`.
+
 ## Source
 
-[some.ts:31](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/some.ts#L31)
+[some.ts:54](https://github.com/softcraft-development/typonomy/blob/c5db2fa8cb85771ae57ef1e5ca7f405fc63a6f0d/src/some.ts#L54)

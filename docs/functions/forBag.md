@@ -15,7 +15,7 @@ unless the callback breaks execution.
 
 • **T**
 
-The e of value(s).
+The type of value in the `Bag`.
 
 ## Parameters
 
@@ -33,4 +33,4 @@ The callback function to apply. If `bag` is singular, then the index will be `0`
 
 ## Source
 
-[bags.ts:33](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/bags.ts#L33)
+[bags.ts:45](https://github.com/softcraft-development/typonomy/blob/c5db2fa8cb85771ae57ef1e5ca7f405fc63a6f0d/src/bags.ts#L45)

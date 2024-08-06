@@ -34,4 +34,4 @@ The new element.
 
 ## Source
 
-[arrays.ts:14](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/arrays.ts#L14)
+[arrays.ts:14](https://github.com/softcraft-development/typonomy/blob/c5db2fa8cb85771ae57ef1e5ca7f405fc63a6f0d/src/arrays.ts#L14)

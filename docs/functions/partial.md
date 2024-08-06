@@ -9,7 +9,7 @@
 > **partial**\<`T`, `R`\>(`transform`, `value`): [`Thunk`](../type-aliases/Thunk.md)\<`R`\>
 
 Partially apply a value to a `Transform`.
-Reduces the order of the function from 1 to 0.
+Reduces the arity of the function from 1 to 0.
 
 ## Type parameters
 
@@ -39,4 +39,4 @@ A Thunk function that returns the transformed input value.
 
 ## Source
 
-[fp.ts:141](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/fp.ts#L141)
+[fp.ts:244](https://github.com/softcraft-development/typonomy/blob/c5db2fa8cb85771ae57ef1e5ca7f405fc63a6f0d/src/fp.ts#L244)

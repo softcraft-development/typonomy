@@ -8,18 +8,18 @@
 
 > **reduceBag**\<`S`, `V`\>(`bag`, `reducer`, `initialState`): `S`
 
-Reduce `Bag<T>` to a single state `S`.
-Note that a `BreakExecution` on a singular `T` or `undefined` will return the initial state.
+Reduce `Bag<V>` to a single state `S`.
+Note that a `BreakExecution` on a singular `V` or `undefined` will return the initial state.
 
 ## Type parameters
 
 • **S**
 
-The e of the state.
+The type of the state.
 
 • **V**
 
-The e of the value.
+The type of the value.
 
 ## Parameters
 
@@ -43,4 +43,4 @@ The final state.
 
 ## Source
 
-[bags.ts:76](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/bags.ts#L76)
+[bags.ts:88](https://github.com/softcraft-development/typonomy/blob/c5db2fa8cb85771ae57ef1e5ca7f405fc63a6f0d/src/bags.ts#L88)

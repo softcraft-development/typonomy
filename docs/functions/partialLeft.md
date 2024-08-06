@@ -9,7 +9,7 @@
 > **partialLeft**\<`A`, `B`, `R`\>(`combine`, `value`): [`Transform`](../type-aliases/Transform.md)\<`B`, `R`\>
 
 Partially apply a value to the left (first) parameter of a `Combine`.
-Reduces the order of the function from 2 to 1.
+Reduces the arity of the function from 2 to 1.
 
 ## Type parameters
 
@@ -43,4 +43,4 @@ A `Transform` function function for the right parameter of the `Combine`.
 
 ## Source
 
-[fp.ts:156](https://github.com/softcraft-development/typonomy/blob/71207c5f8a51cd78ebdeff79293f44e522cae748/src/fp.ts#L156)
+[fp.ts:259](https://github.com/softcraft-development/typonomy/blob/c5db2fa8cb85771ae57ef1e5ca7f405fc63a6f0d/src/fp.ts#L259)
