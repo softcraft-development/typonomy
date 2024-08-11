@@ -48,6 +48,16 @@ export type Entry<T extends object, V = unknown> = [keyof T, V]
 export type Explicit<T> = Exclude<T, Nullish>
 
 /**
+ * A type for objects that can be represented in JSON.
+ */
+export type JsonObject = { [key: string]: Json }
+
+/**
+ * A type for all values that can be represented in JSON.
+ */
+export type Json = string | number | boolean | null | Json[] | JsonObject
+
+/**
  * A function that transforms from one type (and its numeric index) to another.
  * Note that `Transform<T,R>` are `Mapper<T,R>` that ignore the indexes.
  * @typeParam T - The input type.
