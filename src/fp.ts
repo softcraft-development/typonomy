@@ -293,11 +293,10 @@ export function passThrough<T>(value: T): T {
  * @typeParam S - The type of the state.
  * @typeParam V - The type of value to reduce.
  * @typeParam X - The type of value to ignore.
- * @typeParam L - The type of the key.
+ * @typeParam K - The type of the key.
  * @param typeGuard - The `TypeGuard<V>` to check if the value should be reduced.
  * @param reducer - The `Reducer<S,V,K>` to reduce matching values.
- * @param initialState - The initial state.
- * @returns The final state.
+ * @returns A Reducer that accepts either `V` or `X` values.
  */
 export function reduceIf<S, V, X, K>(
   typeGuard: TypeGuard<V>,

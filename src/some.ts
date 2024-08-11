@@ -26,10 +26,9 @@ export function addMore<T>(some: Some<T>, more: Defined<T>): Defined<T>[] {
  * unless the callback breaks execution.
  *
  * @typeParam T - The type of value in the `Some`.
- * @param bag - The `Some<T>` on which to apply the callback.
+ * @param some - The `Some<T>` on which to apply the callback.
  * @param callback - The callback function to apply. If `some` is singular, then the index will be `0`.
  */
-
 export function forSome<T>(some: Some<T>, callback: Combine<Defined<T>, number, void>): void {
   reduceSome(some, (state, value, index) => {
     callback(value, index)
@@ -70,7 +69,7 @@ export function mapSome<T, R>(some: Some<T>, mapper: Mapper<Defined<T>, Defined<
  *
  * @typeParam S The type of the state.
  * @typeParam V The type of the value.
- * @param bag - The `Some<V>` to reduce.
+ * @param some - The `Some<V>` to reduce.
  * @param reducer - The reducer function. If `bag` is singular, then the key/index will be `0`.
  * @param initialState - The initial state.
  * @returns The final state.
