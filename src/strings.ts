@@ -1,5 +1,6 @@
 import { reduceArray } from "./arrays"
-import type { Possible, Reducer } from "./types"
+import { isNullish, undefine } from "./typeGuards"
+import type { Combine, Optional, Possible, Reducer } from "./types"
 
 /**
  * Concatenates two strings
@@ -13,6 +14,25 @@ import type { Possible, Reducer } from "./types"
 export function concat(a: string, b: Possible<string>): string {
   if (!b) return a
   return `${a}${b}`
+}
+
+/**
+ * Create a Combine that concatenates two strings with a given separator.
+ * If both values are `Nullish`, return `undefined`.
+ * If one value is `Nullish`, return the other string.
+ * Can be used as a Reducer for strings as well.
+ *
+ * @param separator - The string used to join two strings. Defaults to `,`.
+ * @returns A function that joins strings using `separator` when both strings are not `Nullish`,
+ *   or returns the other string when one is `Nullish`
+ *   or `undefined` when both are `Nullish`.
+ */
+export function joiner(separator: string = ","): Combine<Possible<string>, Possible<string>, Optional<string>> {
+  return (a, b) => {
+    if (isNullish(a)) return undefine(b)
+    if (isNullish(b)) return undefine(a)
+    return `${a}${separator}${b}`
+  }
 }
 
 /**
