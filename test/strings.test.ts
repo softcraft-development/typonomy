@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest"
 import { reduceBag } from "../src/bags"
+import { reduceSome } from "../src/some"
 import * as lib from "../src/strings"
 import type { Optional, Possible, Thunk } from "../src/types"
 
@@ -205,6 +206,18 @@ describe("strings", () => {
           expect(result()).toEqual("-")
         })
       })
+    })
+
+    it("reduces strings to a separated list", () => {
+      expect(reduceSome(["a", "b", "c", "d"], combine, undefined)).toBe("a-b-c-d")
+    })
+
+    it("reduces a single string to that string", () => {
+      expect(reduceSome("Single", combine, undefined)).toBe("Single")
+    })
+
+    it("reduces undefined to the initial state", () => {
+      expect(reduceBag(undefined, combine, "Initial")).toBe("Initial")
     })
   })
 
