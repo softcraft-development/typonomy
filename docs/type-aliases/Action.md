@@ -27,4 +27,4 @@ Any type.
 
 ## Source
 
-[types.ts:7](https://github.com/softcraft-development/typonomy/blob/c5db2fa8cb85771ae57ef1e5ca7f405fc63a6f0d/src/types.ts#L7)
+[types.ts:7](https://github.com/softcraft-development/typonomy/blob/dfbcc96600b9b9b8c6faf47f3caef423e4f1568c/src/types.ts#L7)

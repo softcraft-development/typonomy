@@ -49,4 +49,4 @@ A curried function that takes the first argument
 
 ## Source
 
-[fp.ts:158](https://github.com/softcraft-development/typonomy/blob/c5db2fa8cb85771ae57ef1e5ca7f405fc63a6f0d/src/fp.ts#L158)
+[fp.ts:158](https://github.com/softcraft-development/typonomy/blob/dfbcc96600b9b9b8c6faf47f3caef423e4f1568c/src/fp.ts#L158)
