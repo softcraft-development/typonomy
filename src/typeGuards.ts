@@ -1,5 +1,5 @@
 import { and, not, or, some } from "./logic"
-import type { Bag, Defined, Explicit, Nullish, Possible, Predicate, Some, TypeGuard } from "./types"
+import type { Bag, Defined, Explicit, Nullable, Nullish, Optional, Possible, Predicate, Some, TypeGuard } from "./types"
 
 /**
  * Ensures that the given value is neither `null` nor `undefined`.
@@ -249,6 +249,17 @@ export function narrow<T, X>(base: TypeGuard<T | X>, excluded: TypeGuard<X>): Ty
 }
 
 /**
+ * Converts undefined to null, or returns the original value.
+ *
+ * @param value - The value to convert.
+ * @returns `null` if the value is `undefined`, or the original value otherwise.
+ */
+export function nullify<T>(value: Possible<T>): Nullable<T> {
+  if (isUndefined(value)) return null
+  return value
+}
+
+/**
  * Convert a `Predicate<unknown>` into a type guard for a type.
  * @typeParam T - The type of the resulting TypeGuard.
  * @param predicate - The `Predicate<unknown>` used to check the type.
@@ -256,6 +267,17 @@ export function narrow<T, X>(base: TypeGuard<T | X>, excluded: TypeGuard<X>): Ty
  */
 export function typeGuard<T>(predicate: Predicate<unknown>): TypeGuard<T> {
   return (value: unknown): value is T => predicate(value)
+}
+
+/**
+ * Converts null to undefined, or returns the original value.
+ *
+ * @param value - The value to convert.
+ * @returns `undefined` if the value is `null`, or the original value otherwise.
+ */
+export function undefine<T>(value: Possible<T>): Optional<T> {
+  if (isNull(value)) return undefined
+  return value
 }
 
 /**

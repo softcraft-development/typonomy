@@ -593,6 +593,21 @@ describe("typeGuards", () => {
     })
   })
 
+  describe("nullify", () => {
+    it("returns null for undefined", () => {
+      expect(lib.nullify(undefined)).toBe(null)
+    })
+
+    it("returns null for null", () => {
+      expect(lib.nullify(null)).toBe(null)
+    })
+
+    it("returns an explicit value", () => {
+      const value = { key: "Explicit" }
+      expect(lib.nullify(value)).toBe(value)
+    })
+  })
+
   describe("narrow", () => {
     describe("for union types", () => {
       type Wide = string | null
@@ -656,6 +671,21 @@ describe("typeGuards", () => {
     it("guards against invalid types", () => {
       const obj: unknown = { even: -1 }
       expect(guard(obj)).toBe(false)
+    })
+  })
+
+  describe("undefine", () => {
+    it("returns undefined for undefined", () => {
+      expect(lib.undefine(undefined)).toBe(undefined)
+    })
+
+    it("returns undefined for null", () => {
+      expect(lib.undefine(null)).toBe(undefined)
+    })
+
+    it("returns an explicit value", () => {
+      const value = { key: "Explicit" }
+      expect(lib.undefine(value)).toBe(value)
     })
   })
 
