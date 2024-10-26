@@ -1,8 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import { mapArray } from "../src/arrays"
 import * as lib from "../src/fp"
+import { isNumber } from "../src/number"
 import { concat, valueToString } from "../src/strings"
-import { isNumber, isString } from "../src/typeGuards"
+import { isString } from "../src/typeGuards"
 import type { Transform, TypeGuard } from "../src/types"
 
 describe("Tuples", () => {

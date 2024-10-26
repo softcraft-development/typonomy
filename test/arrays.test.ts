@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest"
 import * as lib from "../src/arrays"
 import { Break } from "../src/break"
-import { isNumber } from "../src/typeGuards"
+import { isNumber } from "../src/number"
 import type { Optional } from "../src/types"
 
 describe("append", () => {

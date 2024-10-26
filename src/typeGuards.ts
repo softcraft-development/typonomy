@@ -1,6 +1,6 @@
 import { isArrayOf } from "./arrays"
-import { negativeInfinity, positiveInfinity } from "./constants"
 import { and, not, or, some } from "./logic"
+import { isFiniteNumber, isNumber } from "./number"
 import { isRecordOf } from "./objects"
 import * as types from "./types"
 
@@ -34,25 +34,6 @@ export function isEquality<T>(a: T, b: T): boolean {
  */
 export function isExplicit<T>(value: types.Possible<T>): value is types.Explicit<T> {
   return !isNullish(value)
-}
-
-/**
- * Checks if a value is a `number` that is not `Infinity`, `-Infinity`, or `NaN`.
- * Note that this is the branded type guard version of `isFinite`.
- * @param value - The value to check.
- * @returns `true` if `value` is a `number` which is not `Infinity`, `-Infinity` or `NaN`; `false` otherwise.
- */
-export function isFiniteNumber(value: unknown): value is types.Finite {
-  return isNumber(value, false, false)
-}
-
-/**
- * Checks if a value is positive or negative `Infinity`.
- * @param value - The value to check.
- * @returns `true` if the value is `Infinity` or `-Infinity`, `false` otherwise.
- */
-export function isInfinite(value: unknown): value is types.Infinite {
-  return isPositiveInfinity(value) || isNegativeInfinity(value)
 }
 
 /**
@@ -110,24 +91,6 @@ export function isJsonScalar(value: unknown): value is types.JsonScalar {
 }
 
 /**
- * Checks if a value is (negative) `-Infinity`.
- * @param value - The value to check.
- * @returns `true` if the value is `-Infinity`, `false` otherwise.
- */
-export function isNegativeInfinity(value: unknown): value is types.NegativeInfinity {
-  return value === negativeInfinity
-}
-
-/**
- * Checks if a value is NaN.
- * @param value - The value to check.
- * @returns `true` if the value is `NaN`, `false` otherwise.
- */
-export function isNotANumber(value: unknown): value is types.NotANumber {
-  return isNumber(value, true, false) && isNaN(value)
-}
-
-/**
    * Checks if a value is null.
    *
    * @param value - The value to check.
@@ -144,22 +107,6 @@ export function isNull(value: unknown): value is null {
    * @returns `true` if the value is `null` or `undefined`; `false` otherwise.
    */
 export const isNullish = typeGuard<types.Nullish>(or(isNull, isUndefined))
-
-/**
-   * Checks if a value is a number.
-   *
-   * @param value - The value to check.
-   * @param nanAllowed - Whether `NaN` considered a valid number. Defaults to `false`.
-   * @param infiniteAllowed - Whether `Infinity` or `-Infinity` are considered a valid numbers. Defaults to `false`.
-   * @returns `true` if the value is a number (including `NaN`, `Infinity`, or `-Infinity` when allowed),
-   *   `false` otherwise.
-   */
-export function isNumber(value: unknown, nanAllowed = false, infiniteAllowed = false): value is number {
-  if (typeof value !== "number") return false
-  if (isNaN(value)) return nanAllowed
-  if (isInfinite(value)) return infiniteAllowed
-  return true
-}
 
 /**
    * Checks if a value is a non-`Array` non-`null` `object`.
@@ -182,15 +129,6 @@ export function isObject(value: unknown): value is object {
 export function isPlural<T>(value: types.Bag<T>): value is T[] {
   // Undefined is not an array so we don't need to check it explicitly here.
   return Array.isArray(value)
-}
-
-/**
- * Checks if a value is positive `Infinity`.
- * @param value - The value to check.
- * @returns `true` if the value is `Infinity`, `false` otherwise.
- */
-export function isPositiveInfinity(value: unknown): value is types.PositiveInfinity {
-  return value === positiveInfinity
 }
 
 /**

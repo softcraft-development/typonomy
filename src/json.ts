@@ -1,4 +1,5 @@
-import { isFiniteNumber, isObject } from "./typeGuards"
+import { isFiniteNumber } from "./number"
+import { isObject } from "./typeGuards"
 import type { Json, JsonCollection, JsonObject, JsonParsed } from "./types"
 
 /**

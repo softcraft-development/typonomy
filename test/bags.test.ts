@@ -1,7 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import * as lib from "../src/bags"
 import { Break } from "../src/break"
-import { isNumber, isUndefined } from "../src/typeGuards"
+import { isNumber } from "../src/number"
+import { isUndefined } from "../src/typeGuards"
 import type { Bag, Optional, Thunk } from "../src/types"
 
 describe("bag", () => {

@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest"
 import { Break } from "../src/break"
 import { or } from "../src/logic"
+import { isNumber } from "../src/number"
 import * as lib from "../src/objects"
-import { isBoolean, isNumber, isPropertyKey, isString, isUndefined, isUnknown } from "../src/typeGuards"
+import { isBoolean, isPropertyKey, isString, isUndefined, isUnknown } from "../src/typeGuards"
 
 describe("isEmptyObject", () => {
   it("returns true for an empty object", () => {
