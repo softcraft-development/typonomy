@@ -31,7 +31,7 @@ The reason why execution was aborted. Defaults to "Break Execution".
 
 #### Source
 
-[break.ts:18](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/break.ts#L18)
+[break.ts:18](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/break.ts#L18)
 
 ## Properties
 
@@ -43,7 +43,7 @@ The reason why execution was aborted.
 
 #### Source
 
-[break.ts:12](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/break.ts#L12)
+[break.ts:12](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/break.ts#L12)
 
 ## Methods
 
@@ -61,4 +61,4 @@ The `message` used to construct the `BreakExecution`.
 
 #### Source
 
-[break.ts:26](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/break.ts#L26)
+[break.ts:26](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/break.ts#L26)

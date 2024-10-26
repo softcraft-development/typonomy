@@ -24,4 +24,4 @@ The number of items in the bag. Always returns number that is non-negative and f
 
 ## Source
 
-[bags.ts:32](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/bags.ts#L32)
+[bags.ts:32](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/bags.ts#L32)

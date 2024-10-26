@@ -34,4 +34,4 @@ A transform function that takes an object and returns the value of the specified
 
 ## Source
 
-[objects.ts:141](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/objects.ts#L141)
+[objects.ts:141](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/objects.ts#L141)

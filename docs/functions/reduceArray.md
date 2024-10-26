@@ -51,4 +51,4 @@ The final state.
 
 ## Source
 
-[arrays.ts:172](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/arrays.ts#L172)
+[arrays.ts:172](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/arrays.ts#L172)

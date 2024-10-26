@@ -38,7 +38,7 @@
 
 #### Source
 
-[assertions.ts:8](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/assertions.ts#L8)
+[assertions.ts:8](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/assertions.ts#L8)
 
 ## Properties
 
@@ -48,7 +48,7 @@
 
 #### Source
 
-[assertions.ts:10](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/assertions.ts#L10)
+[assertions.ts:10](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/assertions.ts#L10)
 
 ***
 
@@ -58,4 +58,4 @@
 
 #### Source
 
-[assertions.ts:9](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/assertions.ts#L9)
+[assertions.ts:9](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/assertions.ts#L9)

@@ -34,4 +34,4 @@ An empty `object`.
 
 ## Source
 
-[objects.ts:154](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/objects.ts#L154)
+[objects.ts:154](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/objects.ts#L154)
