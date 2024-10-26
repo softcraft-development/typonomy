@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import * as lib from "../src/objects"
+import * as lib from "../../src/objects"
 
 describe("objectOf", () => {
   it("returns the object", () => {

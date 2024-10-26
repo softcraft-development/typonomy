@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import * as lib from "../src/typeGuards"
+import * as lib from "../../src/typeGuards"
 
 describe("isEquality", () => {
   it("returns true if the values are equal", () => {

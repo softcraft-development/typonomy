@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import * as lib from "../src/fp"
+import * as lib from "../../src/fp"
 
 describe("curry", () => {
   it("curries a combine", () => {

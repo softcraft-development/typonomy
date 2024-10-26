@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import * as lib from "../src/arrays"
+import * as lib from "../../src/arrays"
 
 describe("append", () => {
   it("should append the value to the array", () => {

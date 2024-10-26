@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest"
-import { isNumber } from "../src/numbers"
-import * as lib from "../src/objects"
-import { isString } from "../src/strings"
-import { isUnknown } from "../src/typeGuards"
+import { isNumber } from "../../src/numbers"
+import * as lib from "../../src/objects"
+import { isString } from "../../src/strings"
+import { isUnknown } from "../../src/typeGuards"
 
 describe("isEmptyObject", () => {
   it("returns true for an empty object", () => {

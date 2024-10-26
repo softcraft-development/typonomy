@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest"
-import * as lib from "../src/arrays"
-import { Break } from "../src/break"
-import { isNumber } from "../src/numbers"
-import type { Optional } from "../src/types"
+import * as lib from "../../src/arrays"
+import { Break } from "../../src/break"
+import { isNumber } from "../../src/numbers"
+import type { Optional } from "../../src/types"
 
 describe("arrayOf", () => {
   it("returns an array of the specified size", () => {

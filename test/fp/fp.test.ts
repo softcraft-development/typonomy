@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
-import { mapArray } from "../src/arrays"
-import * as lib from "../src/fp"
-import { isNumber } from "../src/numbers"
-import { concat, isString, valueToString } from "../src/strings"
-import type { Transform, TypeGuard } from "../src/types"
+import { mapArray } from "../../src/arrays"
+import * as lib from "../../src/fp"
+import { isNumber } from "../../src/numbers"
+import { concat, isString, valueToString } from "../../src/strings"
+import type { Transform, TypeGuard } from "../../src/types"
 
 describe("Tuples", () => {
   const tuple: [number, string, boolean, null] = [1, "word", true, null]

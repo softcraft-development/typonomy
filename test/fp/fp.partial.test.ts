@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
-import * as lib from "../src/fp"
-import { valueToString } from "../src/strings"
+import * as lib from "../../src/fp"
+import { valueToString } from "../../src/strings"
 
 describe("partial", () => {
   it("partially applies a value to the parameter of a Transform", () => {

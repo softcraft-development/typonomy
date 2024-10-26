@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest"
-import * as lib from "../src/bags"
-import type { Bag, Optional, Thunk } from "../src/types"
+import * as lib from "../../src/bags"
+import type { Bag, Optional, Thunk } from "../../src/types"
 
 describe("bag", () => {
   interface TestType { key: string }

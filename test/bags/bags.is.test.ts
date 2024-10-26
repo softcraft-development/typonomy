@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
-import * as lib from "../src/bags"
-import { isNumber } from "../src/numbers"
+import * as lib from "../../src/bags"
+import { isNumber } from "../../src/numbers"
 
 describe("isBag", () => {
   describe("isBag", () => {

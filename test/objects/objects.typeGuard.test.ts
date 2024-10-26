@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest"
-import { or } from "../src/logic"
-import { isUndefined } from "../src/nullish"
-import { isNumber } from "../src/numbers"
-import * as lib from "../src/objects"
-import { isString } from "../src/strings"
-import { isBoolean } from "../src/typeGuards"
+import { or } from "../../src/logic"
+import { isUndefined } from "../../src/nullish"
+import { isNumber } from "../../src/numbers"
+import * as lib from "../../src/objects"
+import { isString } from "../../src/strings"
+import { isBoolean } from "../../src/typeGuards"
 
 describe("typeGuardFor", () => {
   interface TestType {

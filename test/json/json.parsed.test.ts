@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import * as lib from "../src/json"
+import * as lib from "../../src/json"
 
 describe("isJsonParsed", () => {
   it("is true for null", () => {

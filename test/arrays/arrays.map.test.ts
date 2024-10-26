@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
-import * as lib from "../src/arrays"
-import { Break } from "../src/break"
-import type { Optional } from "../src/types"
+import * as lib from "../../src/arrays"
+import { Break } from "../../src/break"
+import type { Optional } from "../../src/types"
 
 describe("mapArray", () => {
   it("maps an array of values", () => {

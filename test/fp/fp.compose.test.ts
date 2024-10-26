@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
-import * as lib from "../src/fp"
-import { valueToString } from "../src/strings"
+import * as lib from "../../src/fp"
+import { valueToString } from "../../src/strings"
 
 describe("compose", () => {
   it("creates a transform from the input to result type", () => {

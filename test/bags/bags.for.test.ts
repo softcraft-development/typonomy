@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest"
-import * as lib from "../src/bags"
-import { Break } from "../src/break"
+import * as lib from "../../src/bags"
+import { Break } from "../../src/break"
 
 describe("forBag", () => {
   describe("with a single value", () => {

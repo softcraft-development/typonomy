@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
-import { Break } from "../src/break"
-import * as lib from "../src/objects"
+import { Break } from "../../src/break"
+import * as lib from "../../src/objects"
 
 describe("keysForValue", () => {
   describe("for a string enum", () => {

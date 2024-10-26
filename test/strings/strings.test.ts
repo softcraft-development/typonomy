@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
-import { reduceBag } from "../src/bags"
-import * as lib from "../src/strings"
+import { reduceBag } from "../../src/bags"
+import * as lib from "../../src/strings"
 
 describe("concat", () => {
   it("should concatenate two strings", () => {

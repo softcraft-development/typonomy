@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest"
-import * as lib from "../src/bags"
-import { Break } from "../src/break"
-import { isUndefined } from "../src/nullish"
-import type { Optional } from "../src/types"
+import * as lib from "../../src/bags"
+import { Break } from "../../src/break"
+import { isUndefined } from "../../src/nullish"
+import type { Optional } from "../../src/types"
 
 describe("reduceBag", () => {
   const reducer = (state: string, value: Optional<number>, index: number) => {

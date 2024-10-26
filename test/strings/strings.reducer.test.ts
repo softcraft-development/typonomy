@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from "vitest"
-import { reduceBag } from "../src/bags"
-import { reduceSome } from "../src/some"
-import * as lib from "../src/strings"
-import type { Optional, Possible, Thunk } from "../src/types"
+import { reduceBag } from "../../src/bags"
+import { reduceSome } from "../../src/some"
+import * as lib from "../../src/strings"
+import type { Optional, Possible, Thunk } from "../../src/types"
 
 describe("joinReducer", () => {
   const combine = lib.joiner("-")
