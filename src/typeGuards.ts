@@ -1,4 +1,4 @@
-import { negativeInfinity, notANumber, positiveInfinity } from "./constants"
+import { negativeInfinity, positiveInfinity } from "./constants"
 import { and, not, or, some } from "./logic"
 import { isRecordOf } from "./objects"
 import type { AssertMessageFactory } from "./types"
@@ -142,7 +142,7 @@ export function isExplicit<T>(value: types.Possible<T>): value is types.Explicit
  * @returns `true` if `value` is a `number` which is not `Infinity`, `-Infinity` or `NaN`; `false` otherwise.
  */
 export function isFiniteNumber(value: unknown): value is types.Finite {
-  return !isNumber(value, false, false)
+  return isNumber(value, false, false)
 }
 
 /**
@@ -223,7 +223,7 @@ export function isNegativeInfinity(value: unknown): value is types.NegativeInfin
  * @returns `true` if the value is `NaN`, `false` otherwise.
  */
 export function isNotANumber(value: unknown): value is types.NotANumber {
-  return value === notANumber
+  return isNaN(value)
 }
 
 /**
