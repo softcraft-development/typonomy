@@ -50,6 +50,12 @@ export type Entry<T extends object, V = unknown> = [keyof T, V]
 export type Explicit<T> = Exclude<T, Nullish>
 
 /**
+ * Any `number` that is not `NaN` and not `Infinite`,
+ * as defined by `isFiniteNumber`.
+ */
+export type Finite = number & { __brand: "Finite" }
+
+/**
  * A utility type for values that have a specific property with a specific type.
  * @typeParam K - The string key of the property.
  * @typeParam T - The type of the property.
@@ -57,7 +63,11 @@ export type Explicit<T> = Exclude<T, Nullish>
 export type Has<K extends string, T> = { [P in K]: T }
 
 /**
- * A type for all values that can be represented in JSON.
+ * Either positive `Infinity` or (negative) `-Infinity`.
+ */
+export type Infinite = PositiveInfinity | NegativeInfinity
+
+/**
  */
 export type Json = string | number | boolean | null | Json[] | JsonObject
 
@@ -90,16 +100,31 @@ export type Mapper<T, R> = Combine<T, number, R>
 export type MetaTransform<A, B, R> = (fn: Transform<A, R>) => Transform<B, R>
 
 /**
- * A utility type for values that may be `null`.
- * @typeParam T - The type when it is not `null`.
+ * The type of (negative) `-Infinity`, as defined by `isNegativeInfinity`.
+ *
+ * @see {@link isNegativeInfinity}
+ * @see {@link negativeInfinity}
  */
-export type Nullable<T> = T | null
+export type NegativeInfinity = number & { __brand: "NegativeInfinity" }
+
+/**
+ * The type of `NaN` as defined by `isNotANumber`.
+ * @see {@link notANumber}
+ * @see {@link isNotANumber}
+ */
+export type NotANumber = number & { __brand: "NotANumber" }
 
 /**
  * A utility type for values that are never `null` (but potentially `undefined`).
  * @typeParam T - The type, which is not `null`.
  */
 export type NotNull<T> = Exclude<T, null>
+
+/**
+ * A utility type for values that may be `null`.
+ * @typeParam T - The type when it is not `null`.
+ */
+export type Nullable<T> = T | null
 
 /**
  * Either null or undefined.
@@ -111,6 +136,14 @@ export type Nullish = null | undefined
  * @typeParam T - The type when it is not `undefined`.
  */
 export type Optional<T> = T | undefined
+
+/**
+ * The type of `Infinity`, as defined by `isPositiveInfinity`.
+ *
+ * @see {@link isPositiveInfinity}
+ * @see {@link positiveInfinity}
+ */
+export type PositiveInfinity = number & { __brand: "PositiveInfinity" }
 
 /**
  * A utility type for values that may be `null` or `undefined`.
