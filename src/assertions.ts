@@ -14,6 +14,10 @@ export class AssertError<X> extends Error {
   }
 }
 
+export const assertErrorMessage: AssertMessageFactory<unknown> = (value, assertion) => {
+  return `Asserted value {${value}} is not ${assertion}.`
+}
+
 export function assertType<T>(
   value: unknown,
   typeGuard: types.TypeGuard<T>,
@@ -21,10 +25,6 @@ export function assertType<T>(
   messageFactory: AssertMessageFactory<unknown> = assertErrorMessage
 ): asserts value is T {
   if (!typeGuard(value)) throw new AssertError<unknown>(value, assertion, messageFactory)
-}
-
-export const assertErrorMessage: AssertMessageFactory<unknown> = (value, assertion) => {
-  return `Asserted value {${value}} is not ${assertion}.`
 }
 
 export function enforceType<T>(
