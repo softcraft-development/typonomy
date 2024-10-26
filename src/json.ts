@@ -24,7 +24,6 @@ import type { Json, JsonCollection, JsonObject, JsonParsed } from "./types"
  *   * {@link parseJsonArray} for strings intended to be to JSON arrays.
  *   * {@link parseJsonObject} for strings intended to be to JSON objects.
  *   * {@link parseJsonCollection} for strings intended to be either JSON arrays or JSON objects.
- *   * {@link parseJsonString} for strings intended to be _neither_ JSON arrays or JSON objects.
  *   * {@link toJson} for strings of uncertain intention.
  *
  * @param possibleJson - The string to parse as JSON.
