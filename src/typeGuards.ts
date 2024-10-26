@@ -1,7 +1,6 @@
 import { isArrayOf } from "./arrays"
 import { and, not, or, some } from "./logic"
-import { isFiniteNumber, isNumber } from "./number"
-import { isRecordOf } from "./objects"
+import { isNumber } from "./number"
 import * as types from "./types"
 
 /**
@@ -34,60 +33,6 @@ export function isEquality<T>(a: T, b: T): boolean {
  */
 export function isExplicit<T>(value: types.Possible<T>): value is types.Explicit<T> {
   return !isNullish(value)
-}
-
-/**
- * Checks if a value is representable in JSON.
- * @param value - The value to check.
- * @returns `true` if the value is representable in JSON, `false` otherwise.
- */
-export function isJson(value: unknown): value is types.Json {
-  return isJsonScalar(value) || isJsonCollection(value)
-}
-
-/**
- * Checks if a value is representable as a JSON array or object.
- * @param value - The value to check.
- * @returns `true` if the value can be a JSON array or object, `false` otherwise.
- */
-export function isJsonCollection(value: unknown): value is types.JsonCollection {
-  return isArrayOf(value, isJson) || isJsonObject(value)
-}
-
-/**
- * Checks if a value is representable as a parsable JSON value.
- * @param value - The value to check.
- * @returns `true` if the value can be parsed from a JSON string; false otherwise.
- */
-export function isJsonParsed(value: unknown): value is types.JsonParsed {
-  return isJsonParsedScalar(value) || isJsonCollection(value)
-}
-
-/**
- * Checks if a value is representable as a parsable non-collection JSON value.
- * @param value - The value to check.
- * @returns `true` if the value can be parsed from a JSON string and is not a collection; false otherwise.
- */
-export function isJsonParsedScalar(value: unknown): value is types.JsonParsedScalar {
-  return isNull(value) || isBoolean(value) || isFiniteNumber(value)
-}
-
-/**
- * Checks if a value is representable as a JSON object.
- * @param value - The value to check.
- * @returns `true` if the value can be a JSON object; false otherwise.
- */
-export function isJsonObject(value: unknown): value is types.JsonObject {
-  return isRecordOf(value, isString, isJson)
-}
-
-/**
- * Checks if a value is representable as a non-collection JSON value.
- * @param value - The value to check.
- * @returns `true` if the value is a valid JSON non-collection value; false otherwise.
- */
-export function isJsonScalar(value: unknown): value is types.JsonScalar {
-  return isString(value) || isJsonParsedScalar(value)
 }
 
 /**
