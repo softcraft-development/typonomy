@@ -1,4 +1,3 @@
-import { isArrayOf } from "./arrays"
 import { and, not, or } from "./logic"
 import * as types from "./types"
 
@@ -51,16 +50,6 @@ export function isNull(value: unknown): value is null {
    * @returns `true` if the value is `null` or `undefined`; `false` otherwise.
    */
 export const isNullish = typeGuard<types.Nullish>(or(isNull, isUndefined))
-
-/**
-   * Checks if the given object is a string.
-   *
-   * @param value - The object to be checked.
-   * @returns `true` if the object is a string, `false` otherwise.
-   */
-export function isString(value: unknown): value is string {
-  return typeof value === "string"
-}
 
 /**
    * Checks if a value is a `Symbol`

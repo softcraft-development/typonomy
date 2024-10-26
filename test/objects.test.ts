@@ -3,7 +3,8 @@ import { Break } from "../src/break"
 import { or } from "../src/logic"
 import { isNumber } from "../src/number"
 import * as lib from "../src/objects"
-import { isBoolean, isString, isUndefined, isUnknown } from "../src/typeGuards"
+import { isString } from "../src/strings"
+import { isBoolean, isUndefined, isUnknown } from "../src/typeGuards"
 
 describe("isEmptyObject", () => {
   it("returns true for an empty object", () => {

@@ -36,6 +36,16 @@ export function joiner(separator: string = ","): Combine<Possible<string>, Possi
 }
 
 /**
+   * Checks if the given object is a string.
+   *
+   * @param value - The object to be checked.
+   * @returns `true` if the object is a string, `false` otherwise.
+   */
+export function isString(value: unknown): value is string {
+  return typeof value === "string"
+}
+
+/**
  * Reduce each character in a string.
  *
  * @typeParam S - The type of the accumulated state.

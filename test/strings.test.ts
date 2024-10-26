@@ -227,6 +227,43 @@ describe("reduceCharacters", () => {
   })
 })
 
+describe("isString", () => {
+  it("returns true for a string", () => {
+    const result = lib.isString("Hello")
+    expect(result).toBe(true)
+  })
+
+  it("returns false for a number", () => {
+    const result = lib.isString(42)
+    expect(result).toBe(false)
+  })
+
+  it("returns false for a boolean", () => {
+    const result = lib.isString(true)
+    expect(result).toBe(false)
+  })
+
+  it("returns false for an object", () => {
+    const result = lib.isString({ toString: () => "Value of Object" })
+    expect(result).toBe(false)
+  })
+
+  it("returns false for null", () => {
+    const result = lib.isString(null)
+    expect(result).toBe(false)
+  })
+
+  it("returns false for undefined", () => {
+    const result = lib.isString(undefined)
+    expect(result).toBe(false)
+  })
+
+  it("returns false for a symbol", () => {
+    const result = lib.isString(Symbol("Test Symbol"))
+    expect(result).toBe(false)
+  })
+})
+
 describe("valueToString", () => {
   it("should convert a number to a string", () => {
     const result = lib.valueToString(42)

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 import { or } from "../src/logic"
 import { isNumber } from "../src/number"
 import { isObject } from "../src/objects"
+import { isString } from "../src/strings"
 import * as lib from "../src/typeGuards"
 import type { Predicate } from "../src/types"
 
@@ -40,43 +41,6 @@ describe("isEquality", () => {
 
   it("returns false if the values are not equal", () => {
     expect(lib.isEquality<unknown>(42, "42")).toBe(false)
-  })
-})
-
-describe("isString", () => {
-  it("returns true for a string", () => {
-    const result = lib.isString("Hello")
-    expect(result).toBe(true)
-  })
-
-  it("returns false for a number", () => {
-    const result = lib.isString(42)
-    expect(result).toBe(false)
-  })
-
-  it("returns false for a boolean", () => {
-    const result = lib.isString(true)
-    expect(result).toBe(false)
-  })
-
-  it("returns false for an object", () => {
-    const result = lib.isString({ toString: () => "Value of Object" })
-    expect(result).toBe(false)
-  })
-
-  it("returns false for null", () => {
-    const result = lib.isString(null)
-    expect(result).toBe(false)
-  })
-
-  it("returns false for undefined", () => {
-    const result = lib.isString(undefined)
-    expect(result).toBe(false)
-  })
-
-  it("returns false for a symbol", () => {
-    const result = lib.isString(Symbol("Test Symbol"))
-    expect(result).toBe(false)
   })
 })
 
@@ -242,7 +206,7 @@ describe("nullify", () => {
 describe("narrow", () => {
   describe("for union types", () => {
     type Wide = string | null
-    const wide = lib.typeGuard<Wide>(or(lib.isString, lib.isNull))
+    const wide = lib.typeGuard<Wide>(or(isString, lib.isNull))
     const guard = lib.narrow<Wide, null>(wide, lib.isNull)
 
     it("returns false if the value is of the excluded type", () => {
@@ -321,7 +285,7 @@ describe("undefine", () => {
 })
 
 describe("widen", () => {
-  const narrow = lib.isString
+  const narrow = isString
   const guard = lib.widen(narrow, lib.isNull)
 
   it("returns true if the value is of the included type", () => {

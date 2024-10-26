@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest"
 import * as lib from "../src/logic"
 import { isNumber } from "../src/number"
 import { isObject } from "../src/objects"
-import { isString } from "../src/typeGuards"
+import { isString } from "../src/strings"
 
 describe("and", () => {
   it("returns true if both input Predicates are true", () => {

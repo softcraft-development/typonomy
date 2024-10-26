@@ -2,7 +2,8 @@ import { bag } from "./bags"
 import { Break, onBreakExecution } from "./break"
 import { some } from "./logic"
 import { isNumber } from "./number"
-import { isEquality, isString, isSymbol, isUndefined, typeGuard } from "./typeGuards"
+import { isString } from "./strings"
+import { isEquality, isSymbol, isUndefined, typeGuard } from "./typeGuards"
 import type { Bag, Combine, Optional, Predicate, Reducer, Transform, TypeGuard } from "./types"
 
 /**
