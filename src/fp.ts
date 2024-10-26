@@ -1,4 +1,4 @@
-import { isUndefined } from "./typeGuards"
+import { isUndefined } from "./nullish"
 import type { Action, Combine, Mapper, Optional, Reducer, Thunk, Transform, TypeGuard } from "./types"
 
 /**

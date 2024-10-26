@@ -24,50 +24,12 @@ export function isEquality<T>(a: T, b: T): boolean {
 }
 
 /**
- * Checks if a value is not `Nullish`.
- * @typeParam T - The type when it is not `null` or `undefined`.
- * @param value - The value to check.
- * @returns `false` if the value is `null` or `undefined`; `true` otherwise.
- */
-export function isExplicit<T>(value: types.Possible<T>): value is types.Explicit<T> {
-  return !isNullish(value)
-}
-
-/**
-   * Checks if a value is null.
-   *
-   * @param value - The value to check.
-   * @returns `true` if the value is `null`; `false` otherwise.
-   */
-export function isNull(value: unknown): value is null {
-  return value === null
-}
-
-/**
-   * Checks if a potentially null or undefined value is actually null or undefined.
-   *
-   * @param value - The potentially null or undefined value to check.
-   * @returns `true` if the value is `null` or `undefined`; `false` otherwise.
-   */
-export const isNullish = typeGuard<types.Nullish>(or(isNull, isUndefined))
-
-/**
    * Checks if a value is a `Symbol`
    * @param value - The value to check.
    * @returns `true` if the value is a `Symbol`, `false` otherwise.
    */
 export function isSymbol(value: unknown): value is PropertyKey {
   return typeof value === "symbol"
-}
-
-/**
-   * Checks if a value is undefined.
-   *
-   * @param value - The value to check.
-   * @returns `true` if the value is `undefined`; `false` otherwise.
-   */
-export function isUndefined(value: unknown): value is undefined {
-  return value === undefined
 }
 
 /**
@@ -96,17 +58,6 @@ export function narrow<T, X>(
 }
 
 /**
-   * Converts undefined to null, or returns the original value.
-   *
-   * @param value - The value to convert.
-   * @returns `null` if the value is `undefined`, or the original value otherwise.
-   */
-export function nullify<T>(value: types.Possible<T>): types.Nullable<T> {
-  if (isUndefined(value)) return null
-  return value
-}
-
-/**
    * Convert a `Predicate<unknown>` into a type guard for a type.
    * @typeParam T - The type of the resulting TypeGuard.
    * @param predicate - The `Predicate<unknown>` used to check the type.
@@ -114,17 +65,6 @@ export function nullify<T>(value: types.Possible<T>): types.Nullable<T> {
    */
 export function typeGuard<T>(predicate: types.Predicate<unknown>): types.TypeGuard<T> {
   return (value: unknown): value is T => predicate(value)
-}
-
-/**
-   * Converts null to undefined, or returns the original value.
-   *
-   * @param value - The value to convert.
-   * @returns `undefined` if the value is `null`, or the original value otherwise.
-   */
-export function undefine<T>(value: types.Possible<T>): types.Optional<T> {
-  if (isNull(value)) return undefined
-  return value
 }
 
 /**

@@ -1,5 +1,5 @@
 import { reduceArray } from "./arrays"
-import { isNullish, undefine } from "./typeGuards"
+import { isNullish, undefine } from "./nullish"
 import type { Combine, Optional, Possible, Reducer } from "./types"
 
 /**

@@ -1,7 +1,7 @@
 import { isArrayOf, mapArray, push, reduceArray } from "./arrays"
 import { onBreakExecution } from "./break"
 import { or } from "./logic"
-import { isUndefined } from "./typeGuards"
+import { isUndefined } from "./nullish"
 import type { Bag, Defined, Mapper, Optional, Reducer, TypeGuard } from "./types"
 
 /**

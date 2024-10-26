@@ -1,8 +1,9 @@
 import { isArrayOf } from "./arrays"
+import { isNull } from "./nullish"
 import { isFiniteNumber } from "./number"
 import { isObject, isRecordOf } from "./objects"
 import { isString } from "./strings"
-import { isBoolean, isNull } from "./typeGuards"
+import { isBoolean } from "./typeGuards"
 import type { Json, JsonCollection, JsonObject, JsonParsed, JsonParsedScalar, JsonScalar } from "./types"
 
 /**

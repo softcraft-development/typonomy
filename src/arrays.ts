@@ -1,7 +1,7 @@
 import { isPlural } from "./bags"
 import { onBreakExecution } from "./break"
 import { composeReducer } from "./fp"
-import { isExplicit, isUndefined } from "./typeGuards"
+import { isExplicit, isUndefined } from "./nullish"
 import * as types from "./types"
 
 /**
