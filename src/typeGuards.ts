@@ -15,16 +15,6 @@ export function isBoolean(value: unknown): value is boolean {
 }
 
 /**
- * Checks if the given value is an empty array.
- *
- * @param value - The value to check.
- * @returns `true` if the value is an empty array, `false` otherwise.
- */
-export function isEmptyArray(value: unknown): value is [] {
-  return Array.isArray(value) && value.length === 0
-}
-
-/**
  * Checks if two values are equal via the `===` operator.
  *
  * @typeParam T - The type of the values being compared.

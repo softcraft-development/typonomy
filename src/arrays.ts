@@ -88,6 +88,16 @@ export function isArrayOf<T>(value: unknown, predicate: types.Predicate<T>, empt
 }
 
 /**
+ * Checks if the given value is an empty array.
+ *
+ * @param value - The value to check.
+ * @returns `true` if the value is an empty array, `false` otherwise.
+ */
+export function isEmptyArray(value: unknown): value is [] {
+  return Array.isArray(value) && value.length === 0
+}
+
+/**
  * Transform an array of one type to another type.
  * Note that the output array will have the same number of elements as the input array
  * unless the mapper throws a `BreakExecution`.

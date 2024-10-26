@@ -133,6 +133,24 @@ describe("isArrayOf", () => {
   })
 })
 
+describe("isEmptyArray", () => {
+  it("returns true for an empty array", () => {
+    expect(lib.isEmptyArray([])).toBe(true)
+  })
+
+  it("returns false a filled Array", () => {
+    expect(lib.isEmptyArray([1, 2])).toBe(false)
+  })
+
+  it("returns false for null", () => {
+    expect(lib.isEmptyArray(null)).toBe(false)
+  })
+
+  it("returns false for undefined", () => {
+    expect(lib.isEmptyArray(undefined)).toBe(false)
+  })
+})
+
 describe("mapArray", () => {
   it("maps an array of values", () => {
     expect(lib.mapArray([3, 5, 7], (value, index) => `${index}:${value}`)).toEqual(["0:3", "1:5", "2:7"])

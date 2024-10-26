@@ -3,24 +3,6 @@ import { or } from "../src/logic"
 import * as lib from "../src/typeGuards"
 import type { Predicate } from "../src/types"
 
-describe("isEmptyArray", () => {
-  it("returns true for an empty array", () => {
-    expect(lib.isEmptyArray([])).toBe(true)
-  })
-
-  it("returns false a filled Array", () => {
-    expect(lib.isEmptyArray([1, 2])).toBe(false)
-  })
-
-  it("returns false for null", () => {
-    expect(lib.isEmptyArray(null)).toBe(false)
-  })
-
-  it("returns false for undefined", () => {
-    expect(lib.isEmptyArray(undefined)).toBe(false)
-  })
-})
-
 describe("isEquality", () => {
   it("returns true if the values are equal", () => {
     expect(lib.isEquality(42, 42)).toBe(true)
