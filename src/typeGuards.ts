@@ -54,16 +54,6 @@ export function isNull(value: unknown): value is null {
 export const isNullish = typeGuard<types.Nullish>(or(isNull, isUndefined))
 
 /**
-   * Checks if a value is a non-`Array` non-`null` `object`.
-   *
-   * @param value - The value to check.
-   * @returns `false` if the value is an `Array` or `null`; `true` if the value is an object; `false` otherwise.
-   */
-export function isObject(value: unknown): value is object {
-  return typeof value === "object" && value !== null && !Array.isArray(value)
-}
-
-/**
    * Checks if the given `Bag<T>` is an array of `T`.
    * Note that an empty array, or an array of one element, or an array of `undefined`
    * are all still considered plural.

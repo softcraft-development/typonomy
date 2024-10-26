@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { or } from "../src/logic"
 import { isNumber } from "../src/number"
+import { isObject } from "../src/objects"
 import * as lib from "../src/typeGuards"
 import type { Predicate } from "../src/types"
 
@@ -219,32 +220,6 @@ describe("isNullish", () => {
   })
 })
 
-describe("isObject", () => {
-  it("returns true if the value is an object", () => {
-    expect(lib.isObject({})).toBe(true)
-  })
-
-  it("returns false if the value is an array", () => {
-    expect(lib.isObject([])).toBe(false)
-  })
-
-  it("returns false if the value is a number", () => {
-    expect(lib.isObject(17)).toBe(false)
-  })
-
-  it("returns false if the value is a string", () => {
-    expect(lib.isObject("test")).toBe(false)
-  })
-
-  it("returns false if the value is null", () => {
-    expect(lib.isObject(null)).toBe(false)
-  })
-
-  it("returns false if the value is undefined", () => {
-    expect(lib.isObject(undefined)).toBe(false)
-  })
-})
-
 describe("isPropertyKey", () => {
   it("returns true if the value is a string", () => {
     expect(lib.isPropertyKey("hello")).toBe(true)
@@ -411,7 +386,7 @@ describe("narrow", () => {
 describe("typeGuard", () => {
   type TestType = { even: number }
   const predicate: Predicate<unknown> = (value: unknown): boolean => {
-    if (!lib.isObject(value)) return false
+    if (!isObject(value)) return false
     if (!("even" in value)) return false
     if (!isNumber(value.even)) return false
     return value.even % 2 === 0

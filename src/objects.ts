@@ -1,6 +1,6 @@
 import { bag } from "./bags"
 import { Break, onBreakExecution } from "./break"
-import { isEquality, isObject, isPropertyKey, isUndefined, typeGuard } from "./typeGuards"
+import { isEquality, isPropertyKey, isUndefined, typeGuard } from "./typeGuards"
 import type { Bag, Combine, Optional, Predicate, Reducer, Transform, TypeGuard } from "./types"
 
 /**
@@ -16,6 +16,16 @@ export function isEmptyObject(value: unknown): value is {} {
 export function isKeyOf<T extends object>(value: unknown, example: T): value is keyof T {
   if (!isPropertyKey(value)) return false
   return value in example
+}
+
+/**
+   * Checks if a value is a non-`Array` non-`null` `object`.
+   *
+   * @param value - The value to check.
+   * @returns `false` if the value is an `Array` or `null`; `true` if the value is an object; `false` otherwise.
+   */
+export function isObject(value: unknown): value is object {
+  return typeof value === "object" && value !== null && !Array.isArray(value)
 }
 
 /**

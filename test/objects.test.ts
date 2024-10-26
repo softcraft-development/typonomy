@@ -41,6 +41,32 @@ describe("isKeyOf", () => {
   })
 })
 
+describe("isObject", () => {
+  it("returns true if the value is an object", () => {
+    expect(lib.isObject({})).toBe(true)
+  })
+
+  it("returns false if the value is an array", () => {
+    expect(lib.isObject([])).toBe(false)
+  })
+
+  it("returns false if the value is a number", () => {
+    expect(lib.isObject(17)).toBe(false)
+  })
+
+  it("returns false if the value is a string", () => {
+    expect(lib.isObject("test")).toBe(false)
+  })
+
+  it("returns false if the value is null", () => {
+    expect(lib.isObject(null)).toBe(false)
+  })
+
+  it("returns false if the value is undefined", () => {
+    expect(lib.isObject(undefined)).toBe(false)
+  })
+})
+
 describe("isRecordOf", () => {
   it("returns true if the value is a record of specific types", () => {
     expect(lib.isRecordOf({ a: 1, b: 2, c: 3 }, isString, isNumber)).toBe(true)
