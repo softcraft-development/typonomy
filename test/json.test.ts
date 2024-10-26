@@ -55,7 +55,7 @@ describe("parseJson", () => {
   })
 
   it("parses an object", () => {
-    expect(parseJson("{\"key\": \"value\"}")).toEqual({})
+    expect(parseJson("{\"key\": \"value\"}")).toEqual({ key: "value" })
   })
 
   it("throws JsonParseError for a malformed object", () => {
@@ -139,7 +139,7 @@ describe("parseJsonCollection", () => {
   })
 
   it("parses an object", () => {
-    expect(parseJsonCollection("{\"key\": \"value\"}")).toEqual({})
+    expect(parseJsonCollection("{\"key\": \"value\"}")).toEqual({ key: "value" })
   })
 
   it("throws JsonParseError for a malformed object", () => {
@@ -177,7 +177,7 @@ describe("parseJsonObject", () => {
   })
 
   it("parses an object", () => {
-    expect(parseJsonObject("{\"key\": \"value\"}")).toEqual({})
+    expect(parseJsonObject("{\"key\": \"value\"}")).toEqual({ key: "value" })
   })
 
   it("throws JsonParseError for a malformed object", () => {
@@ -239,7 +239,7 @@ describe("parseJson", () => {
   })
 
   it("parses an object", () => {
-    expect(toJson("{\"key\": \"value\"}")).toEqual({})
+    expect(toJson("{\"key\": \"value\"}")).toEqual({ key: "value" })
   })
 
   it("returns a malformed object as string", () => {
