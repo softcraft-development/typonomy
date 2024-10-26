@@ -159,8 +159,8 @@ export function isInfinite(value: unknown): value is types.Infinite {
  * @param value - The value to check.
  * @returns `true` if the value is representable in JSON, `false` otherwise.
  */
-export function isJson(obj: unknown): obj is types.Json {
-  return isJsonScalar(obj) || isJsonCollection(obj)
+export function isJson(value: unknown): value is types.Json {
+  return isJsonScalar(value) || isJsonCollection(value)
 }
 
 /**
@@ -168,8 +168,8 @@ export function isJson(obj: unknown): obj is types.Json {
  * @param value - The value to check.
  * @returns `true` if the value can be a JSON array or object, `false` otherwise.
  */
-export function isJsonCollection(obj: unknown): obj is types.JsonCollection {
-  return isArrayOf(obj, isJson) || isJsonObject(obj)
+export function isJsonCollection(value: unknown): value is types.JsonCollection {
+  return isArrayOf(value, isJson) || isJsonObject(value)
 }
 
 /**
@@ -177,8 +177,8 @@ export function isJsonCollection(obj: unknown): obj is types.JsonCollection {
  * @param value - The value to check.
  * @returns `true` if the value can be parsed from a JSON string; false otherwise.
  */
-export function isJsonParsed(obj: unknown): obj is types.JsonParsed {
-  return isJsonParsedScalar(obj) || isJsonCollection(obj)
+export function isJsonParsed(value: unknown): value is types.JsonParsed {
+  return isJsonParsedScalar(value) || isJsonCollection(value)
 }
 
 /**
@@ -186,8 +186,8 @@ export function isJsonParsed(obj: unknown): obj is types.JsonParsed {
  * @param value - The value to check.
  * @returns `true` if the value can be parsed from a JSON string and is not a collection; false otherwise.
  */
-export function isJsonParsedScalar(obj: unknown): obj is types.JsonParsedScalar {
-  return isNull(obj) || isBoolean(obj) || isFiniteNumber(obj)
+export function isJsonParsedScalar(value: unknown): value is types.JsonParsedScalar {
+  return isNull(value) || isBoolean(value) || isFiniteNumber(value)
 }
 
 /**
@@ -195,8 +195,8 @@ export function isJsonParsedScalar(obj: unknown): obj is types.JsonParsedScalar 
  * @param value - The value to check.
  * @returns `true` if the value can be a JSON object; false otherwise.
  */
-export function isJsonObject(obj: unknown): obj is types.JsonObject {
-  return isRecordOf(obj, isString, isJson)
+export function isJsonObject(value: unknown): value is types.JsonObject {
+  return isRecordOf(value, isString, isJson)
 }
 
 /**
@@ -204,8 +204,8 @@ export function isJsonObject(obj: unknown): obj is types.JsonObject {
  * @param value - The value to check.
  * @returns `true` if the value is a valid JSON non-collection value; false otherwise.
  */
-export function isJsonScalar(obj: unknown): obj is types.JsonScalar {
-  return isString(obj) || isJsonParsedScalar(obj)
+export function isJsonScalar(value: unknown): value is types.JsonScalar {
+  return isString(value) || isJsonParsedScalar(value)
 }
 
 /**
@@ -329,11 +329,11 @@ export function isSome<T>(value: unknown, typeGuard: types.TypeGuard<T>): value 
 /**
    * Checks if the given object is a string.
    *
-   * @param obj - The object to be checked.
+   * @param value - The object to be checked.
    * @returns `true` if the object is a string, `false` otherwise.
    */
-export function isString(obj: unknown): obj is string {
-  return typeof obj === "string"
+export function isString(value: unknown): value is string {
+  return typeof value === "string"
 }
 
 /**

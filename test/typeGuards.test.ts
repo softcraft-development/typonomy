@@ -1204,9 +1204,9 @@ describe("typeGuard", () => {
   const guard = lib.typeGuard<TestType>(predicate)
 
   it("converts a predicate to a type guard", () => {
-    const obj: unknown = { even: 42 }
-    if (guard(obj)) {
-      const typed = obj
+    const value: unknown = { even: 42 }
+    if (guard(value)) {
+      const typed = value
       expect(typed.even).toBe(42)
     }
     else {
@@ -1215,8 +1215,8 @@ describe("typeGuard", () => {
   })
 
   it("guards against invalid types", () => {
-    const obj: unknown = { even: -1 }
-    expect(guard(obj)).toBe(false)
+    const value: unknown = { even: -1 }
+    expect(guard(value)).toBe(false)
   })
 })
 

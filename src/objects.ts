@@ -148,13 +148,13 @@ export function typeGuardRecord<K extends PropertyKey, V>(
  * @returns A TypeGuard that checks if an object is of type T.
  */
 export function typeGuardFor<T>(predicates: { [K in keyof T]: Predicate<unknown> }): TypeGuard<T> {
-  return (obj: unknown): obj is T => {
-    if (!isObject(obj)) return false
-    if (isEmptyObject(obj)) return false
+  return (value: unknown): value is T => {
+    if (!isObject(value)) return false
+    if (isEmptyObject(value)) return false
     for (const key in predicates) {
       const predicate = predicates[key]
-      const value = obj[key]
-      if (!predicate(value)) return false
+      const v = value[key]
+      if (!predicate(v)) return false
     }
     return true
   }
