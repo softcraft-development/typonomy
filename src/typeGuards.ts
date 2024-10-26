@@ -223,7 +223,7 @@ export function isNegativeInfinity(value: unknown): value is types.NegativeInfin
  * @returns `true` if the value is `NaN`, `false` otherwise.
  */
 export function isNotANumber(value: unknown): value is types.NotANumber {
-  return isNaN(value)
+  return isNumber(value, true, false) && isNaN(value)
 }
 
 /**
