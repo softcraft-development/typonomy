@@ -1,4 +1,5 @@
 export * from "./arrays"
+export * from "./assertion"
 export * from "./bags"
 export * from "./break"
 export * from "./constants"
