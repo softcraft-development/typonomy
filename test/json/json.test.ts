@@ -137,3 +137,65 @@ describe("parseJson", () => {
     expect(() => lib.parseJson("{key: value}")).toThrowError(lib.JsonParseError)
   })
 })
+
+describe("toJson", () => {
+  it("parses null", () => {
+    expect(lib.toJson("null")).toBe(null)
+  })
+
+  it("returns undefined as a string", () => {
+    expect(lib.toJson("undefined")).toBe("undefined")
+  })
+
+  it("parses true", () => {
+    expect(lib.toJson("true")).toBe(true)
+  })
+
+  it("parses false", () => {
+    expect(lib.toJson("false")).toBe(false)
+  })
+
+  it("parses a number", () => {
+    expect(lib.toJson("42.7")).toBe(42.7)
+  })
+
+  it("returns Infinity as a string", () => {
+    expect(lib.toJson("Infinity")).toBe("Infinity")
+  })
+
+  it("returns -Infinity as a string", () => {
+    expect(lib.toJson("-Infinity")).toBe("-Infinity")
+  })
+
+  it("returns NaN as a string", () => {
+    expect(lib.toJson("NaN")).toBe("NaN")
+  })
+
+  it("returns a string", () => {
+    expect(lib.toJson("A String")).toBe("A String")
+  })
+
+  it("parses an empty array", () => {
+    expect(lib.toJson("[]")).toEqual([])
+  })
+
+  it("parses an array of strings", () => {
+    expect(lib.toJson("[\"a\", \"b\", \"c\"]")).toEqual(["a", "b", "c"])
+  })
+
+  it("returns a malformed array as string", () => {
+    expect(lib.toJson("[42,]")).toBe("[42,]")
+  })
+
+  it("parses an empty object", () => {
+    expect(lib.toJson("{}")).toEqual({})
+  })
+
+  it("parses an object", () => {
+    expect(lib.toJson("{\"key\": \"value\"}")).toEqual({ key: "value" })
+  })
+
+  it("returns a malformed object as string", () => {
+    expect(lib.toJson("{key: value}")).toBe("{key: value}")
+  })
+})
