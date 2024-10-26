@@ -1,5 +1,41 @@
 import { and, not, or, some } from "./logic"
-import type { Bag, Defined, Explicit, Nullable, Nullish, Optional, Possible, Predicate, Some, TypeGuard } from "./types"
+import type { AssertMessageFactory } from "./types"
+import * as types from "./types"
+
+export const defaultAssertion = "the expected type"
+
+export class AssertError<X> extends Error {
+  constructor(
+    public readonly value: X,
+    public readonly assertion: string,
+    messageFactory: AssertMessageFactory<X> = assertErrorMessage
+  ) {
+    super(messageFactory(value, assertion))
+  }
+}
+
+export function assertType<T>(
+  value: unknown,
+  typeGuard: types.TypeGuard<T>,
+  assertion: string = defaultAssertion,
+  messageFactory: AssertMessageFactory<unknown> = assertErrorMessage
+): asserts value is T {
+  if (!typeGuard(value)) throw new AssertError<unknown>(value, assertion, messageFactory)
+}
+
+export const assertErrorMessage: AssertMessageFactory<unknown> = (value, assertion) => {
+  return `Asserted value {${value}} is not ${assertion}.`
+}
+
+export function enforceType<T>(
+  value: unknown,
+  typeGuard: types.TypeGuard<T>,
+  assertion: string = defaultAssertion,
+  messageFactory: AssertMessageFactory<unknown> = assertErrorMessage
+): T {
+  assertType(value, typeGuard, assertion, messageFactory)
+  return value
+}
 
 /**
  * Ensures that the given value is neither `null` nor `undefined`.
@@ -9,7 +45,7 @@ import type { Bag, Defined, Explicit, Nullable, Nullish, Optional, Possible, Pre
  * @returns The non-null non-undefined value.
  * @throws If the value is null or undefined.
  */
-export function insist<T>(value: Possible<T>): T {
+export function insist<T>(value: types.Possible<T>): T {
   if (isNull(value)) throw new Error("Value must not be null")
   if (isUndefined(value)) throw new Error("Value must not be undefined")
   return value
@@ -24,7 +60,7 @@ export function insist<T>(value: Possible<T>): T {
  *  Defaults to `true`.
  * @returns `true` if the value is an array of the specified type, `false` otherwise.
  */
-export function isArrayOf<T>(value: unknown, predicate: Predicate<T>, emptyMatches = true): value is T[] {
+export function isArrayOf<T>(value: unknown, predicate: types.Predicate<T>, emptyMatches = true): value is T[] {
   if (!Array.isArray(value)) return false
   if (value.length === 0) return emptyMatches
   return value.every(predicate)
@@ -38,7 +74,7 @@ export function isArrayOf<T>(value: unknown, predicate: Predicate<T>, emptyMatch
  * @returns `true` the value is of the specified type,
  *  `undefined`, an array of that type or `undefined`, or an empty array; `false` otherwise.
  */
-export function isBag<T>(value: unknown, typeGuard: TypeGuard<T>): value is Bag<T> {
+export function isBag<T>(value: unknown, typeGuard: types.TypeGuard<T>): value is types.Bag<T> {
   if (isUndefined(value)) return true
   if (isArrayOf(value, or(isUndefined, typeGuard), true)) return true
   if (typeGuard(value)) return true
@@ -93,7 +129,7 @@ export function isEmptyObject(value: unknown): value is {} {
  * @param value - The value to check.
  * @returns `false` if the value is `null` or `undefined`; `true` otherwise.
  */
-export function isExplicit<T>(value: Possible<T>): value is Explicit<T> {
+export function isExplicit<T>(value: types.Possible<T>): value is types.Explicit<T> {
   return !isNullish(value)
 }
 
@@ -122,7 +158,7 @@ export function isNull(value: unknown): value is null {
  * @param value - The potentially null or undefined value to check.
  * @returns `true` if the value is `null` or `undefined`; `false` otherwise.
  */
-export const isNullish = typeGuard<Nullish>(or(isNull, isUndefined))
+export const isNullish = typeGuard<types.Nullish>(or(isNull, isUndefined))
 
 /**
  * Checks if a value is a number.
@@ -158,7 +194,7 @@ export function isObject(value: unknown): value is object {
  * @param value The `Bag<T>` to check.
  * @returns `true` if the value is an `Array<T>`, `false` if it is a single `T` or `undefined`.
  */
-export function isPlural<T>(value: Bag<T>): value is T[] {
+export function isPlural<T>(value: types.Bag<T>): value is T[] {
   // Undefined is not an array so we don't need to check it explicitly here.
   return Array.isArray(value)
 }
@@ -178,7 +214,7 @@ export function isPropertyKey(value: unknown): value is PropertyKey {
  * @param value The `Bag<T>` to check.
  * @returns `true` if the value is a single `T`, `false` if it is an `Array<T>` or `undefined`.
  */
-export function isSingular<T>(value: Bag<T>): value is Defined<T> {
+export function isSingular<T>(value: types.Bag<T>): value is types.Defined<T> {
   if (isPlural(value)) return false
   if (isUndefined(value)) return false
   return true
@@ -191,7 +227,7 @@ export function isSingular<T>(value: Bag<T>): value is Defined<T> {
  * @param typeGuard - A function to check individual values.
  * @returns `true` the value is of the specified type or a non-empty array of that type; `false` otherwise.
  */
-export function isSome<T>(value: unknown, typeGuard: TypeGuard<T>): value is Some<T> {
+export function isSome<T>(value: unknown, typeGuard: types.TypeGuard<T>): value is types.Some<T> {
   if (isArrayOf(value, typeGuard, false)) return true
   if (typeGuard(value)) return true
   return false
@@ -244,7 +280,10 @@ export function isUnknown(value: unknown): value is unknown {
  * @param base - A `TypeGuard` that allows either the base type or excluded type.
  * @returns A narrower `TypeGuard` that only allows the base type.
  */
-export function narrow<T, X>(base: TypeGuard<T | X>, excluded: TypeGuard<X>): TypeGuard<Exclude<T | X, X>> {
+export function narrow<T, X>(
+  base: types.TypeGuard<T | X>,
+  excluded: types.TypeGuard<X>
+): types.TypeGuard<Exclude<T | X, X>> {
   return typeGuard(and(not(excluded), base))
 }
 
@@ -254,7 +293,7 @@ export function narrow<T, X>(base: TypeGuard<T | X>, excluded: TypeGuard<X>): Ty
  * @param value - The value to convert.
  * @returns `null` if the value is `undefined`, or the original value otherwise.
  */
-export function nullify<T>(value: Possible<T>): Nullable<T> {
+export function nullify<T>(value: types.Possible<T>): types.Nullable<T> {
   if (isUndefined(value)) return null
   return value
 }
@@ -265,7 +304,7 @@ export function nullify<T>(value: Possible<T>): Nullable<T> {
  * @param predicate - The `Predicate<unknown>` used to check the type.
  * @returns A `TypeGuard<T>` that checks if an `unknown` value is of type `T`.
  */
-export function typeGuard<T>(predicate: Predicate<unknown>): TypeGuard<T> {
+export function typeGuard<T>(predicate: types.Predicate<unknown>): types.TypeGuard<T> {
   return (value: unknown): value is T => predicate(value)
 }
 
@@ -275,7 +314,7 @@ export function typeGuard<T>(predicate: Predicate<unknown>): TypeGuard<T> {
  * @param value - The value to convert.
  * @returns `undefined` if the value is `null`, or the original value otherwise.
  */
-export function undefine<T>(value: Possible<T>): Optional<T> {
+export function undefine<T>(value: types.Possible<T>): types.Optional<T> {
   if (isNull(value)) return undefined
   return value
 }
@@ -287,6 +326,6 @@ export function undefine<T>(value: Possible<T>): Optional<T> {
  * @param base - A `TypeGuard` that allows the base type.
  * @returns A wider `TypeGuard` that allows the base type or the included type.
  */
-export function widen<T, I>(base: TypeGuard<T>, included: TypeGuard<I>): TypeGuard<T | I> {
+export function widen<T, I>(base: types.TypeGuard<T>, included: types.TypeGuard<I>): types.TypeGuard<T | I> {
   return typeGuard(or(included, base))
 }

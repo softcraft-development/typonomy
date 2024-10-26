@@ -3,6 +3,57 @@ import { or } from "../src/logic"
 import * as lib from "../src/typeGuards"
 import type { Predicate } from "../src/types"
 
+describe("assertType", () => {
+  type Branded = string & { __brand: "Branded" }
+  const guard = (value: unknown): value is Branded => {
+    return value === "Is Branded"
+  }
+
+  describe("when the type matches", () => {
+    it("asserts the type", () => {
+      const value = "Is Branded"
+      lib.assertType(value, guard)
+      const branded: Branded = value
+      expect(branded).toBe(value)
+    })
+  })
+
+  describe("when the type does not match", () => {
+    it("throws an AssertError", () => {
+      const value = "Is Not Branded"
+      expect(() => {
+        lib.assertType(value, guard)
+        // This line is unreachable if `assertType` throws its error.
+        const branded: Branded = value
+      }).toThrowError(lib.AssertError)
+    })
+  })
+})
+
+describe("enforceType", () => {
+  type Branded = string & { __brand: "Branded" }
+  const guard = (value: unknown): value is Branded => {
+    return value === "Is Branded"
+  }
+
+  describe("when the type matches", () => {
+    it("returns the type", () => {
+      const value = "Is Branded"
+      const branded: Branded = lib.enforceType(value, guard)
+      expect(branded).toBe(value)
+    })
+  })
+
+  describe("when the type does not match", () => {
+    it("throws an AssertError", () => {
+      const value = "Is Not Branded"
+      expect(() => {
+        lib.enforceType(value, guard)
+      }).toThrowError(lib.AssertError)
+    })
+  })
+})
+
 describe("insist", () => {
   let value: object | null | undefined
 
