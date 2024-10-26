@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import * as lib from "../src/logic"
-import { isNumber } from "../src/number"
+import { isNumber } from "../src/numbers"
 import { isObject } from "../src/objects"
 import { isString } from "../src/strings"
 

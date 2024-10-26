@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest"
 import * as lib from "../src/bags"
 import { Break } from "../src/break"
 import { isUndefined } from "../src/nullish"
-import { isNumber } from "../src/number"
+import { isNumber } from "../src/numbers"
 import type { Bag, Optional, Thunk } from "../src/types"
 
 describe("bag", () => {

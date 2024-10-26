@@ -1,6 +1,6 @@
 import { isArrayOf } from "./arrays"
 import { isNull } from "./nullish"
-import { isFiniteNumber } from "./number"
+import { isFiniteNumber } from "./numbers"
 import { isObject, isRecordOf } from "./objects"
 import { isString } from "./strings"
 import { isBoolean } from "./typeGuards"

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import { Break } from "../src/break"
-import { isNumber } from "../src/number"
+import { isNumber } from "../src/numbers"
 import * as lib from "../src/some"
 import type { Some } from "../src/types"
 

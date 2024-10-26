@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import * as lib from "../src/number"
+import * as lib from "../src/numbers"
 
 describe("isFiniteNumber", () => {
   it("is true for a positive number", () => {

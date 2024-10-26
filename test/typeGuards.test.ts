@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { or } from "../src/logic"
 import { isNull } from "../src/nullish"
-import { isNumber } from "../src/number"
+import { isNumber } from "../src/numbers"
 import { isObject } from "../src/objects"
 import { isString } from "../src/strings"
 import * as lib from "../src/typeGuards"
