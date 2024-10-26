@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest"
-import * as lib from "../src/assertion"
+import * as lib from "../src/assertions"
 
 describe("assertType", () => {
   type Branded = string & { __brand: "Branded" }

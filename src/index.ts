@@ -1,6 +1,6 @@
 
 export * from "./arrays"
-export * from "./assertion"
+export * from "./assertions"
 export * from "./bags"
 export * from "./break"
 export * from "./fp"
