@@ -1,8 +1,7 @@
-import { mapReducer, push } from "./arrays"
-import { reduceBag } from "./bags"
+import { isArrayOf, mapReducer, push } from "./arrays"
+import { isPlural, reduceBag } from "./bags"
 import { onBreakExecution } from "./break"
-import { isPlural } from "./typeGuards"
-import type { Combine, Defined, Mapper, Reducer, Some } from "./types"
+import type { Combine, Defined, Mapper, Reducer, Some, TypeGuard } from "./types"
 
 /**
  * Adds an element to a `Some`, resulting in an `Array` of elements.
@@ -34,6 +33,19 @@ export function forSome<T>(some: Some<T>, callback: Combine<Defined<T>, number, 
     callback(value, index)
     return state
   }, undefined)
+}
+
+/**
+   * Checks if a value matches a type or a non-empty array of that type.
+   * @typeParam T - The type to check.
+   * @param value - The value to check.
+   * @param typeGuard - A function to check individual values.
+   * @returns `true` the value is of the specified type or a non-empty array of that type; `false` otherwise.
+   */
+export function isSome<T>(value: unknown, typeGuard: TypeGuard<T>): value is Some<T> {
+  if (isArrayOf(value, typeGuard, false)) return true
+  if (typeGuard(value)) return true
+  return false
 }
 
 /**

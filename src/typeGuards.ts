@@ -53,44 +53,6 @@ export function isNull(value: unknown): value is null {
 export const isNullish = typeGuard<types.Nullish>(or(isNull, isUndefined))
 
 /**
-   * Checks if the given `Bag<T>` is an array of `T`.
-   * Note that an empty array, or an array of one element, or an array of `undefined`
-   * are all still considered plural.
-   *
-   * @param value The `Bag<T>` to check.
-   * @returns `true` if the value is an `Array<T>`, `false` if it is a single `T` or `undefined`.
-   */
-export function isPlural<T>(value: types.Bag<T>): value is T[] {
-  // Undefined is not an array so we don't need to check it explicitly here.
-  return Array.isArray(value)
-}
-
-/**
-   * Checks if the given `Bag<T>` is a single `T`.
-   *
-   * @param value The `Bag<T>` to check.
-   * @returns `true` if the value is a single `T`, `false` if it is an `Array<T>` or `undefined`.
-   */
-export function isSingular<T>(value: types.Bag<T>): value is types.Defined<T> {
-  if (isPlural(value)) return false
-  if (isUndefined(value)) return false
-  return true
-}
-
-/**
-   * Checks if a value matches a type or a non-empty array of that type.
-   * @typeParam T - The type to check.
-   * @param value - The value to check.
-   * @param typeGuard - A function to check individual values.
-   * @returns `true` the value is of the specified type or a non-empty array of that type; `false` otherwise.
-   */
-export function isSome<T>(value: unknown, typeGuard: types.TypeGuard<T>): value is types.Some<T> {
-  if (isArrayOf(value, typeGuard, false)) return true
-  if (typeGuard(value)) return true
-  return false
-}
-
-/**
    * Checks if the given object is a string.
    *
    * @param value - The object to be checked.

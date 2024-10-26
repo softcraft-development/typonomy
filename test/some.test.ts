@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import { Break } from "../src/break"
+import { isNumber } from "../src/number"
 import * as lib from "../src/some"
 import type { Some } from "../src/types"
 
@@ -55,6 +56,37 @@ describe("forSome", () => {
         expect(callback).toHaveBeenNthCalledWith(1, 5, 0)
         expect(callback).toHaveBeenNthCalledWith(2, 7, 1)
       })
+    })
+  })
+})
+
+describe("isSome", () => {
+  describe("isSome", () => {
+    it("returns true for an array of the specified type", () => {
+      expect(lib.isSome([1, 2, 3], isNumber)).toBe(true)
+    })
+    it("returns false for an empty array", () => {
+      expect(lib.isSome([], isNumber)).toBe(false)
+    })
+    it("returns true for a single element array of the specified type", () => {
+      expect(lib.isSome([42], isNumber)).toBe(true)
+    })
+    it("returns false if the value is undefined", () => {
+      expect(lib.isSome(undefined, isNumber)).toBe(false)
+    })
+    it("returns true for a single value of the specified type", () => {
+      expect(lib.isSome(42, isNumber)).toBe(true)
+    })
+
+    it("returns false for an array that contains other types", () => {
+      expect(lib.isSome([1, "2", 3], isNumber)).toBe(false)
+    })
+
+    it("returns false if the value is null", () => {
+      expect(lib.isSome(null, isNumber)).toBe(false)
+    })
+    it("returns false for a single value of another type", () => {
+      expect(lib.isSome("42", isNumber)).toBe(false)
     })
   })
 })

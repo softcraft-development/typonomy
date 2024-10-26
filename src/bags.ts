@@ -1,8 +1,8 @@
 import { isArrayOf, mapArray, push, reduceArray } from "./arrays"
 import { onBreakExecution } from "./break"
 import { or } from "./logic"
-import { isPlural, isUndefined } from "./typeGuards"
-import type { Bag, Mapper, Optional, Reducer, TypeGuard } from "./types"
+import { isUndefined } from "./typeGuards"
+import type { Bag, Defined, Mapper, Optional, Reducer, TypeGuard } from "./types"
 
 /**
  * Adds an element to a `Bag<T>`, ignore it if it is `undefined`.
@@ -63,6 +63,31 @@ export function isBag<T>(value: unknown, typeGuard: TypeGuard<T>): value is Bag<
   if (isArrayOf(value, or(isUndefined, typeGuard), true)) return true
   if (typeGuard(value)) return true
   return false
+}
+
+/**
+   * Checks if the given `Bag<T>` is an array of `T`.
+   * Note that an empty array, or an array of one element, or an array of `undefined`
+   * are all still considered plural.
+   *
+   * @param value The `Bag<T>` to check.
+   * @returns `true` if the value is an `Array<T>`, `false` if it is a single `T` or `undefined`.
+   */
+export function isPlural<T>(value: Bag<T>): value is T[] {
+  // Undefined is not an array so we don't need to check it explicitly here.
+  return Array.isArray(value)
+}
+
+/**
+   * Checks if the given `Bag<T>` is a single `T`.
+   *
+   * @param value The `Bag<T>` to check.
+   * @returns `true` if the value is a single `T`, `false` if it is an `Array<T>` or `undefined`.
+   */
+export function isSingular<T>(value: Bag<T>): value is Defined<T> {
+  if (isPlural(value)) return false
+  if (isUndefined(value)) return false
+  return true
 }
 
 /**
