@@ -68,13 +68,34 @@ export type Has<K extends string, T> = { [P in K]: T }
 export type Infinite = PositiveInfinity | NegativeInfinity
 
 /**
+ * A value that is valid in JSON.
  */
-export type Json = string | number | boolean | null | Json[] | JsonObject
+export type Json = JsonScalar | JsonCollection
 
 /**
- * A type for objects that can be represented in JSON.
+ * A collection of zero or more values that are valid in JSON.
+ */
+export type JsonCollection = Json[] | JsonObject
+
+/**
+ * A value that can be converted from a string via JSON parsing.
+ */
+export type JsonParsed = JsonParsedScalar | JsonCollection
+
+/**
+ * A non-collection value that can be converted from a string via JSON parsing.
+ */
+export type JsonParsedScalar = null | boolean | Finite
+
+/**
+ * A collection of key-value pairs that are valid in JSON.
  */
 export type JsonObject = { [key: string]: Json }
+
+/**
+ * A non-collection value that is valid in JSON.
+ */
+export type JsonScalar = JsonParsedScalar | string
 
 /**
  * A function that transforms from one type (and its numeric index) to another.

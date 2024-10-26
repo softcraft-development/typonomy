@@ -4,6 +4,7 @@
     "IIFE",
     "outdir",
     "outfile",
+    "parseable",
     "typonomy",
     "uncurried",
     "uncurry",
