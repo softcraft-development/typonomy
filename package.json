@@ -62,13 +62,14 @@
   "scripts": {
     "build": "node esbuild.mjs",
     "check": "tsc --noEmit && tsc --noEmit -p test/tsconfig.json",
+    "circ": "pnpm exec dpdm ./src/index.ts",
     "docs": "typedoc && rm docs/README.md",
     "lint:fix": "eslint --fix src/**/*.ts test/**/*.test.ts",
     "lint": "eslint src/**/*.ts test/**/*.test.ts",
     "test:coverage": "vitest run --coverage",
     "test:dev": "vitest  --coverage",
     "test": "vitest run",
-    "validate": "pnpm run check && pnpm run lint && pnpm run test"
+    "validate": "pnpm run check && pnpm run circ && pnpm run lint && pnpm run test"
   },
   "types": "dist/esm/index.d.ts",
   "version": "0.28.0"
