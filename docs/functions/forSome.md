@@ -21,6 +21,8 @@ The type of value in the `Some`.
 
 • **some**: [`Some`](../type-aliases/Some.md)\<`T`\>
 
+The `Some<T>` on which to apply the callback.
+
 • **callback**: [`Combine`](../type-aliases/Combine.md)\<[`Defined`](../type-aliases/Defined.md)\<`T`\>, `number`, `void`\>
 
 The callback function to apply. If `some` is singular, then the index will be `0`.
@@ -31,4 +33,4 @@ The callback function to apply. If `some` is singular, then the index will be `0
 
 ## Source
 
-[some.ts:33](https://github.com/softcraft-development/typonomy/blob/dfbcc96600b9b9b8c6faf47f3caef423e4f1568c/src/some.ts#L33)
+[some.ts:31](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/some.ts#L31)

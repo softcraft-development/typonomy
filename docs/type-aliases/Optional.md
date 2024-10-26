@@ -18,4 +18,4 @@ The type when it is not `undefined`.
 
 ## Source
 
-[types.ts:104](https://github.com/softcraft-development/typonomy/blob/dfbcc96600b9b9b8c6faf47f3caef423e4f1568c/src/types.ts#L104)
+[types.ts:159](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/types.ts#L159)

@@ -25,6 +25,8 @@ The type of the value.
 
 • **some**: [`Some`](../type-aliases/Some.md)\<`V`\>
 
+The `Some<V>` to reduce.
+
 • **reducer**: [`Reducer`](../type-aliases/Reducer.md)\<`S`, [`Defined`](../type-aliases/Defined.md)\<`V`\>, `number`\>
 
 The reducer function. If `bag` is singular, then the key/index will be `0`.
@@ -41,4 +43,4 @@ The final state.
 
 ## Source
 
-[some.ts:78](https://github.com/softcraft-development/typonomy/blob/dfbcc96600b9b9b8c6faf47f3caef423e4f1568c/src/some.ts#L78)
+[some.ts:89](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/some.ts#L89)

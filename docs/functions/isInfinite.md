@@ -6,9 +6,9 @@
 
 # Function: isInfinite()
 
-> **isInfinite**(`value`): `boolean`
+> **isInfinite**(`value`): `value is Infinite`
 
-Checks if a value is positive of negative `Infinity`.
+Checks if a value is positive or negative `Infinity`.
 
 ## Parameters
 
@@ -18,10 +18,10 @@ The value to check.
 
 ## Returns
 
-`boolean`
+`value is Infinite`
 
 `true` if the value is `Infinity` or `-Infinity`, `false` otherwise.
 
 ## Source
 
-[typeGuards.ts:105](https://github.com/softcraft-development/typonomy/blob/dfbcc96600b9b9b8c6faf47f3caef423e4f1568c/src/typeGuards.ts#L105)
+[numbers.ts:18](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/numbers.ts#L18)

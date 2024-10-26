@@ -27,6 +27,8 @@ The type of value to ignore.
 
 • **K**
 
+The type of the key.
+
 ## Parameters
 
 • **typeGuard**: [`TypeGuard`](../type-aliases/TypeGuard.md)\<`V`\>
@@ -41,8 +43,8 @@ The `Reducer<S,V,K>` to reduce matching values.
 
 [`Reducer`](../type-aliases/Reducer.md)\<`S`, `V` \| `X`, `K`\>
 
-The final state.
+A Reducer that accepts either `V` or `X` values.
 
 ## Source
 
-[fp.ts:302](https://github.com/softcraft-development/typonomy/blob/dfbcc96600b9b9b8c6faf47f3caef423e4f1568c/src/fp.ts#L302)
+[fp.ts:301](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/fp.ts#L301)

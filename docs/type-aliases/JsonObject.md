@@ -8,7 +8,7 @@
 
 > **JsonObject**: `object`
 
-A type for objects that can be represented in JSON.
+A collection of key-value pairs that are valid in JSON.
 
 ## Index signature
 
@@ -16,4 +16,4 @@ A type for objects that can be represented in JSON.
 
 ## Source
 
-[types.ts:58](https://github.com/softcraft-development/typonomy/blob/dfbcc96600b9b9b8c6faf47f3caef423e4f1568c/src/types.ts#L58)
+[types.ts:93](https://github.com/softcraft-development/typonomy/blob/d8b6722e8f9213512ecbf239a27330f22316ef6d/src/types.ts#L93)
