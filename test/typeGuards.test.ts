@@ -299,7 +299,7 @@ describe("isJson", () => {
   })
 
   it("is false for undefined", () => {
-    expect(lib.isJson(undefined)).toBe(true)
+    expect(lib.isJson(undefined)).toBe(false)
   })
 
   it("is true for true", () => {
@@ -364,7 +364,7 @@ describe("isJson", () => {
     expect(lib.isJson({
       number: 42,
       object: { key: undefined },
-    })).toBe(true)
+    })).toBe(false)
   })
 })
 
@@ -482,7 +482,7 @@ describe("isJsonParsed", () => {
     expect(lib.isJsonParsed({
       number: 42,
       object: { key: undefined },
-    })).toBe(true)
+    })).toBe(false)
   })
 })
 
