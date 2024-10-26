@@ -1,4 +1,3 @@
-import { isPlural } from "./bags"
 import { onBreakExecution } from "./break"
 import { composeReducer } from "./fp"
 import { isExplicit, isUndefined } from "./nullish"
@@ -225,7 +224,7 @@ export function reiterate<S>(count: number, reducer: types.Reducer<S, number, nu
  */
 export function wrap<T>(value: types.Bag<T>): T[] {
   if (isUndefined(value)) return []
-  if (isPlural(value)) return value
+  if (Array.isArray(value)) return value
   return [value]
 }
 
