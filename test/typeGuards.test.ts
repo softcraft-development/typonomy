@@ -644,24 +644,6 @@ describe("isBoolean", () => {
   })
 })
 
-describe("isEmptyObject", () => {
-  it("returns true for an empty object", () => {
-    expect(lib.isEmptyObject({})).toBe(true)
-  })
-
-  it("returns false for an object with keys", () => {
-    expect(lib.isEmptyObject({ a: 1, b: 2 })).toBe(false)
-  })
-
-  it("returns false for null", () => {
-    expect(lib.isEmptyObject(null)).toBe(false)
-  })
-
-  it("returns false for undefined", () => {
-    expect(lib.isEmptyObject(undefined)).toBe(false)
-  })
-})
-
 describe("isExplicit", () => {
   it("returns false for a null value", () => {
     expect(lib.isExplicit(null)).toBe(false)

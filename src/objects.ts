@@ -1,7 +1,17 @@
 import { bag } from "./bags"
 import { Break, onBreakExecution } from "./break"
-import { isEmptyObject, isEquality, isObject, isPropertyKey, isUndefined, typeGuard } from "./typeGuards"
+import { isEquality, isObject, isPropertyKey, isUndefined, typeGuard } from "./typeGuards"
 import type { Bag, Combine, Optional, Predicate, Reducer, Transform, TypeGuard } from "./types"
+
+/**
+ * Checks if an object has no properties or elements.
+ * @param value - The object or array to check.
+ * @returns Returns `true` if value is an object with no properties, `false` otherwise.
+ */
+export function isEmptyObject(value: unknown): value is {} {
+  if (!isObject(value)) return false
+  return Object.keys(value).length === 0
+}
 
 export function isKeyOf<T extends object>(value: unknown, example: T): value is keyof T {
   if (!isPropertyKey(value)) return false

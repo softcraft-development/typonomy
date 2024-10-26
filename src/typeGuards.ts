@@ -27,16 +27,6 @@ export function isEquality<T>(a: T, b: T): boolean {
 }
 
 /**
- * Checks if an object has no properties or elements.
- * @param value - The object or array to check.
- * @returns Returns `true` if value is an object with no properties, `false` otherwise.
- */
-export function isEmptyObject(value: unknown): value is {} {
-  if (!isObject(value)) return false
-  return Object.keys(value).length === 0
-}
-
-/**
  * Checks if a value is not `Nullish`.
  * @typeParam T - The type when it is not `null` or `undefined`.
  * @param value - The value to check.

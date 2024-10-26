@@ -4,6 +4,24 @@ import { or } from "../src/logic"
 import * as lib from "../src/objects"
 import { isBoolean, isNumber, isPropertyKey, isString, isUndefined, isUnknown } from "../src/typeGuards"
 
+describe("isEmptyObject", () => {
+  it("returns true for an empty object", () => {
+    expect(lib.isEmptyObject({})).toBe(true)
+  })
+
+  it("returns false for an object with keys", () => {
+    expect(lib.isEmptyObject({ a: 1, b: 2 })).toBe(false)
+  })
+
+  it("returns false for null", () => {
+    expect(lib.isEmptyObject(null)).toBe(false)
+  })
+
+  it("returns false for undefined", () => {
+    expect(lib.isEmptyObject(undefined)).toBe(false)
+  })
+})
+
 describe("isKeyOf", () => {
   it("returns true if the value is a key of the example", () => {
     expect(lib.isKeyOf("a", { a: 1, b: 2 })).toBe(true)
