@@ -1,6 +1,5 @@
 import { isArrayOf } from "./arrays"
-import { and, not, or, some } from "./logic"
-import { isNumber } from "./number"
+import { and, not, or } from "./logic"
 import * as types from "./types"
 
 /**
@@ -64,15 +63,6 @@ export const isNullish = typeGuard<types.Nullish>(or(isNull, isUndefined))
 export function isPlural<T>(value: types.Bag<T>): value is T[] {
   // Undefined is not an array so we don't need to check it explicitly here.
   return Array.isArray(value)
-}
-
-/**
-   * Checks if a value is a PropertyKey (i.e.: a `string`, `number`, or `Symbol`).
-   * @param value - The value to check.
-   * @returns `true` if the value is a `string`, `number`, or `Symbol`, `false` otherwise.
-   */
-export function isPropertyKey(value: unknown): value is PropertyKey {
-  return some(isString, isNumber, isSymbol)(value)
 }
 
 /**

@@ -1,6 +1,8 @@
 import { bag } from "./bags"
 import { Break, onBreakExecution } from "./break"
-import { isEquality, isPropertyKey, isUndefined, typeGuard } from "./typeGuards"
+import { some } from "./logic"
+import { isNumber } from "./number"
+import { isEquality, isString, isSymbol, isUndefined, typeGuard } from "./typeGuards"
 import type { Bag, Combine, Optional, Predicate, Reducer, Transform, TypeGuard } from "./types"
 
 /**
@@ -26,6 +28,15 @@ export function isKeyOf<T extends object>(value: unknown, example: T): value is 
    */
 export function isObject(value: unknown): value is object {
   return typeof value === "object" && value !== null && !Array.isArray(value)
+}
+
+/**
+   * Checks if a value is a PropertyKey (i.e.: a `string`, `number`, or `Symbol`).
+   * @param value - The value to check.
+   * @returns `true` if the value is a `string`, `number`, or `Symbol`, `false` otherwise.
+   */
+export function isPropertyKey(value: unknown): value is PropertyKey {
+  return some(isString, isNumber, isSymbol)(value)
 }
 
 /**

@@ -3,7 +3,7 @@ import { Break } from "../src/break"
 import { or } from "../src/logic"
 import { isNumber } from "../src/number"
 import * as lib from "../src/objects"
-import { isBoolean, isPropertyKey, isString, isUndefined, isUnknown } from "../src/typeGuards"
+import { isBoolean, isString, isUndefined, isUnknown } from "../src/typeGuards"
 
 describe("isEmptyObject", () => {
   it("returns true for an empty object", () => {
@@ -67,6 +67,36 @@ describe("isObject", () => {
   })
 })
 
+describe("isPropertyKey", () => {
+  it("returns true if the value is a string", () => {
+    expect(lib.isPropertyKey("hello")).toBe(true)
+  })
+
+  it("returns true if the value is a number", () => {
+    expect(lib.isPropertyKey(13)).toBe(true)
+  })
+
+  it("returns true if the value is a Symbol", () => {
+    expect(lib.isPropertyKey(Symbol("test"))).toBe(true)
+  })
+
+  it("returns false if the value is an object", () => {
+    expect(lib.isPropertyKey({})).toBe(false)
+  })
+
+  it("returns false if the value is a boolean", () => {
+    expect(lib.isPropertyKey(true)).toBe(false)
+  })
+
+  it("returns false if the value is null", () => {
+    expect(lib.isPropertyKey(null)).toBe(false)
+  })
+
+  it("returns false if the value is undefined", () => {
+    expect(lib.isPropertyKey(false)).toBe(false)
+  })
+})
+
 describe("isRecordOf", () => {
   it("returns true if the value is a record of specific types", () => {
     expect(lib.isRecordOf({ a: 1, b: 2, c: 3 }, isString, isNumber)).toBe(true)
@@ -81,15 +111,15 @@ describe("isRecordOf", () => {
   })
 
   it("returns false for undefined", () => {
-    expect(lib.isRecordOf(undefined, isPropertyKey, isUnknown)).toBe(false)
+    expect(lib.isRecordOf(undefined, lib.isPropertyKey, isUnknown)).toBe(false)
   })
 
   it("returns false for undefined", () => {
-    expect(lib.isRecordOf(null, isPropertyKey, isUnknown)).toBe(false)
+    expect(lib.isRecordOf(null, lib.isPropertyKey, isUnknown)).toBe(false)
   })
 
   it("returns false for a value of the value type", () => {
-    expect(lib.isRecordOf(1, isPropertyKey, isNumber)).toBe(false)
+    expect(lib.isRecordOf(1, lib.isPropertyKey, isNumber)).toBe(false)
   })
 
   it("returns false if the value is a record of any other type", () => {
@@ -98,13 +128,13 @@ describe("isRecordOf", () => {
 
   describe("when emptyMatches is false", () => {
     it("returns false for an empty record", () => {
-      expect(lib.isRecordOf({}, isPropertyKey, isUnknown, false)).toBe(false)
+      expect(lib.isRecordOf({}, lib.isPropertyKey, isUnknown, false)).toBe(false)
     })
   })
 
   describe("when emptyMatches is true", () => {
     it("returns false for an empty record", () => {
-      expect(lib.isRecordOf({}, isPropertyKey, isUnknown, true)).toBe(true)
+      expect(lib.isRecordOf({}, lib.isPropertyKey, isUnknown, true)).toBe(true)
     })
   })
 })

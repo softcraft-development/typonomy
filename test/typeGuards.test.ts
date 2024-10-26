@@ -220,36 +220,6 @@ describe("isNullish", () => {
   })
 })
 
-describe("isPropertyKey", () => {
-  it("returns true if the value is a string", () => {
-    expect(lib.isPropertyKey("hello")).toBe(true)
-  })
-
-  it("returns true if the value is a number", () => {
-    expect(lib.isPropertyKey(13)).toBe(true)
-  })
-
-  it("returns true if the value is a Symbol", () => {
-    expect(lib.isPropertyKey(Symbol("test"))).toBe(true)
-  })
-
-  it("returns false if the value is an object", () => {
-    expect(lib.isPropertyKey({})).toBe(false)
-  })
-
-  it("returns false if the value is a boolean", () => {
-    expect(lib.isPropertyKey(true)).toBe(false)
-  })
-
-  it("returns false if the value is null", () => {
-    expect(lib.isPropertyKey(null)).toBe(false)
-  })
-
-  it("returns false if the value is undefined", () => {
-    expect(lib.isPropertyKey(false)).toBe(false)
-  })
-})
-
 describe("isSome", () => {
   describe("isSome", () => {
     it("returns true for an array of the specified type", () => {
