@@ -1,7 +1,8 @@
 import { mapArray, push, reduceArray } from "./arrays"
 import { onBreakExecution } from "./break"
-import { isPlural, isUndefined } from "./typeGuards"
-import type { Bag, Mapper, Optional, Reducer } from "./types"
+import { or } from "./logic"
+import { isArrayOf, isPlural, isUndefined } from "./typeGuards"
+import type { Bag, Mapper, Optional, Reducer, TypeGuard } from "./types"
 
 /**
  * Adds an element to a `Bag<T>`, ignore it if it is `undefined`.
@@ -47,6 +48,21 @@ export function forBag<T>(bag: Bag<T>, callback: (value: Optional<T>, index: num
     callback(value, index)
     return undefined
   }, undefined)
+}
+
+/**
+ * Checks a value is a `Bag` of values that could match a specific type.
+ * @typeParam T - The type to check.
+ * @param value - The value to check.
+ * @param typeGuard - A function to check individual values
+ * @returns `true` the value is of the specified type,
+ *  `undefined`, an array of that type or `undefined`, or an empty array; `false` otherwise.
+ */
+export function isBag<T>(value: unknown, typeGuard: TypeGuard<T>): value is Bag<T> {
+  if (isUndefined(value)) return true
+  if (isArrayOf(value, or(isUndefined, typeGuard), true)) return true
+  if (typeGuard(value)) return true
+  return false
 }
 
 /**

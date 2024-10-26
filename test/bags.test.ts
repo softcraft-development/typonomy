@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import * as lib from "../src/bags"
 import { Break } from "../src/break"
-import { isUndefined } from "../src/typeGuards"
+import { isNumber, isUndefined } from "../src/typeGuards"
 import type { Bag, Optional, Thunk } from "../src/types"
 
 describe("bag", () => {
@@ -180,6 +180,37 @@ describe("forBag", () => {
         expect(callback).toHaveBeenNthCalledWith(1, 5, 0)
         expect(callback).toHaveBeenNthCalledWith(2, 7, 1)
       })
+    })
+  })
+})
+
+describe("isBag", () => {
+  describe("isBag", () => {
+    it("returns true for an array of the specified type", () => {
+      expect(lib.isBag([1, 2, 3], isNumber)).toBe(true)
+    })
+    it("returns true for an empty array", () => {
+      expect(lib.isBag([], isNumber)).toBe(true)
+    })
+    it("returns true for a single element array of the specified type", () => {
+      expect(lib.isBag([42], isNumber)).toBe(true)
+    })
+    it("returns true if the value is undefined", () => {
+      expect(lib.isBag(undefined, isNumber)).toBe(true)
+    })
+    it("returns true for a single value of the specified type", () => {
+      expect(lib.isBag(42, isNumber)).toBe(true)
+    })
+
+    it("returns false for an array that contains other types", () => {
+      expect(lib.isBag([1, "2", 3], isNumber)).toBe(false)
+    })
+
+    it("returns false if the value is null", () => {
+      expect(lib.isBag(null, isNumber)).toBe(false)
+    })
+    it("returns false for a single value of another type", () => {
+      expect(lib.isBag("42", isNumber)).toBe(false)
     })
   })
 })

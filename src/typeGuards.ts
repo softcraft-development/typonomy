@@ -19,21 +19,6 @@ export function isArrayOf<T>(value: unknown, predicate: types.Predicate<T>, empt
 }
 
 /**
- * Checks a value is a `Bag` of values that could match a specific type.
- * @typeParam T - The type to check.
- * @param value - The value to check.
- * @param typeGuard - A function to check individual values
- * @returns `true` the value is of the specified type,
- *  `undefined`, an array of that type or `undefined`, or an empty array; `false` otherwise.
- */
-export function isBag<T>(value: unknown, typeGuard: types.TypeGuard<T>): value is types.Bag<T> {
-  if (isUndefined(value)) return true
-  if (isArrayOf(value, or(isUndefined, typeGuard), true)) return true
-  if (typeGuard(value)) return true
-  return false
-}
-
-/**
  * Checks if a value is a `true` or `false`.
  *
  * @param value - The value to check.

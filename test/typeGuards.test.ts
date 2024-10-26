@@ -1,92 +1,7 @@
-import { beforeEach, describe, expect, it } from "vitest"
+import { describe, expect, it } from "vitest"
 import { or } from "../src/logic"
 import * as lib from "../src/typeGuards"
 import type { Predicate } from "../src/types"
-
-describe("assertType", () => {
-  type Branded = string & { __brand: "Branded" }
-  const guard = (value: unknown): value is Branded => {
-    return value === "Is Branded"
-  }
-
-  describe("when the type matches", () => {
-    it("asserts the type", () => {
-      const value = "Is Branded"
-      lib.assertType(value, guard)
-      const branded: Branded = value
-      expect(branded).toBe(value)
-    })
-  })
-
-  describe("when the type does not match", () => {
-    it("throws an AssertError", () => {
-      const value = "Is Not Branded"
-      expect(() => {
-        lib.assertType(value, guard)
-        // This line is unreachable if `assertType` throws its error.
-        const branded: Branded = value
-      }).toThrowError(lib.AssertError)
-    })
-  })
-})
-
-describe("enforceType", () => {
-  type Branded = string & { __brand: "Branded" }
-  const guard = (value: unknown): value is Branded => {
-    return value === "Is Branded"
-  }
-
-  describe("when the type matches", () => {
-    it("returns the type", () => {
-      const value = "Is Branded"
-      const branded: Branded = lib.enforceType(value, guard)
-      expect(branded).toBe(value)
-    })
-  })
-
-  describe("when the type does not match", () => {
-    it("throws an AssertError", () => {
-      const value = "Is Not Branded"
-      expect(() => {
-        lib.enforceType(value, guard)
-      }).toThrowError(lib.AssertError)
-    })
-  })
-})
-
-describe("insist", () => {
-  let value: object | null | undefined
-
-  describe("when the value is not null or undefined", () => {
-    beforeEach(() => {
-      value = { key: "A specific object" }
-    })
-
-    it("is the same object", () => {
-      expect(lib.insist(value)).toBe(value)
-    })
-  })
-
-  describe("when the value is null", () => {
-    beforeEach(() => {
-      value = null
-    })
-
-    it("throws an error", () => {
-      expect(() => lib.insist(value)).toThrow()
-    })
-  })
-
-  describe("when the value is undefined", () => {
-    beforeEach(() => {
-      value = undefined
-    })
-
-    it("throws an error", () => {
-      expect(() => lib.insist(value)).toThrow()
-    })
-  })
-})
 
 describe("isArrayOf", () => {
   describe("when the value is an empty array", () => {
@@ -135,37 +50,6 @@ describe("isArrayOf", () => {
 
   it("returns false for an object", () => {
     expect(lib.isArrayOf({}, lib.isNumber)).toBe(false)
-  })
-})
-
-describe("isBag", () => {
-  describe("isBag", () => {
-    it("returns true for an array of the specified type", () => {
-      expect(lib.isBag([1, 2, 3], lib.isNumber)).toBe(true)
-    })
-    it("returns true for an empty array", () => {
-      expect(lib.isBag([], lib.isNumber)).toBe(true)
-    })
-    it("returns true for a single element array of the specified type", () => {
-      expect(lib.isBag([42], lib.isNumber)).toBe(true)
-    })
-    it("returns true if the value is undefined", () => {
-      expect(lib.isBag(undefined, lib.isNumber)).toBe(true)
-    })
-    it("returns true for a single value of the specified type", () => {
-      expect(lib.isBag(42, lib.isNumber)).toBe(true)
-    })
-
-    it("returns false for an array that contains other types", () => {
-      expect(lib.isBag([1, "2", 3], lib.isNumber)).toBe(false)
-    })
-
-    it("returns false if the value is null", () => {
-      expect(lib.isBag(null, lib.isNumber)).toBe(false)
-    })
-    it("returns false for a single value of another type", () => {
-      expect(lib.isBag("42", lib.isNumber)).toBe(false)
-    })
   })
 })
 
