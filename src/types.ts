@@ -48,6 +48,13 @@ export type Entry<T extends object, V = unknown> = [keyof T, V]
 export type Explicit<T> = Exclude<T, Nullish>
 
 /**
+ * A utility type for values that have a specific property with a specific type.
+ * @typeParam K - The string key of the property.
+ * @typeParam T - The type of the property.
+ */
+export type Has<K extends string, T> = { [P in K]: T }
+
+/**
  * A type for all values that can be represented in JSON.
  */
 export type Json = string | number | boolean | null | Json[] | JsonObject
