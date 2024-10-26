@@ -1,22 +1,8 @@
+import { isArrayOf } from "./arrays"
 import { negativeInfinity, positiveInfinity } from "./constants"
 import { and, not, or, some } from "./logic"
 import { isRecordOf } from "./objects"
 import * as types from "./types"
-
-/**
- * Checks if a value is an array of a specific type.
- *
- * @param value - The value to check.
- * @param predicate - The Predicate to check each item in the array.
- * @param emptyMatches - The value to return when the array is empty, and the type cannot be defined by the value.
- *  Defaults to `true`.
- * @returns `true` if the value is an array of the specified type, `false` otherwise.
- */
-export function isArrayOf<T>(value: unknown, predicate: types.Predicate<T>, emptyMatches = true): value is T[] {
-  if (!Array.isArray(value)) return false
-  if (value.length === 0) return emptyMatches
-  return value.every(predicate)
-}
 
 /**
  * Checks if a value is a `true` or `false`.

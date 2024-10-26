@@ -3,56 +3,6 @@ import { or } from "../src/logic"
 import * as lib from "../src/typeGuards"
 import type { Predicate } from "../src/types"
 
-describe("isArrayOf", () => {
-  describe("when the value is an empty array", () => {
-    describe("and emptyMatches is true", () => {
-      it("returns true", () => {
-        expect(lib.isArrayOf([], lib.isNumber, true)).toBe(true)
-      })
-    })
-
-    describe("and emptyMatches is false", () => {
-      it("returns false", () => {
-        expect(lib.isArrayOf([], lib.isNumber, false)).toBe(false)
-      })
-    })
-  })
-
-  describe("when the value is an filled array", () => {
-    describe("and the array contains only values of that type", () => {
-      it("returns true", () => {
-        expect(lib.isArrayOf([1, 2, 3], lib.isNumber)).toBe(true)
-      })
-    })
-
-    describe("and the array contains any values not of that type", () => {
-      it("returns false", () => {
-        expect(lib.isArrayOf([1, 2, "3"], lib.isNumber)).toBe(false)
-      })
-    })
-  })
-
-  it("returns false if the value is of the array type", () => {
-    expect(lib.isArrayOf(1, lib.isNumber)).toBe(false)
-  })
-
-  it("returns false for null", () => {
-    expect(lib.isArrayOf(null, lib.isNumber)).toBe(false)
-  })
-
-  it("returns false for null", () => {
-    expect(lib.isArrayOf(undefined, lib.isNumber)).toBe(false)
-  })
-
-  it("returns false for a string", () => {
-    expect(lib.isArrayOf("test", lib.isNumber)).toBe(false)
-  })
-
-  it("returns false for an object", () => {
-    expect(lib.isArrayOf({}, lib.isNumber)).toBe(false)
-  })
-})
-
 describe("isEmptyArray", () => {
   it("returns true for an empty array", () => {
     expect(lib.isEmptyArray([])).toBe(true)

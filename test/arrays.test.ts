@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest"
 import * as lib from "../src/arrays"
 import { Break } from "../src/break"
+import { isNumber } from "../src/typeGuards"
 import type { Optional } from "../src/types"
 
 describe("append", () => {
@@ -79,6 +80,56 @@ describe("fill", () => {
     const filler = (value: number) => value * 2
     const result = lib.fill(4, filler)
     expect(result).toEqual([2, 4, 6, 8])
+  })
+})
+
+describe("isArrayOf", () => {
+  describe("when the value is an empty array", () => {
+    describe("and emptyMatches is true", () => {
+      it("returns true", () => {
+        expect(lib.isArrayOf([], isNumber, true)).toBe(true)
+      })
+    })
+
+    describe("and emptyMatches is false", () => {
+      it("returns false", () => {
+        expect(lib.isArrayOf([], isNumber, false)).toBe(false)
+      })
+    })
+  })
+
+  describe("when the value is an filled array", () => {
+    describe("and the array contains only values of that type", () => {
+      it("returns true", () => {
+        expect(lib.isArrayOf([1, 2, 3], isNumber)).toBe(true)
+      })
+    })
+
+    describe("and the array contains any values not of that type", () => {
+      it("returns false", () => {
+        expect(lib.isArrayOf([1, 2, "3"], isNumber)).toBe(false)
+      })
+    })
+  })
+
+  it("returns false if the value is of the array type", () => {
+    expect(lib.isArrayOf(1, isNumber)).toBe(false)
+  })
+
+  it("returns false for null", () => {
+    expect(lib.isArrayOf(null, isNumber)).toBe(false)
+  })
+
+  it("returns false for null", () => {
+    expect(lib.isArrayOf(undefined, isNumber)).toBe(false)
+  })
+
+  it("returns false for a string", () => {
+    expect(lib.isArrayOf("test", isNumber)).toBe(false)
+  })
+
+  it("returns false for an object", () => {
+    expect(lib.isArrayOf({}, isNumber)).toBe(false)
   })
 })
 
