@@ -16,4 +16,4 @@ A collection of key-value pairs that are valid in JSON.
 
 ## Source
 
-[types.ts:93](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/types.ts#L93)
+[types.ts:91](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/types.ts#L91)

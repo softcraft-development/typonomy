@@ -33,4 +33,4 @@ The callback function to apply. If `bag` is singular, then the index will be `0`
 
 ## Source
 
-[bags.ts:46](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/bags.ts#L46)
+[bags.ts:46](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/bags.ts#L46)

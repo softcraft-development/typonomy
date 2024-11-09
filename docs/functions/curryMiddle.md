@@ -49,4 +49,4 @@ A curried function that takes the second argument
 
 ## Source
 
-[fp.ts:178](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/fp.ts#L178)
+[fp.ts:178](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/fp.ts#L178)

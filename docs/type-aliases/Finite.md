@@ -19,4 +19,4 @@ as defined by `isFiniteNumber`.
 
 ## Source
 
-[types.ts:56](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/types.ts#L56)
+[types.ts:54](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/types.ts#L54)

@@ -8,24 +8,37 @@
 
 > **assertType**\<`T`\>(`value`, `typeGuard`, `assertion`, `messageFactory`): `asserts value is T`
 
+Asserts that the given value is of a given type.
+Throws an AssertError otherwise.
+
 ## Type parameters
 
 • **T**
+
+The type to guarantee.
 
 ## Parameters
 
 • **value**: `unknown`
 
+The value to be checked.
+
 • **typeGuard**: [`TypeGuard`](../type-aliases/TypeGuard.md)\<`T`\>
 
 • **assertion**: `string`= `defaultAssertion`
 
-• **messageFactory**: [`AssertMessageFactory`](../type-aliases/AssertMessageFactory.md)\<`unknown`\>= `assertErrorMessage`
+• **messageFactory**: [`Combine`](../type-aliases/Combine.md)\<`unknown`, `string`, `string`\>= `assertErrorMessage`
 
 ## Returns
 
 `asserts value is T`
 
+An assertion that the value is of type T.
+
+## Throws
+
+`AssertError` If the value is not of type T.
+
 ## Source
 
-[assertions.ts:21](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/assertions.ts#L21)
+[assertions.ts:54](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/assertions.ts#L54)

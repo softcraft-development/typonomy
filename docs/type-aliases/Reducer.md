@@ -46,4 +46,4 @@ The key or index associated with the value.
 
 ## Source
 
-[types.ts:195](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/types.ts#L195)
+[types.ts:193](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/types.ts#L193)

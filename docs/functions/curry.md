@@ -39,4 +39,4 @@ A curried function that takes the first argument and returns a function that tak
 
 ## Source
 
-[fp.ts:138](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/fp.ts#L138)
+[fp.ts:138](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/fp.ts#L138)

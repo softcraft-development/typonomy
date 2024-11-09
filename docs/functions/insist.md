@@ -31,8 +31,8 @@ The non-null non-undefined value.
 
 ## Throws
 
-If the value is null or undefined.
+If `AssertError` is null or undefined.
 
 ## Source
 
-[assertions.ts:48](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/assertions.ts#L48)
+[assertions.ts:71](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/assertions.ts#L71)

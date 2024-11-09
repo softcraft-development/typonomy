@@ -6,18 +6,26 @@
 
 # Function: assertErrorMessage()
 
-> **assertErrorMessage**(`a`, `b`): `string`
+> **assertErrorMessage**(`value`, `assertion`): `string`
+
+Constructs a standard message describing an assertion failure.
 
 ## Parameters
 
-• **a**: `unknown`
+• **value**: `unknown`
 
-• **b**: `string`
+Any value that failed an assertion.
+
+• **assertion**: `string`
+
+A description of the assertion.
 
 ## Returns
 
 `string`
 
+A message describing the assertion failure.
+
 ## Source
 
-[assertions.ts:17](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/assertions.ts#L17)
+[assertions.ts:42](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/assertions.ts#L42)

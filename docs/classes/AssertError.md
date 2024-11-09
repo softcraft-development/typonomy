@@ -6,6 +6,8 @@
 
 # Class: AssertError\<X\>
 
+Represents an error thrown when a type assertion is invalid.
+
 ## Extends
 
 - `Error`
@@ -14,19 +16,27 @@
 
 • **X**
 
+The type of the value that caused the assertion to fail.
+
 ## Constructors
 
 ### new AssertError()
 
-> **new AssertError**\<`X`\>(`value`, `assertion`, `messageFactory`): [`AssertError`](AssertError.md)\<`X`\>
+> **new AssertError**\<`X`\>(`value`, `assertion`, `message`): [`AssertError`](AssertError.md)\<`X`\>
+
+Creates an instance of `AssertError`.
 
 #### Parameters
 
 • **value**: `X`
 
+The value that caused the assertion to fail.
+
 • **assertion**: `string`
 
-• **messageFactory**: [`AssertMessageFactory`](../type-aliases/AssertMessageFactory.md)\<`X`\>= `assertErrorMessage`
+A description of the assertion that failed.
+
+• **message**: `string`
 
 #### Returns
 
@@ -38,7 +48,7 @@
 
 #### Source
 
-[assertions.ts:8](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/assertions.ts#L8)
+[assertions.ts:19](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/assertions.ts#L19)
 
 ## Properties
 
@@ -46,9 +56,11 @@
 
 > `readonly` **assertion**: `string`
 
+A description of the assertion that failed.
+
 #### Source
 
-[assertions.ts:10](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/assertions.ts#L10)
+[assertions.ts:21](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/assertions.ts#L21)
 
 ***
 
@@ -56,6 +68,34 @@
 
 > `readonly` **value**: `X`
 
+The value that caused the assertion to fail.
+
 #### Source
 
-[assertions.ts:9](https://github.com/softcraft-development/typonomy/blob/cee340f062935faae6d8d20bbf994df4a652481c/src/assertions.ts#L9)
+[assertions.ts:20](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/assertions.ts#L20)
+
+## Methods
+
+### withMessageFactory()
+
+> `static` **withMessageFactory**\<`X`\>(`value`, `assertion`, `messageFactory`): [`AssertError`](AssertError.md)\<`X`\>
+
+#### Type parameters
+
+• **X** = `unknown`
+
+#### Parameters
+
+• **value**: `X`
+
+• **assertion**: `string`
+
+• **messageFactory**: [`Combine`](../type-aliases/Combine.md)\<`X`, `string`, `string`\>= `assertErrorMessage`
+
+#### Returns
+
+[`AssertError`](AssertError.md)\<`X`\>
+
+#### Source
+
+[assertions.ts:27](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/assertions.ts#L27)
