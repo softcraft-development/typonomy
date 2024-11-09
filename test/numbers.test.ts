@@ -1,5 +1,15 @@
 import { describe, expect, it } from "vitest"
+import { insistType } from "../src/assertions"
 import * as lib from "../src/numbers"
+import type { Finite } from "../src/types"
+
+describe("Finite", () => {
+  it("is assignable to number", () => {
+    const finite = insistType<Finite>(42, lib.isFiniteNumber)
+    const num: number = finite
+    expect(num).toBe(finite)
+  })
+})
 
 describe("isFiniteNumber", () => {
   it("is true for a positive number", () => {
