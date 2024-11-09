@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest"
 import * as lib from "../src/assertions"
 
-describe("assertType", () => {
+describe(lib.assertType, () => {
   type Branded = string & { __brand: "Branded" }
   const guard = (value: unknown): value is Branded => {
     return value === "Is Branded"
@@ -28,7 +28,7 @@ describe("assertType", () => {
   })
 })
 
-describe("enforceType", () => {
+describe(lib.insistType, () => {
   type Branded = string & { __brand: "Branded" }
   const guard = (value: unknown): value is Branded => {
     return value === "Is Branded"
@@ -37,7 +37,7 @@ describe("enforceType", () => {
   describe("when the type matches", () => {
     it("returns the type", () => {
       const value = "Is Branded"
-      const branded: Branded = lib.enforceType(value, guard)
+      const branded: Branded = lib.insistType(value, guard)
       expect(branded).toBe(value)
     })
   })
@@ -46,13 +46,13 @@ describe("enforceType", () => {
     it("throws an AssertError", () => {
       const value = "Is Not Branded"
       expect(() => {
-        lib.enforceType(value, guard)
+        lib.insistType(value, guard)
       }).toThrowError(lib.AssertError)
     })
   })
 })
 
-describe("insist", () => {
+describe(lib.insist, () => {
   let value: object | null | undefined
 
   describe("when the value is not null or undefined", () => {

@@ -6,8 +6,6 @@
  */
 export type Action<T> = (value: T) => void
 
-export type AssertMessageFactory<X> = Combine<X, string, string>
-
 /**
  * Zero, one, or more values of type `T`.
  * Zero values are represented as `undefined`.
