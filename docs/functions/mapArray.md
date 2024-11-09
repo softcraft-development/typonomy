@@ -40,4 +40,4 @@ The mapped array.
 
 ## Source
 
-[arrays.ts:111](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/arrays.ts#L111)
+[arrays.ts:111](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/arrays.ts#L111)

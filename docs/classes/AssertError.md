@@ -38,6 +38,8 @@ A description of the assertion that failed.
 
 • **message**: `string`
 
+An explanatory message.
+
 #### Returns
 
 [`AssertError`](AssertError.md)\<`X`\>
@@ -48,7 +50,7 @@ A description of the assertion that failed.
 
 #### Source
 
-[assertions.ts:19](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/assertions.ts#L19)
+[assertions.ts:19](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/assertions.ts#L19)
 
 ## Properties
 
@@ -60,7 +62,7 @@ A description of the assertion that failed.
 
 #### Source
 
-[assertions.ts:21](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/assertions.ts#L21)
+[assertions.ts:21](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/assertions.ts#L21)
 
 ***
 
@@ -72,7 +74,7 @@ The value that caused the assertion to fail.
 
 #### Source
 
-[assertions.ts:20](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/assertions.ts#L20)
+[assertions.ts:20](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/assertions.ts#L20)
 
 ## Methods
 
@@ -98,4 +100,4 @@ The value that caused the assertion to fail.
 
 #### Source
 
-[assertions.ts:27](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/assertions.ts#L27)
+[assertions.ts:27](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/assertions.ts#L27)

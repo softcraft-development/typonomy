@@ -12,4 +12,4 @@ A value that can be converted from a string via JSON parsing.
 
 ## Source
 
-[types.ts:81](https://github.com/softcraft-development/typonomy/blob/bcea019d216cf7f686cf96fe07d66281dfcae070/src/types.ts#L81)
+[types.ts:81](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/types.ts#L81)
