@@ -14,7 +14,7 @@ export class AssertError<X> extends Error {
    *
    * @param value - The value that caused the assertion to fail.
    * @param assertion - A description of the assertion that failed.
-   * @param messageFactory - A function that generates the error message. Defaults to `assertErrorMessage`.
+   * @param message - An explanatory message.
    */
   constructor(
     public readonly value: X,
