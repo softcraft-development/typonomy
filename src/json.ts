@@ -1,10 +1,44 @@
 import { isArrayOf } from "./arrays"
-import { isNull } from "./nullish"
+import { isNull, isUndefined } from "./nullish"
 import { isFiniteNumber } from "./numbers"
-import { isObject, isRecordOf } from "./objects"
+import { isObject, isRecordOf, recordOf, reduceObject } from "./objects"
 import { isString } from "./strings"
 import { isBoolean } from "./typeGuards"
 import type { Json, JsonCollection, JsonObject, JsonParsed, JsonParsedScalar, JsonScalar } from "./types"
+
+/**
+ * Converts an arbitrary value to `Json` as best as possible.
+ * * Some values are preserved as-is:
+ *   *  `null`
+ *   *  `string`
+ *   *  `boolean`
+ *   *  `number` if they are `Finite`.
+ * * Arrays are recursively converted to `Json[]`.
+ * * Objects are recursively converted to `Record<string, Json>`.
+ *   * Keys are converted to strings.
+ * * Any other value becomes `null`, including:
+ *   * `undefined`
+ *   * `NaN`
+ *   * `Infinity`
+ *   * `-Infinity`
+ * @param value - The value to convert.
+ * @returns A `Json` value that represents the input value.
+ */
+export function convertToJson(value: unknown): Json {
+  if (isUndefined(value)) return null
+  if (isString(value)) return value
+  if (isBoolean(value)) return value
+  if (isFiniteNumber(value)) return value
+  if (Array.isArray(value)) return value.map(convertToJson)
+  if (isObject(value)) {
+    return reduceObject(value, (state, val, key) => {
+      const property = isString(key) ? key : String(key)
+      state[property] = convertToJson(val)
+      return state
+    }, recordOf<string, Json>())
+  }
+  return null
+}
 
 /**
  * Checks if a value is representable in JSON.

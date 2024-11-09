@@ -1,6 +1,93 @@
 import { describe, expect, it } from "vitest"
 import * as lib from "../../src/json"
 
+describe("convertToJson", () => {
+  it("preserves null", () => {
+    expect(lib.convertToJson(null)).toBe(null)
+  })
+
+  it("converts undefined to null", () => {
+    expect(lib.convertToJson(undefined)).toBe(null)
+  })
+
+  it("preserves true", () => {
+    expect(lib.convertToJson(true)).toBe(true)
+  })
+
+  it("preserves false", () => {
+    expect(lib.convertToJson(false)).toBe(false)
+  })
+
+  it("preserves Finite numbers", () => {
+    expect(lib.convertToJson(42)).toBe(42)
+  })
+
+  it("converts NaN to null", () => {
+    expect(lib.convertToJson(NaN)).toBe(null)
+  })
+
+  it("converts Infinity to null", () => {
+    expect(lib.convertToJson(Infinity)).toBe(null)
+  })
+
+  it("converts -Infinity to null", () => {
+    expect(lib.convertToJson(-Infinity)).toBe(null)
+  })
+
+  it("preserves strings", () => {
+    expect(lib.convertToJson("Arbitrary String")).toBe("Arbitrary String")
+  })
+
+  it("converts an object to Json", () => {
+    expect(lib.convertToJson(
+      {
+        array: [42, undefined],
+        finite: 42,
+        infinite: Infinity,
+        obj: {
+          nested: "Nested",
+        },
+        undef: undefined,
+      })).toEqual({
+      array: [42, null],
+      finite: 42,
+      infinite: null,
+      obj: {
+        nested: "Nested",
+      },
+      undef: null,
+    })
+  })
+
+  it("converts an array to Json", () => {
+    expect(lib.convertToJson([
+      "A String",
+      undefined,
+      Infinity,
+      -Infinity,
+      NaN,
+      {
+        finite: 42,
+        infinite: Infinity,
+        string: "Nested",
+        undef: undefined,
+      },
+    ])).toEqual([
+      "A String",
+      null,
+      null,
+      null,
+      null,
+      {
+        finite: 42,
+        infinite: null,
+        string: "Nested",
+        undef: null,
+      },
+    ])
+  })
+})
+
 describe("isJson", () => {
   it("is true for null", () => {
     expect(lib.isJson(null)).toBe(true)
