@@ -28,4 +28,4 @@ A new `Predicate` that returns the opposite value of the input Predicate.
 
 ## Source
 
-[logic.ts:30](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/logic.ts#L30)
+[logic.ts:30](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/logic.ts#L30)

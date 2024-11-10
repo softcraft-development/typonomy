@@ -29,4 +29,4 @@ A function that joins strings using `separator` when both strings are not `Nulli
 
 ## Source
 
-[strings.ts:30](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/strings.ts#L30)
+[strings.ts:30](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/strings.ts#L30)

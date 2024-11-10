@@ -50,4 +50,4 @@ A `JsonParsed` that was parsed from `possibleJson`.
 
 ## Source
 
-[json.ts:126](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/json.ts#L126)
+[json.ts:131](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/json.ts#L131)

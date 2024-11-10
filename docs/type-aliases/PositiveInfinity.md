@@ -23,4 +23,4 @@ The type of `Infinity`, as defined by `isPositiveInfinity`.
 
 ## Source
 
-[types.ts:165](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/types.ts#L165)
+[types.ts:165](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/types.ts#L165)

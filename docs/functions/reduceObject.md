@@ -6,9 +6,9 @@
 
 # Function: reduceObject()
 
-> **reduceObject**\<`S`, `T`, `V`\>(`obj`, `reducer`, `initialState`): `S`
+> **reduceObject**\<`S`, `T`\>(`obj`, `reducer`, `initialState`): `S`
 
-Reduces the keys and values of an object.
+Reduces the enumerable keys and values of an object.
 Stops execution if the reducer throws a `BreakExecution`.
 Note that the order of the keys & values is not guaranteed.
 
@@ -18,13 +18,9 @@ Note that the order of the keys & values is not guaranteed.
 
 The type of the state.
 
-• **T** *extends* `Record`\<keyof `T`, `V`\>
+• **T** *extends* `object` = `Record`\<`string`, `unknown`\>
 
-The type of object to reduce.
-
-• **V** = `unknown`
-
-The type of the values in the object. Defaults to `unknown`.
+The type of the object to be reduced.
 
 ## Parameters
 
@@ -32,7 +28,7 @@ The type of the values in the object. Defaults to `unknown`.
 
 The object to be reduced.
 
-• **reducer**: [`Reducer`](../type-aliases/Reducer.md)\<`S`, `V`, keyof `T`\>
+• **reducer**: [`Reducer`](../type-aliases/Reducer.md)\<`S`, `T`\[keyof `T`\], keyof `T`\>
 
 The reducer function.
 
@@ -48,4 +44,4 @@ The final state.
 
 ## Source
 
-[objects.ts:104](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/objects.ts#L104)
+[objects.ts:127](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/objects.ts#L127)

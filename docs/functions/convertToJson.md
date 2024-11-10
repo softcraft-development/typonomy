@@ -6,7 +6,7 @@
 
 # Function: convertToJson()
 
-> **convertToJson**(`value`): [`Json`](../type-aliases/Json.md)
+> **convertToJson**(`value`, `onUnconvertible`): [`Json`](../type-aliases/Json.md)
 
 Converts an arbitrary value to `Json` as best as possible.
 * Some values are preserved as-is:
@@ -29,6 +29,8 @@ Converts an arbitrary value to `Json` as best as possible.
 
 The value to convert.
 
+• **onUnconvertible**: [`Transform`](../type-aliases/Transform.md)\<`unknown`, [`Json`](../type-aliases/Json.md)\>= `undefined`
+
 ## Returns
 
 [`Json`](../type-aliases/Json.md)
@@ -37,4 +39,4 @@ A `Json` value that represents the input value.
 
 ## Source
 
-[json.ts:27](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/json.ts#L27)
+[json.ts:28](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/json.ts#L28)

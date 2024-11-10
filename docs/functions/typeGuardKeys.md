@@ -28,4 +28,4 @@ A type guard function that checks if a value is a key of the object.
 
 ## Source
 
-[objects.ts:201](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/objects.ts#L201)
+[objects.ts:224](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/objects.ts#L224)

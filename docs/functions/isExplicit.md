@@ -30,4 +30,4 @@ The value to check.
 
 ## Source
 
-[nullish.ts:11](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/nullish.ts#L11)
+[nullish.ts:11](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/nullish.ts#L11)

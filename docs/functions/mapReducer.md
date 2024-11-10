@@ -34,4 +34,4 @@ A `Reducer` that transforms inputs to outputs and appends them to an array.
 
 ## Source
 
-[arrays.ts:123](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/arrays.ts#L123)
+[arrays.ts:123](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/arrays.ts#L123)

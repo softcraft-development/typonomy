@@ -47,4 +47,4 @@ The function that transforms the intermediate type to the result type.
 
 ## Source
 
-[fp.ts:50](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/fp.ts#L50)
+[fp.ts:50](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/fp.ts#L50)

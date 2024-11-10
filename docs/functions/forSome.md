@@ -33,4 +33,4 @@ The callback function to apply. If `some` is singular, then the index will be `0
 
 ## Source
 
-[some.ts:31](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/some.ts#L31)
+[some.ts:31](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/some.ts#L31)

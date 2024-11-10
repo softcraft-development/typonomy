@@ -41,4 +41,4 @@ The value if it is of type T.
 
 ## Source
 
-[assertions.ts:85](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/assertions.ts#L85)
+[assertions.ts:85](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/assertions.ts#L85)

@@ -12,4 +12,4 @@ A `BreakExecution` instance that can be used in general contexts.
 
 ## Source
 
-[break.ts:34](https://github.com/softcraft-development/typonomy/blob/eea886e2cab97560257369acf8e7d17e5016c6e5/src/break.ts#L34)
+[break.ts:34](https://github.com/softcraft-development/typonomy/blob/1c47fc13034f4e53267c72ada03a418616dc092e/src/break.ts#L34)
