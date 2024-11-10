@@ -1,7 +1,7 @@
 import { isArrayOf } from "./arrays"
 import { isNull, isUndefined } from "./nullish"
 import { isFiniteNumber } from "./numbers"
-import { isObject, isRecordOf, recordOf, reduceObject } from "./objects"
+import { errorToObject, isObject, isRecordOf, recordOf, reduceObject } from "./objects"
 import { isString } from "./strings"
 import { isBoolean } from "./typeGuards"
 import type { Json, JsonCollection, JsonObject, JsonParsed, JsonParsedScalar, JsonScalar } from "./types"
@@ -31,6 +31,9 @@ export function convertToJson(value: unknown): Json {
   if (isFiniteNumber(value)) return value
   if (Array.isArray(value)) return value.map(convertToJson)
   if (isObject(value)) {
+    if (value instanceof Error) {
+      return convertToJson(errorToObject(value))
+    }
     return reduceObject(value, (state, val, key) => {
       const property = isString(key) ? key : String(key)
       state[property] = convertToJson(val)
@@ -202,5 +205,6 @@ export function toJson(possibleJson: string): Json {
 export class JsonParseError extends Error {
   constructor(message: string, public readonly invalid: string, public readonly cause?: unknown) {
     super(message)
+    this.name = "JsonParseError"
   }
 }

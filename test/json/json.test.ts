@@ -86,6 +86,21 @@ describe("convertToJson", () => {
       },
     ])
   })
+
+  it("converts an error to Json", () => {
+    const error = new Error("An Error", {
+      cause: new lib.JsonParseError("A JsonParseError", "Invalid"),
+    })
+    expect(lib.convertToJson(error)).toMatchObject({
+      cause: {
+        invalid: "Invalid",
+        message: "A JsonParseError",
+        name: "JsonParseError",
+      },
+      message: "An Error",
+      name: "Error",
+    })
+  })
 })
 
 describe("isJson", () => {
