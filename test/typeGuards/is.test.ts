@@ -1,7 +1,25 @@
 import { describe, expect, it } from "vitest"
 import * as lib from "../../src/typeGuards"
 
-describe("isEquality", () => {
+describe(lib.isDate, () => {
+  it("returns true for a Date", () => {
+    expect(lib.isDate(new Date())).toBe(true)
+  })
+
+  it("returns false for Date.time()", () => {
+    expect(lib.isDate(new Date().getTime())).toBe(false)
+  })
+
+  it("returns false for Date.toISOString()", () => {
+    expect(lib.isDate(new Date().toISOString())).toBe(false)
+  })
+
+  it("returns false for undefined", () => {
+    expect(lib.isDate(undefined)).toBe(false)
+  })
+})
+
+describe(lib.isEquality, () => {
   it("returns true if the values are equal", () => {
     expect(lib.isEquality(42, 42)).toBe(true)
   })
@@ -39,7 +57,7 @@ describe("isEquality", () => {
   })
 })
 
-describe("isBoolean", () => {
+describe(lib.isBoolean, () => {
   it("returns true for true", () => {
     expect(lib.isBoolean(true)).toBe(true)
   })
@@ -65,7 +83,7 @@ describe("isBoolean", () => {
   })
 })
 
-describe("isUnknown", () => {
+describe(lib.isUnknown, () => {
   it("is true for false", () => {
     expect(lib.isUnknown(false)).toBe(true)
   })

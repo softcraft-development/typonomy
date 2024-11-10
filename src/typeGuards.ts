@@ -12,6 +12,16 @@ export function isBoolean(value: unknown): value is boolean {
 }
 
 /**
+ * Checks if a value is a `Date``.
+ *
+ * @param value - The value to check.
+ * @returns `true` if the value is a `Date`; `false` otherwise.
+ */
+export function isDate(value: unknown): value is Date {
+  return value instanceof Date
+}
+
+/**
  * Checks if two values are equal via the `===` operator.
  *
  * @typeParam T - The type of the values being compared.
