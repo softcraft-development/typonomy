@@ -112,6 +112,11 @@ describe("convertToJson", () => {
       fn: "Unconvertible",
     })
   })
+
+  it("converts dates in the same way as Date.toJSON", () => {
+    const date = new Date()
+    expect(lib.convertToJson(date)).toBe(date.toJSON())
+  })
 })
 
 describe("isJson", () => {

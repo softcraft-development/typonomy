@@ -1,3 +1,4 @@
+import { isDate } from "util/types"
 import { isArrayOf } from "./arrays"
 import { thunk } from "./fp"
 import { isNull, isUndefined } from "./nullish"
@@ -30,6 +31,7 @@ export function convertToJson(value: unknown, onUnconvertible: Transform<unknown
   if (isUndefined(value)) return null
   if (isString(value)) return value
   if (isBoolean(value)) return value
+  if (isDate(value)) return value.toJSON()
   if (isFiniteNumber(value)) return value
   if (Array.isArray(value)) return value.map(e => convertToJson(e, onUnconvertible))
   if (isObject(value)) {
