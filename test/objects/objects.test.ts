@@ -111,6 +111,15 @@ describe(lib.reduceObject, () => {
     expect(result).toBe("Initial a:1 b:3 c:5")
   })
 
+  it("should not reduce symbol keys", () => {
+    const symbol = Symbol("key")
+    const obj = {
+      [symbol]: 5,
+    }
+    const result = lib.reduceObject(obj, (state, value, key) => `${state} ${String(key)}:${value}`, "Initial")
+    expect(result).toBe("Initial")
+  })
+
   describe("when the reducer breaks execution", () => {
     it("should only reduce prior to the break", () => {
       const obj = { a: 3, b: undefined, c: 7, d: null }
@@ -124,7 +133,7 @@ describe(lib.reduceObject, () => {
 })
 
 describe(lib.errorToObject, () => {
-  it.only("sets the name", () => {
+  it("sets the name", () => {
     expect(lib.errorToObject(new JsonParseError("Test Error", "Invalid"))).toMatchObject({ name: "JsonParseError" })
   })
 

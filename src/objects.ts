@@ -112,21 +112,20 @@ export function keysForValue<T extends object>(
 }
 
 /**
- * Reduces the keys and values of an object.
+ * Reduces the enumerable keys and values of an object.
  * Stops execution if the reducer throws a `BreakExecution`.
  * Note that the order of the keys & values is not guaranteed.
  *
  * @typeParam S - The type of the state.
- * @typeParam T - The type of object to reduce.
- * @typeParam V - The type of the values in the object. Defaults to `unknown`.
+ * @typeParam T - The type of the object to be reduced.
  * @param obj - The object to be reduced.
  * @param reducer - The reducer function.
  * @param initialState - The initial state.
  * @returns The final state.
  */
-export function reduceObject<S, T extends Record<keyof T, V>, V = unknown>(
+export function reduceObject<S, T extends object = Record<string, unknown>>(
   obj: T,
-  reducer: Reducer<S, V, keyof T>,
+  reducer: Reducer<S, T[keyof T], keyof T>,
   initialState: S): S {
   let state: S = initialState
   for (const key in obj) {

@@ -35,8 +35,7 @@ export function convertToJson(value: unknown): Json {
       return convertToJson(errorToObject(value))
     }
     return reduceObject(value, (state, val, key) => {
-      const property = isString(key) ? key : String(key)
-      state[property] = convertToJson(val)
+      state[key] = convertToJson(val)
       return state
     }, recordOf<string, Json>())
   }
