@@ -1,11 +1,10 @@
-import { isDate } from "util/types"
 import { isArrayOf } from "./arrays"
 import { thunk } from "./fp"
 import { isNull, isUndefined } from "./nullish"
 import { isFiniteNumber } from "./numbers"
 import { errorToObject, isObject, isRecordOf, recordOf, reduceObject } from "./objects"
 import { isString } from "./strings"
-import { isBoolean } from "./typeGuards"
+import { isBoolean, isDate } from "./typeGuards"
 import type { Json, JsonCollection, JsonObject, JsonParsed, JsonParsedScalar, JsonScalar, Transform } from "./types"
 
 /**
