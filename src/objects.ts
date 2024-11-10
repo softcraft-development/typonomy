@@ -8,9 +8,10 @@ import { isEquality, isSymbol, typeGuard } from "./typeGuards"
 import type { Bag, Combine, Optional, Predicate, Reducer, Transform, TypeGuard } from "./types"
 
 /**
- * Converts an `Error` into an `object` with enumerable properties.
- * @param value - The object or array to check.
- * @returns Returns `true` if value is an object with no properties, `false` otherwise.
+ * Converts an `Error` into an `object` with enumerable properties, including the `name` property.
+ * If any of these properties are an `Error`, they will be recursively converted.
+ * @param error - The error to convert.
+ * @returns An object with the same properties of the `error`
  */
 export function errorToObject(error: Error): Record<string, unknown> {
   const keys = Object.getOwnPropertyNames(error)
