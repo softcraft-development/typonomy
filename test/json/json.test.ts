@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
 import * as lib from "../../src/json"
+import type { Json, Transform } from "../../src/types"
 
 describe("convertToJson", () => {
   it("preserves null", () => {
@@ -99,6 +100,16 @@ describe("convertToJson", () => {
       },
       message: "An Error",
       name: "Error",
+    })
+  })
+
+  it("transforms unconvertible objects", () => {
+    const object = {
+      fn: () => "Some Function",
+    }
+    const convert: Transform<unknown, Json> = value => "Unconvertible"
+    expect(lib.convertToJson(object, convert)).toMatchObject({
+      fn: "Unconvertible",
     })
   })
 })

@@ -1,10 +1,11 @@
 import { isArrayOf } from "./arrays"
+import { thunk } from "./fp"
 import { isNull, isUndefined } from "./nullish"
 import { isFiniteNumber } from "./numbers"
 import { errorToObject, isObject, isRecordOf, recordOf, reduceObject } from "./objects"
 import { isString } from "./strings"
 import { isBoolean } from "./typeGuards"
-import type { Json, JsonCollection, JsonObject, JsonParsed, JsonParsedScalar, JsonScalar } from "./types"
+import type { Json, JsonCollection, JsonObject, JsonParsed, JsonParsedScalar, JsonScalar, Transform } from "./types"
 
 /**
  * Converts an arbitrary value to `Json` as best as possible.
@@ -24,22 +25,23 @@ import type { Json, JsonCollection, JsonObject, JsonParsed, JsonParsedScalar, Js
  * @param value - The value to convert.
  * @returns A `Json` value that represents the input value.
  */
-export function convertToJson(value: unknown): Json {
+export function convertToJson(value: unknown, onUnconvertible: Transform<unknown, Json> = thunk(null)): Json {
+  if (isNull(value)) return null
   if (isUndefined(value)) return null
   if (isString(value)) return value
   if (isBoolean(value)) return value
   if (isFiniteNumber(value)) return value
-  if (Array.isArray(value)) return value.map(convertToJson)
+  if (Array.isArray(value)) return value.map(e => convertToJson(e, onUnconvertible))
   if (isObject(value)) {
     if (value instanceof Error) {
-      return convertToJson(errorToObject(value))
+      return convertToJson(errorToObject(value), onUnconvertible)
     }
     return reduceObject(value, (state, val, key) => {
-      state[key] = convertToJson(val)
+      state[key] = convertToJson(val, onUnconvertible)
       return state
     }, recordOf<string, Json>())
   }
-  return null
+  return onUnconvertible(value)
 }
 
 /**
