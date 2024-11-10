@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest"
 import { Break } from "../../src/break"
+import { JsonParseError } from "../../src/json"
 import * as lib from "../../src/objects"
 
-describe("keysForValue", () => {
+describe(lib.keysForValue, () => {
   describe("for a string enum", () => {
     enum TestEnum {
       A = "a",
@@ -85,7 +86,7 @@ describe("keysForValue", () => {
   })
 })
 
-describe("plucker", () => {
+describe(lib.plucker, () => {
   interface TestType {
     a: number
     b: string
@@ -97,7 +98,7 @@ describe("plucker", () => {
   })
 })
 
-describe("reduceObject", () => {
+describe(lib.reduceObject, () => {
   it("should reduce the keys and values of an object", () => {
     const obj = { a: 3, b: undefined, c: 7, d: null }
     const result = lib.reduceObject(obj, (state, value, key) => `${state} ${key}:${value}`, "Initial")
@@ -119,5 +120,21 @@ describe("reduceObject", () => {
       }, "Initial")
       expect(result).toBe("Initial a:3")
     })
+  })
+})
+
+describe(lib.errorToObject, () => {
+  it.only("sets the name", () => {
+    expect(lib.errorToObject(new JsonParseError("Test Error", "Invalid"))).toMatchObject({ name: "JsonParseError" })
+  })
+
+  it("sets the message", () => {
+    expect(lib.errorToObject(new Error("Test Error"))).toMatchObject({ message: "Test Error" })
+  })
+
+  it("converts the Error cause to an object", () => {
+    expect(lib.errorToObject(new Error("Test Error", {
+      cause: new Error("Cause Error"),
+    }))).toMatchObject({ cause: { message: "Cause Error" } })
   })
 })

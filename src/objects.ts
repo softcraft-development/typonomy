@@ -8,6 +8,29 @@ import { isEquality, isSymbol, typeGuard } from "./typeGuards"
 import type { Bag, Combine, Optional, Predicate, Reducer, Transform, TypeGuard } from "./types"
 
 /**
+ * Converts an `Error` into an `object` with enumerable properties.
+ * @param value - The object or array to check.
+ * @returns Returns `true` if value is an object with no properties, `false` otherwise.
+ */
+export function errorToObject(error: Error): Record<string, unknown> {
+  const keys = Object.getOwnPropertyNames(error)
+  const obj = keys.reduce((state, key) => {
+    // Need to assert this to get the value for the non-enumerable property.
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    const value = error[key as keyof Error]
+    if (value instanceof Error) {
+      state[key] = errorToObject(value)
+    }
+    else {
+      state[key] = value
+    }
+    return state
+  }, recordOf<string, unknown>())
+  obj["name"] = error.name
+  return obj
+}
+
+/**
  * Checks if an object has no properties or elements.
  * @param value - The object or array to check.
  * @returns Returns `true` if value is an object with no properties, `false` otherwise.
